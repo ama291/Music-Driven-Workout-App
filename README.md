@@ -8,7 +8,7 @@ Make sure you have VirtualEnv installed - ```sudo pip3 install virtualenv```
 ## Local Setup
 ```source setup.sh``` to install the necessary dependencies to run the app and tests.
 
-This should be run every time you work on the project, it'll make sure dependencies are up to date and use the VirtualEnv environment. If you exit your current terminal window, you'll need to re-run this.
+```source env/bin/activate``` should be run every time you work on the project, it'll make sure dependencies are up to date and use the VirtualEnv environment. If you exit your current terminal window, you'll need to re-run this.
 
 If your script uses a new dependency, please add it to the "requirements.txt" file. You can view your requirements via ```pip freeze```.
 
