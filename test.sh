@@ -1,2 +1,3 @@
-#example - add tests like this
-#python Tests/template.py
+for file in Tests/*; do
+  python Tests/${file##*/}
+done
