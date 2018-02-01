@@ -3,7 +3,7 @@ CS 220 Music Driven Workout App Project
 
 Before running anything, make sure you have Python3 installed, the app will use the ```python3``` executables.
 
-Make sure you have VirtualEnv installed - ```sudo pip3 install python-virtualenv```
+Make sure you have VirtualEnv installed - ```sudo pip3 install virtualenv```
 
 ## Local Setup
 ```source setup.sh``` to install the necessary dependencies to run the app and tests.
