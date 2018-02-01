@@ -10,7 +10,7 @@ Make sure you have VirtualEnv installed - ```sudo pip3 install python-virtualenv
 
 This should probably be run every time you pull from master.
 
-If your script uses a new dependency, please add it to this script. You can view your requirements via a ```pip freeze```
+If your script uses a new dependency, please add it to the "requirements.txt" file. You can view your requirements via ```pip freeze```.
 
 ## Testing
 Tests will be stored in the "Tests" folder. 
@@ -22,7 +22,7 @@ If you create a new test script and would like it to run, please add it to this 
 ## Server Setup
 The server will build itself and run the unit tests upon a push to the GitHub repository.
 
-For manual setup, ```source setup-server.sh``
+For manual setup, ```source setup-server.sh```
 
 ## Scripts
 Place scripts in the "Scripts" folder, import them where necessary.
