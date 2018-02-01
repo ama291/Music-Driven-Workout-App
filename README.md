@@ -6,7 +6,7 @@ Before running anything, make sure you have Python3 installed, the app will use 
 Make sure you have VirtualEnv installed - ```sudo pip3 install virtualenv```
 
 ## Local Setup
-```source setup.sh``` to install the necessary dependencies to run the app and tests.
+```source setup.sh``` to install the necessary dependencies to run the app and tests. This should probably be run every time you pull from master.
 
 ```source env/bin/activate``` should be run every time you work on the project, it'll make sure dependencies are up to date and use the VirtualEnv environment. If you exit your current terminal window, you'll need to re-run this.
 
