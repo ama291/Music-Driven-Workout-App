@@ -11,3 +11,4 @@ Thumbs.db
 #VENV#
 ######
 env/
+API/__pycache__
