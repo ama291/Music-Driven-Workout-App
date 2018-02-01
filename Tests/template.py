@@ -1,4 +1,4 @@
-#just for example, remove this when we add tests
+#testing example
 import unittest
 
 class exampleTest(unittest.TestCase):
