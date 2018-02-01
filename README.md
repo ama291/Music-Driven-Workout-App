@@ -19,7 +19,7 @@ Tests will be stored in the "Tests" folder.
 
 If you create a new test script and would like it to run, please add it to this script.
 
-## Server Setup
+## Server Setup - DigitalOcean Box
 The server will build itself and run the unit tests upon a push to the GitHub repository.
 
 For manual setup, ```source setup-server.sh```
