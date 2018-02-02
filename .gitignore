@@ -13,3 +13,4 @@ __pycache__
 #VENV#
 ######
 env/
+API/__pycache__
