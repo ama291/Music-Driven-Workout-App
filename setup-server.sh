@@ -6,3 +6,6 @@ source env/bin/activate
 while read line; do
 	pip install $line
 done <requirements.txt
+
+#restart app
+supervisorctl restart flaskapp
