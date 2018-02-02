@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, Response
 import json
 app = Flask(__name__)
 app.config['DEBUG'] = False
@@ -9,4 +9,4 @@ def index():
 
 @app.route('/api')
 def api():
-    return json.dumps({"Status": "Welcome to the API."})
+    return Response(json.dumps({"Status": "Welcome to the API."}), mimetype='application/json')
