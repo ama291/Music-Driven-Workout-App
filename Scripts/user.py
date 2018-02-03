@@ -2,12 +2,19 @@
 from Scripts.exercise import Exercise
 from Scripts.userexercise import UserExercise
 from Scripts.fitnesstest import FitnessTest
+from Scripts.workout import Workout # added by Larissa
 
 class User:
     def __init__(self, name):
         self.name = name
         self.tracked = []
         self.untracked = []
+
+        # added by Larissa
+        # stores current and incomplete workouts
+        self.inProgressWorkouts = {} # key: workoutID, value: workout class instance
+        # stores saved workouts, if a user wants to do the workout again
+        self.savedWorkouts = {} # key: workoutID, value: workout class instance
 
     def __repr__(self):
         string = "User: %s\n***\nTracked:" % self.name
@@ -69,10 +76,67 @@ class User:
         del self.tracked[idx]
         self.untracked.append(uex)
 
-
     def testFitness(self, category, numExercises):
         test = FitnessTest(category, numExercises)
 
+    # added by Larissa
+    def getWorkout(self, duration, difficulty, categories = None, muscleGroups = None):
+        """
+        User either inputs a list of categories or a list of muscle groups
+        Returns a workout based in the user's inputs
+        """
+        new = Workout(categories, muscleGroups, duration, difficulty)
+        new.generateWorkout()
+        return new
+
+    def startWorkout(self, workout):
+        self.inProgressWorkouts[workout.getID()] = workout
+
+    def quitWorkout(self, id):
+        """
+        NOTE: can also be used when the user has completed
+        a workout and does not want to save it
+        :param id: workout ID
+        """
+        del self.inProgressWorkouts[id]
+
+    def pauseWorkout(self, id, pausedOn):
+        """
+        Updates in progress workout to the paused exercise
+        Will start at this exercise when workout is resumed
+        :param id: workout ID
+        :param pausedOn: exercise where pause occurred
+        """
+        workout = self.inProgressWorkouts[id]
+        workout.setCurrEx(pausedOn)
+        self.inProgressWorkouts[id] = workout
+
+    def saveWorkout(self, id):
+        """
+        Upon completing a workout, user can save it
+        :param id: workout ID
+        """
+        toSave = self.inProgressWorkouts[id]
+        toSave.setCurrEx(0) # roll back workout to beginning
+        self.savedWorkouts[id] = toSave
+        del self.inProgressWorkouts[id]
+
+    def unsaveWorkout(self, id):
+        del self.savedWorkouts[id]
+
+    def workoutsInProgress(self):
+        """
+        Return all incomplete workouts so the app can load them for a user to see
+        From there the user can resume a workout, which should start at the paused exercise
+        """
+        return self.inProgressWorkouts
+
+    def workoutsSaved(self):
+        """
+        Return all saved workouts so the app can load them for a user to see
+        From there the user can restart workout, which should start at the first exercise
+        """
+        return self.savedWorkouts
 
 if __name__ == '__main__':
     user = User("Madeline")
