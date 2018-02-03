@@ -12,6 +12,8 @@ Make sure you have VirtualEnv installed - ```sudo pip3 install virtualenv```
 
 If your script uses a new dependency, please add it to the "requirements.txt" file. You can view your requirements via ```pip freeze```.
 
+To run the API locally, ```sh server.sh```
+
 ## Testing
 Tests will be stored in the "Tests" folder. 
 
