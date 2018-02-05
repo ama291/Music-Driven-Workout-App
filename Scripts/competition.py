@@ -30,21 +30,28 @@ class Competition:
         self.date = _date
 
     def addParticipant(self, _participant):
-        if _participant not in participants:
+        if _participant not in self.participants:
             self.participants.append(_participant)
+            return True
+        else:
+            return False
 
     def removeParticipant(self, _participant):
-        if _participant in participants:
+        if _participant in self.participants:
             self.participants.remove(_participant)
+            return True
         else:
             print ("This participant doesn't exist")
+            return False
 
     # can repeat exercises
     def addExercise(self, _exercise):
         self.exercises.append(_exercise)
 
     def removeExercise(self, _exercise):
-        if _exercise in exercises:
+        if _exercise in self.exercises:
             self.exercises.remove(_exercise)
-        elif _exercise not in exercises:
+            return True
+        elif _exercise not in self.exercises:
             print ("This exercise was not found")
+            return False

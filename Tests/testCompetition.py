@@ -31,7 +31,7 @@ class TestCompetition(unittest.TestCase):
         self.assertEqual(competition1.date, "06-06-20")
 
         ## test addParticipant and removeParticipant
-        self.assertEqual(competition1.removeParticipant("Jessica"), "This participant doesn't exist")
+        self.assertFalse(competition1.removeParticipant("Jessica"))
         competition1.addParticipant("Jessica")
         participants1 = ["Jessica"]
         self.assertEqual(competition1.participants, participants1) # checks adding 1 participant
@@ -50,7 +50,7 @@ class TestCompetition(unittest.TestCase):
         self.assertEqual(competition1.participants, participants1) # checks adding participant already in competition
 
         ## test addExercise and removeExercise
-        self.assertEqual(competition1.removeExercise("Squats"), "This exercise was not found")
+        self.assertFalse(competition1.removeExercise("Squats"))
         competition1.addExercise("Squats")
         self.assertEqual(competition1.exercises, ["Squats"])
         competition1.removeExercise("Pushups")
