@@ -36,15 +36,15 @@ class Competition:
     def removeParticipant(self, _participant):
         if _participant in participants:
             self.participants.remove(_participant)
-        else
-            print "This participant doesn't exist"
+        else:
+            print ("This participant doesn't exist")
 
     # can repeat exercises
     def addExercise(self, _exercise):
         self.exercises.append(_exercise)
 
     def removeExercise(self, _exercise):
-        if _exercise in exercises
+        if _exercise in exercises:
             self.exercises.remove(_exercise)
-        else _exercise not in exercises
-            print "This exercise was not found"
+        elif _exercise not in exercises:
+            print ("This exercise was not found")
