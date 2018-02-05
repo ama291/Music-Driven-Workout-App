@@ -7,9 +7,10 @@ class Competition:
         self.description = description
         self.date = date
         self.completed = False
+        self.participants = []
 
     def __repr__(self):
-        string = "Competition: %s: %s - %r" % (self.name, self.description, self.date, self.completed)
+        string = "Competition: %s: %s - %r with participants %s" % (self.name, self.description, self.date, self.completed, self.participants)
         return string
 
     def __eq__(self, other):
@@ -26,3 +27,13 @@ class Competition:
 
     def editCompetitionDate(self, _date):
         self.date = _date
+        
+    def addParticipant(self, _participant):
+        if _participant not in participants:
+            self.participants.append(_participant)
+            
+    def removeParticipant(self, _participant):
+        if _participant in participants:
+            self.participants.remove(_participant)
+
+    
