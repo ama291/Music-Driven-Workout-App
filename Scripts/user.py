@@ -10,6 +10,7 @@ class User:
         self.untracked = []
         self.goals = []
         self.themes = []
+        self.competition = []
 
     def __repr__(self):
         string = "User: %s\n***\nTracked:" % self.name

@@ -8,6 +8,7 @@ class Competition:
         self.date = date
         self.completed = False
         self.participants = []
+        self.exercises = []
 
     def __repr__(self):
         string = "Competition: %s: %s - %r with participants %s" % (self.name, self.description, self.date, self.completed, self.participants)
@@ -27,13 +28,23 @@ class Competition:
 
     def editCompetitionDate(self, _date):
         self.date = _date
-        
+
     def addParticipant(self, _participant):
         if _participant not in participants:
             self.participants.append(_participant)
-            
+
     def removeParticipant(self, _participant):
         if _participant in participants:
             self.participants.remove(_participant)
+        else
+            print "This participant doesn't exist"
 
-    
+    # can repeat exercises
+    def addExercise(self, _exercise):
+        self.exercises.append(_exercise)
+
+    def removeExercise(self, _exercise):
+        if _exercise in exercises
+            self.exercises.remove(_exercise)
+        else _exercise not in exercises
+            print "This exercise was not found"
