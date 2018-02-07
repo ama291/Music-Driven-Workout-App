@@ -22,43 +22,39 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        // saving acceleration every 0.1 seconds
         timer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(ViewController.printResult), userInfo: nil, repeats: false)
         
-        motionManager.accelerometerUpdateInterval = 0.2
+        motionManager.accelerometerUpdateInterval = 0.1
         
         motionManager.startAccelerometerUpdates(to: OperationQueue.current!) {(data, error) in
             if let myData = data
             {
                 var myDict: [String: Double] = [:]
-                myDict = ["x": myData.acceleration.x, "y": myData.acceleration.y, "z": myData.acceleration.z, "timestamp": myData.timestamp]
+                myDict = ["xAccl": myData.acceleration.x, "yAccl": myData.acceleration.y, "zAccl": myData.acceleration.z, "timestamp": myData.timestamp]
                 
-                self.motionData.append(myDict)
-                
+                self.motionData.append(myDict) 
             }
         }
     }
     
     @objc func printResult() {
-        //        print(self.motionData)
-        
+        // printing the results in JSON format
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: self.motionData, options: .prettyPrinted)
-            let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
-            print(decoded)
+            let data = try? JSONSerialization.data(withJSONObject: self.motionData, options: .prettyPrinted )
+            let json = String(data: data!, encoding: .utf8)
+            if let json = json { // converting to a string
+                print(json)
+            }
         }
-        catch {
-            print(error.localizedDescription)
-        }
+        exit(0)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    
+    }   
 }
-
