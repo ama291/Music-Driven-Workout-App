@@ -10,7 +10,7 @@ class TestExercise(unittest.TestCase):
         self.assertEqual(ex1.name, "Chin-ups")
         self.assertEqual(ex1.duration, 30.0)
 
-        ex2 = Exercise("Chin-ups", 20.0)
+        ex2 = Exercise("Chin-ups", 30.0)
         ex3 = Exercise("Pull-ups", 30.0)
         self.assertTrue(ex1 == ex2)
         self.assertFalse(ex1 == ex3)

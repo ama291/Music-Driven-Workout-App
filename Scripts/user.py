@@ -9,6 +9,9 @@ class User:
         self.name = name
         self.tracked = []
         self.untracked = []
+        self.goals = []
+        self.themes = []
+        self.competition = []
 
         # added by Larissa
         # stores current and incomplete workouts
@@ -50,7 +53,7 @@ class User:
         """
         checks if the user is already tracking the exercise. If so,
         it adds the new info. If not, it adds it to tracked exercises.
-        If it's in the untracked exercises, it moves the untracked 
+        If it's in the untracked exercises, it moves the untracked
         exercise with the same name to tracked exercises.
         """
         exname = userexercise.exercise.name
