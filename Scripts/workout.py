@@ -14,6 +14,21 @@ class Workout:
     def getID(self):
         return self.ID
 
+    def getCategories(self):
+        return self.categories
+
+    def getMuscleGroups(self):
+        return self.muscleGroups
+
+    def getDuration(self):
+        return self.duration
+
+    def getDifficulty(self):
+        return self.difficulty
+
+    def getCurrEx(self):
+        return self.currExercise
+
     def setCurrEx(self, idx):
         self.currExercise = idx
 
@@ -24,5 +39,5 @@ class Workout:
         Get proper rpm for each exercise, based on difficulty
         For each exercise, randomly choose duration from its range and increments
         (range either from the database or the user)
-        Add to self.Exercises until reach duration (or get close)
+        Add to self.Exercises until reach duration (or get close enough)
         """
