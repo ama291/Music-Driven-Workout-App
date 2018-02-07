@@ -5,12 +5,13 @@ import matplotlib.pyplot as plt
 class Log:
     measurements = ["xAccl", "yAccl", "zAccl"]
     def __init__(self, data):
+        time0 = data[0]["timestamp"]
         self.times = []
         self.xAccl = []
         self.yAccl = []
         self.zAccl = []
         for measurement in data:
-            self.times.append(measurement["timestamp"])
+            self.times.append(measurement["timestamp"] - time0)
             self.xAccl.append(measurement["xAccl"])
             self.yAccl.append(measurement["yAccl"])
             self.zAccl.append(measurement["zAccl"])
