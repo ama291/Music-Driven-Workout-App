@@ -1,4 +1,3 @@
-#testing example
 import unittest
 from Scripts.exercise import Exercise
 from Scripts.userexercise import UserExercise

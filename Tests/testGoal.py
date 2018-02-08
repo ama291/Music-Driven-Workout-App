@@ -1,4 +1,3 @@
-#testing example
 import unittest
 from Scripts.goal import Goal
 from Scripts.user import User

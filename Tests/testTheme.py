@@ -1,4 +1,3 @@
-#testing example
 import unittest
 from Scripts.theme import Theme
 from Scripts.user import User
