@@ -46,7 +46,6 @@ class Log:
             y4 = savgol_filter(y0, amt, 2, mode="wrap")
             for y in [y0,y1,y2,y3,y4]:
                 indexes = peakutils.indexes(y, thres=thres)
-                print(len(indexes))
                 plt.figure(figsize=(10,6))
                 pplot(x, y, indexes)
             plt.show()
