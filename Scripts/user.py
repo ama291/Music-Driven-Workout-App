@@ -3,21 +3,23 @@ from Scripts.exercise import Exercise
 from Scripts.userexercise import UserExercise
 from Scripts.fitnesstest import FitnessTest
 from Scripts.workout import Workout # added by Larissa
+import requests
 
 class User:
-    def __init__(self, name):
+    def __init__(self, ID, name, tracked, untracked, goals, \
+         themes, competition, inProgressWorkouts, savedWorkouts):
         self.name = name
-        self.tracked = []
-        self.untracked = []
-        self.goals = []
-        self.themes = []
-        self.competition = []
+        self.tracked = tracked
+        self.untracked = untracked
+        self.goals = goals
+        self.themes = themes
+        self.competition = competition
 
         # added by Larissa
         # stores current and incomplete workouts
-        self.inProgressWorkouts = {} # key: workoutID, value: workout class instance
+        self.inProgressWorkouts = inProgressWorkouts # key: workoutID, value: workout class instance
         # stores saved workouts, if a user wants to do the workout again
-        self.savedWorkouts = {} # key: workoutID, value: workout class instance
+        self.savedWorkouts = savedWorkouts # key: workoutID, value: workout class instance
 
     def __repr__(self):
         string = "User: %s\n***\nTracked:" % self.name

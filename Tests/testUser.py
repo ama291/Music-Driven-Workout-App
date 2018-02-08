@@ -17,12 +17,15 @@ class TestUserExercise(unittest.TestCase):
         ex3 = Exercise(name2, 30.0)
         uex3 = UserExercise(ex3, 91.0)
 
-        ## test constructor
-        usr1 = User("Madeline")
-        self.assertEqual(usr1.name, "Madeline")
-        # added by Larissa
-        self.assertFalse(usr1.workoutsInProgress())
-        self.assertFalse(usr1.workoutsSaved())
+        ## test constructor (ID, name tracked, 
+        ## untracked, goals, themes, competition, 
+        ## inProgressWorkouts, savedWorkouts)
+        usr1 = User(1, "Alex", [], [], [], [], [], {}, {})
+        self.assertEqual(usr1.name, "Alex")
+        self.assertTrue(usr1.tracked == [])
+        self.assertTrue(usr1.untracked == [])
+        self.assertTrue(usr1.inProgressWorkouts == {})
+        self.assertTrue(usr1.savedWorkouts == {})
 
         ## test trackEx
         usr1.trackEx(uex1)
