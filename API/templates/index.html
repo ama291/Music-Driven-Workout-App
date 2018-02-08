@@ -6,13 +6,13 @@
 		<p>To access the database, make requests to http://138.197.49.155:8000/api/database</p>
 		<p>Required parameters: query, key</p>
 		<p>Request Example: /Scripts/testrequest.py</p>
-		<code>
+		<pre>
 			#testrequest.py
 			import requests
 
 			#make request to API
 			r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': 'select * from users', 'key': 'password is in test file'})
 			print(r.json())
-		</code>
+		</pre>
 	</body>
 </html>
