@@ -17,5 +17,5 @@ def api():
     return Response(json.dumps({"Message": "Welcome to the API", "Status" : "Success"}), mimetype='application/json')
 
 @app.route('/api/database/<string:query>')
-def api():
+def database():
     return Response(json.dumps({"Query": query, "Status": "Success"}), mimetype='application/json')
