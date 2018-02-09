@@ -16,15 +16,22 @@ reasonable durations determined by us and this range is entered by us into the d
 class TestWorkout(unittest.TestCase):
   def test(self):
     usr1 = User(1, "Alex", [], [], [], [], [], {}, {})
+
     #category condition
     duration = 50
     difficulty = "Intermediate"
-    categories = ["Cardio", "Strength"]
+    categories = ["Cardio", "Stretching"]
     equipment = ["Body Only"]
     workout1 = usr1.getWorkout(equipment,duration, difficulty, categories=categories)
-    
-    #test array of excercises non empty
-    assertTrue(len(workout1.Excercises) != 0)
+
+    # test workout properties match input parameters and has exercises
+    elf.assertEqual(workout1.uid, usr1.ID)
+    self.assertEqual(workout1.duration, duration)
+    self.assertEqual(workout1.difficulty, difficulty)
+    self.assertEqual(workout1.categories, categories)
+    self.assertEqual(workout1.muscleGroups, None)
+    self.assertEqual(workout1.currExercise, 0)
+    self.assertTrue(len(workout1.Exercises) > 0)
     
     #test excercises in workout are unique 
     for i in range(len(workout1.Excercises)):
@@ -42,7 +49,6 @@ class TestWorkout(unittest.TestCase):
     for i in range(len(workout1.Excercises)):
       self.assertTrue(workout1.Excercises[i].range_start >= workout1.Excercises[i].duration <= workout1.Excercises[i].range_end)
     
-    
     #test if each exercise is from the correct category
     for i in range(len(workout1.Excercises)):
       self.assertTrue(workout1.Excercises[i].category in categories)
@@ -50,17 +56,23 @@ class TestWorkout(unittest.TestCase):
     #test if each exercise has correct equipment requirement
     for i in range(len(workout1.Excercises)):
       self.assertTrue(workout1.Excercises[i].equipment in equipment)
-      
-    
-    
-    
+
     # muscle group condition
     duration = 30
     difficulty = "Beginner"
     muscleGroups = ["Chest", "Shoulders", "Biceps"]
-    equipment = ["Body Only"]
+    equipment = ["Kettlebells", "Machine"]
     workout2 = usr1.getWorkout(equipment,duration, difficulty, muscleGroups=muscleGroups)
-      
+
+    # test workout properties match input parameters and has exercises
+    self.assertEqual(workout2.uid, usr1.ID)
+    self.assertEqual(workout2.duration, duration)
+    self.assertEqual(workout2.difficulty, difficulty)
+    self.assertEqual(workout2.categories, None)
+    self.assertEqual(workout2.muscleGroups, muscleGroups)
+    self.assertEqual(workout2.currExercise, 0)
+    self.assertTrue(len(workout2.Exercises) > 0)
+
     #test array of excercises non empty
     assertTrue(len(workout2.Excercises) != 0)
     
@@ -79,8 +91,7 @@ class TestWorkout(unittest.TestCase):
     #test duration is within required range
     for i in range(len(workout2.Excercises)):
       self.assertTrue(workout2.Excercises[i].range_start >= workout2.Excercises[i].duration <= workout2.Excercises[i].range_end)
-      
-    
+
     #test if each exercise is from the correct muscle group
     for i in range(len(workout2.Excercises)):
       self.assertTrue(workout2.Excercises[i].muscleGroup in muscleGroups)
@@ -88,6 +99,7 @@ class TestWorkout(unittest.TestCase):
     #test if each exercise has correct equipment requirement
     for i in range(len(workout2.Excercises)):
       self.assertTrue(workout2.Excercises[i].equipment in equipment)
+
 
 if __name__ == '__main__':
   unittest.main()
