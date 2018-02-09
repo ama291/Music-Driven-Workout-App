@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import random
 
-class Exercise:
+class Exercise(object):
 
     def __init__(self, name, difficulty, category, muscleGroup, equipment, images, range, increment, rpm):
         self.name = name
@@ -24,4 +24,3 @@ class Exercise:
     def __eq__(self, other):
         return self.name == other.name
         
-if __name__ == '__main__':

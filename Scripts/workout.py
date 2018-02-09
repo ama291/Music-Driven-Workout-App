@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 import uuid
 
-class Workout:
-    def __init__(self, uid, categories, muscleGroups, equipment, duration, difficulty):
+class Workout(object):
+    def __init__(self, uid, themes, categories, muscleGroups, equipment, duration, difficulty):
         self.ID = uuid.uuid4()  # random UUID
+        self.themes = themes # will not be used until iter 2, for music recommendations
         self.uid = uid # user ID, to get fitness test info
         self.categories = categories
         self.muscleGroups = muscleGroups

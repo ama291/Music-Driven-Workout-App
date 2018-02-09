@@ -142,11 +142,11 @@ class TestUserExercise(unittest.TestCase):
         self.assertTrue(w2_ID in inProgress)
         self.assertEqual(inProgress[w2_ID].currExercise, 0)  # restarted at first exercise
         self.assertTrue(w2_ID in usr1.workoutsSaved())
-        self.assertFalse(startSavedWorkout(w2_ID))  # cannot restart until in progress version is complete
+        self.assertFalse(usr1.startSavedWorkout(w2_ID))  # cannot restart until in progress version is complete
         self.assertTrue(usr1.quitWorkout(w2_ID))
         self.assertFalse(w2_ID in usr1.workoutsInProgress())
         self.assertTrue(w2_ID in usr1.workoutsSaved()) # quiting a saved workout does not unsave it
-        self.assertTrue(startSavedWorkout(w2_ID)) # can now restart
+        self.assertTrue(usr1.startSavedWorkout(w2_ID)) # can now restart
         self.assertTrue(usr1.quitWorkout(w2_ID))
 
         # test unsaveWorkout
