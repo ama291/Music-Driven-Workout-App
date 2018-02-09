@@ -1,6 +1,8 @@
 import unittest
 from Scripts.workout import Workout
-
+from Scripts.exercise import Exercise
+from Scripts.userexercise import UserExercise
+from Scripts.user import User
 
 
 '''
