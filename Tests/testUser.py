@@ -51,8 +51,6 @@ class TestUserExercise(unittest.TestCase):
         self.assertEqual(usr1.exIndexUntracked(name1), 0)
         self.assertEqual(usr1.exIndexUntracked(name2), 1)
 
-        # added by Larissa
-
         """
         Workout flow - User keeps getting workouts until they find one they like,
         then they start the workout. They can pause multiple times during a workout,
@@ -72,25 +70,18 @@ class TestUserExercise(unittest.TestCase):
         # category option
         duration = 50
         difficulty = "Intermediate"
-        categories = ["Cardio", "Strength"]
-        workout1 = usr1.getWorkout(duration, difficulty, categories=categories)
-        w1_ID = workout1.getID()
-        self.assertEqual(workout1.getDuration(), duration)
-        self.assertEqual(workout1.getDifficulty(), difficulty)
-        self.assertEqual(workout1.getCategories(), categories)
-        self.assertEqual(workout1.getMuscleGroups(), None)
-        self.assertEqual(workout1.getCurrEx(), 0)
+        categories = ["Cardio", "Stretching"]
+        equipment = ["Body Only"]
+        workout1 = usr1.getWorkout(equipment, duration, difficulty, categories=categories)
+        w1_ID = workout1.ID
         # muscle group option
         duration = 30
         difficulty = "Beginner"
         muscleGroups = ["Chest", "Shoulders", "Biceps"]
-        workout2 = usr1.getWorkout(duration, difficulty, muscleGroups=muscleGroups)
-        w2_ID = workout2.getID()
-        self.assertEqual(workout2.getDuration(), duration)
-        self.assertEqual(workout2.getDifficulty(), difficulty)
-        self.assertEqual(workout2.getCategories(), None)
-        self.assertEqual(workout2.getMuscleGroups(), muscleGroups)
-        self.assertEqual(workout2.getCurrEx(), 0)
+        equipment = ["Kettlebells", "Machine"]
+        workout2 = usr1.getWorkout(equipment, duration, difficulty, muscleGroups=muscleGroups)
+        w2_ID = workout2.ID
+
         # workouts should have unique IDs and not be saved/in progress
         self.assertTrue(w1_ID != w2_ID)
         self.assertFalse(w1_ID in usr1.workoutsInProgress())
@@ -112,43 +103,51 @@ class TestUserExercise(unittest.TestCase):
         self.assertTrue(usr1.pauseWorkout(w2_ID, 4))
         inProgress = usr1.workoutsInProgress()
         self.assertTrue(w2_ID in inProgress)
-        self.assertEqual(inProgress[w2_ID].getCurrEx(), 4)
+        self.assertEqual(inProgress[w2_ID].currExercise, 4)
         # second pause
         self.assertTrue(usr1.pauseWorkout(w2_ID, 7))
         inProgress = usr1.workoutsInProgress()
         self.assertTrue(w2_ID in inProgress)
-        self.assertEqual(inProgress[w2_ID].getCurrEx(), 7)
-        workout3 = usr1.getWorkout(duration, difficulty, categories=categories)
-        w3_ID = workout3.getID()
-        self.assertFalse(usr1.pauseWorkout(w3_ID, 2)) # cannot pause, was never started
+        self.assertEqual(inProgress[w2_ID].currExercise, 7)
+        # attempt to pause unstarted workout
+        duration = 40
+        difficulty = "Beginner"
+        categories = ["Strongman", "Strength"]
+        equipment = ["Dumbbell", "Cable"]
+        workout3 = usr1.getWorkout(equipment, duration, difficulty, categories=categories)
+        w3_ID = workout3.ID
+        self.assertFalse(usr1.pauseWorkout(w3_ID, 2))
 
         # test quitWorkout
         self.assertTrue(usr1.quitWorkout(w1_ID))
         self.assertFalse(usr1.pauseWorkout(w1_ID, 3)) # workout completed, can no longer pause
-        self.assertFalse(w1_ID in usr1.workoutsInProgress()) # can only save once completed workout
+        self.assertFalse(w1_ID in usr1.workoutsInProgress())
         self.assertFalse(w1_ID in usr1.workoutsSaved())
         self.assertFalse(usr1.quitWorkout(w3_ID)) # cannot quit, was never started
 
         # test saveWorkout
         self.assertTrue(usr1.saveWorkout(w2_ID))
-        self.assertFalse(w2_ID in usr1.workoutsInProgress())
+        self.assertFalse(w2_ID in usr1.workoutsInProgress()) # can only save if workout has been completed
         saved = usr1.workoutsSaved()
         self.assertTrue(w2_ID in saved)
-        self.assertEqual(saved[w2_ID].getCurrEx(), 0) # so restarts at first exercise
+        self.assertEqual(saved[w2_ID].currExercise, 0) # so restarts at first exercise
         self.assertFalse(usr1.saveWorkout(w1_ID))  # was quit, no longer exists
         self.assertFalse(usr1.saveWorkout(w2_ID)) # cannot resave
-        self.assertFalse(usr1.saveWorkout(w3_ID))  # cannot save, was never completed
+        self.assertFalse(usr1.saveWorkout(w3_ID))  # cannot save, was never started
 
         # test startSavedWorkout
         self.assertFalse(usr1.startSavedWorkout(w1_ID)) # cannot restart, was never saved
         self.assertTrue(usr1.startSavedWorkout(w2_ID))
-        self.assertTrue(w2_ID in usr1.workoutsInProgress())
         inProgress = usr1.workoutsInProgress()
-        self.assertEqual(inProgress[w2_ID].getCurrEx(), 0)  # restarted at first exercise
+        self.assertTrue(w2_ID in inProgress)
+        self.assertEqual(inProgress[w2_ID].currExercise, 0)  # restarted at first exercise
         self.assertTrue(w2_ID in usr1.workoutsSaved())
+        self.assertFalse(startSavedWorkout(w2_ID))  # cannot restart until in progress version is complete
         self.assertTrue(usr1.quitWorkout(w2_ID))
         self.assertFalse(w2_ID in usr1.workoutsInProgress())
         self.assertTrue(w2_ID in usr1.workoutsSaved()) # quiting a saved workout does not unsave it
+        self.assertTrue(startSavedWorkout(w2_ID)) # can now restart
+        self.assertTrue(usr1.quitWorkout(w2_ID))
 
         # test unsaveWorkout
         self.assertTrue(usr1.unsaveWorkout(w2_ID))

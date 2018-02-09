@@ -8,6 +8,7 @@ import requests
 class User:
     def __init__(self, ID, name, tracked, untracked, goals, \
          themes, competition, inProgressWorkouts, savedWorkouts):
+        self.ID = ID
         self.name = name
         self.tracked = tracked
         self.untracked = untracked
@@ -15,7 +16,6 @@ class User:
         self.themes = themes
         self.competition = competition
 
-        # added by Larissa
         # stores current and incomplete workouts
         self.inProgressWorkouts = inProgressWorkouts # key: workoutID, value: workout class instance
         # stores saved workouts, if a user wants to do the workout again
@@ -84,8 +84,7 @@ class User:
     def testFitness(self, category, numExercises):
         test = FitnessTest(category, numExercises)
 
-    # added by Larissa
-    def getWorkout(self, duration, difficulty, categories = None, muscleGroups = None):
+    def getWorkout(self, equipment, duration, difficulty, categories = None, muscleGroups = None):
         """
         User either inputs a list of categories or a list of muscle groups
         Returns a workout based in the user's inputs
@@ -94,7 +93,7 @@ class User:
         or muscleGroups are non-empty done by the app
         (if user does not input manually, pull from user profile)
         """
-        new = Workout(categories, muscleGroups, duration, difficulty)
+        new = Workout(self.ID, categories, muscleGroups, equipment, duration, difficulty)
         new.generateWorkout()
         return new
 
@@ -109,13 +108,17 @@ class User:
 
     def startSavedWorkout(self, id):
         """
+        start a saved workout from saved workout page
+
+        will return false if there is already an in
+        progress version of the workout, in which case
+        the app will pop up an error that says the user
+        should finish the workout before starting it again
         :param id: workout ID
         """
-        if id in self.savedWorkouts:
-            # only update if not already an in progress version
-            if id not in self.inProgressWorkouts:
-                workout = self.savedWorkouts[id]
-                self.inProgressWorkouts[id] = workout
+        if id in self.savedWorkouts and id not in self.inProgressWorkouts:
+            workout = self.savedWorkouts[id]
+            self.inProgressWorkouts[id] = workout
             return True
 
         return False
@@ -188,5 +191,4 @@ class User:
         return self.savedWorkouts
 
 if __name__ == '__main__':
-    user = User("Madeline")
-    print(user)
+
