@@ -38,7 +38,7 @@ class TestWorkout(unittest.TestCase):
     
     #test duration is within required range
     for i in range(len(workout1.Excercises)):
-      self.assertTrue(workout1.Excercises[i].range_start <= workout1.Excercises[i].duration <= workout1.Excercises[i].range_end)
+      self.assertTrue(workout1.Excercises[i].range_start >= workout1.Excercises[i].duration <= workout1.Excercises[i].range_end)
     
     
     # muscle group condition
@@ -64,7 +64,7 @@ class TestWorkout(unittest.TestCase):
     
     #test duration is within required range
     for i in range(len(workout2.Excercises)):
-      self.assertTrue(workout2.Excercises[i].range_start <= workout2.Excercises[i].duration <= workout2.Excercises[i].range_end)
+      self.assertTrue(workout2.Excercises[i].range_start >= workout2.Excercises[i].duration <= workout2.Excercises[i].range_end)
     
 
 if __name__ == '__main__':
