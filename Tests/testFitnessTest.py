@@ -2,7 +2,7 @@ import unittest
 from Scripts.exercise import Exercise
 from Scripts.fitnesstest import FitnessTest
 
-class exampleTest(unittest.TestCase):
+class TestFitnessTest(unittest.TestCase):
 
     def test(self):
         ## test constructor 

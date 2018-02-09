@@ -35,21 +35,26 @@ class Log:
         plt.show()
 
     def getPeaks(self, thres, min_dist):
-        print("--")
         for m in self.measurements:
             x = np.array(self.times)
             y0 = np.array(self.__dict__[m])
             amt = 25
             y1 = savgol_filter(y0, amt, 2, mode="nearest")
-            y2 = savgol_filter(y0, amt, 2, mode="mirror")
-            y3 = savgol_filter(y0, amt, 2, mode="constant")
-            y4 = savgol_filter(y0, amt, 2, mode="wrap")
-            for y in [y0,y1,y2,y3,y4]:
+            for y in [y0,y1]:
                 indexes = peakutils.indexes(y, thres=thres)
                 plt.figure(figsize=(10,6))
                 pplot(x, y, indexes)
-            plt.show()
+        #plt.show()
+        return len(indexes)
 
+    def getFrequency(self):
+        return 60 * self.getPeaks(.5, 5) / max(self.times) 
+
+def LogFromFile(filepath):
+    with open(filepath) as f:
+        data = json.load(f)
+    log = Log(data)
+    return log
 
 if __name__ == '__main__':
     folder = "Logs/"
@@ -60,10 +65,11 @@ if __name__ == '__main__':
     for i in range(len(files)):
         ct += 1
         if ct != 2:
-            continue
+            pass#continue
         file = files[i]
         filepath = os.path.join(folder, file)
         with open(filepath) as f:
             data = json.load(f)
         log = Log(data)
         log.getPeaks(0.5, 5)
+        print(log.getFrequency())
