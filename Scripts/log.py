@@ -6,7 +6,7 @@ from peakutils.plot import plot as pplot
 import numpy as np
 from scipy.signal import savgol_filter
 
-class Log:
+class Log(object):
     measurements = ["xAccl", "yAccl", "zAccl"]
     def __init__(self, data):
         time0 = data[0]["timestamp"]

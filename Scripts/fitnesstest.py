@@ -2,7 +2,7 @@
 
 from Scripts.exercise import Exercise
 
-class FitnessTest:
+class FitnessTest(object):
     def __init__(self, category, numExercises):
         if category not in Exercise.categories:
             raise ValueError("%s is not a valid category")

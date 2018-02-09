@@ -2,7 +2,7 @@
 #from Scripts.user import User
 from datetime import datetime
 
-class Goal:
+class Goal(object):
     def __init__(self, name, description):
         self.name = name
         self.description = description

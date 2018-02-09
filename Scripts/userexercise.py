@@ -2,7 +2,7 @@
 from Scripts.exercise import Exercise
 from datetime import datetime
 
-class UserExercise:
+class UserExercise(object):
     def __init__(self, exercise, rpm):
         self.exercise = exercise
         self.trials = []

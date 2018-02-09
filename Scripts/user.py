@@ -5,7 +5,7 @@ from Scripts.fitnesstest import FitnessTest
 from Scripts.workout import Workout # added by Larissa
 import requests
 
-class User:
+class User(object):
     def __init__(self, ID, name, tracked, untracked, goals, \
          themes, competition, inProgressWorkouts, savedWorkouts):
         self.ID = ID
@@ -84,16 +84,34 @@ class User:
     def testFitness(self, category, numExercises):
         test = FitnessTest(category, numExercises)
 
-    def getWorkout(self, equipment, duration, difficulty, categories = None, muscleGroups = None):
+    def getWorkout(self, equipment, duration, difficulty, categories = None, muscleGroups = None, themes = None):
         """
         User either inputs a list of categories or a list of muscle groups
         Returns a workout based in the user's inputs
 
-        Note: checking that duration, difficulty, and categories
-        or muscleGroups are non-empty done by the app
-        (if user does not input manually, pull from user profile)
+        Note: checking that duration, difficulty, equipment, and categories
+        or muscleGroups are non-empty done by the app (can have no theme applied)
+
+        Note: categories and muscleGroups options come from user's goals
+        (can select any number, at least 1, but either categories or
+        muscleGroups, not both), themes options come from user's themes
+        (select up to 5, at least 1), equipment options based on exercise
+        database (select any number, at least 1), difficulty options based
+        on exercise database (select 1), and duration options set by us
+        (select 1)
         """
-        new = Workout(self.ID, categories, muscleGroups, equipment, duration, difficulty)
+
+        """
+        for theme in themes:
+            t = self.themes[theme.ID]
+            t.timesUsed += 1
+            if t.timesUsed == t.numWorkouts:
+                del self.themes[theme.ID]
+            else:
+                self.themes[theme.ID] = t
+        """
+
+        new = Workout(self.ID, themes, categories, muscleGroups, equipment, duration, difficulty)
         new.generateWorkout()
         return new
 
@@ -189,6 +207,4 @@ class User:
         Unless it is already in progress, in which case it starts at the proper exercise
         """
         return self.savedWorkouts
-
-if __name__ == '__main__':
 
