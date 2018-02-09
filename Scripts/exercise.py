@@ -1,19 +1,27 @@
 #!/usr/bin/env python3
+import random
 
 class Exercise:
-    categories = ["Cardio", "Arms", "Abs"]
 
-    def __init__(self, name, duration):
+    def __init__(self, name, difficulty, category, muscleGroup, equipment, images, range, increment, rpm):
         self.name = name
-        self.duration = duration
+        self.difficulty = difficulty
+        self.category = category
+        self.muscleGroup = muscleGroup
+        self.equipment = equipment
+        self.images = images # list of urls
+        self.range_start = range[0]
+        self.range_end = range[1]
+        self.increment = increment # valid duration increment
+        self.duration = random.randrange(self.range_start, self.range_end, self.increment)
+        self.rpm = rpm # either from exercise database or user's fitness test info
+
 
     def __repr__(self):
-        string = "Exercise: %s for %f seconds" % (self.name, self.duration)
+        string = "Exercise: %s for %d seconds" % (self.name, self.duration)
         return string
 
     def __eq__(self, other):
         return self.name == other.name
         
 if __name__ == '__main__':
-    ex = Exercise("chin-ups", 30.0)
-    print(ex)
