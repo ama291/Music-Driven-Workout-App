@@ -19,7 +19,8 @@ class TestWorkout(unittest.TestCase):
     duration = 50
     difficulty = "Intermediate"
     categories = ["Cardio", "Strength"]
-    workout1 = usr1.getWorkout(duration, difficulty, categories=categories)
+    equipment = ["Body Only"]
+    workout1 = usr1.getWorkout(equipment,duration, difficulty, categories=categories)
     
     #test array of excercises non empty
     assertTrue(len(workout1.Excercises) != 0)
@@ -41,11 +42,23 @@ class TestWorkout(unittest.TestCase):
       self.assertTrue(workout1.Excercises[i].range_start >= workout1.Excercises[i].duration <= workout1.Excercises[i].range_end)
     
     
+    #test if each exercise is from the correct category
+    for i in range(len(workout1.Excercises)):
+      self.assertTrue(workout1.Excercises[i].category in categories)
+      
+    #test if each exercise has correct equipment requirement
+    for i in range(len(workout1.Excercises)):
+      self.assertTrue(workout1.Excercises[i].equipment in equipment)
+      
+    
+    
+    
     # muscle group condition
     duration = 30
     difficulty = "Beginner"
     muscleGroups = ["Chest", "Shoulders", "Biceps"]
-    workout2 = usr1.getWorkout(duration, difficulty, muscleGroups=muscleGroups)
+    equipment = ["Body Only"]
+    workout2 = usr1.getWorkout(equipment,duration, difficulty, muscleGroups=muscleGroups)
       
     #test array of excercises non empty
     assertTrue(len(workout2.Excercises) != 0)
@@ -65,7 +78,15 @@ class TestWorkout(unittest.TestCase):
     #test duration is within required range
     for i in range(len(workout2.Excercises)):
       self.assertTrue(workout2.Excercises[i].range_start >= workout2.Excercises[i].duration <= workout2.Excercises[i].range_end)
+      
     
+    #test if each exercise is from the correct muscle group
+    for i in range(len(workout2.Excercises)):
+      self.assertTrue(workout2.Excercises[i].muscleGroup in muscleGroups)
+      
+    #test if each exercise has correct equipment requirement
+    for i in range(len(workout2.Excercises)):
+      self.assertTrue(workout2.Excercises[i].equipment in equipment)
 
 if __name__ == '__main__':
   unittest.main()
