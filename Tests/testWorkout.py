@@ -66,3 +66,6 @@ class TestWorkout(unittest.TestCase):
     for i in range(len(workout2.Excercises)):
       self.assertTrue(workout2.Excercises[i].range_start <= workout2.Excercises[i].duration <= workout2.Excercises[i].range_end)
     
+
+if __name__ == '__main__':
+  unittest.main()
