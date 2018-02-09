@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from Scripts.exercise import Exercise
 from Scripts.userexercise import UserExercise
-from Scripts.fitnesstest import FitnessTest
 from Scripts.workout import Workout # added by Larissa
 import requests
 
@@ -30,6 +29,13 @@ class User:
             string += "\n%s" % str(ex)
         string += "\n***"
         return string
+
+    def getFitnessTest(self, categories, numExercises, tracked):
+        numUntracked = numExercises - len(tracked)
+        ## TODO: get numUntracked exercises from the database 
+        #  that are neither tracked nor (saved) untracked for the user.
+        #  Create a UserExercise for each exercise.
+        return []
 
     def exIndexTracked(self, name):
         count = 0
@@ -80,9 +86,6 @@ class User:
         uex = self.tracked[idx]
         del self.tracked[idx]
         self.untracked.append(uex)
-
-    def testFitness(self, category, numExercises):
-        test = FitnessTest(category, numExercises)
 
     # added by Larissa
     def getWorkout(self, duration, difficulty, categories = None, muscleGroups = None):

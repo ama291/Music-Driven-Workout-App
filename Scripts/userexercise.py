@@ -1,18 +1,13 @@
 #!/usr/bin/env python3
 from Scripts.exercise import Exercise
+from Scripts.log import Log
 from datetime import datetime
 
 class UserExercise:
-    def __init__(self, exercise, category, numReps):
+    def __init__(self, exercise, categories, trials):
         self.exercise = exercise
-        self.trials = []
-        self.rpm = self.getRPM(exercise, numReps)
-        self.addTrial(rpm)
-        if category not in Exercise.categories:
-            raise ValueError("%s is not a valid category")
-        if numExercises <= 0:
-            raise ValueError("numExercises must be positive")
-        self.category = category
+        self.categories = categories
+        self.trials = trials
 
     def __repr__(self):
         string = "UserExercise: %s, max: %f rpm on %s\n\tTrials:" % \
@@ -35,11 +30,17 @@ class UserExercise:
         self.trials += other.trials
         self.trials.sort()
 
-    def addTrial(self, rpm):
-        self.trials.append((datetime.now(),rpm))
+    def addTrial(self, date, freq):
+        self.trials.append((date, freq))
 
-    def getRPM(self, exercise, numReps):
-        return numReps * 60.0 / exercise.duration
+    def addFreqFromNumReps(self, time, numReps):
+        freq = numReps * 60.0 / self.exercise.duration
+        self.addTrial(time, freq)
+
+    def addFrequency(self, time, data):
+        log = Log(data)
+        freq = log.getFrequency()
+        self.addTrial(time, freq)
 
     @property
     def maxRate(self):
