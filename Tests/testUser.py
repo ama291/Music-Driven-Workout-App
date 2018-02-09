@@ -74,6 +74,7 @@ class TestUserExercise(unittest.TestCase):
         equipment = ["Body Only"]
         workout1 = usr1.getWorkout(equipment, duration, difficulty, categories=categories)
         w1_ID = workout1.ID
+        ### NOTE: will move to testWorkout.py ###
         self.assertEqual(workout1.uid, usr1.ID)
         self.assertEqual(workout1.duration, duration)
         self.assertEqual(workout1.difficulty, difficulty)
@@ -81,6 +82,7 @@ class TestUserExercise(unittest.TestCase):
         self.assertEqual(workout1.muscleGroups, None)
         self.assertEqual(workout1.currExercise, 0)
         self.assertTrue(len(workout1.Exercises) > 0)
+        #########################################
         # muscle group option
         duration = 30
         difficulty = "Beginner"
@@ -88,6 +90,7 @@ class TestUserExercise(unittest.TestCase):
         equipment = ["Kettlebells", "Machine"]
         workout2 = usr1.getWorkout(equipment, duration, difficulty, muscleGroups=muscleGroups)
         w2_ID = workout2.ID
+        ### NOTE: will move to testWorkout.py ###
         self.assertEqual(workout2.uid, usr1.ID)
         self.assertEqual(workout2.duration, duration)
         self.assertEqual(workout2.difficulty, difficulty)
@@ -95,6 +98,7 @@ class TestUserExercise(unittest.TestCase):
         self.assertEqual(workout2.muscleGroups, muscleGroups)
         self.assertEqual(workout2.currExercise, 0)
         self.assertTrue(len(workout2.Exercises) > 0)
+        #########################################
         # workouts should have unique IDs and not be saved/in progress
         self.assertTrue(w1_ID != w2_ID)
         self.assertFalse(w1_ID in usr1.workoutsInProgress())
@@ -128,6 +132,7 @@ class TestUserExercise(unittest.TestCase):
         equipment = ["Dumbbell", "Cable"]
         workout3 = usr1.getWorkout(equipment, duration, difficulty, categories=categories)
         w3_ID = workout3.ID
+        ### NOTE: will move to testWorkout.py ###
         self.assertEqual(workout3.uid, usr1.ID)
         self.assertEqual(workout3.duration, duration)
         self.assertEqual(workout3.difficulty, difficulty)
@@ -135,6 +140,7 @@ class TestUserExercise(unittest.TestCase):
         self.assertEqual(workout3.muscleGroups, None)
         self.assertEqual(workout3.currExercise, 0)
         self.assertTrue(len(workout3.Exercises) > 0)
+        #########################################
         self.assertFalse(usr1.pauseWorkout(w3_ID, 2)) # cannot pause, was never started
 
         # test quitWorkout
