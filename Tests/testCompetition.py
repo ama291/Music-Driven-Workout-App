@@ -63,5 +63,12 @@ class TestCompetition(unittest.TestCase):
         competition1.addExercise("Burpees")
         self.assertEqual(competition1.exercises, ["Pushups", "Burpees", "Burpees"])
 
+        ## test declareWinners
+        self.assertEqual(competition1.winners, [])
+        competition1.declareWinners("Jessica")
+        self.assertEqual(competition1.winners, ["Jessica"])
+        competition1.declareWinners("Bob")
+        self.assertEqual(competition1.winners, ["Jessica", "Bob"])
+
 if __name__ == '__main__':
     unittest.main()

@@ -9,6 +9,7 @@ class Competition:
         self.completed = False
         self.participants = []
         self.exercises = []
+        self.winners = [] #multiple winners in case of ties
 
     def __repr__(self):
         string = "Competition: %s: %s - %r with participants %s" % (self.name, self.description, self.date, self.completed, self.participants)
@@ -54,4 +55,11 @@ class Competition:
             return True
         elif _exercise not in self.exercises:
             print ("This exercise was not found")
+            return False
+
+    def declareWinners(self, _winner):
+        if _winner not in self.winners:
+            self.winners.append(_winner)
+            return True
+        else:
             return False
