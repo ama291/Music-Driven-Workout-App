@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 from Scripts.exercise import Exercise
+from Scripts.log import Log
 from datetime import datetime
 
 class UserExercise(object):
-    def __init__(self, exercise, rpm):
+    def __init__(self, exercise, categories, trials):
         self.exercise = exercise
-        self.trials = []
-        self.addTrial(rpm)
+        self.categories = categories
+        self.trials = trials
 
     def __repr__(self):
         string = "UserExercise: %s, max: %f rpm on %s\n\tTrials:" % \
@@ -29,8 +30,17 @@ class UserExercise(object):
         self.trials += other.trials
         self.trials.sort()
 
-    def addTrial(self, rpm):
-        self.trials.append((datetime.now(),rpm))
+    def addTrial(self, date, freq):
+        self.trials.append((date, freq))
+
+    def addFreqFromNumReps(self, time, numReps):
+        freq = numReps * 60.0 / self.exercise.duration
+        self.addTrial(time, freq)
+
+    def addFrequency(self, time, data):
+        log = Log(data)
+        freq = log.getFrequency()
+        self.addTrial(time, freq)
 
     @property
     def maxRate(self):
@@ -38,7 +48,7 @@ class UserExercise(object):
 
 if __name__ == '__main__':
     ex = Exercise("Lunges", 30.0)
-    uex = UserExercise(ex, 16.0)
+    uex = UserExercise(ex, 16.0, 12)
     for i in [23.5,32.0,12.0]:
         uex.addTrial(i)
     print(uex)

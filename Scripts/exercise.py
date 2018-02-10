@@ -16,7 +16,6 @@ class Exercise(object):
         self.duration = random.randrange(self.range_start, self.range_end, self.increment)
         self.rpm = rpm # either from exercise database or user's fitness test info
 
-
     def __repr__(self):
         string = "Exercise: %s for %d seconds" % (self.name, self.duration)
         return string

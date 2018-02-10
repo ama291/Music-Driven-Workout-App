@@ -25,7 +25,7 @@ class TestWorkout(unittest.TestCase):
     workout1 = usr1.getWorkout(equipment,duration, difficulty, categories=categories)
 
     # test workout properties match input parameters and has exercises
-    elf.assertEqual(workout1.uid, usr1.ID)
+    self.assertEqual(workout1.uid, usr1.ID)
     self.assertEqual(workout1.duration, duration)
     self.assertEqual(workout1.difficulty, difficulty)
     self.assertEqual(workout1.categories, categories)
