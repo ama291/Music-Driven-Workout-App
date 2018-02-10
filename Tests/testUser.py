@@ -181,17 +181,34 @@ class TestUser(unittest.TestCase):
         self.assertTrue(goal1 in usr1.goals)
 
         # test remove goal
-        usr1.removeGoal(goal1)
+        self.assertTrue(usr1.removeGoal(goal1))
         self.assertFalse(goal1 in usr1.goals)
+        goal2 = Goal("goal2", "Complete 5 workouts", 5,\
+         ["arms"], ["bicepts"], 14, 3, True)
+        usr1.addGoal(goal1)
+        self.assertFalse(usr1.removeGoal(goal2))
 
         # test add theme
+        theme1 = Theme("Beyonce theme", "Beyonce", 5)
+        usr1.addTheme(theme1)
+        self.assertTrue(theme1 in usr1.themes)
 
         # test remove theme
+        theme2 = Theme("Taylor Swift theme", "Taylor Swift", 5)
+        self.assertFalse(usr1.removeTheme(theme2))
+        self.assertTrue(usr1.removeTheme(theme1))
+        self.assertFalse(theme1 in usr1.themes)
 
         # test add competition
+        competition1 = Competition("Race", "Who'll get 1st", "02-05-18")
+        usr1.addCompetition(competition1)
+        self.assertTrue(competition1 in usr1.competitions)
 
         # test remove competition
-
+        competition2 = Competition("Contest", "Who'll get 1st", "02-05-18")
+        self.assertFalse(usr1.removeCompetition(competition2))
+        self.assertTrue(usr1.removeCompetition(competition1))
+        self.assertFalse(competition1 in usr1.competitions)
 
         ## test getFitnessTest
         usr1.trackEx(uex1)
