@@ -1,16 +1,32 @@
 import unittest
 from Scripts.exercise import Exercise
+import random
 
 class TestExercise(unittest.TestCase):
 
     def test(self):
     	## test constructor
-        ex1 = Exercise("Chin-ups", 30.0)
-        self.assertEqual(ex1.name, "Chin-ups")
-        self.assertEqual(ex1.duration, 30.0)
+        ex1 = Exercise("Calf Raises", 1, "Legs", \
+            ["Calves"], ["Stairs"], [], [0,1], 1, 30.0)
+        self.assertEqual(ex1.name, "Calf Raises")
+        self.assertEqual(ex1.difficulty, 1)
+        self.assertEqual(ex1.category, "Legs")
+        self.assertEqual(ex1.muscleGroup, ["Calves"])
+        self.assertEqual(ex1.equipment, ["Stairs"])
+        self.assertEqual(ex1.images, [])
+        self.assertEqual(ex1.range_start, 0)
+        self.assertEqual(ex1.range_end, 1)
+        self.assertEqual(ex1.duration, \
+            random.randrange(ex1.range_start, ex1.range_end, ex1.increment))
+        self.assertEqual(ex1.increment, 1)
+        self.assertEqual(ex1.rpm, 30.0)
 
-        ex2 = Exercise("Chin-ups", 30.0)
-        ex3 = Exercise("Pull-ups", 30.0)
+        ## test equlity
+        ex2 = Exercise("Calf Raises", 1, "Legs", \
+            ["Calves"], ["Stairs"], [], [4,60], 1, 20.0)
+        ex3 = Exercise("Chin-ups", 3, "Arms", \
+            ["Bicepts", "Tricepts"], ["Stairs"], [], \
+            [0,1], 1, 30.0)
         self.assertTrue(ex1 == ex2)
         self.assertFalse(ex1 == ex3)
 
