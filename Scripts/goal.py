@@ -3,7 +3,8 @@
 from datetime import datetime
 
 class Goal(object):
-    def __init__(self, name, description, startingProgress, duration, daysPerWeek, notify):
+    def __init__(self, name, description, goalNum, categories, \
+        muscleGroups, duration, daysPerWeek, notify):
         """
         name: string
         description: string
@@ -13,28 +14,40 @@ class Goal(object):
         """
         self.name = name
         self.description = description
-        self.progress = startingProgress
+        self.progress = 0
+        self.goalNum = goalNum
         self.date = datetime.now()
         self.duration = duration
         self.daysPerWeek = daysPerWeek
         self.notify = notify
+        self.categories = categories
+        self.muscleGroups = muscleGroups
 
     def __repr__(self):
-        string = "Goal: %s: %s - %r" % (self.name, self.description, self.completed)
+        string = "Goal: %s: %s - %s, %s" % (self.name, self.description, self.categories, self.muscleGroups)
         return string
 
     def __eq__(self, other):
         return self.name == other.name
 
     def makeProgress(self):
-        self.progress -= 1
+        self.progress += 1
 
     @property
     def completed(self):
-        return self.progress <= 0
+        return self.progress >= self.goalNum
 
-    def editGoalName(self, _name):
-        self.name = _name
+    def addCategory(self, _cat):
+        self.categories.append(_cat)
+
+    def addMuscleGroup(self, _mg):
+        self.muscleGroups.append(_mg)
+
+    def getCategories(self):
+        return self.categories
+
+    def getMuscleGroups(self):
+        return self.muscleGroups
 
     def editGoalDescription(self, _description):
         self.description = _description

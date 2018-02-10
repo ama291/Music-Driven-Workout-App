@@ -62,20 +62,6 @@ class TestUser(unittest.TestCase):
         self.assertEqual(usr1.exIndexUntracked(name1), 0)
         self.assertEqual(usr1.exIndexUntracked(name2), 1)
 
-        ## test getFitnessTest
-        usr1.trackEx(uex1)
-        usr1.trackEx(uex3)
-        cats = ["cardio", "abs"]
-        uexs = [uex1, uex3]
-        tests = usr1.getFitnessTest(cats, 5, uexs)
-        self.assertEqual(len(tests), 5)
-        self.assertTrue(uex1 in tests)
-        self.assertTrue(uex3 in tests)
-        for t in tests:
-            self.assertTrue(t.exercise.category in cats)
-            if t not in uexs:
-                self.assertTrue(t not in usr1.tracked)
-                self.assertTrue(t not in usr1.untracked)
         """
         Workout flow - User keeps getting workouts until they find one they like,
         then they start the workout. They can pause multiple times during a workout,
@@ -189,8 +175,14 @@ class TestUser(unittest.TestCase):
 
 
         # test add goal
+        goal1 = Goal("goal1", "Complete 5 workouts", 5,\
+         ["arms"], ["bicepts"], 14, 3, True)
+        usr1.addGoal(goal1)
+        self.assertTrue(goal1 in usr1.goals)
 
         # test remove goal
+        usr1.removeGoal(goal1)
+        self.assertFalse(goal1 in usr1.goals)
 
         # test add theme
 
@@ -199,6 +191,22 @@ class TestUser(unittest.TestCase):
         # test add competition
 
         # test remove competition
+
+
+        ## test getFitnessTest
+        usr1.trackEx(uex1)
+        usr1.trackEx(uex3)
+        cats = ["cardio", "abs"]
+        uexs = [uex1, uex3]
+        tests = usr1.getFitnessTest(cats, 5, uexs)
+        self.assertEqual(len(tests), 5)
+        self.assertTrue(uex1 in tests)
+        self.assertTrue(uex3 in tests)
+        for t in tests:
+            self.assertTrue(t.exercise.category in cats)
+            if t not in uexs:
+                self.assertTrue(t not in usr1.tracked)
+                self.assertTrue(t not in usr1.untracked)
 
 
 
