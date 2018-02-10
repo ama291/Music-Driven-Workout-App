@@ -7,19 +7,20 @@ class TestGoal(unittest.TestCase):
     def test(self):
         goal1 = Goal("goal1", "Complete 1 workout")
         goal2 = Goal("goal2","Complete 5 workouts")
+        goal2.addCategory('workouts')
+        goal2.addMuscleGroup('cardio')
 
         ## test constructor
         self.assertEqual(goal1.name, "goal1")
         self.assertEqual(goal2.description, "Complete 5 workouts")
-        self.assertFalse(goal2.completed)
 
-        ## test goalCompleted
-        goal1.goalCompleted()
-        self.assertTrue(goal1.completed)
+        #test getCategories
+        self.assertEqual(goal2.getCategories(), ['workouts'])
+        self.assertEqual(goal1.getCategories(), [])
 
-        ## test editGoalName
-        goal1.editGoalName("goal01")
-        self.assertEqual(goal1.name, "goal01")
+        #test getMuscleGroups
+        self.assertEqual(goal2.getMuscleGroups(), ['cardio'])
+        self.assertEqual(goal1.getMuscleGroups(), [])
 
         ## test editGoalDescription
         goal2.editGoalDescription("Complete 3 workouts")

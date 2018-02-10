@@ -7,8 +7,9 @@ class Competition:
         self.description = description
         self.date = date
         self.completed = False
-        self.participants = []
+        self.participants = {} #key =  user id, value = score
         self.exercises = []
+        self.winners = [] #multiple winners in case of ties
 
     def __repr__(self):
         string = "Competition: %s: %s - %r with participants %s" % (self.name, self.description, self.date, self.completed, self.participants)
@@ -29,16 +30,16 @@ class Competition:
     def editCompetitionDate(self, _date):
         self.date = _date
 
-    def addParticipant(self, _participant):
+    def addParticipant(self, _participant): #_participant = user id
         if _participant not in self.participants:
-            self.participants.append(_participant)
+            self.participants[_participant] = 0
             return True
         else:
             return False
 
     def removeParticipant(self, _participant):
         if _participant in self.participants:
-            self.participants.remove(_participant)
+            self.participants.pop(_participant, None)
             return True
         else:
             print ("This participant doesn't exist")
@@ -55,3 +56,13 @@ class Competition:
         elif _exercise not in self.exercises:
             print ("This exercise was not found")
             return False
+
+    def findWinner(self):
+        maxVal = max(self.participants, key=self.participants.get)
+        for i in self.participants:
+            if self.participants[i] == self.participants[maxVal]:
+                self.winners.append(i)
+        return self.winners
+
+    def getNumParticipants(self):
+        return len(self.participants)
