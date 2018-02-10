@@ -5,27 +5,32 @@ from Scripts.user import User
 from datetime import datetime
 
 
-class TestUserExercise(unittest.TestCase):
+class TestUser(unittest.TestCase):
 
     def test(self):
-        name1 = "Jumping Jacks"
-        ex1 = Exercise(name1, 30.0)
+        name1 = "Calf Raises"
+        ex1 = Exercise(name1, 1, "Legs", \
+            ["Calves"], ["Stairs"], [], [0,1], 1, 30.0)
         uex1 = UserExercise(ex1, [], [])
         uex1.addFreqFromNumReps(datetime.now(), 51)
 
-        ex2 = Exercise(name1, 30.0)
+        ex2 = Exercise(name1, 1, "Legs", \
+            ["Calves"], ["Stairs"], [], [0,1], 1, 30.0)
         uex2 = UserExercise(ex2, [], [])
         uex2.addFreqFromNumReps(datetime.now(), 48)
 
-        name2 = "High Knees"
-        ex3 = Exercise(name2, 30.0)
+        name2 = "Chin-ups"
+        ex3 = Exercise("Chin-ups", 3, "Arms", \
+            ["Bicepts", "Tricepts"], ["Stairs"], [], \
+            [0,1], 1, 30.0)
         uex3 = UserExercise(ex3, [], [])
         uex3.addFreqFromNumReps(datetime.now(), 61)
 
         ## test constructor (ID, name tracked, 
         ## untracked, goals, themes, competition, 
         ## inProgressWorkouts, savedWorkouts)
-        usr1 = User(1, "Alex", [], [], [], [], [], {}, {})
+        usr1 = User(1, "Alex", [], [], [], [], [], \
+            {}, {})
         self.assertEqual(usr1.name, "Alex")
         self.assertTrue(usr1.tracked == [])
         self.assertTrue(usr1.untracked == [])
@@ -34,7 +39,8 @@ class TestUserExercise(unittest.TestCase):
 
         ## test trackEx
         usr1.trackEx(uex1)
-        self.assertTrue(usr1.exIndexTracked(name1) is not None)
+        self.assertTrue(usr1.exIndexTracked(name1) \
+            is not None)
         usr1.trackEx(uex2)
         self.assertEqual(len(usr1.tracked), 1)
         self.assertEqual(len(usr1.tracked[0].trials), 2)        

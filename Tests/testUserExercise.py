@@ -8,7 +8,8 @@ class TestUserExercise(unittest.TestCase):
 
     def test(self):
         ## test constructor
-        ex1 = Exercise("Lunges", 30.0)
+        ex1 = Exercise("Calf Raises", 1, "Legs", \
+            ["Calves"], ["Stairs"], [], [0,1], 1, 30.0)
         uex1 = UserExercise(ex1, [], [])
         self.assertEqual(uex1.exercise, ex1)
         self.assertEqual(uex1.categories, [])
@@ -16,7 +17,9 @@ class TestUserExercise(unittest.TestCase):
 
 
         ## test sameExercise
-        ex2 = Exercise("Frog Jumps", 20.0)
+        ex2 = Exercise("Chin-ups", 3, "Arms", \
+            ["Bicepts", "Tricepts"], ["Stairs"], [], \
+            [0,1], 1, 30.0)
         self.assertTrue(uex1.sameExercise(ex1))
         self.assertFalse(uex1.sameExercise(ex2))
         
@@ -37,21 +40,22 @@ class TestUserExercise(unittest.TestCase):
         self.assertHasRates(uex3, RPMs)
 
         ## test addFreqFromNumReps 
-        time = datetime.now()
-        uex1.addFreqFromNumReps(time, 20)
-        self.assertTrue((time, 40.0) in uex1.trials)
+        time1 = datetime.now()
+        uex1.addFreqFromNumReps(time1, 20)
+        self.assertTrue((time1, 20 / uex1.exercise.duration * 60) in uex1.trials)
 
         ## test addFrequency
         filepath = "Logs/log1.json"
         with open(filepath) as f:
             data = json.load(f)
-        time = datetime.now()
-        uex1.addFrequency(time, data)
-        expected = (time, 60.22)
-        self.assertTrialAlmostEqual(uex1.trials[4], expected)
+        time2 = datetime.now()
+        uex1.addFrequency(time2, data)
+        expected1 = (time2, 60.22)
+        self.assertTrialAlmostEqual(uex1.trials[4], expected1)
 
         ## test maxRate
-        self.assertTrialAlmostEqual(uex1.maxRate, expected)
+        expected2 = (time1, 1200.)
+        self.assertTrialAlmostEqual(uex1.maxRate, expected2)
 
     def assertHasRates(self, uex, ts):
         for t in ts:
