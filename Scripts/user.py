@@ -211,3 +211,23 @@ class User(object):
         """
         return self.savedWorkouts
 
+    def addGoal(self, goal):
+        self.goals.append(goal)
+
+    def removeGoal(self, goal):
+        assert goal in self.goals
+        self.goals.remove(goal)
+
+    def addTheme(self, theme):
+        self.themes.append(theme)
+
+    def removeTheme(self, theme):
+        assert theme in self.themes
+        self.themes.remove(theme)
+
+    def addCompetition(self, competition):
+        self.competitions.append(competition)
+
+    def removeCompetition(self, competition):
+        assert competition in self.competitions
+        self.competitions.remove(competition)

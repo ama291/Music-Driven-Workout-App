@@ -2,6 +2,9 @@ import unittest
 from Scripts.exercise import Exercise
 from Scripts.userexercise import UserExercise
 from Scripts.user import User
+from Scripts.goal import Goal
+from Scripts.theme import Theme
+from Scripts.competition import Competition
 from datetime import datetime
 
 
@@ -184,6 +187,18 @@ class TestUser(unittest.TestCase):
         self.assertFalse(w3_ID in usr1.workoutsInProgress())
         self.assertFalse(w3_ID in usr1.workoutsSaved())
 
+
+        # test add goal
+
+        # test remove goal
+
+        # test add theme
+
+        # test remove theme
+
+        # test add competition
+
+        # test remove competition
 
 
 
