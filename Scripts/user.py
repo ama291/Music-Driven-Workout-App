@@ -87,7 +87,8 @@ class User(object):
         del self.tracked[idx]
         self.untracked.append(uex)
 
-    def getWorkout(self, equipment, duration, difficulty, categories = None, muscleGroups = None, themes = None):
+    def getWorkout(self, equipment, duration, difficulty, \
+         categories = None, muscleGroups = None, themes = None):
         """
         User either inputs a list of categories or a list of muscle groups
         Returns a workout based in the user's inputs
@@ -114,12 +115,13 @@ class User(object):
                 self.themes[theme.ID] = t
         """
 
-        new = Workout(self.ID, themes, categories, muscleGroups, equipment, duration, difficulty)
+        new = Workout(self.ID, themes, categories, \
+            muscleGroups, equipment, duration, difficulty)
         new.generateWorkout()
         return new
 
     def startWorkout(self, workout):
-        id = workout.getID()
+        id = workout.ID
 
         if id not in self.inProgressWorkouts:
             self.inProgressWorkouts[id] = workout
@@ -211,3 +213,23 @@ class User(object):
         """
         return self.savedWorkouts
 
+    def addGoal(self, goal):
+        self.goals.append(goal)
+
+    def removeGoal(self, goal):
+        assert goal in self.goals
+        self.goals.remove(goal)
+
+    def addTheme(self, theme):
+        self.themes.append(theme)
+
+    def removeTheme(self, theme):
+        assert theme in self.themes
+        self.themes.remove(theme)
+
+    def addCompetition(self, competition):
+        self.competitions.append(competition)
+
+    def removeCompetition(self, competition):
+        assert competition in self.competitions
+        self.competitions.remove(competition)
