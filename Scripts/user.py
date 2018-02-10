@@ -6,14 +6,14 @@ import requests
 
 class User(object):
     def __init__(self, ID, name, tracked, untracked, goals, \
-         themes, competition, inProgressWorkouts, savedWorkouts):
+         themes, competitions, inProgressWorkouts, savedWorkouts):
         self.ID = ID
         self.name = name
         self.tracked = tracked
         self.untracked = untracked
         self.goals = goals
         self.themes = themes
-        self.competition = competition
+        self.competitions = competitions
 
         # stores current and incomplete workouts
         self.inProgressWorkouts = inProgressWorkouts # key: workoutID, value: workout class instance
@@ -114,7 +114,6 @@ class User(object):
             else:
                 self.themes[theme.ID] = t
         """
-
         new = Workout(self.ID, themes, categories, \
             muscleGroups, equipment, duration, difficulty)
         new.generateWorkout()
@@ -217,19 +216,25 @@ class User(object):
         self.goals.append(goal)
 
     def removeGoal(self, goal):
-        assert goal in self.goals
-        self.goals.remove(goal)
+        if goal in self.goals:
+            self.goals.remove(goal)
+            return True
+        return False
 
     def addTheme(self, theme):
         self.themes.append(theme)
 
     def removeTheme(self, theme):
-        assert theme in self.themes
-        self.themes.remove(theme)
+        if theme in self.themes:   
+            self.themes.remove(theme)
+            return True
+        return False
 
     def addCompetition(self, competition):
         self.competitions.append(competition)
 
     def removeCompetition(self, competition):
-        assert competition in self.competitions
-        self.competitions.remove(competition)
+        if competition in self.competitions:
+            self.competitions.remove(competition)
+            return True
+        return False
