@@ -14,8 +14,6 @@ class Exercise(object):
         self.range_end = range[1]
         self.increment = increment # valid duration increment
         self.duration = random.randrange(self.range_start, self.range_end, self.increment)
-        if self.duration == 0:
-            self.duration = 1
         self.rpm = rpm # either from exercise database or user's fitness test info
 
     def __repr__(self):

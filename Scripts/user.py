@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
-from Scripts.exercise import Exercise
-from Scripts.userexercise import UserExercise
-from Scripts.workout import Workout # added by Larissa
-import requests
+from Scripts.workout import Workout
 
 class User(object):
-    def __init__(self, ID, name, tracked, untracked, goals, \
+    def __init__(self, ID, name, tracked, untracked, goals,
          themes, competitions, inProgressWorkouts, savedWorkouts):
         self.ID = ID
         self.name = name
@@ -87,8 +84,7 @@ class User(object):
         del self.tracked[idx]
         self.untracked.append(uex)
 
-    def getWorkout(self, equipment, duration, difficulty, \
-         categories = None, muscleGroups = None, themes = None):
+    def getWorkout(self, themes, categories, muscleGroups, equipment, duration, difficulty):
         """
         User either inputs a list of categories or a list of muscle groups
         Returns a workout based in the user's inputs
@@ -105,6 +101,7 @@ class User(object):
         (select 1)
         """
 
+        # TODO (next iteration): handle themes
         """
         for theme in themes:
             t = self.themes[theme.ID]
@@ -114,10 +111,10 @@ class User(object):
             else:
                 self.themes[theme.ID] = t
         """
-        new = Workout(self.ID, themes, categories, \
-            muscleGroups, equipment, duration, difficulty)
-        new.generateWorkout()
-        return new
+        new = Workout(self.ID, themes, categories, muscleGroups,
+                      equipment, duration, difficulty)
+        hasGenerated = new.generateWorkout() # true if no request failures
+        return new if hasGenerated else None
 
     def startWorkout(self, workout):
         id = workout.ID
@@ -129,15 +126,6 @@ class User(object):
         return False
 
     def startSavedWorkout(self, id):
-        """
-        start a saved workout from saved workout page
-
-        will return false if there is already an in
-        progress version of the workout, in which case
-        the app will pop up an error that says the user
-        should finish the workout before starting it again
-        :param id: workout ID
-        """
         if id in self.savedWorkouts and id not in self.inProgressWorkouts:
             workout = self.savedWorkouts[id]
             self.inProgressWorkouts[id] = workout
@@ -149,7 +137,6 @@ class User(object):
         """
         NOTE: can also be used when the user has completed
         a workout and does not want to save it
-        :param id: workout ID
         """
         if id in self.inProgressWorkouts:
             del self.inProgressWorkouts[id]
@@ -159,12 +146,7 @@ class User(object):
 
     def pauseWorkout(self, id, pausedOn):
         """
-        Updates in progress workout to the paused exercise
-        Will start at this exercise when workout is resumed
-        :param id: workout ID
-        :param pausedOn: exercise where pause occurred
-
-        Note: resume will be handled by the app
+        NOTE: will start at this exercise when workout is resumed
         """
         if id in self.inProgressWorkouts:
             workout = self.inProgressWorkouts[id]
@@ -175,10 +157,6 @@ class User(object):
         return False
 
     def saveWorkout(self, id):
-        """
-        Upon completing a workout, user can save it
-        :param id: workout ID
-        """
         if id in self.inProgressWorkouts and id not in self.savedWorkouts:
             toSave = self.inProgressWorkouts[id]
             toSave.setCurrEx(0) # roll back workout to beginning
@@ -201,6 +179,7 @@ class User(object):
         """
         Return all incomplete workouts so the app can load them for a user to see
         From there the user can resume a workout, which should start at the paused exercise
+        NOTE: can also be retrieved directly from database
         """
         return self.inProgressWorkouts
 
@@ -208,7 +187,8 @@ class User(object):
         """
         Return all saved workouts so the app can load them for a user to see
         From there the user can restart a workout, which should start at the first exercise
-        Unless it is already in progress, in which case it starts at the proper exercise
+        Unless it has an in progress version, in which case the app should redirect them
+        NOTE: can also be retrieved directly from database
         """
         return self.savedWorkouts
 
