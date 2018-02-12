@@ -6,7 +6,7 @@ class TestExercise(unittest.TestCase):
 
     def test(self):
     	## test constructor
-        ex1 = Exercise("Calf Raises", 1, "Legs", \
+        ex1 = Exercise("Calf Raises", 1, "Legs",
             ["Calves"], ["Stairs"], [], [10,60], 1, 30.0)
         self.assertEqual(ex1.name, "Calf Raises")
         self.assertEqual(ex1.difficulty, 1)
@@ -21,11 +21,11 @@ class TestExercise(unittest.TestCase):
         self.assertEqual(ex1.increment, 1)
         self.assertEqual(ex1.rpm, 30.0)
 
-        ## test equlity
-        ex2 = Exercise("Calf Raises", 1, "Legs", \
+        ## test equality
+        ex2 = Exercise("Calf Raises", 1, "Legs",
             ["Calves"], ["Stairs"], [], [4,60], 1, 20.0)
-        ex3 = Exercise("Chin-ups", 3, "Arms", \
-            ["Bicepts", "Tricepts"], ["Stairs"], [], \
+        ex3 = Exercise("Chin-ups", 3, "Arms",
+            ["Biceps", "Triceps"], ["Stairs"], [],
             [0,1], 1, 30.0)
         self.assertTrue(ex1 == ex2)
         self.assertFalse(ex1 == ex3)
