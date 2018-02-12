@@ -30,3 +30,68 @@ For manual setup, ```source setup-server.sh```
 
 ## Scripts
 Place scripts in the "Scripts" folder, import them where necessary.
+
+## Milestone 3b Progress
+
+### Front End and Infrastructure
+
+The server, API, and testing infrastructure is described above. 
+
+#### Description of Front End
+
+#### Who Did What
+
+#### Changes
+
+### Wokring Out
+
+#### Description
+
+#### Acceptance Tests
+
+#### Who Did What
+
+#### Changes
+
+### Fitness Test
+
+#### Description
+
+For this iteration, we focused on setting up fitness testing with the following use cases:
+
+* A user can begin a fitness test. The `User.testFitness()` method creates a list of UserExercise objects that will be recommended to them for the test.
+
+* A user can complete an exercise in a fitness test. There will be a button for them to begin the test in the front end, that causes the phone to begin collecting accelerometer logs. These logs are sent to the server to be analyzed for frequency. `UserExercise.addFrequency()` saves a frequency to a `UserExercise`, which will be added to the `User.tracked` or `User.untracked`, depending on if they are tracking the exercise. The computation is done in `Log.getFrequency()`.
+
+* A user can view their results to a fitness test. Since results are displayed by date, we can show how they have progressed over time on an exercise. The front end can display a graph.
+
+* A user can track (`User.trackEx()`) and untrack (`User.untrackEx()`) exercises. When they begin the test, they are specifically asked which tracked exercises they want to complete, and the rest of the exercises are recommended randomly from the database. 
+
+#### Acceptance Tests
+
+* For beginning a fitness test: 
+    * TODO
+* For determining frequency from a log:
+    * TODO
+* For getting sorted results:
+    * TODO
+* For tracking and un-tracking:
+    * TODO
+
+#### Who Did What
+
+Lucy Newman and Gregory Howlett-Gomez worked on this part of the project. (TODO: more specific details)
+
+#### Changes
+
+TODO
+
+### Goals, Themes, and Competitions
+
+#### Description
+
+#### Acceptance Tests
+
+#### Who Did What
+
+#### Changes
