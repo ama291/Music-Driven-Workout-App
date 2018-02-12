@@ -2,12 +2,12 @@
 from Scripts.user import User
 import requests
 import jsonpickle
+import sqlite3
 
 # constant return values
 SUCCESS = 0
 DB_FAILURE = 1
 FAILURE = 2
-
 
 def getUser(uid):
     """
@@ -182,8 +182,49 @@ def unsaveWorkout(uid, wid):
     else:
         return FAILURE
 
-# addGoal
-# removeGoal
+def addGoal(uid, goal):
+    """
+    :param uid: user ID
+    :param goal: goal to add
+    :return: 0 - success, 1 - failure to add to goals in db
+    """
+    user = getUser(uid)
+    user.addGoal(goal)
+    db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
+    cursor = db.cursor()
+    goalString = jsonpickle.encode(user.goals)
+    sql = 'UPDATE users
+           SET goals = %s
+           WHERE id = %s' % (goalString, uid)
+    try:
+        cursor.execute(sql)
+        db.commit()
+        return SUCCESS
+    except:
+        db.rollback()
+        return DB_FAILURE
+
+def removeGoal(uid, goal):
+    """
+    :param uid: user ID
+    :param goal: goal to remove
+    """
+    user = getUser(uid)
+    user.removeGoal(goal)
+    db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
+    cursor = db.cursor()
+    goalString = jsonpickle.encode(user.goals)
+    sql = 'UPDATE users
+           SET goals = %s
+           WHERE id = %s' % (goalString, uid)
+    try:
+        cursor.execute(sql)
+        db.commit()
+        return SUCCESS
+    except:
+        db.rollback()
+        return DB_FAILURE
+
 # addTheme
 # removeTheme
 # addCompetition
