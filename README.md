@@ -59,13 +59,13 @@ The server, API, and testing infrastructure is described above.
 
 For this iteration, we focused on setting up fitness testing with the following use cases:
 
-* A user can begin a fitness test. The method `user.testFitness()` creates a list of UserExercise objects that will be recommended to them for the test.
+* A user can begin a fitness test. The `User.testFitness()` method creates a list of UserExercise objects that will be recommended to them for the test.
 
-* A user can complete an exercise in a fitness test. There will be a button for them to begin the test in the front end, that causes the phone to begin collecting accelerometer logs. These logs are sent to the server to be analyzed for frequency. 
+* A user can complete an exercise in a fitness test. There will be a button for them to begin the test in the front end, that causes the phone to begin collecting accelerometer logs. These logs are sent to the server to be analyzed for frequency. `UserExercise.addFrequency()` saves a frequency to a `UserExercise`, which will be added to the `User.tracked` or `User.untracked`, depending on if they are tracking the exercise. The computation is done in `Log.getFrequency()`.
 
 * A user can view their results to a fitness test. Since results are displayed by date, we can show how they have progressed over time on an exercise. The front end can display a graph.
 
-* A user can track and untrack exercises. When they begin the test, they are specifically asked which tracked exercises they want to complete, and the rest of the exercises are recommended randomly from the database.
+* A user can track (`User.trackEx()`) and untrack (`User.untrackEx()`) exercises. When they begin the test, they are specifically asked which tracked exercises they want to complete, and the rest of the exercises are recommended randomly from the database. 
 
 #### Acceptance Tests
 
