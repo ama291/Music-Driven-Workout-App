@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# This script takes the newlinejson file created by Scripts/workout_scraper.py
+# and puts the data into our database's exercises table.
+
 import newlinejson as nlj
 import json
 import requests
