@@ -16,7 +16,7 @@ class Workout(object):
         self.Exercises = [] # filled by generateWorkout
         self.currExercise = 0 # index of current exercise
 
-	 def setCurrEx(self, idx):
+    def setCurrEx(self, idx):
         self.currExercise = idx
 
     def generateWorkout(self):
