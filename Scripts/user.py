@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
-from Scripts.exercise import Exercise
-from Scripts.userexercise import UserExercise
-from Scripts.fitnesstest import FitnessTest
-from Scripts.workout import Workout # added by Larissa
+from Scripts.workout import Workout
 
-class User:
-    def __init__(self, name):
+class User(object):
+    def __init__(self, ID, name, tracked, untracked, goals,
+         themes, competitions, inProgressWorkouts, savedWorkouts):
+        self.ID = ID
         self.name = name
-        self.tracked = []
-        self.untracked = []
+        self.tracked = tracked
+        self.untracked = untracked
+        self.goals = goals
+        self.themes = themes
+        self.competitions = competitions
 
-        # added by Larissa
         # stores current and incomplete workouts
-        self.inProgressWorkouts = {} # key: workoutID, value: workout class instance
+        self.inProgressWorkouts = inProgressWorkouts # key: workoutID, value: workout class instance
         # stores saved workouts, if a user wants to do the workout again
-        self.savedWorkouts = {} # key: workoutID, value: workout class instance
+        self.savedWorkouts = savedWorkouts # key: workoutID, value: workout class instance
 
     def __repr__(self):
         string = "User: %s\n***\nTracked:" % self.name
@@ -25,6 +26,13 @@ class User:
             string += "\n%s" % str(ex)
         string += "\n***"
         return string
+
+    def getFitnessTest(self, categories, numExercises, tracked):
+        numUntracked = numExercises - len(tracked)
+        ## TODO: get numUntracked exercises from the database 
+        #  that are neither tracked nor (saved) untracked for the user.
+        #  Create a UserExercise for each exercise.
+        return []
 
     def exIndexTracked(self, name):
         count = 0
@@ -50,7 +58,7 @@ class User:
         """
         checks if the user is already tracking the exercise. If so,
         it adds the new info. If not, it adds it to tracked exercises.
-        If it's in the untracked exercises, it moves the untracked 
+        If it's in the untracked exercises, it moves the untracked
         exercise with the same name to tracked exercises.
         """
         exname = userexercise.exercise.name
@@ -76,25 +84,40 @@ class User:
         del self.tracked[idx]
         self.untracked.append(uex)
 
-    def testFitness(self, category, numExercises):
-        test = FitnessTest(category, numExercises)
-
-    # added by Larissa
-    def getWorkout(self, duration, difficulty, categories = None, muscleGroups = None):
+    def getWorkout(self, themes, categories, muscleGroups, equipment, duration, difficulty):
         """
         User either inputs a list of categories or a list of muscle groups
         Returns a workout based in the user's inputs
 
-        Note: checking that duration, difficulty, and categories
-        or muscleGroups are non-empty done by the app
-        (if user does not input manually, pull from user profile)
+        Note: checking that duration, difficulty, equipment, and categories
+        or muscleGroups are non-empty done by the app (can have no theme applied)
+
+        Note: categories and muscleGroups options come from user's goals
+        (can select any number, at least 1, but either categories or
+        muscleGroups, not both), themes options come from user's themes
+        (select up to 5, at least 1), equipment options based on exercise
+        database (select any number, at least 1), difficulty options based
+        on exercise database (select 1), and duration options set by us
+        (select 1)
         """
-        new = Workout(categories, muscleGroups, duration, difficulty)
-        new.generateWorkout()
-        return new
+
+        # TODO (next iteration): handle themes
+        """
+        for theme in themes:
+            t = self.themes[theme.ID]
+            t.timesUsed += 1
+            if t.timesUsed == t.numWorkouts:
+                del self.themes[theme.ID]
+            else:
+                self.themes[theme.ID] = t
+        """
+        new = Workout(self.ID, themes, categories, muscleGroups,
+                      equipment, duration, difficulty)
+        hasGenerated = new.generateWorkout() # true if no request failures
+        return new if hasGenerated else None
 
     def startWorkout(self, workout):
-        id = workout.getID()
+        id = workout.ID
 
         if id not in self.inProgressWorkouts:
             self.inProgressWorkouts[id] = workout
@@ -103,14 +126,9 @@ class User:
         return False
 
     def startSavedWorkout(self, id):
-        """
-        :param id: workout ID
-        """
-        if id in self.savedWorkouts:
-            # only update if not already an in progress version
-            if id not in self.inProgressWorkouts:
-                workout = self.savedWorkouts[id]
-                self.inProgressWorkouts[id] = workout
+        if id in self.savedWorkouts and id not in self.inProgressWorkouts:
+            workout = self.savedWorkouts[id]
+            self.inProgressWorkouts[id] = workout
             return True
 
         return False
@@ -119,7 +137,6 @@ class User:
         """
         NOTE: can also be used when the user has completed
         a workout and does not want to save it
-        :param id: workout ID
         """
         if id in self.inProgressWorkouts:
             del self.inProgressWorkouts[id]
@@ -129,12 +146,7 @@ class User:
 
     def pauseWorkout(self, id, pausedOn):
         """
-        Updates in progress workout to the paused exercise
-        Will start at this exercise when workout is resumed
-        :param id: workout ID
-        :param pausedOn: exercise where pause occurred
-
-        Note: resume will be handled by the app
+        NOTE: will start at this exercise when workout is resumed
         """
         if id in self.inProgressWorkouts:
             workout = self.inProgressWorkouts[id]
@@ -145,10 +157,6 @@ class User:
         return False
 
     def saveWorkout(self, id):
-        """
-        Upon completing a workout, user can save it
-        :param id: workout ID
-        """
         if id in self.inProgressWorkouts and id not in self.savedWorkouts:
             toSave = self.inProgressWorkouts[id]
             toSave.setCurrEx(0) # roll back workout to beginning
@@ -171,6 +179,7 @@ class User:
         """
         Return all incomplete workouts so the app can load them for a user to see
         From there the user can resume a workout, which should start at the paused exercise
+        NOTE: can also be retrieved directly from database
         """
         return self.inProgressWorkouts
 
@@ -178,10 +187,34 @@ class User:
         """
         Return all saved workouts so the app can load them for a user to see
         From there the user can restart a workout, which should start at the first exercise
-        Unless it is already in progress, in which case it starts at the proper exercise
+        Unless it has an in progress version, in which case the app should redirect them
+        NOTE: can also be retrieved directly from database
         """
         return self.savedWorkouts
 
-if __name__ == '__main__':
-    user = User("Madeline")
-    print(user)
+    def addGoal(self, goal):
+        self.goals.append(goal)
+
+    def removeGoal(self, goal):
+        if goal in self.goals:
+            self.goals.remove(goal)
+            return True
+        return False
+
+    def addTheme(self, theme):
+        self.themes.append(theme)
+
+    def removeTheme(self, theme):
+        if theme in self.themes:   
+            self.themes.remove(theme)
+            return True
+        return False
+
+    def addCompetition(self, competition):
+        self.competitions.append(competition)
+
+    def removeCompetition(self, competition):
+        if competition in self.competitions:
+            self.competitions.remove(competition)
+            return True
+        return False

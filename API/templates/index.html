@@ -2,6 +2,20 @@
 	<body>
 		<h1>Music-Driven-Workout-App API</h1>
 		<h2>Documentation:</h2>
-		<p>Make requests to /api</p>
+		<h3>Database Access:</h3>
+		<p>To access the database, make POST requests to http://138.197.49.155:8000/api/database/</p>
+		<p>Required parameters: query, key</p>
+		<p>Request Example: /Scripts/testrequest.py</p>
+		<pre>
+#testrequest.py
+import requests
+
+#make request to API
+r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': 'select * from users', 'key': 'password is in test file'})
+print(r.json())
+		</pre>
+		<p>The database was created with<p>
+		<code>CREATE TABLE users (id integer, name varchar(50), tracked varchar(9999), untracked varchar(9999), goals varchar(9999), themes varchar(9999), competition varchar(9999), inProgressWorkouts varchar(9999), savedWorkouts varchar(9999));</code>
+		<p>The varchar(9999) fields are meant to hold JSON objects as strings.</p>
 	</body>
 </html>

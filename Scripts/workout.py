@@ -16,6 +16,9 @@ class Workout(object):
         self.Exercises = [] # filled by generateWorkout
         self.currExercise = 0 # index of current exercise
 
+	 def setCurrEx(self, idx):
+        self.currExercise = idx
+
     def generateWorkout(self):
         # TODO - need to add range_start, range_end, increment, and rpm to database
 

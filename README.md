@@ -1,7 +1,9 @@
 # Music-Driven-Workout-App
 CS 220 Music Driven Workout App Project
 
-The Flask API is live at http://138.197.49.155:8000/ Upon pushing to master the Jenkins instance on the server will re-install dependencies and restart the Flask app.
+The Flask API  with documentation is live at http://138.197.49.155:8000/
+
+Upon pushing to master the Jenkins instance on the server will re-install dependencies and restart the Flask app.
 
 Before running anything locally, make sure you have Python3 installed, the app will use the ```python3``` executables.
 
