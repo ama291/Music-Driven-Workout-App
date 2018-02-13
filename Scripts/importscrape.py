@@ -3,15 +3,15 @@
 # This script takes the newlinejson file created by Scripts/workout_scraper.py
 # and puts the data into our database's exercises table.
 
-import newlinejson as nlj
+# import newlinejson as nlj
 import json
 import requests
 
 db = 'http://138.197.49.155:8000/api/database/'
 dbKey = 'SoftCon2018'
-nljFile = 'Logs/workoutScrape'
+jFile = 'Logs/exercises.json'
 
-with nlj.open(nljFile) as src:
+with open(jFile) as src:
     i = 0
     for line in src:
         # Load our json object from a line in the nlj file
@@ -32,7 +32,14 @@ with nlj.open(nljFile) as src:
         i += 1
 
         # Insert Fields into our Database's exercises Table
-        requests.post(db, data = {'key': dbKey, \
-            'query': 'INSERT INTO exercises (id, name, duration, type, muscle, equipment, level, images, guide) ' \
-                      + '(%d, %s, %10.5f, %s, %s, %s, %s, %s, %s)' \
-                      % (_id, _name, _duration, _type, _muscle, _equipment, _level, _images, _guide)})
+        print("id: %d name: %s" % (_id, _name))
+        r = requests.post(db, data = {'key': dbKey, \
+            'query': 'INSERT INTO exercises (id, name, duration, type, muscle, equipment, level) ' \
+                    + 'VALUES (%d, %s, %10.5f, %s, %s, %s, %s)' \
+                    % (_id, _name, _duration, _type, _muscle, _equipment, _level)})
+
+        # r = requests.post(db, data = {'key': dbKey, \
+        #     'query': 'INSERT INTO exercises (id, name, duration, type, muscle, equipment, level, images, guide) ' \
+        #             + 'VALUES (%d, %s, %10.5f, %s, %s, %s, %s, %s, %s)' \
+        #             % (_id, _name, _duration, _type, _muscle, _equipment, _level, _images, _guide)})
+        print(r.json()["Status"])
