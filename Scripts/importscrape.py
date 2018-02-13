@@ -20,7 +20,6 @@ with open(jFile) as src:
         # Parse that json object into our fields
         _id         = i
         _name       = json.dumps(o["exercise_name"])
-        _duration   = 0
         _type       = json.dumps(o["type"])
         _muscle     = json.dumps(o["main_muscle_worked"])
         _equipment  = json.dumps(o["equipment"])
@@ -34,12 +33,7 @@ with open(jFile) as src:
         # Insert Fields into our Database's exercises Table
         print("id: %d name: %s" % (_id, _name))
         r = requests.post(db, data = {'key': dbKey, \
-            'query': 'INSERT INTO exercises (id, name, duration, type, muscle, equipment, level) ' \
-                    + 'VALUES (%d, %s, %10.5f, %s, %s, %s, %s)' \
-                    % (_id, _name, _duration, _type, _muscle, _equipment, _level)})
-
-        # r = requests.post(db, data = {'key': dbKey, \
-        #     'query': 'INSERT INTO exercises (id, name, duration, type, muscle, equipment, level, images, guide) ' \
-        #             + 'VALUES (%d, %s, %10.5f, %s, %s, %s, %s, %s, %s)' \
-        #             % (_id, _name, _duration, _type, _muscle, _equipment, _level, _images, _guide)})
+            'query': 'INSERT INTO exercises (id, name, type, muscle, equipment, level) ' \
+                    + 'VALUES (%d, %s, %s, %s, %s, %s)' \
+                    % (_id, _name, _type, _muscle, _equipment, _level)})
         print(r.json()["Status"])
