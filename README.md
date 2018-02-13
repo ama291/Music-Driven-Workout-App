@@ -90,8 +90,17 @@ TODO
 
 #### Description
 
+For this iteration, we focused on setting up the general goals, themes, and competitions infrasturcture as well as integrating changes to them with the database:
+
+* A user can add and remove goals. The `addGoal()` and `removeGoal()` methods allow the user to specify goals geared towards certain muscle groups and categories
+
+* A user can add and remove themes. These are based on specific genres or artists, and the user can choose how many workouts use the theme
+
+* A user can create, join, and leave competitions. These can have specific exercises added to them and the amount of time they span can be edited.
 #### Acceptance Tests
 
 #### Who Did What
+
+Julia Xu and Jessica Wang worked on this part of the project. 
 
 #### Changes
