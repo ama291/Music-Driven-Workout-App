@@ -1,8 +1,6 @@
 import json
 import os
-import matplotlib.pyplot as plt
 import peakutils
-from peakutils.plot import plot as pplot
 import numpy as np
 from scipy.signal import savgol_filter
 
@@ -20,20 +18,6 @@ class Log(object):
             self.yAccl.append(measurement["yAccl"])
             self.zAccl.append(measurement["zAccl"])
 
-    def plot(self):
-        i=1
-        plt.figure(1).set_size_inches(24,48)
-        for ylabel in self.measurements:
-            m = self.__dict__[ylabel]
-            plt.subplot(len(self.measurements),1,i)
-            i += 1
-            plt.plot(self.times,m,label=ylabel)
-            plt.xlabel('Time (s)')
-            plt.title("magnitude for %s" % ylabel)
-            plt.grid(True)
-        plt.tight_layout()
-        plt.show()
-
     def getPeaks(self, thres, min_dist):
         for m in self.measurements:
             x = np.array(self.times)
@@ -42,9 +26,6 @@ class Log(object):
             y1 = savgol_filter(y0, amt, 2, mode="nearest")
             for y in [y0,y1]:
                 indexes = peakutils.indexes(y, thres=thres)
-                plt.figure(figsize=(10,6))
-                pplot(x, y, indexes)
-        #plt.show()
         return len(indexes)
 
     def getFrequency(self):

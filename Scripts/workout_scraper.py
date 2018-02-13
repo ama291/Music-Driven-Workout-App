@@ -14,7 +14,7 @@ class Runner():
     session.proxies = {'http': 'socks5://127.0.0.1:9050',
                         'https': 'socks5://127.0.0.1:9050'}
 
-    def __init__(self):    
+    def __init__(self):
         self.s = Scraper()
 
     def run(self, filename):

@@ -14,8 +14,10 @@ import requests
 r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': 'select * from users', 'key': 'password is in test file'})
 print(r.json())
 		</pre>
-		<p>The database was created with<p>
+		<p>The users table in the database was created with: </p>
 		<code>CREATE TABLE users (id integer, name varchar(50), tracked varchar(9999), untracked varchar(9999), goals varchar(9999), themes varchar(9999), competition varchar(9999), inProgressWorkouts varchar(9999), savedWorkouts varchar(9999));</code>
 		<p>The varchar(9999) fields are meant to hold JSON objects as strings.</p>
+        <p>The exercises table in the database was created with: </p>
+        <code>CREATE TABLE exercises (id integer, name varchar(512), type varchar(512), muscle varchar(512), equipment varchar(512), level varchar(512), images varchar(9999), guide varchar(9999)); </code>
 	</body>
 </html>
