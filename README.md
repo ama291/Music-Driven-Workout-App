@@ -19,7 +19,7 @@ If your script uses a new dependency, please add it to the "requirements.txt" fi
 To run the API locally, ```sh server.sh```
 
 ## Testing
-Tests will be stored in the "Tests" folder. 
+Tests will be stored in the "Tests" folder.
 
 ```sh test.sh``` to run all test files locally.
 
@@ -35,7 +35,7 @@ Place scripts in the "Scripts" folder, import them where necessary.
 
 ### Front End and Infrastructure
 
-The server, API, and testing infrastructure is described above. 
+The server, API, and testing infrastructure is described above.
 
 #### Description of Front End
 
@@ -65,11 +65,11 @@ For this iteration, we focused on setting up fitness testing with the following 
 
 * A user can view their results to a fitness test. Since results are displayed by date, we can show how they have progressed over time on an exercise. The front end can display a graph.
 
-* A user can track (`User.trackEx()`) and untrack (`User.untrackEx()`) exercises. When they begin the test, they are specifically asked which tracked exercises they want to complete, and the rest of the exercises are recommended randomly from the database. 
+* A user can track (`User.trackEx()`) and untrack (`User.untrackEx()`) exercises. When they begin the test, they are specifically asked which tracked exercises they want to complete, and the rest of the exercises are recommended randomly from the database.
 
 #### Acceptance Tests
 
-* For beginning a fitness test: 
+* For beginning a fitness test:
     * TODO
 * For determining frequency from a log:
     * TODO
@@ -90,17 +90,31 @@ TODO
 
 #### Description
 
-For this iteration, we focused on setting up the general goals, themes, and competitions infrasturcture as well as integrating changes to them with the database:
+For this iteration, we focused on setting up the general goals, themes, and competitions infrastructure as well as integrating changes to them with the database:
 
 * A user can add and remove goals. The `addGoal()` and `removeGoal()` methods allow the user to specify goals geared towards certain muscle groups and categories
 
 * A user can add and remove themes. These are based on specific genres or artists, and the user can choose how many workouts use the theme
 
-* A user can create, join, and leave competitions. These can have specific exercises added to them and the amount of time they span can be edited.
+* A user can create, join, and leave competitions. These can have specific exercises added to them, the amount of time they span can be edited, participants can be added or removed, and a winner(s) is eventually chosen
+
 #### Acceptance Tests
+
+* For creating a goal:
+    * TODO
+* For creating a theme:
+    * TODO
+* For creating a competition:
+    * TODO
+* For removing a goal:
+    * TODO
+* For removing a theme:
+    * TODO
+* For removing a competition:
+    * TODO
 
 #### Who Did What
 
-Julia Xu and Jessica Wang worked on this part of the project. 
+Julia Xu and Jessica Wang worked on this part of the project. Julia added methods for the driver.py file to allow users to add/remove goals/themes/competitions, the theme and goal classes and unit tests for both. Jessica added the competition class and unit tests for it.
 
 #### Changes
