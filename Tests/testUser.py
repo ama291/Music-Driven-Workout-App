@@ -13,20 +13,20 @@ class TestUser(unittest.TestCase):
     def test(self):
         name1 = "Calf Raises"
         ex1 = Exercise(name1, 1, "Legs",
-            ["Calves"], ["Stairs"], [], [0,1], 1, 30.0)
-        uex1 = UserExercise(ex1, [], [])
+            ["Calves"], ["Stairs"], [], [0,60], 1, 30.0)
+        uex1 = UserExercise(ex1, [])
         uex1.addFreqFromNumReps(datetime.now(), 51)
 
         ex2 = Exercise(name1, 1, "Legs",
-            ["Calves"], ["Stairs"], [], [0,1], 1, 30.0)
-        uex2 = UserExercise(ex2, [], [])
+            ["Calves"], ["Stairs"], [], [0,60], 1, 30.0)
+        uex2 = UserExercise(ex2, [])
         uex2.addFreqFromNumReps(datetime.now(), 48)
 
         name2 = "Chin-ups"
         ex3 = Exercise("Chin-ups", 3, "Arms",
             ["Bicepts", "Tricepts"], ["Stairs"], [],
-            [0,1], 1, 30.0)
-        uex3 = UserExercise(ex3, [], [])
+            [0,60], 1, 30.0)
+        uex3 = UserExercise(ex3, [])
         uex3.addFreqFromNumReps(datetime.now(), 61)
 
         ## test constructor (ID, name tracked, 
@@ -60,6 +60,23 @@ class TestUser(unittest.TestCase):
         usr1.untrackEx(name2)
         self.assertEqual(usr1.exIndexUntracked(name1), 0)
         self.assertEqual(usr1.exIndexUntracked(name2), 1)
+
+
+        ## test getFitnessTest
+        usr1.trackEx(uex1)
+        usr1.trackEx(uex3)
+        cats = ["cardio", "abs"]
+        uexs = [uex1, uex3]
+        tests = usr1.getFitnessTest(cats, 5, uexs)
+        self.assertEqual(len(tests), 5)
+        self.assertTrue(uex1 in tests)
+        self.assertTrue(uex3 in tests)
+        for t in tests:
+            self.assertTrue(t.exercise.category in cats)
+            if t not in uexs:
+                self.assertTrue(t not in usr1.tracked)
+                self.assertTrue(t not in usr1.untracked)
+
 
         """
         Workout flow - User keeps getting workouts until they find one they like,
@@ -216,21 +233,6 @@ class TestUser(unittest.TestCase):
         self.assertFalse(usr1.removeCompetition(competition2))
         self.assertTrue(usr1.removeCompetition(competition1))
         self.assertFalse(competition1 in usr1.competitions)
-
-        ## test getFitnessTest
-        usr1.trackEx(uex1)
-        usr1.trackEx(uex3)
-        cats = ["cardio", "abs"]
-        uexs = [uex1, uex3]
-        tests = usr1.getFitnessTest(cats, 5, uexs)
-        self.assertEqual(len(tests), 5)
-        self.assertTrue(uex1 in tests)
-        self.assertTrue(uex3 in tests)
-        for t in tests:
-            self.assertTrue(t.exercise.category in cats)
-            if t not in uexs:
-                self.assertTrue(t not in usr1.tracked)
-                self.assertTrue(t not in usr1.untracked)
 
 
 

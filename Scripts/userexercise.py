@@ -4,9 +4,8 @@ from Scripts.log import Log
 from datetime import datetime
 
 class UserExercise(object):
-    def __init__(self, exercise, categories, trials):
+    def __init__(self, exercise, trials):
         self.exercise = exercise
-        self.categories = categories
         self.trials = trials
 
     def __repr__(self):
@@ -34,6 +33,8 @@ class UserExercise(object):
         self.trials.append((date, freq))
 
     def addFreqFromNumReps(self, time, numReps):
+        if self.exercise.duration == 0:
+            return
         freq = numReps * 60.0 / self.exercise.duration
         self.addTrial(time, freq)
 
