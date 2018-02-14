@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['DEBUG'] = False
 
 #database connections - path to data.db on server /Project/Music-Driven-Workout-App/data.db
-conn = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
+conn = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db", isolation_level=None)
 c = conn.cursor()
 
 #documentation page
@@ -34,7 +34,6 @@ def database():
 		return failure(str(e))
 	result = c.fetchall()
 	return Response(json.dumps({"Query": query, "Result": result, "Status": "Success"}), mimetype='application/json')
-	conn.commit()
 
 @app.route('/api/fitness/accel/', methods=['POST'])
 def accel():
