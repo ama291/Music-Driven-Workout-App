@@ -26,8 +26,8 @@ class Workout(object):
         trials = 10 # number of runs of algorithm, can be tuned
         results = [[]] * trials
 
-        attributes = ['exercise_name', 'type', 'main_muscle_worked', 'level', 'equipment',
-                    'associated_images', 'range_start', 'range_end', 'increment', 'rpm']
+        attributes = ['name', 'type', 'muscle', 'level', 'equipment',
+                        'range_start', 'range_end', 'increment', 'rpm']
         equipment = ', '.join("\'" + e + "\'" for e in self.equipment)
         duration = self.duration
         difficulty = self.difficulty
@@ -88,18 +88,16 @@ class Workout(object):
         for i in range(m):
             exRange = [0]*2
             for j in range(n):
-                if ordering[j] == "exercise_name":
+                if ordering[j] == "name":
                     name = dbExercises[i][j]
                 elif ordering[j] == "level":
                     difficulty = dbExercises[i][j]
                 elif ordering[j] == "type":
                     category = dbExercises[i][j]
-                elif ordering[j] == "main_muscle_worked":
+                elif ordering[j] == "muscle":
                     muscleGroup = dbExercises[i][j]
                 elif ordering[j] == "equipment":
                     equipment = dbExercises[i][j]
-                elif ordering[j] == "associated_images":
-                    images = dbExercises[i][j]
                 elif ordering[j] == "range_start":
                     exRange[0]= dbExercises[i][j]
                 elif ordering[j] == "range_end":
@@ -109,7 +107,7 @@ class Workout(object):
                 else: # ordering[j] == "rpm"
                     rpm = dbExercises[i][j] # TODO: if tested on, get rpm from user, scaled to difficulty
 
-            new = Exercise(name, difficulty, category, muscleGroup, equipment, images, exRange, increment, rpm)
+            new = Exercise(name, difficulty, category, muscleGroup, equipment, [], exRange, increment, rpm)
 
             # TODO (optimization) - work on changing exercise duration, keep in range and at increment
             if new.duration + total_duration <= self.duration:
