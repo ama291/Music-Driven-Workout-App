@@ -2,20 +2,32 @@ import unittest
 from Scripts.exercise import Exercise
 from Scripts.userexercise import UserExercise
 from Scripts.user import User
+from Scripts.goal import Goal
+from Scripts.theme import Theme
+from Scripts.competition import Competition
+from datetime import datetime
 
-class TestUserExercise(unittest.TestCase):
+
+class TestUser(unittest.TestCase):
 
     def test(self):
-        name1 = "Jumping Jacks"
-        ex1 = Exercise(name1, 30.0)
-        uex1 = UserExercise(ex1, 68.0)
-        
-        ex2 = Exercise(name1, 30.0)
-        uex2 = UserExercise(ex2, 71.0)
+        name1 = "Calf Raises"
+        ex1 = Exercise(name1, 1, "Legs",
+            ["Calves"], ["Stairs"], [], [0,1], 1, 30.0)
+        uex1 = UserExercise(ex1, [], [])
+        uex1.addFreqFromNumReps(datetime.now(), 51)
 
-        name2 = "High Knees"
-        ex3 = Exercise(name2, 30.0)
-        uex3 = UserExercise(ex3, 91.0)
+        ex2 = Exercise(name1, 1, "Legs",
+            ["Calves"], ["Stairs"], [], [0,1], 1, 30.0)
+        uex2 = UserExercise(ex2, [], [])
+        uex2.addFreqFromNumReps(datetime.now(), 48)
+
+        name2 = "Chin-ups"
+        ex3 = Exercise("Chin-ups", 3, "Arms",
+            ["Bicepts", "Tricepts"], ["Stairs"], [],
+            [0,1], 1, 30.0)
+        uex3 = UserExercise(ex3, [], [])
+        uex3.addFreqFromNumReps(datetime.now(), 61)
 
         ## test constructor (ID, name tracked, 
         ## untracked, goals, themes, competition, 
@@ -29,20 +41,18 @@ class TestUserExercise(unittest.TestCase):
 
         ## test trackEx
         usr1.trackEx(uex1)
-        self.assertTrue(usr1.exIndexTracked(name1) is not None)
+        self.assertTrue(usr1.exIndexTracked(name1) \
+            is not None)
         usr1.trackEx(uex2)
         self.assertEqual(len(usr1.tracked), 1)
+        self.assertEqual(len(usr1.tracked[0].trials), 2)        
 
-        uex2 = UserExercise(ex1, 71.0)
-        usr1.trackEx(uex2)
-        self.assertTrue(usr1.exIndexTracked(name1) is not None)
-        self.assertEqual(len(usr1.tracked), 1)
-        self.assertEqual(len(usr1.tracked[0].trials), 3)
-        
         ## test untrackEx
         usr1.untrackEx(name1)
         self.assertTrue(usr1.exIndexUntracked(name1) is not None)
         self.assertTrue(usr1.exIndexTracked(name1) is None)
+        self.assertEqual(len(usr1.untracked), 1)
+        self.assertEqual(len(usr1.untracked[0].trials), 2)
 
         ## test exIndex
         usr1.trackEx(uex3)
@@ -50,8 +60,6 @@ class TestUserExercise(unittest.TestCase):
         usr1.untrackEx(name2)
         self.assertEqual(usr1.exIndexUntracked(name1), 0)
         self.assertEqual(usr1.exIndexUntracked(name2), 1)
-
-        # added by Larissa
 
         """
         Workout flow - User keeps getting workouts until they find one they like,
@@ -70,27 +78,26 @@ class TestUserExercise(unittest.TestCase):
 
         # test getWorkout
         # category option
+        themes = None
+        categories = ["Cardio", "Stretching"]
+        muscleGroups = None
+        equipment = ["Body Only"]
         duration = 50
         difficulty = "Intermediate"
-        categories = ["Cardio", "Strength"]
-        workout1 = usr1.getWorkout(duration, difficulty, categories=categories)
-        w1_ID = workout1.getID()
-        self.assertEqual(workout1.getDuration(), duration)
-        self.assertEqual(workout1.getDifficulty(), difficulty)
-        self.assertEqual(workout1.getCategories(), categories)
-        self.assertEqual(workout1.getMuscleGroups(), None)
-        self.assertEqual(workout1.getCurrEx(), 0)
+        workout1 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty)
+        self.assertTrue(workout1 is not None) # None in case of request failure
+        w1_ID = workout1.ID
         # muscle group option
+        themes = None
+        categories = None
+        muscleGroups = ["Chest", "Shoulders", "Biceps"]
+        equipment = ["Kettlebells", "Machine"]
         duration = 30
         difficulty = "Beginner"
-        muscleGroups = ["Chest", "Shoulders", "Biceps"]
-        workout2 = usr1.getWorkout(duration, difficulty, muscleGroups=muscleGroups)
-        w2_ID = workout2.getID()
-        self.assertEqual(workout2.getDuration(), duration)
-        self.assertEqual(workout2.getDifficulty(), difficulty)
-        self.assertEqual(workout2.getCategories(), None)
-        self.assertEqual(workout2.getMuscleGroups(), muscleGroups)
-        self.assertEqual(workout2.getCurrEx(), 0)
+        workout2 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty)
+        self.assertTrue(workout2 is not None)  # None in case of request failure
+        w2_ID = workout2.ID
+
         # workouts should have unique IDs and not be saved/in progress
         self.assertTrue(w1_ID != w2_ID)
         self.assertFalse(w1_ID in usr1.workoutsInProgress())
@@ -112,43 +119,54 @@ class TestUserExercise(unittest.TestCase):
         self.assertTrue(usr1.pauseWorkout(w2_ID, 4))
         inProgress = usr1.workoutsInProgress()
         self.assertTrue(w2_ID in inProgress)
-        self.assertEqual(inProgress[w2_ID].getCurrEx(), 4)
+        self.assertEqual(inProgress[w2_ID].currExercise, 4)
         # second pause
         self.assertTrue(usr1.pauseWorkout(w2_ID, 7))
         inProgress = usr1.workoutsInProgress()
         self.assertTrue(w2_ID in inProgress)
-        self.assertEqual(inProgress[w2_ID].getCurrEx(), 7)
-        workout3 = usr1.getWorkout(duration, difficulty, categories=categories)
-        w3_ID = workout3.getID()
-        self.assertFalse(usr1.pauseWorkout(w3_ID, 2)) # cannot pause, was never started
+        self.assertEqual(inProgress[w2_ID].currExercise, 7)
+        # attempt to pause unstarted workout
+        themes = None
+        categories = ["Strongman", "Strength"]
+        muscleGroups = None
+        equipment = ["Dumbbell", "Cable"]
+        duration = 40
+        difficulty = "Beginner"
+        workout3 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty)
+        self.assertTrue(workout3 is not None)  # None in case of request failure
+        w3_ID = workout3.ID
+        self.assertFalse(usr1.pauseWorkout(w3_ID, 2))
 
         # test quitWorkout
         self.assertTrue(usr1.quitWorkout(w1_ID))
         self.assertFalse(usr1.pauseWorkout(w1_ID, 3)) # workout completed, can no longer pause
-        self.assertFalse(w1_ID in usr1.workoutsInProgress()) # can only save once completed workout
+        self.assertFalse(w1_ID in usr1.workoutsInProgress())
         self.assertFalse(w1_ID in usr1.workoutsSaved())
         self.assertFalse(usr1.quitWorkout(w3_ID)) # cannot quit, was never started
 
         # test saveWorkout
         self.assertTrue(usr1.saveWorkout(w2_ID))
-        self.assertFalse(w2_ID in usr1.workoutsInProgress())
+        self.assertFalse(w2_ID in usr1.workoutsInProgress()) # can only save if workout has been completed
         saved = usr1.workoutsSaved()
         self.assertTrue(w2_ID in saved)
-        self.assertEqual(saved[w2_ID].getCurrEx(), 0) # so restarts at first exercise
+        self.assertEqual(saved[w2_ID].currExercise, 0) # so restarts at first exercise
         self.assertFalse(usr1.saveWorkout(w1_ID))  # was quit, no longer exists
         self.assertFalse(usr1.saveWorkout(w2_ID)) # cannot resave
-        self.assertFalse(usr1.saveWorkout(w3_ID))  # cannot save, was never completed
+        self.assertFalse(usr1.saveWorkout(w3_ID))  # cannot save, was never started
 
         # test startSavedWorkout
         self.assertFalse(usr1.startSavedWorkout(w1_ID)) # cannot restart, was never saved
         self.assertTrue(usr1.startSavedWorkout(w2_ID))
-        self.assertTrue(w2_ID in usr1.workoutsInProgress())
         inProgress = usr1.workoutsInProgress()
-        self.assertEqual(inProgress[w2_ID].getCurrEx(), 0)  # restarted at first exercise
+        self.assertTrue(w2_ID in inProgress)
+        self.assertEqual(inProgress[w2_ID].currExercise, 0)  # restarted at first exercise
         self.assertTrue(w2_ID in usr1.workoutsSaved())
+        self.assertFalse(usr1.startSavedWorkout(w2_ID))  # cannot restart until in progress version is complete
         self.assertTrue(usr1.quitWorkout(w2_ID))
         self.assertFalse(w2_ID in usr1.workoutsInProgress())
         self.assertTrue(w2_ID in usr1.workoutsSaved()) # quiting a saved workout does not unsave it
+        self.assertTrue(usr1.startSavedWorkout(w2_ID)) # can now restart
+        self.assertTrue(usr1.quitWorkout(w2_ID))
 
         # test unsaveWorkout
         self.assertTrue(usr1.unsaveWorkout(w2_ID))
@@ -163,6 +181,56 @@ class TestUserExercise(unittest.TestCase):
         self.assertFalse(w3_ID in usr1.workoutsInProgress())
         self.assertFalse(w3_ID in usr1.workoutsSaved())
 
+        # test add goal
+        goal1 = Goal("goal1", "Complete 5 workouts", 5,\
+         ["arms"], ["bicepts"], 14, 3, True)
+        usr1.addGoal(goal1)
+        self.assertTrue(goal1 in usr1.goals)
+
+        # test remove goal
+        self.assertTrue(usr1.removeGoal(goal1))
+        self.assertFalse(goal1 in usr1.goals)
+        goal2 = Goal("goal2", "Complete 5 workouts", 5,\
+         ["arms"], ["bicepts"], 14, 3, True)
+        usr1.addGoal(goal1)
+        self.assertFalse(usr1.removeGoal(goal2))
+
+        # test add theme
+        theme1 = Theme("Beyonce theme", "Beyonce", 5)
+        usr1.addTheme(theme1)
+        self.assertTrue(theme1 in usr1.themes)
+
+        # test remove theme
+        theme2 = Theme("Taylor Swift theme", "Taylor Swift", 5)
+        self.assertFalse(usr1.removeTheme(theme2))
+        self.assertTrue(usr1.removeTheme(theme1))
+        self.assertFalse(theme1 in usr1.themes)
+
+        # test add competition
+        competition1 = Competition("Race", "Who'll get 1st", "02-05-18")
+        usr1.addCompetition(competition1)
+        self.assertTrue(competition1 in usr1.competitions)
+
+        # test remove competition
+        competition2 = Competition("Contest", "Who'll get 1st", "02-05-18")
+        self.assertFalse(usr1.removeCompetition(competition2))
+        self.assertTrue(usr1.removeCompetition(competition1))
+        self.assertFalse(competition1 in usr1.competitions)
+
+        ## test getFitnessTest
+        usr1.trackEx(uex1)
+        usr1.trackEx(uex3)
+        cats = ["cardio", "abs"]
+        uexs = [uex1, uex3]
+        tests = usr1.getFitnessTest(cats, 5, uexs)
+        self.assertEqual(len(tests), 5)
+        self.assertTrue(uex1 in tests)
+        self.assertTrue(uex3 in tests)
+        for t in tests:
+            self.assertTrue(t.exercise.category in cats)
+            if t not in uexs:
+                self.assertTrue(t not in usr1.tracked)
+                self.assertTrue(t not in usr1.untracked)
 
 
 

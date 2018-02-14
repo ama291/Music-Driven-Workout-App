@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #from Scripts.user import User
 
-class Competition:
+class Competition(object):
     def __init__(self, name, description, date):
         self.name = name
         self.description = description

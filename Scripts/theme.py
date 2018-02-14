@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #from Scripts.user import User
 
-class Theme:
+class Theme(object):
     def __init__(self, name, theme, numWorkouts):
         self.name = name
         self.theme = theme

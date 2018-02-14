@@ -2,13 +2,26 @@
 #from Scripts.user import User
 from datetime import datetime
 
-class Goal:
-    def __init__(self, name, description):
+class Goal(object):
+    def __init__(self, name, description, goalNum, categories,
+        muscleGroups, duration, daysPerWeek, notify):
+        """
+        name: string
+        description: string
+        duration: int (number of days)
+        days per week: int (<=7)
+        notifications: boolean
+        """
         self.name = name
         self.description = description
+        self.progress = 0
+        self.goalNum = goalNum
         self.date = datetime.now()
-        self.categories = []
-        self.muscleGroups = []
+        self.duration = duration
+        self.daysPerWeek = daysPerWeek
+        self.notify = notify
+        self.categories = categories
+        self.muscleGroups = muscleGroups
 
     def __repr__(self):
         string = "Goal: %s: %s - %s, %s" % (self.name, self.description, self.categories, self.muscleGroups)
@@ -16,6 +29,13 @@ class Goal:
 
     def __eq__(self, other):
         return self.name == other.name
+
+    def makeProgress(self):
+        self.progress += 1
+
+    @property
+    def completed(self):
+        return self.progress >= self.goalNum
 
     def addCategory(self, _cat):
         self.categories.append(_cat)

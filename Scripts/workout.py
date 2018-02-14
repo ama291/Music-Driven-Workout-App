@@ -1,33 +1,18 @@
 #!/usr/bin/env python3
 import uuid
 
-class Workout:
-    def __init__(self, categories, muscleGroups, duration, difficulty):
+class Workout(object):
+    def __init__(self, uid, themes, categories, muscleGroups, equipment, duration, difficulty):
         self.ID = uuid.uuid4()  # random UUID
+        self.themes = themes # will not be used until iter 2, for music recommendations
+        self.uid = uid # user ID, to get fitness test info
         self.categories = categories
         self.muscleGroups = muscleGroups
+        self.equipment = equipment
         self.duration = duration
         self.difficulty = difficulty
         self.Exercises = [] # filled by generateWorkout
         self.currExercise = 0 # index of current exercise
-
-    def getID(self):
-        return self.ID
-
-    def getCategories(self):
-        return self.categories
-
-    def getMuscleGroups(self):
-        return self.muscleGroups
-
-    def getDuration(self):
-        return self.duration
-
-    def getDifficulty(self):
-        return self.difficulty
-
-    def getCurrEx(self):
-        return self.currExercise
 
     def setCurrEx(self, idx):
         self.currExercise = idx
@@ -38,6 +23,7 @@ class Workout:
         Randomly pull exercises from database that match input criteria
         Get proper rpm for each exercise, based on difficulty
         For each exercise, randomly choose duration from its range and increments
-        (range either from the database or the user)
+        (occurs in exercise constructor, but can reset if need be)
+        Use rpm from database or user's fitness test info
         Add to self.Exercises until reach duration (or get close enough)
         """
