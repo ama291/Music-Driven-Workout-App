@@ -82,25 +82,29 @@ def getWorkout(uid, equipment, duration, difficulty, categories = None, muscleGr
     :param categories: List[String]
     :param muscleGroups: List[String]
     :param themes: List[Theme]
-    :return: Workout instance, None if error
+    :return: json string, empty if error otherwise pickled Workout instance
     """
     user = getUser(uid)
 
     if user is None:
-        return None
+        return '{}'
 
     workout = user.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty)
-    return workout
+    return '{}' if workout is None else jsonpickle.encode(workout)
 
 
 def startWorkout(uid, workout):
     """
     :param uid: user ID
-    :param workout: Workout instance
+    :param workout: json string
     :return: 0 - success, 1 - failure to update users table, 2 - workout already in progress
     """
     user = getUser(uid)
-    hasStarted = user.startWorkout(workout)
+    if user is None:
+        return DB_FAILURE
+
+    decoded = jsonpickle.decode(workout)
+    hasStarted = user.startWorkout(decoded)
 
     if hasStarted:
         return updateInProgressWorkouts(user)
@@ -115,6 +119,9 @@ def startSavedWorkout(uid, wid):
     :return: 0 - success, 1 - failure to update users table, 2 - workout not saved or already in progress
     """
     user = getUser(uid)
+    if user is None:
+        return DB_FAILURE
+
     hasStarted = user.startSavedWorkout(wid)
 
     if hasStarted:
@@ -130,6 +137,9 @@ def quitWorkout(uid, wid):
     :return: 0 - success, 1 - failure to update users table, 2 - workout was not in progress
     """
     user = getUser(uid)
+    if user is None:
+        return DB_FAILURE
+
     hasQuit = user.quitWorkout(wid)
 
     if hasQuit:
@@ -145,6 +155,9 @@ def pauseWorkout(uid, wid, pausedOn):
     :return: 0 - success, 1 - failure to update users table, 2 - workout not in progress
     """
     user = getUser(uid)
+    if user is None:
+        return DB_FAILURE
+
     hasPaused = user.pauseWorkout(wid, pausedOn)
 
     if hasPaused:
@@ -160,6 +173,9 @@ def saveWorkout(uid, wid):
     :return: 0 - success, 1 - failure to update users table, 2 - workout not in progress or already saved
     """
     user = getUser(uid)
+    if user is None:
+        return DB_FAILURE
+
     hasSaved = user.saveWorkout(wid)
 
     if hasSaved:
@@ -175,12 +191,38 @@ def unsaveWorkout(uid, wid):
     :return: 0 - success, 1 - failure to update users table, 2 - workout not previously saved
     """
     user = getUser(uid)
+    if user is None:
+        return DB_FAILURE
+
     hasUnsaved = user.unsaveWorkout(wid)
 
     if hasUnsaved:
         return updateAllWorkouts(user)
     else:
         return FAILURE
+
+
+def workoutsInProgress(uid):
+    """
+    :param uid: user ID
+    :return: json string of in progress workouts
+    """
+    query = 'SELECT inProgressWorkouts FROM users where id = %s' % str(uid)
+    r = requests.post('http://138.197.49.155:8000/api/database/', data={'query': query, 'key': 'SoftCon2018'})
+    dbEntry = r.json()['Result'][0]
+    return dbEntry[7]
+
+
+def workoutsSaved(uid):
+    """
+    :param uid: user ID
+    :return: json string of saved workouts
+    """
+    query = 'SELECT inProgressWorkouts FROM users where id = %s' % str(uid)
+    r = requests.post('http://138.197.49.155:8000/api/database/', data={'query': query, 'key': 'SoftCon2018'})
+    dbEntry = r.json()['Result'][0]
+    return dbEntry[8]
+
 
 def addGoal(uid, goal):
     """
@@ -189,13 +231,14 @@ def addGoal(uid, goal):
     :return: 0 - success, 1 - failure to add to goals in db
     """
     user = getUser(uid)
+    if user is None:
+        return DB_FAILURE
+
     user.addGoal(goal)
     db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
     cursor = db.cursor()
-    goalString = jsonpickle.encode(user.goals)
-    sql = 'UPDATE users
-           SET goals = %s
-           WHERE id = %s' % (goalString, uid)
+    goalString = "\'" + jsonpickle.encode(user.goals) + "\'"
+    sql = 'UPDATE users SET goals = %s WHERE id = %s' % (goalString, str(uid))
     try:
         cursor.execute(sql)
         db.commit()
@@ -211,13 +254,14 @@ def removeGoal(uid, goal):
     :return: 0 - success, 1 - failure to remove goals from db, 2 - goal never added
     """
     user = getUser(uid)
-    if(user.removeGoal(goal)):
+    if user is None:
+        return DB_FAILURE
+
+    if user.removeGoal(goal):
         db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
         cursor = db.cursor()
-        goalString = jsonpickle.encode(user.goals)
-        sql = 'UPDATE users
-               SET goals = %s
-               WHERE id = %s' % (goalString, uid)
+        goalString = "\'" + jsonpickle.encode(user.goals) + "\'"
+        sql = 'UPDATE users SET goals = %s WHERE id = %s' % (goalString, str(uid))
         try:
             cursor.execute(sql)
             db.commit()
@@ -234,13 +278,14 @@ def addTheme(uid, theme):
     :param theme: theme to add
     """
     user = getUser(uid)
+    if user is None:
+        return DB_FAILURE
+
     user.addTheme(theme)
     db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
     cursor = db.cursor()
-    themeString = jsonpickle.encode(user.themes)
-    sql = 'UPDATE users
-           SET themes = %s
-           WHERE id = %s' % (goalString, uid)
+    themeString = "\'" + jsonpickle.encode(user.themes) + "\'"
+    sql = 'UPDATE users SET themes = %s WHERE id = %s' % (themeString, str(uid))
     try:
         cursor.execute(sql)
         db.commit()
@@ -255,13 +300,14 @@ def removeTheme(uid, theme):
     :param theme: theme to remove
     """
     user = getUser(uid)
-    if(user.removeTheme(theme)):
+    if user is None:
+        return DB_FAILURE
+
+    if user.removeTheme(theme):
         db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
         cursor = db.cursor()
-        themeString = jsonpickle.encode(user.themes)
-        sql = 'UPDATE users
-               SET themes = %s
-               WHERE id = %s' % (goalString, uid)
+        themeString = "\'" + jsonpickle.encode(user.themes) + "\'"
+        sql = 'UPDATE users SET themes = %s WHERE id = %s' % (themeString, str(uid))
         try:
             cursor.execute(sql)
             db.commit()
@@ -278,13 +324,14 @@ def addCompetition(uid, competition):
     :param competition: competition to add
     """
     user = getUser(uid)
+    if user is None:
+        return DB_FAILURE
+
     user.addCompetition(competition)
     db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
     cursor = db.cursor()
-    compString = jsonpickle.encode(user.competitions)
-    sql = 'UPDATE users
-           SET competition = %s
-           WHERE id = %s' % (compString, uid)
+    compString = "\'" + jsonpickle.encode(user.competitions) + "\'"
+    sql = 'UPDATE users SET competition = %s WHERE id = %s' % (compString, str(uid))
     try:
         cursor.execute(sql)
         db.commit()
@@ -299,13 +346,14 @@ def removeCompetition(uid, competition):
     :param competition: competition to remove
     """
     user = getUser(uid)
-    if(user.removeCompetition(competition)):
+    if user is None:
+        return DB_FAILURE
+
+    if user.removeCompetition(competition):
         db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
         cursor = db.cursor()
-        compString = jsonpickle.encode(user.competitions)
-        sql = 'UPDATE users
-               SET competition = %s
-               WHERE id = %s' % (compString, uid)
+        compString = "\'" + jsonpickle.encode(user.competitions) + "\'"
+        sql = 'UPDATE users SET competition = %s WHERE id = %s' % (compString, str(uid))
         try:
             cursor.execute(sql)
             db.commit()

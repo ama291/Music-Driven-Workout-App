@@ -14,6 +14,7 @@
 		11AF5E33202D42D2004EB40B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11AF5E31202D42D2004EB40B /* LaunchScreen.storyboard */; };
 		11AF5E3E202D42D2004EB40B /* Music_Driven_Workout_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E3D202D42D2004EB40B /* Music_Driven_Workout_AppTests.swift */; };
 		11AF5E49202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E48202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift */; };
+		11F9ABEB2033E593007F217C /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F9ABEA2033E593007F217C /* ExerciseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		11AF5E44202D42D2004EB40B /* Music-Driven-Workout-AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Music-Driven-Workout-AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11AF5E48202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music_Driven_Workout_AppUITests.swift; sourceTree = "<group>"; };
 		11AF5E4A202D42D2004EB40B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11F9ABEA2033E593007F217C /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				11AF5E2F202D42D2004EB40B /* Assets.xcassets */,
 				11AF5E31202D42D2004EB40B /* LaunchScreen.storyboard */,
 				11AF5E34202D42D2004EB40B /* Info.plist */,
+				11F9ABEA2033E593007F217C /* ExerciseViewController.swift */,
 			);
 			path = "Music-Driven-Workout-App";
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11AF5E2B202D42D2004EB40B /* ViewController.swift in Sources */,
+				11F9ABEB2033E593007F217C /* ExerciseViewController.swift in Sources */,
 				11AF5E29202D42D2004EB40B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
