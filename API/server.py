@@ -37,7 +37,7 @@ def database():
 
 @app.route('/api/fitness/accel/', methods=['POST'])
 def accel():
-	data = request.form.get('query')
+	data = request.form.get('data')
 	key = request.form.get('key')
 	if (data == None or key == None):
 		return failure("Invalid parameters")
