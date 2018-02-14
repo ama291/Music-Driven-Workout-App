@@ -70,6 +70,7 @@ class ExerciseViewController: UIViewController {
     }
 
     @objc func displayResult() {
+        motionManager.stopAccelerometerUpdates()
         self.statusLabel.text = "complete"
         //let encoder = JSONEncoder()
         //encoder.outputFormatting = .prettyPrinted
