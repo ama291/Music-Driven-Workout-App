@@ -12,19 +12,19 @@ class TestUser(unittest.TestCase):
 
     def test(self):
         name1 = "Calf Raises"
-        ex1 = Exercise(name1, 1, "Legs", \
+        ex1 = Exercise(name1, 1, "Legs",
             ["Calves"], ["Stairs"], [], [0,1], 1, 30.0)
         uex1 = UserExercise(ex1, [], [])
         uex1.addFreqFromNumReps(datetime.now(), 51)
 
-        ex2 = Exercise(name1, 1, "Legs", \
+        ex2 = Exercise(name1, 1, "Legs",
             ["Calves"], ["Stairs"], [], [0,1], 1, 30.0)
         uex2 = UserExercise(ex2, [], [])
         uex2.addFreqFromNumReps(datetime.now(), 48)
 
         name2 = "Chin-ups"
-        ex3 = Exercise("Chin-ups", 3, "Arms", \
-            ["Bicepts", "Tricepts"], ["Stairs"], [], \
+        ex3 = Exercise("Chin-ups", 3, "Arms",
+            ["Bicepts", "Tricepts"], ["Stairs"], [],
             [0,1], 1, 30.0)
         uex3 = UserExercise(ex3, [], [])
         uex3.addFreqFromNumReps(datetime.now(), 61)
@@ -32,8 +32,7 @@ class TestUser(unittest.TestCase):
         ## test constructor (ID, name tracked, 
         ## untracked, goals, themes, competition, 
         ## inProgressWorkouts, savedWorkouts)
-        usr1 = User(1, "Alex", [], [], [], [], [], \
-            {}, {})
+        usr1 = User(1, "Alex", [], [], [], [], [], {}, {})
         self.assertEqual(usr1.name, "Alex")
         self.assertTrue(usr1.tracked == [])
         self.assertTrue(usr1.untracked == [])
@@ -79,18 +78,24 @@ class TestUser(unittest.TestCase):
 
         # test getWorkout
         # category option
+        themes = None
+        categories = ["Cardio", "Stretching"]
+        muscleGroups = None
+        equipment = ["Body Only"]
         duration = 50
         difficulty = "Intermediate"
-        categories = ["Cardio", "Stretching"]
-        equipment = ["Body Only"]
-        workout1 = usr1.getWorkout(equipment, duration, difficulty, categories=categories)
+        workout1 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty)
+        self.assertTrue(workout1 is not None) # None in case of request failure
         w1_ID = workout1.ID
         # muscle group option
-        duration = 30
-        difficulty = "Beginner"
+        themes = None
+        categories = None
         muscleGroups = ["Chest", "Shoulders", "Biceps"]
         equipment = ["Kettlebells", "Machine"]
-        workout2 = usr1.getWorkout(equipment, duration, difficulty, muscleGroups=muscleGroups)
+        duration = 30
+        difficulty = "Beginner"
+        workout2 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty)
+        self.assertTrue(workout2 is not None)  # None in case of request failure
         w2_ID = workout2.ID
 
         # workouts should have unique IDs and not be saved/in progress
@@ -121,11 +126,14 @@ class TestUser(unittest.TestCase):
         self.assertTrue(w2_ID in inProgress)
         self.assertEqual(inProgress[w2_ID].currExercise, 7)
         # attempt to pause unstarted workout
+        themes = None
+        categories = ["Strongman", "Strength"]
+        muscleGroups = None
+        equipment = ["Dumbbell", "Cable"]
         duration = 40
         difficulty = "Beginner"
-        categories = ["Strongman", "Strength"]
-        equipment = ["Dumbbell", "Cable"]
-        workout3 = usr1.getWorkout(equipment, duration, difficulty, categories=categories)
+        workout3 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty)
+        self.assertTrue(workout3 is not None)  # None in case of request failure
         w3_ID = workout3.ID
         self.assertFalse(usr1.pauseWorkout(w3_ID, 2))
 
@@ -172,7 +180,6 @@ class TestUser(unittest.TestCase):
         self.assertTrue(usr1.unsaveWorkout(w3_ID)) # unsaves and removes in progress version
         self.assertFalse(w3_ID in usr1.workoutsInProgress())
         self.assertFalse(w3_ID in usr1.workoutsSaved())
-
 
         # test add goal
         goal1 = Goal("goal1", "Complete 5 workouts", 5,\

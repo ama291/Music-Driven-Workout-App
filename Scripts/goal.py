@@ -3,7 +3,7 @@
 from datetime import datetime
 
 class Goal(object):
-    def __init__(self, name, description, goalNum, categories, \
+    def __init__(self, name, description, goalNum, categories,
         muscleGroups, duration, daysPerWeek, notify):
         """
         name: string
