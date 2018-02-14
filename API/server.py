@@ -35,6 +35,10 @@ def database():
 	result = c.fetchall()
 	return Response(json.dumps({"Query": query, "Result": result, "Status": "Success"}), mimetype='application/json')
 
+#Workouts test 1
+
+
+#Fitness test 1
 @app.route('/api/fitness/accel/', methods=['POST'])
 def accel():
 	data = request.form.get('data')
