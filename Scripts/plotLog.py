@@ -42,9 +42,10 @@ if __name__ == '__main__':
 
     files = os.listdir(folder)
     for i in range(len(files)):
+        print(files[i])
         ct += 1
-        if ct != 2:
-            pass#continue
+        if ct == 3:
+            continue
         file = files[i]
         filepath = os.path.join(folder, file)
         with open(filepath) as f:
@@ -52,4 +53,4 @@ if __name__ == '__main__':
         log = Log(data)
         log.getPeaks(0.5, 5)
         print(log.getFrequency())
-        plotPeaks(log, 0.5, 5)
+        plotLog(log)
