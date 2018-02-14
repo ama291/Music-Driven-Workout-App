@@ -1,7 +1,7 @@
 from flask import Flask, render_template, Response, request
 import json
 import sqlite3
-from Scripts.log import Log, LogFromFile
+from helpers import *
 
 app = Flask(__name__)
 app.config['DEBUG'] = False
