@@ -44,7 +44,7 @@ def accel():
 	if (key != "SoftCon2018"):
 		return failure("Invalid authentication")
 	try:
-		log1 = Log(data)
+		log1 = log.Log(data)
 	except Exception as e:
 		return failure(str(e))
 	return standardRes(log1.getFrequency())

@@ -1,1 +1,1 @@
-from Scripts.log import Log, LogFromFile
+from ..Scripts import log
