@@ -20,28 +20,27 @@ class Workout(object):
         self.currExercise = idx
 
     def generateWorkout(self):
-        # TODO - need to add range_start, range_end, increment, and rpm to database
-
         limit = 40 # number of exercises for each trial, can be tuned
-        trials = 10 # number of runs of algorithm, can be tuned
+        trials = 5 # number of runs of algorithm, can be tuned
         results = [[]] * trials
 
         attributes = ['name', 'type', 'muscle', 'level', 'equipment',
                         'range_start', 'range_end', 'increment', 'rpm']
         equipment = ', '.join("\'" + e + "\'" for e in self.equipment)
         duration = self.duration
-        difficulty = self.difficulty
+        difficulty = "\'" + self.difficulty + "\'"
 
         if self.categories is not None: # category option
             categories = ', '.join("\'" + c + "\'" for c in self.categories)
 
             query = 'SELECT %s FROM exercises WHERE type IN (%s) AND equipment IN (%s) \
-                    AND range_start <= %s AND level = %s ORDER BY NEWID() LIMIT %s' \
+                    AND range_start <= %s AND level = %s ORDER BY RANDOM() LIMIT %s' \
                     % (', '.join(attributes), categories, equipment, duration, difficulty, str(limit))
 
             for i in range(trials):
                 r = requests.post('http://138.197.49.155:8000/api/database/',
                     data={'query': query, 'key': 'SoftCon2018'})
+                print(r.json()['Status'])
                 if r.json()['Status'] != 'Success':
                     return False
                 results[i] = r.json()['Result']
@@ -49,13 +48,14 @@ class Workout(object):
         else: # muscleGroup option
             muscleGroups = ', '.join("\'" + m + "\'" for m in self.muscleGroups)
 
-            query = 'SELECT %s FROM exercises WHERE main_muscle_worked IN (%s) AND equipment \
-                    IN (%s) AND range_start <= %s AND level = %s ORDER BY NEWID() LIMIT %s' \
+            query = 'SELECT %s FROM exercises WHERE muscle IN (%s) AND equipment \
+                    IN (%s) AND range_start <= %s AND level = %s ORDER BY RANDOM() LIMIT %s' \
                     % (', '.join(attributes), muscleGroups, equipment, duration, difficulty, str(limit))
 
             for i in range(trials):
                 r = requests.post('http://138.197.49.155:8000/api/database/',
                     data={'query': query, 'key': 'SoftCon2018'})
+                print(r.json()['Status'])
                 if r.json()['Status'] != 'Success':
                     return False
                 results[i] = r.json()['Result']
@@ -65,18 +65,20 @@ class Workout(object):
         greedily choose the closest outcome, each trial has a
         random subset of the exercises returned by that query """
 
-        # TODO - find a way to run in parallel
         best = 0
         finalExercises = []
         for i in range(trials):
             dur, exercises = self.pickExercises(results[i], attributes)
             if dur > best:
+                print('reset best on iter' + str(i))
                 best, finalExercises = dur, exercises
             if best == self.duration:
                 break
 
         self.duration = best
         self.Exercises = finalExercises
+
+        # TODO - if tested on, get rpm from user, scaled to difficulty
         return True
 
 
@@ -105,11 +107,10 @@ class Workout(object):
                 elif ordering[j] == "increment":
                     increment = dbExercises[i][j]
                 else: # ordering[j] == "rpm"
-                    rpm = dbExercises[i][j] # TODO: if tested on, get rpm from user, scaled to difficulty
+                    rpm = dbExercises[i][j]
 
             new = Exercise(name, difficulty, category, muscleGroup, equipment, [], exRange, increment, rpm)
 
-            # TODO (optimization) - work on changing exercise duration, keep in range and at increment
             if new.duration + total_duration <= self.duration:
                 exercises.append(new)
                 total_duration += new.duration
@@ -117,3 +118,15 @@ class Workout(object):
                     break
 
         return total_duration, exercises
+
+### TESTING ###
+duration = 107
+workout = Workout(0, [], ["Cardio"], None, ["Body Only"], duration, "Beginner")
+hasGenerated = workout.generateWorkout()
+if hasGenerated:
+    print("input duration: " + str(duration))
+    print("final duration: " + str(workout.duration))
+    for ex in workout.Exercises:
+        print(ex.name)
+else:
+    print("database error")
