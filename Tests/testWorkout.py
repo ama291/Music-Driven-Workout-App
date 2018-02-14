@@ -5,7 +5,6 @@ from Scripts.userexercise import UserExercise
 from Scripts.user import User
 
 
-
 '''
 All excercises in the workout must have a different name (using equaliy testing will pass the same excercise with a different duration). 
 The list of excercises must be non empty and the sum of their durations should not be more than the user specified duration. 
@@ -22,6 +21,7 @@ class TestWorkout(unittest.TestCase):
     difficulty = "Intermediate"
     categories = ["Cardio", "Stretching"]
     equipment = ["Body Only"]
+    # TODO - update getWorkout input parameters
     workout1 = usr1.getWorkout(equipment,duration, difficulty, categories=categories)
 
     # test workout properties match input parameters and has exercises
@@ -34,34 +34,36 @@ class TestWorkout(unittest.TestCase):
     self.assertTrue(len(workout1.Exercises) > 0)
     
     #test excercises in workout are unique 
-    for i in range(len(workout1.Excercises)):
-      for j in range(len(workout1.Excercises)):
+    for i in range(len(workout1.Exercises)):
+      for j in range(len(workout1.Exercises)):
         if i != j:
-          self.assertFalse(workout1.Excercises[i].name == workout1.Excercises[j].name)
+          self.assertFalse(workout1.Exercises[i].name == workout1.Exercises[j].name)
       
     #test total duration matches or is under user specification
     total_duration = 0
-    for i in range(len(workout1.Excercises)):
-      total_duration = workout1.Excercises[i].duration + total_duration
+    for i in range(len(workout1.Exercises)):
+      total_duration = workout1.Exercises[i].duration + total_duration
     self.assertFalse(total_duration > duration)
     
     #test duration is within required range
-    for i in range(len(workout1.Excercises)):
-      self.assertTrue(workout1.Excercises[i].range_start >= workout1.Excercises[i].duration <= workout1.Excercises[i].range_end)
+    for i in range(len(workout1.Exercises)):
+      self.assertTrue(workout1.Exercises[i].range_start >= workout1.Exercises[i].duration <= workout1.Exercises[i].range_end)
     
     #test if each exercise is from the correct category
-    for i in range(len(workout1.Excercises)):
-      self.assertTrue(workout1.Excercises[i].category in categories)
+    for i in range(len(workout1.Exercises)):
+      self.assertTrue(workout1.Exercises[i].category in categories)
       
     #test if each exercise has correct equipment requirement
-    for i in range(len(workout1.Excercises)):
-      self.assertTrue(workout1.Excercises[i].equipment in equipment)
+    for i in range(len(workout1.Exercises)):
+      self.assertTrue(workout1.Exercises[i].equipment in equipment)
+      
 
     # muscle group condition
     duration = 30
     difficulty = "Beginner"
     muscleGroups = ["Chest", "Shoulders", "Biceps"]
     equipment = ["Kettlebells", "Machine"]
+    # TODO- update getWorkout input parameters
     workout2 = usr1.getWorkout(equipment,duration, difficulty, muscleGroups=muscleGroups)
 
     # test workout properties match input parameters and has exercises
@@ -73,32 +75,29 @@ class TestWorkout(unittest.TestCase):
     self.assertEqual(workout2.currExercise, 0)
     self.assertTrue(len(workout2.Exercises) > 0)
 
-    #test array of excercises non empty
-    assertTrue(len(workout2.Excercises) != 0)
-    
     #test excercises in workout are unique 
-    for i in range(len(workout2.Excercises)):
-      for j in range(len(workout2.Excercises)):
+    for i in range(len(workout2.Exercises)):
+      for j in range(len(workout2.Exercises)):
         if i != j:
-          self.assertFalse(workout2.Excercises[i].name == workout2.Excercises[j].name)
+          self.assertFalse(workout2.Exercises[i].name == workout2.Exercises[j].name)
       
     #test total duration matches or is under user specification
     total_duration = 0
-    for i in range(len(workout2.Excercises)):
-      total_duration = workout2.Excercises[i].duration + total_duration
+    for i in range(len(workout2.Exercises)):
+      total_duration = workout2.Exercises[i].duration + total_duration
     self.assertFalse(total_duration > duration)
     
     #test duration is within required range
-    for i in range(len(workout2.Excercises)):
-      self.assertTrue(workout2.Excercises[i].range_start >= workout2.Excercises[i].duration <= workout2.Excercises[i].range_end)
-
+    for i in range(len(workout2.Exercises)):
+      self.assertTrue(workout2.Exercises[i].range_start >= workout2.Exercises[i].duration <= workout2.Exercises[i].range_end)
+      
     #test if each exercise is from the correct muscle group
-    for i in range(len(workout2.Excercises)):
-      self.assertTrue(workout2.Excercises[i].muscleGroup in muscleGroups)
+    for i in range(len(workout2.Exercises)):
+      self.assertTrue(workout2.Exercises[i].muscleGroup in muscleGroups)
       
     #test if each exercise has correct equipment requirement
-    for i in range(len(workout2.Excercises)):
-      self.assertTrue(workout2.Excercises[i].equipment in equipment)
+    for i in range(len(workout2.Exercises)):
+      self.assertTrue(workout2.Exercises[i].equipment in equipment)
 
 
 if __name__ == '__main__':
