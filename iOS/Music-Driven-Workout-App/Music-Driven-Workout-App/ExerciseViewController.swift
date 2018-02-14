@@ -69,34 +69,47 @@ class ExerciseViewController: UIViewController {
         }
     }
 
+    //json request struct
+    struct jsonRequest: Codable {
+        var Result: Float
+        var Status: String
+    }
+
     @objc func displayResult() {
         motionManager.stopAccelerometerUpdates()
         self.statusLabel.text = "complete"
-        //let encoder = JSONEncoder()
-        //encoder.outputFormatting = .prettyPrinted
-        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let decoder = JSONDecoder()
+        var frequency = ""
         do {
             let data = try? JSONSerialization.data(withJSONObject: self.motionData, options: .prettyPrinted)
             let json = String(data: data!, encoding: .utf8)
             if let json = json { // converting to a string
-                let url = URL(string: "http://138.197.49.155:8000/api/database/")!
+                print(json)
+                let url = URL(string: "http://138.197.49.155:8000/api/fitness/accel/")!
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
-                var headers = request.allHTTPHeaderFields ?? [:]
-                headers["Content-Type"] = "application/json"
-                request.allHTTPHeaderFields = headers
-                let bodyData = "data=" + json + "&key=SoftCon2018"
-                request.httpBody = bodyData.data(using: String.Encoding.utf8)
+                let postString = "data=" + json + "&key=SoftCon2018"
+                request.httpBody = postString.data(using: String.Encoding.utf8)
                 let config = URLSessionConfiguration.default
                 let session = URLSession(configuration: config)
                 let task = session.dataTask(with: request) { (responseData, response, responseError) in
                     guard responseError == nil else {
                         return
                     }
-                    if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
-                        print("response: ", utf8Representation)
+                    if let data = responseData {
+                        do {
+                            let jsonResponse = try decoder.decode(jsonRequest.self, from: data)
+                            frequency = String(describing: jsonResponse.Result)
+                            //need to fix this to callback
+                            self.frequencyLabel.text = frequency
+                        }
+                        catch {
+                            return
+                        }
                     } else {
-                        print("no readable data received in response")
+                        return
                     }
                 }
                 task.resume()
