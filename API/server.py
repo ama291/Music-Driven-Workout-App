@@ -85,7 +85,7 @@ def checkTracked():
 		return failure("Route not configured")
 		#return standardRes(isTracked(userid, exid))
 	except Exception as e:
-		return failure(str(e)
+		return failure(str(e))
 
 @app.route('/api/database/', methods=['POST'])
 def queryDatabase():
