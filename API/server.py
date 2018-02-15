@@ -2,6 +2,7 @@ from flask import Flask, render_template, Response, request
 import json
 import sqlite3
 from Scripts.log import Log, LogFromFile
+from Scripts.driver import *
 
 app = Flask(__name__)
 app.config['DEBUG'] = False
@@ -18,7 +19,7 @@ def index():
 #sample route for how api routing works
 @app.route('/api')
 def getApi():
-	return Response(json.dumps({"Message": "Welcome to the API", "Status" : "Success"}), mimetype='application/json')
+	return standardRes("Welcome to the API");
 
 @app.route('/api/database/', methods=['POST'])
 def queryDatabase():
@@ -30,11 +31,10 @@ def queryDatabase():
 		return failure("Invalid authentication")
 	try:
 		c.execute(query)
+		result = c.fetchall()
+		return standardRes(result)
 	except Exception as e:
 		return failure(str(e))
-	result = c.fetchall()
-	return Response(json.dumps({"Query": query, "Result": result, "Status": "Success"}), mimetype='application/json')
-
 #TODO
 @app.route('/api/fitness/tracked/', methods=['POST'])
 def getTracked():
@@ -46,9 +46,42 @@ def getTracked():
 		return failure("Invalid authentication")
 	try:
 		return failure("Route not configured")
+		#return standardRes(getTrackedExercises(userid))
 	except Exception as e:
 		return failure(str(e))
-	return standardRes(log1.getFrequency())
+
+#TODO
+@app.route('/api/fitness/istracked/', methods=['POST'])
+def checkTracked():
+	userid = request.form.get('userid')
+	exid = request.form.get('exid')
+	key = request.form.get('key')
+	if (userid == None or exid == None or key == None):
+		return failure("Invalid parameters")
+	if (key != "SoftCon2018"):
+		return failure("Invalid authentication")
+	try:
+		return failure("Route not configured")
+		#return standardRes(isTracked(userid, exid))
+	except Exception as e:
+		return failure(str(e))
+
+#TODO
+@app.route('/api/fitness/test/', methods=['POST'])
+def getFitness():
+	userid = request.form.get('userid')\
+	categories = request.form.get('categories')
+	numExercises = request.form.get('numExercises')
+	key = request.form.get('key')
+	if (userid == None or categories == None or numExercises == None or key == None):
+		return failure("Invalid parameters")
+	if (key != "SoftCon2018"):
+		return failure("Invalid authentication")
+	try:
+		return failure("Route not configured") 
+		#return standardRes(getFitnessTest(categories, numExercises, getTrackedExercises(userid))
+	except Exception as e:
+		return failure(str(e))
 
 @app.route('/api/fitness/accel/', methods=['POST'])
 def accel():
@@ -60,9 +93,9 @@ def accel():
 		return failure("Invalid authentication")
 	try:
 		log1 = Log(json.loads(data))
+		return standardRes(log1.getFrequency())
 	except Exception as e:
 		return failure(str(e))
-	return standardRes(log1.getFrequency())
 
 #api messages
 def failure(msg):
