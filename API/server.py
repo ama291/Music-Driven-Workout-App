@@ -6,6 +6,7 @@ from Scripts.driver import *
 
 app = Flask(__name__)
 app.config['DEBUG'] = False
+masterKey = "SoftCon2018"
 
 #database connections - path to data.db on server /Project/Music-Driven-Workout-App/data.db
 try:
@@ -24,20 +25,20 @@ def index():
 def getApi():
 	return standardRes("Welcome to the API");
 
-@app.route('/api/database/', methods=['POST'])
-def queryDatabase():
-	query = request.form.get('query')
+@app.route('/api/fitness/accel/', methods=['POST'])
+def accel():
+	data = request.form.get('data')
 	key = request.form.get('key')
-	if (query == None or key == None):
+	if (data == None or key == None):
 		return failure("Invalid parameters")
-	if (key != "SoftCon2018"):
+	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		c.execute(query)
-		result = c.fetchall()
-		return standardRes(result)
+		log1 = Log(json.loads(data))
+		return standardRes(log1.getFrequency())
 	except Exception as e:
 		return failure(str(e))
+
 #TODO
 @app.route('/api/fitness/tracked/', methods=['POST'])
 def getTracked():
@@ -45,27 +46,11 @@ def getTracked():
 	key = request.form.get('key')
 	if (userid == None or key == None):
 		return failure("Invalid parameters")
-	if (key != "SoftCon2018"):
+	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
 		return failure("Route not configured")
 		#return standardRes(getTrackedExercises(userid))
-	except Exception as e:
-		return failure(str(e))
-
-#TODO
-@app.route('/api/fitness/istracked/', methods=['POST'])
-def checkTracked():
-	userid = request.form.get('userid')
-	exid = request.form.get('exid')
-	key = request.form.get('key')
-	if (userid == None or exid == None or key == None):
-		return failure("Invalid parameters")
-	if (key != "SoftCon2018"):
-		return failure("Invalid authentication")
-	try:
-		return failure("Route not configured")
-		#return standardRes(isTracked(userid, exid))
 	except Exception as e:
 		return failure(str(e))
 
@@ -78,7 +63,7 @@ def getFitness():
 	key = request.form.get('key')
 	if (userid == None or categories == None or numExercises == None or key == None):
 		return failure("Invalid parameters")
-	if (key != "SoftCon2018"):
+	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
 		return failure("Route not configured") 
@@ -86,17 +71,34 @@ def getFitness():
 	except Exception as e:
 		return failure(str(e))
 
-@app.route('/api/fitness/accel/', methods=['POST'])
-def accel():
-	data = request.form.get('data')
+#TODO
+@app.route('/api/fitness/istracked/', methods=['POST'])
+def checkTracked():
+	userid = request.form.get('userid')
+	exid = request.form.get('exid')
 	key = request.form.get('key')
-	if (data == None or key == None):
+	if (userid == None or exid == None or key == None):
 		return failure("Invalid parameters")
-	if (key != "SoftCon2018"):
+	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		log1 = Log(json.loads(data))
-		return standardRes(log1.getFrequency())
+		return failure("Route not configured")
+		#return standardRes(isTracked(userid, exid))
+	except Exception as e:
+		return failure(str(e)
+
+@app.route('/api/database/', methods=['POST'])
+def queryDatabase():
+	query = request.form.get('query')
+	key = request.form.get('key')
+	if (query == None or key == None):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		c.execute(query)
+		result = c.fetchall()
+		return standardRes(result)
 	except Exception as e:
 		return failure(str(e))
 
