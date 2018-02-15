@@ -7,8 +7,8 @@ app = Flask(__name__)
 app.config['DEBUG'] = False
 
 #database connections - path to data.db on server /Project/Music-Driven-Workout-App/data.db
-conn = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db", isolation_level=None)
-c = conn.cursor()
+#conn = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db", isolation_level=None)
+#c = conn.cursor()
 
 #documentation page
 @app.route('/')
@@ -17,11 +17,11 @@ def index():
 
 #sample route for how api routing works
 @app.route('/api')
-def api():
+def getApi():
 	return Response(json.dumps({"Message": "Welcome to the API", "Status" : "Success"}), mimetype='application/json')
 
 @app.route('/api/database/', methods=['POST'])
-def database():
+def queryDatabase():
 	query = request.form.get('query')
 	key = request.form.get('key')
 	if (query == None or key == None):
@@ -35,10 +35,21 @@ def database():
 	result = c.fetchall()
 	return Response(json.dumps({"Query": query, "Result": result, "Status": "Success"}), mimetype='application/json')
 
-#Workouts test 1
+#TODO
+@app.route('/api/fitness/tracked/', methods=['POST'])
+def getTracked():
+	userid = request.form.get('userid')
+	key = request.form.get('key')
+	if (userid == None or key == None):
+		return failure("Invalid parameters")
+	if (key != "SoftCon2018"):
+		return failure("Invalid authentication")
+	try:
+		return failure("Route not configured")
+	except Exception as e:
+		return failure(str(e))
+	return standardRes(log1.getFrequency())
 
-
-#Fitness test 1
 @app.route('/api/fitness/accel/', methods=['POST'])
 def accel():
 	data = request.form.get('data')
