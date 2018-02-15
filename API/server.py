@@ -8,8 +8,11 @@ app = Flask(__name__)
 app.config['DEBUG'] = False
 
 #database connections - path to data.db on server /Project/Music-Driven-Workout-App/data.db
-#conn = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db", isolation_level=None)
-#c = conn.cursor()
+try:
+	conn = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db", isolation_level=None)
+	c = conn.cursor()
+except:
+	print("Local testing detected - no database")
 
 #documentation page
 @app.route('/')
