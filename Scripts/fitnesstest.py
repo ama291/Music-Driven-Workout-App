@@ -140,10 +140,10 @@ def addExercise(userID, exID, timestamp, rate):
 
 ## AddRoute
 def processMotionData(userID, exID, timestamp, rawdata):
-    log = Log(rawdata)
+    log = Log(rawdata, data=True)
     rate = log.getFrequency()
     addExercise(userID, exID, timestamp, rate)
-    return str(rate)
+    return rate
 
 ## My test:
 # with open("Logs/log1.json") as f:

@@ -1,5 +1,6 @@
 import unittest
 import Scripts.fitnessTest as ft
+import json
 from random import randint
 
 class TestFitnessTest(unittest.TestCase):
@@ -48,6 +49,15 @@ class TestFitnessTest(unittest.TestCase):
         self.assertTrue(421 in IDs)
         for t in tests:
             self.assertTrue(t[2] in cats)
+
+        ## Test add motion data
+        with open('Logs/log1.json', 'r') as fd:
+                data = json.load(fd)
+        data = processMotionData(ID, 12, time, data)
+        tolerance = 0.1
+        actual_rate = (17.0 / 30.0)
+        diff = abs(actual_rate - data)
+        self.assertTrue(diff < tolerance)
 
 if __name__ == '__main__':
     unittest.main()
