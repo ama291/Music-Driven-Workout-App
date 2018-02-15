@@ -19,13 +19,19 @@ class Frequency():
             y_fft = list(abs(fft.fft(y_accl)))[:int(len(timestamp)/2)]
             z_fft = list(abs(fft.fft(z_accl)))[:int(len(timestamp)/2)]
             freq = [fs/len(timestamp)*index for index in range(int(len(timestamp) /2))]
-            self.x_freq = max(zip(x_fft, freq), key=lambda x: x[0])[1]
-            self.y_freq = max(zip(y_fft, freq), key=lambda x: x[0])[1]
-            self.z_freq = max(zip(z_fft, freq), key=lambda x: x[0])[1]
+            self.x_freq = self.best_freq(x_fft, freq)
+            self.y_freq = self.best_freq(y_fft, freq)
+            self.z_freq = self.best_freq(z_fft, freq)
             self.freq = self.x_freq
+
+    #removes the data where frequency is 0
+    def best_freq(self, ffts, freqs):
+        nffts = ffts[1:]
+        mfreq = freqs[1:]
+        sarr = sorted(zip(ffts, freqs), key=lambda x: x[0])
+        for i in range(1, len(sarr)):
+            if sarr[-i][1] != 0:
+                return sarr[-i][1]
 
     def get_freq(self):
         return self.freq
-
-f = Frequency('Logs/log1.json')
-print(f.get_freq())
