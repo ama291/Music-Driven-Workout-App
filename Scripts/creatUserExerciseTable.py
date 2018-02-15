@@ -3,18 +3,32 @@ import requests
 dbURL = "http://138.197.49.155:8000/api/database/"
 key = "SoftCon2018"
 
-query = """CREATE TABLE userexercises 
-(id INT AUTO_INCREMENT PRIMARY KEY,
-userID INT,
-exID INT,
-timestamp TIMESTAMP, 
-rate DOUBLE,
-tracked BIT
-);
-"""
+def deleteOldTable():
+	query = "DROP TABLE userexercises"
 
-data = {"query": query, "key": key}
+	data = {"query": query, "key": key}
 
-r = requests.post(dbURL, data)
+	r = requests.post(dbURL, data)
 
-print(r.json())
+	print(r.json())
+
+def makeTable():
+	query = """CREATE TABLE userexercises 
+	(id INTEGER NOT NULL PRIMARY KEY,
+	userID INT,
+	exID INT,
+	timestamp TIMESTAMP, 
+	rate DOUBLE,
+	tracked BIT
+	);
+	"""
+
+	data = {"query": query, "key": key}
+
+	r = requests.post(dbURL, data)
+
+	print(r.json())
+
+if __name__ == '__main__':
+	deleteOldTable()
+	makeTable()

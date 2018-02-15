@@ -41,16 +41,16 @@ def getTrackedExercises(userID):
     exercises = []
     IDs = []
     for i in res:
-        if i[0] not in IDs:
-            query = "SELECT * FROM exercises WHERE id = %d" % i[0]
-            r = requests.post(dbURL, data = {'query':query, 'key':key})
-            if r.status_code != requests.codes.ok:
-                #TODO
-                return
-            print(r.json())
-            ex = r.json()["Result"]
-            exercises.append(ex)
-            IDs.append(i[0])
+        if i[0] in IDs:
+            continue
+        query = "SELECT * FROM exercises WHERE id = %d" % i[2]
+        r = requests.post(dbURL, data = {'query':query, 'key':key})
+        if r.status_code != requests.codes.ok:
+            #TODO
+            return
+        ex = r.json()["Result"][0]
+        exercises.append(ex)
+        IDs.append(i[0])
     return exercises
 
 ## My test
@@ -118,10 +118,6 @@ def checkTracked(userID, exID):
 ## My test
 # print(checkTracked(1,12))
 
-## Add route
-def isTracked(userID, exID):
-    return str(checkTracked(userID, exID))
-
 def addExercise(userID, exID, timestamp, rate):
     ct = checkTracked(userID, exID)
     if ct == True:
@@ -136,7 +132,7 @@ def addExercise(userID, exID, timestamp, rate):
     if r.status_code != requests.codes.ok:
         #TODO
         pass
-    return "OK" ## not sure about this
+    return True
 
 ## AddRoute
 def processMotionData(userID, exID, timestamp, rawdata):
