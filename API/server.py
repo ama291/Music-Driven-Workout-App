@@ -69,7 +69,7 @@ def checkTracked():
 #TODO
 @app.route('/api/fitness/test/', methods=['POST'])
 def getFitness():
-	userid = request.form.get('userid')\
+	userid = request.form.get('userid')
 	categories = request.form.get('categories')
 	numExercises = request.form.get('numExercises')
 	key = request.form.get('key')
