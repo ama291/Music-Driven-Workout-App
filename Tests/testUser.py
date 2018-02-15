@@ -1,6 +1,5 @@
 import unittest
 from Scripts.exercise import Exercise
-from Scripts.userexercise import UserExercise
 from Scripts.user import User
 from Scripts.goal import Goal
 from Scripts.theme import Theme
@@ -11,24 +10,6 @@ from datetime import datetime
 class TestUser(unittest.TestCase):
 
     def test(self):
-        name1 = "Calf Raises"
-        ex1 = Exercise(name1, 1, "Legs",
-            ["Calves"], ["Stairs"], [], [0,60], 1, 30.0)
-        uex1 = UserExercise(ex1, [])
-        uex1.addFreqFromNumReps(datetime.now(), 51)
-
-        ex2 = Exercise(name1, 1, "Legs",
-            ["Calves"], ["Stairs"], [], [0,60], 1, 30.0)
-        uex2 = UserExercise(ex2, [])
-        uex2.addFreqFromNumReps(datetime.now(), 48)
-
-        name2 = "Chin-ups"
-        ex3 = Exercise("Chin-ups", 3, "Arms",
-            ["Bicepts", "Tricepts"], ["Stairs"], [],
-            [0,60], 1, 30.0)
-        uex3 = UserExercise(ex3, [])
-        uex3.addFreqFromNumReps(datetime.now(), 61)
-
         ## test constructor (ID, name tracked, 
         ## untracked, goals, themes, competition, 
         ## inProgressWorkouts, savedWorkouts)
@@ -39,45 +20,7 @@ class TestUser(unittest.TestCase):
         self.assertTrue(usr1.inProgressWorkouts == {})
         self.assertTrue(usr1.savedWorkouts == {})
 
-        ## test trackEx
-        usr1.trackEx(uex1)
-        self.assertTrue(usr1.exIndexTracked(name1) \
-            is not None)
-        usr1.trackEx(uex2)
-        self.assertEqual(len(usr1.tracked), 1)
-        self.assertEqual(len(usr1.tracked[0].trials), 2)        
-
-        ## test untrackEx
-        usr1.untrackEx(name1)
-        self.assertTrue(usr1.exIndexUntracked(name1) is not None)
-        self.assertTrue(usr1.exIndexTracked(name1) is None)
-        self.assertEqual(len(usr1.untracked), 1)
-        self.assertEqual(len(usr1.untracked[0].trials), 2)
-
-        ## test exIndex
-        usr1.trackEx(uex3)
-        self.assertEqual(usr1.exIndexTracked(name2), 0)
-        usr1.untrackEx(name2)
-        self.assertEqual(usr1.exIndexUntracked(name1), 0)
-        self.assertEqual(usr1.exIndexUntracked(name2), 1)
-
-
-        ## test getFitnessTest
-        usr1.trackEx(uex1)
-        usr1.trackEx(uex3)
-        cats = ["cardio", "abs"]
-        uexs = [uex1, uex3]
-        tests = usr1.getFitnessTest(cats, 5, uexs)
-        self.assertEqual(len(tests), 5)
-        self.assertTrue(uex1 in tests)
-        self.assertTrue(uex3 in tests)
-        for t in tests:
-            self.assertTrue(t.exercise.category in cats)
-            if t not in uexs:
-                self.assertTrue(t not in usr1.tracked)
-                self.assertTrue(t not in usr1.untracked)
-
-
+    
         """
         Workout flow - User keeps getting workouts until they find one they like,
         then they start the workout. They can pause multiple times during a workout,
