@@ -29,9 +29,9 @@ def getApi():
 def accel():
 	data = request.form.get('data')
 	key = request.form.get('key')
-	if (data == None or key == None):
+	if (not checkParams([data, key])):
 		return failure("Invalid parameters")
-	if (key != masterKey):
+	if (not checkAuth(key)):
 		return failure("Invalid authentication")
 	try:
 		log1 = Log(json.loads(data))
@@ -44,9 +44,9 @@ def accel():
 def getTracked():
 	userid = request.form.get('userid')
 	key = request.form.get('key')
-	if (userid == None or key == None):
+	if (not checkParams([userid, key])):
 		return failure("Invalid parameters")
-	if (key != masterKey):
+	if (not checkAuth(key)):
 		return failure("Invalid authentication")
 	try:
 		return failure("Route not configured")
@@ -61,9 +61,9 @@ def getFitness():
 	categories = request.form.get('categories')
 	numExercises = request.form.get('numExercises')
 	key = request.form.get('key')
-	if (userid == None or categories == None or numExercises == None or key == None):
+	if (not checkParams([userid, categories, numExercises, key])):
 		return failure("Invalid parameters")
-	if (key != masterKey):
+	if (not checkAuth(key)):
 		return failure("Invalid authentication")
 	try:
 		return failure("Route not configured") 
@@ -77,9 +77,9 @@ def checkTracked():
 	userid = request.form.get('userid')
 	exid = request.form.get('exid')
 	key = request.form.get('key')
-	if (userid == None or exid == None or key == None):
+	if (not checkParams([userid, exid, key])):
 		return failure("Invalid parameters")
-	if (key != masterKey):
+	if (not checkAuth(key)):
 		return failure("Invalid authentication")
 	try:
 		return failure("Route not configured")
@@ -91,9 +91,9 @@ def checkTracked():
 def queryDatabase():
 	query = request.form.get('query')
 	key = request.form.get('key')
-	if (query == None or key == None):
+	if (not checkParams([query, key])):
 		return failure("Invalid parameters")
-	if (key != masterKey):
+	if (not checkAuth(key)):
 		return failure("Invalid authentication")
 	try:
 		c.execute(query)
@@ -102,6 +102,13 @@ def queryDatabase():
 	except Exception as e:
 		return failure(str(e))
 
+def checkParams(params):
+	for p in params:
+		if (p == None):
+			return False
+def checkAuth(key):
+	if (key != masterKey):
+		return False
 #api messages
 def failure(msg):
 	return Response(json.dumps({"Status": "Failure - " + msg}), mimetype='application/json')
