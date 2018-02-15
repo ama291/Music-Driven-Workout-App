@@ -14,8 +14,6 @@ def countExercises(category):
         return -1
     return r.json()["Result"][0][0]
 
-## My test
-# print(countExercises("Strength"))
 
 def getExQuery(categories):
     string = "SELECT * FROM exercises WHERE "
@@ -24,8 +22,6 @@ def getExQuery(categories):
     string = string[:-4]
     return string
 
-## My test
-# print(getExQuery(["Strength"]))
 
 ## Add route
 def getTrackedExercises(userID):
@@ -53,8 +49,6 @@ def getTrackedExercises(userID):
         IDs.append(i[0])
     return exercises
 
-## My test
-# getTrackedExercises(1)
 
 def getUntrackedIDs(categories, numUntracked, trackedIDs):
     query = getExQuery(categories)
@@ -77,8 +71,6 @@ def getUntrackedIDs(categories, numUntracked, trackedIDs):
         pass
     return untrackedIDs
 
-## My test
-# print(getUntrackedIDs(["Strength"], 5, [412, 567]))
 
 ## Add route
 ## This is slow. We should make it faster
@@ -99,9 +91,8 @@ def getFitnessTest(categories, numExercises, trackedIDs):
     assert len(exercises) == numExercises
     return exercises
 
-## My test
-# print(getFitnessTest(["Strength"], 3, [4]))
 
+## Add route
 def checkTracked(userID, exID): 
     query = "SELECT * FROM userexercises WHERE userID = %s AND exID = %s" % (userID, exID)
     r = requests.post(dbURL, data = {'query':query, 'key':key})
@@ -115,8 +106,6 @@ def checkTracked(userID, exID):
         return True
     return False
 
-## My test
-# print(checkTracked(1,12))
 
 def addExercise(userID, exID, timestamp, rate):
     ct = checkTracked(userID, exID)
@@ -134,17 +123,13 @@ def addExercise(userID, exID, timestamp, rate):
         pass
     return True
 
-## AddRoute
+## Add route
 def processMotionData(userID, exID, timestamp, rawdata):
-    log = Log(rawdata)
+    log = Log(rawdata, data=True)
     rate = log.getFrequency()
     addExercise(userID, exID, timestamp, rate)
-    return str(rate)
+    return rate
 
-## My test:
-# with open("Logs/log1.json") as f:
-#     data = json.load(f)
-# print(processMotionData(1,12, "2012-12-12 12:12:12",data))
 
 ## Add route
 def toggleTracked(userID, exID, clear=False):
@@ -159,7 +144,4 @@ def toggleTracked(userID, exID, clear=False):
         #TODO
         pass
     return [userID, exID, trackBit]
-
-## My test:
-# print(toggleTracked(1, 12))
 

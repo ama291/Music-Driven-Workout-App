@@ -65,11 +65,12 @@ class TestFitnessTest(unittest.TestCase):
         ## Test add motion data
         with open('Logs/log1.json', 'r') as fd:
                 data = json.load(fd)
-        data = processMotionData(ID, 12, time, data)
+        data = ft.processMotionData(ID, 12, time, data)
         tolerance = 0.1
         actual_rate = (17.0 / 30.0)
         diff = abs(actual_rate - data)
         self.assertTrue(diff < tolerance)
+        #TODO: Add check that this is in the database
 
 if __name__ == '__main__':
     unittest.main()
