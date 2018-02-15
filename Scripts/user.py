@@ -32,14 +32,6 @@ class User(object):
         return string
 
     def getFitnessTest(self, categories, numExercises, tracked):
-        exercises = []
-        for ex in tracked:
-            # TODO: add tracked ex to list
-            pass
-        numUntracked = numExercises - len(tracked)
-        query = "SELECT * FROM exercises"
-        r = requests.post(dbURL, data = {'query': query, 'key': key})
-        print(r.json()["Result"][188])
         ## TODO: get numUntracked exercises from the database 
         #  that are neither tracked nor (saved) untracked for the user.
         #  Create a UserExercise for each exercise.
