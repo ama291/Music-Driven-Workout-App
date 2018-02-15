@@ -1,6 +1,5 @@
 import numpy.fft as fft
 from numpy import abs
-import matplotlib.pyplot as plt
 import json
 
 class Log(object):
