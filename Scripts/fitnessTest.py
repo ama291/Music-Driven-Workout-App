@@ -42,7 +42,7 @@ def getTrackedExercises(userID):
     IDs = []
     for i in res:
         if i[0] not in IDs:
-            query = "SELECT %d FROM exercises" % i[0]
+            query = "SELECT * FROM exercises WHERE id = %d" % i[0]
             r = requests.post(dbURL, data = {'query':query, 'key':key})
             if r.status_code != requests.codes.ok:
                 #TODO
@@ -80,22 +80,28 @@ def getUntrackedIDs(categories, numUntracked, trackedIDs):
 ## My test
 # print(getUntrackedIDs(["Strength"], 5, [412, 567]))
 
-## Add route
 def getFitnessTest(categories, numExercises, trackedIDs):
     numUntracked = numExercises - len(trackedIDs)    
     untrackedIDs = getUntrackedIDs(categories, numUntracked, trackedIDs)
     exerciseIDs = trackedIDs + untrackedIDs
+    assert len(exerciseIDs) == numExercises
     exercises = []
     for ID in exerciseIDs:
-        query = "SELECT %d FROM exercises" % ID
+        query = "SELECT * FROM exercises WHERE id = %d" % ID
         r = requests.post(dbURL, data = {'query':query, 'key':key})
         print(r.json())
         if r.status_code == requests.codes.ok and len(r.content) == 1:
-            exercises.append(r.json()["Result"][0])
+            exercises.append(r.json()["Result"][0][0])
         else:
             #TODO
             pass
+    print(exercises)
     assert len(exercises) == numExercises
+    return exercises
+
+## Add route
+def getFitnessTestStr(categories, numExercises, trackedIDs):
+    exs = getFitnessTest(categories, numExercises, trackedIDs)
     return str(exercises)
 
 ## My test
@@ -104,9 +110,9 @@ def getFitnessTest(categories, numExercises, trackedIDs):
 def checkTracked(userID, exID): 
     query = "SELECT * FROM userexercises WHERE userID = %s AND exID = %s" % (userID, exID)
     r = requests.post(dbURL, data = {'query':query, 'key':key})
-    if r.status_code != requests.codes.ok:
+    if r.status_code != requests.codes.ok or "Result" not in r.json():
         #TODO
-        return
+        return False
     res = r.json()["Result"]
     if len(res) == 0:
         return False
@@ -127,13 +133,15 @@ def addExercise(userID, exID, timestamp, rate):
         trackBit = 1
     else:
         trackBit = 0
-    query = "INSERT INTO userexercises VALUES(1,%d,%d,'%s',%f,%d)" % \
+    query = "INSERT INTO userexercises \
+     (userID, exID, timestamp, rate, tracked) \
+     VALUES (%d,%d,'%s',%f,%d)" % \
      (userID, exID, timestamp, rate, trackBit)
     r = requests.post(dbURL, data = {'query':query, 'key':key})
-    print(r.json())
     if r.status_code != requests.codes.ok:
         #TODO
         pass
+    return "OK" ## not sure about this
 
 ## AddRoute
 def processMotionData(userID, exID, timestamp, rawdata):
@@ -148,15 +156,19 @@ def processMotionData(userID, exID, timestamp, rawdata):
 # print(processMotionData(1,12, "2012-12-12 12:12:12",data))
 
 ## Add route
-def toggleTracked(userID, exID):
-    tracked = checkTracked(userID, exID)
+def toggleTracked(userID, exID, clear=False):
+    if clear:
+        trackBit = 0
+    else:
+        tracked = checkTracked(userID, exID)
     trackBit = 1 - tracked
     query = "UPDATE userexercises SET tracked = %d WHERE userID = '%s' AND exID = '%s'" % (trackBit, userID, exID)
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     if r.status_code != requests.codes.ok:
         #TODO
         pass
-    return [userID, exID, 1 - trackBit]
+    return [userID, exID, trackBit]
 
 ## My test:
 # print(toggleTracked(1, 12))
+
