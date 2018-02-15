@@ -25,6 +25,28 @@ def index():
 def getApi():
 	return standardRes("Welcome to the API");
 
+#TODO
+@app.route('/api/workouts/getworkout/', methods=['POST'])
+def getWorkout():
+	userid = request.form.get('userid')
+	equipment = request.form.get('equipment')
+	duration = request.form.get('duration')
+	difficulty = request.form.get('difficulty')
+	cats = request.form.get('categories')
+	groups = request.form.get('musclegroups')
+	thems = request.form.get('themes')
+	key = request.form.get('key')
+	params = [userid, equiment, duration, difficulty, cats, groups, thems, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		return failure("Route not configured")
+		#return standardRes(getWorkout(userid, equipment, duration, difficulty, categories = cats, muscleGroups = groups, themes = thems))
+	except Exception as e:
+		return failure(str(e))
+
 @app.route('/api/fitness/accel/', methods=['POST'])
 def accel():
 	data = request.form.get('data')
@@ -73,7 +95,7 @@ def getFitness():
 
 #TODO
 @app.route('/api/fitness/istracked/', methods=['POST'])
-def checkTracked():
+def isTracked():
 	userid = request.form.get('userid')
 	exid = request.form.get('exid')
 	key = request.form.get('key')
@@ -87,11 +109,28 @@ def checkTracked():
 	except Exception as e:
 		return failure(str(e))
 
+#TODO
+@app.route('/api/fitness/toggletracked/', methods=['POST'])
+def checkTracked():
+	userid = request.form.get('userid')
+	exid = request.form.get('exid')
+	key = request.form.get('key')
+	if (userid == None or exid == None or key == None):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		return failure("Route not configured")
+		#return standardRes(toggleTracked(userid, exid))
+	except Exception as e:
+		return failure(str(e))
+
 @app.route('/api/database/', methods=['POST'])
 def queryDatabase():
 	query = request.form.get('query')
 	key = request.form.get('key')
-	if (query == None or key == None):
+	params = [query, key]
+	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
