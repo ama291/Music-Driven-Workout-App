@@ -8,6 +8,16 @@ class TestFitnessTest(unittest.TestCase):
         yr = randint(1000, 2000)
         ID = randint(2,100000)
         time = "%d-12-12 12:12:12" % yr
+        cats = ["Strength"]
+        cats2 = ["Strength", "Plyometrics"]
+
+        ## Test count exercise
+        self.assertEqual(ft.countExercises("Strength"), 859)
+
+        ## Test getting query string
+        q = "SELECT * FROM exercises WHERE type = 'Strength' OR type = 'Plyometrics'"
+        self.assertEqual(ft.getExQuery(cats2), q)
+
         ## Test adding an exercise
         self.assertEqual(ft.addExercise(ID, 12, time, 30.5), "OK")
         self.assertFalse(ft.checkTracked(ID, 12))
@@ -25,7 +35,6 @@ class TestFitnessTest(unittest.TestCase):
 
         ## Test get untrectked IDs
         trackedIDs = [23,56]
-        cats = ["Strength"]
         IDs = ft.getUntrackedIDs(cats, 4, trackedIDs)
         self.assertEqual(len(IDs), 4)
         for ID in IDs:
@@ -38,7 +47,6 @@ class TestFitnessTest(unittest.TestCase):
         self.assertTrue(412 in IDs)
         self.assertTrue(421 in IDs)
         for t in tests:
-            print(t)
             self.assertTrue(t[2] in cats)
 
 if __name__ == '__main__':
