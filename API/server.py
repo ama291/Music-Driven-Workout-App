@@ -1,7 +1,7 @@
 from flask import Flask, render_template, Response, request
 import json
 import sqlite3
-from Scripts.log import Log, LogFromFile
+from Scripts.log import Log
 from Scripts.driver import *
 
 app = Flask(__name__)
