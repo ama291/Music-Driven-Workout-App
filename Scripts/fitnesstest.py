@@ -12,7 +12,7 @@ def countExercises(category):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     if r.status_code != requests.codes.ok:
         return -1
-    return r.json()
+    return r.json()["Result"][0][0]
 
 ## My test
 # print(countExercises("Strength"))
@@ -21,7 +21,7 @@ def getExQuery(categories):
     string = "SELECT * FROM exercises WHERE "
     for cat in categories:
         string += "type = '%s' OR " % cat
-    string = string[:-3]
+    string = string[:-4]
     return string
 
 ## My test
@@ -51,7 +51,7 @@ def getTrackedExercises(userID):
             ex = r.json()["Result"]
             exercises.append(ex)
             IDs.append(i[0])
-    return str(exercises)
+    return exercises
 
 ## My test
 # getTrackedExercises(1)
@@ -80,6 +80,8 @@ def getUntrackedIDs(categories, numUntracked, trackedIDs):
 ## My test
 # print(getUntrackedIDs(["Strength"], 5, [412, 567]))
 
+## Add route
+## This is slow. We should make it faster
 def getFitnessTest(categories, numExercises, trackedIDs):
     numUntracked = numExercises - len(trackedIDs)    
     untrackedIDs = getUntrackedIDs(categories, numUntracked, trackedIDs)
@@ -89,20 +91,13 @@ def getFitnessTest(categories, numExercises, trackedIDs):
     for ID in exerciseIDs:
         query = "SELECT * FROM exercises WHERE id = %d" % ID
         r = requests.post(dbURL, data = {'query':query, 'key':key})
-        print(r.json())
-        if r.status_code == requests.codes.ok and len(r.content) == 1:
-            exercises.append(r.json()["Result"][0][0])
+        if r.status_code == requests.codes.ok and len(r.json()["Result"]) == 1:
+            exercises.append(r.json()["Result"][0])
         else:
             #TODO
             pass
-    print(exercises)
     assert len(exercises) == numExercises
     return exercises
-
-## Add route
-def getFitnessTestStr(categories, numExercises, trackedIDs):
-    exs = getFitnessTest(categories, numExercises, trackedIDs)
-    return str(exercises)
 
 ## My test
 # print(getFitnessTest(["Strength"], 3, [4]))
@@ -145,10 +140,10 @@ def addExercise(userID, exID, timestamp, rate):
 
 ## AddRoute
 def processMotionData(userID, exID, timestamp, rawdata):
-    log = Log(rawdata)
+    log = Log(rawdata, data=True)
     rate = log.getFrequency()
     addExercise(userID, exID, timestamp, rate)
-    return str(rate)
+    return rate
 
 ## My test:
 # with open("Logs/log1.json") as f:
