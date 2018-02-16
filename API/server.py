@@ -274,8 +274,8 @@ def apiIsTracked():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return failure("Route not configured")
-		#return standardRes(isTracked(userid, exid))
+		response = isTracked(userid, exid)
+		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
 
@@ -294,7 +294,7 @@ def apiCheckTracked():
 		return failure("Invalid authentication")
 	try:
 		return failure("Route not configured")
-		#return standardRes(toggleTracked(userid, exid))
+		response =toggleTracked(userid, exid)
 	except Exception as e:
 		return failure(str(e))
 
