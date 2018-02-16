@@ -283,7 +283,6 @@ def apiCheckTracked():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return failure("Route not configured")
 		response =toggleTracked(userid, exid)
 	except Exception as e:
 		return failure(str(e))
