@@ -275,7 +275,7 @@ def apiCheckTracked():
 	userid = request.form.get('userid')
 	if (userid != None):
 		userid = int(userid)
-	exid = request.form.get('exid')
+	exid = int(request.form.get('exid'))
 	key = request.form.get('key')
 	params = [userid, exid, key]
 	if (None in params):
@@ -283,7 +283,7 @@ def apiCheckTracked():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		response =toggleTracked(userid, exid)
+		response = toggleTracked(userid, exid)
 	except Exception as e:
 		return failure(str(e))
 
