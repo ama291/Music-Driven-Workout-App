@@ -29,35 +29,37 @@ def getApi():
 #TODO
 @app.route('/api/workouts/getworkout/', methods=['POST'])
 def apiGetWorkout():
-	userid = request.form.get('userid')
+	userid = int(request.form.get('userid'))
 	equipment = request.form.get('equipment')
-	duration = request.form.get('duration')
+	if (equipment != None):
+		equipment = equipment.split(",")
+	duration = int(request.form.get('duration'))
 	difficulty = request.form.get('difficulty')
 	cats = request.form.get('categories')
+	if (cats != None):
+		cats = cats.split(",")
 	groups = request.form.get('musclegroups')
+	if (groups != None):
+		groups = groups.split(",")
 	thems = request.form.get('themes')
+	if (thems != None):
+		thems = equipment.split(",")
 	key = request.form.get('key')
-	listparams = [equipment, cats, groups, thems]
-	try:
-		for l in listparams:
-			if (l != None):
-				l = l.split(",")
-	except:
-		return failure("Invalid parameters")
 	params = [userid, equipment, duration, difficulty, key]
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return standardRes(getWorkout(userid, equipment, duration, difficulty, categories = cats, muscleGroups = groups, themes = thems))
+		response = getWorkout(userid, equipment, duration, difficulty, categories = cats, muscleGroups = groups, themes = thems)
+		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
 
 #TODO
 @app.route('/api/workouts/startworkout/', methods=['POST'])
 def apiStartWorkout():
-	userid = request.form.get('userid')
+	userid = int(request.form.get('userid'))
 	workout = request.form.get('workout')
 	key = request.form.get('key')
 	params = [userid, workout, key]
@@ -66,7 +68,8 @@ def apiStartWorkout():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return standardRes(startWorkout(userid, workout))
+		response = standardRes(startWorkout(userid, workout))
+		return standardRes(response)
 	except Exception as e:
 		return failure(str(e))
 
