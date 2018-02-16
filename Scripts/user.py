@@ -29,7 +29,7 @@ class User(object):
 
     def getFitnessTest(self, categories, numExercises, tracked):
         numUntracked = numExercises - len(tracked)
-        ## TODO: get numUntracked exercises from the database 
+        ## TODO: get numUntracked exercises from the database
         #  that are neither tracked nor (saved) untracked for the user.
         #  Create a UserExercise for each exercise.
         return []
@@ -205,7 +205,7 @@ class User(object):
         self.themes.append(theme)
 
     def removeTheme(self, theme):
-        if theme in self.themes:   
+        if theme in self.themes:
             self.themes.remove(theme)
             return True
         return False
