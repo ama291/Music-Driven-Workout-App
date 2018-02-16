@@ -87,10 +87,9 @@ def apiPauseWorkout():
 	except Exception as e:
 		return failure(str(e))
 
-#TODO
 @app.route('/api/workouts/quitworkout/', methods=['POST'])
 def apiQuitWorkout():
-	userid = request.form.get('userid')
+	userid = int(request.form.get('userid'))
 	workoutid = request.form.get('workoutid')
 	key = request.form.get('key')
 	params = [userid, workoutid, key]
@@ -99,14 +98,14 @@ def apiQuitWorkout():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return standardRes(quitWorkout(userid, workoutid))
+		response = quitWorkout(userid, workoutid)
+		return standardRes(response)
 	except Exception as e:
 		return failure(str(e))
 
-#TODO
 @app.route('/api/workouts/saveworkout/', methods=['POST'])
 def apiSaveWorkout():
-	userid = request.form.get('userid')
+	userid = int(request.form.get('userid'))
 	workoutid = request.form.get('workoutid')
 	key = request.form.get('key')
 	params = [userid, workoutid, key]
@@ -115,14 +114,14 @@ def apiSaveWorkout():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return standardRes(saveWorkout(userid, workoutid))
+		response = saveWorkout(userid, workoutid)
+		return standardRes(response)
 	except Exception as e:
 		return failure(str(e))
 
-#TODO
 @app.route('/api/workouts/workoutssaved/', methods=['POST'])
 def apiWorkoutsSaved():
-	userid = request.form.get('userid')
+	userid = int(request.form.get('userid'))
 	key = request.form.get('key')
 	params = [userid, key]
 	if (None in params):
@@ -130,11 +129,11 @@ def apiWorkoutsSaved():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return standardRes(workoutsSaved(userid))
+		response = workoutsSaved(userid)
+		return standardRes(response)
 	except Exception as e:
 		return failure(str(e))
 
-#TODO
 @app.route('/api/workouts/workoutsinprogress/', methods=['POST'])
 def apiWorkoutsInProgress():
 	userid = request.form.get('userid')
@@ -145,7 +144,8 @@ def apiWorkoutsInProgress():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return standardRes(workoutsInProgress(userid))
+		response = workoutsinprogress(userid)
+		return standardRes(response)
 	except Exception as e:
 		return failure(str(e))
 
