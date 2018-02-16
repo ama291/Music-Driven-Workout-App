@@ -102,6 +102,8 @@ Get workout using command-
 Start Workout using- (should return 0)
 
     $ curl --data "userid=0&workout=(Use string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/
+    
+    For this test, we have noticed that the command line does not like the quotation marks in the JSON string returned by the getworkout, so this request needs to be done via Python or a Rest client. When using this method, remove the /-escape characters in the JSON (this is automatically done by json.loads() in Python).
 
 Try to start Workout again using- (should return 2)
 
