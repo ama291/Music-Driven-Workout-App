@@ -94,6 +94,7 @@ def getFitnessTest(categories, numExercises, trackedIDs):
     numUntracked = numExercises - len(trackedIDs)    
     untrackedIDs = getUntrackedIDs(categories, numUntracked, trackedIDs)
     exerciseIDs = trackedIDs + untrackedIDs
+    return exercises
     assert len(exerciseIDs) == numExercises
     exercises = []
     for ID in exerciseIDs:

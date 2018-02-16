@@ -226,6 +226,11 @@ For this iteration, we focused on setting up a back end for fitness testing with
         * When the returned track bit is 1 for toggling tracked, the subsequent return for isTracked should be true. Otherwise, false.
     * Cases
         * `userID`: 1, `exID`: 12
+
+        curl --data "userid=1&exid=12&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/istracked/
+
+        curl --data "userid=1&exid=12&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/toggletracked/
+
         * You can also add a new userexercise to the database to ensure that it becomes 1 the first time you toggle it.
 * For getting tracked exercises: 
     * Route
@@ -233,6 +238,10 @@ For this iteration, we focused on setting up a back end for fitness testing with
     * Procedure
         * Pass userID to the given route
     * Cases
+        * For User 1:
+
+         curl --data "userid=1&exid=12&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/istracked/
+
         * Try the things we do for `getTrackedExercises` in the unit tests
     * Expected result
         * See unit tests
