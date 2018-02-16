@@ -81,6 +81,8 @@ builds a User instance from that information, and calls the associated function 
 
 #### Acceptance Tests
 
+The acceptance tests below test all functionality of the workout-related functions in driver.py (hence these functions
+are not tested in testDriver.py).
 
 #### Who Did What
 
