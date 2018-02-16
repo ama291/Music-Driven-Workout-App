@@ -14,7 +14,6 @@ class Workout(object):
         self.equipment.append("Body Only") #Body Only is always included in list of equipment
         self.duration = duration # updated by generateWorkout
         self.difficulty = difficulty
-        #self.difficulty
         self.Exercises = [] # filled by generateWorkout
         self.currExercise = 0 # index of current exercise
 
