@@ -4,7 +4,7 @@
 	</head>
 	<body>
 		<h1>Music-Driven-Workout-App API Documentation</h1>
-		
+
 		<h2>Request Example:</h2>
 		<p>/Scripts/testrequest.py</p>
 		<pre>
@@ -15,14 +15,59 @@ import requests
 r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': 'select * from users', 'key': 'masterKey'})
 print(r.json())
 		</pre>
-		
+
 		<h2>Response Example:</h2>
 		<p>Each API route will give a JSON response in this format:</p>
 		<b>Success: </b><code>{"Result": data, "Status": "Success"}</code>
 		<br />
-		<b>Failure: </b><code>{"Status": "Failure - message"}</code>	
+		<b>Failure: </b><code>{"Status": "Failure - message"}</code>
 
-		
+
+        <!-- Workout Functions -->
+        <h2>Get Workout:</h2>
+		<p><b>Route:</b> /api/workouts/getworkout</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, equipment, duration, difficulty, categories, musclegroups, themes, key</p>
+		<p><b>Description:</b> </p>
+
+        <h2>Start Workout:</h2>
+		<p><b>Route:</b> /api/workouts/startworkout/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, workout, key</p>
+		<p><b>Description:</b> </p>
+
+        <h2>Pause Workout:</h2>
+		<p><b>Route:</b> /api/workouts/pauseworkout/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, workoutid, key</p>
+		<p><b>Description:</b> </p>
+
+        <h2>Quit Workout:</h2>
+		<p><b>Route:</b> /api/workouts/quitworkout/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, workoutid, key</p>
+		<p><b>Description:</b> </p>
+
+        <h2>Save Workout:</h2>
+		<p><b>Route:</b> /api/workouts/saveworkout/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, workoutid, key</p>
+		<p><b>Description:</b> </p>
+
+        <h2>Get Saved Workouts:</h2>
+		<p><b>Route:</b> /api/workouts/workoutssaved/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, key</p>
+		<p><b>Description:</b> </p>
+
+        <h2>Get In-Progress Workouts:</h2>
+		<p><b>Route:</b> /api/workouts/workoutsinprogress/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, key</p>
+		<p><b>Description:</b> </p>
+
+
+        <!-- Fitness Functions -->
         <h2>Accelerometer Frequency:</h2>
 		<p><b>Route:</b> /api/fitness/accel/</p>
 		<p><b>Methods:</b> POST</p>
@@ -47,6 +92,14 @@ print(r.json())
 		<p><b>Required parameters:</b> userid, exid, key</p>
 		<p><b>Description:</b> Submit user id and exercise id, receive a boolean on whether exercise is tracked.</p>
 
+        <h2>Toggle Exercise Tracking:</h2>
+        <p><b>Route:</b> /api/fitness/toggletracked/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, exid, key</p>
+		<p><b>Description:</b> Submit userId and exerciseId, toggle the exercise's tracked status. Receive success or failure.</p>
+
+
+        <!-- Database -->
 		<h2>Database Access:</h2>
 		<p><b>Route:</b> /api/database/</p>
 		<p><b>Methods:</b> POST</p>
