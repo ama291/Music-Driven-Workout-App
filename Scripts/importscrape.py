@@ -7,7 +7,7 @@
 import json
 import requests
 
-db = 'http://138.197.49.155:8000/api/database/'
+db = 'http://138.197.49.155:5000/api/database/'
 dbKey = 'SoftCon2018'
 jFile = 'Logs/exercises.json'
 
