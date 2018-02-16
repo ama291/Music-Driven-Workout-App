@@ -131,6 +131,42 @@ def apiSaveWorkout():
 	except Exception as e:
 		return failure(str(e))
 
+@app.route('/api/workouts/unsaveworkout/', methods=['POST'])
+def apiUnSaveWorkout():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	workoutid = request.form.get('workoutid')
+	key = request.form.get('key')
+	params = [userid, workoutid, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		response = unsaveWorkout(userid, workoutid)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
+@app.route('/api/workouts/startsavedworkout/', methods=['POST'])
+def apiStartSaveWorkout():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	workoutid = request.form.get('workoutid')
+	key = request.form.get('key')
+	params = [userid, workoutid, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		response = startSavedWorkout(userid, workoutid)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
 @app.route('/api/workouts/workoutssaved/', methods=['POST'])
 def apiWorkoutsSaved():
 	userid = request.form.get('userid')
@@ -225,7 +261,6 @@ def apiGetFitness():
 	except Exception as e:
 		return failure(str(e))
 
-#TODO
 @app.route('/api/fitness/istracked/', methods=['POST'])
 def apiIsTracked():
 	userid = request.form.get('userid')
