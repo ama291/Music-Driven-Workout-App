@@ -120,6 +120,9 @@ $ curl --data "userid=0&workoutid=(Use the workout id from the string returned b
 Try to quit workout that has been unsaved - (should return 2)
 $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/quitworkout/ <br>
 
+Workouts can be created with a variety of inputs. Options for muscle groups, category, and equipment can be found at https://www.bodybuilding.com/exercises/finder.
+Only one of categories or muscle groups should be included in getWorkout, not both.
+
 #### Who Did What
 
 Larissa did the unit tests for the workout-related user functions. Manasvi did the unit tests for the Workout class.
