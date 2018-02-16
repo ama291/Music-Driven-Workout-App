@@ -69,6 +69,10 @@ and we randomly choose a duration within that range, with a given increment. If 
 will be given that rpm; otherwise, they will be given the suggested rpm that has been retrieved from the database for that
 exercise.
 
+The exercises scraped from bodybuilding.com did not have any information about duration or rpm (it was also not
+available in any single source), so we added these fields to the database. For each exercise, we filled in these
+fields based on a reasonable range of values for its corresponding category.
+
 We have not yet dealt with getting music that matches the beat of each exercise, that will be the next iteration.
 At that time, we will apply the themes chosen by the user.
 
@@ -78,12 +82,22 @@ builds a User instance from that information, and calls the associated function 
 #### Acceptance Tests
 
 
-
 #### Who Did What
 
-Larissa wrote the getUser and all workout-related functions in driver.py.
+Larissa did the unit tests for the workout-related user functions. Manasvi did the unit tests for the Workout class.
+
+Larissa wrote the getUser and all workout-related functions in driver.py. Together, Manasvi and Larissa
+added the necessary information for generating workouts into the database (i.e. duration range, increment, and suggested
+rpm). We also wrote the generateWorkout function in workout.py together. Manasvi then tested the algorithm with a variety
+of inputs, tuning the number of exercises retrieved for each run and the number of runs.
 
 #### Changes
+
+We added an id to the exercises class, since that field is available in the database.
+
+We also changed the function prototype for user.getWorkout, removing the defaults values and changing
+the parameter ordering to match the Workout class construction order. The default values were shifted
+to the higher-level function in driver.py.
 
 ### Fitness Test
 
