@@ -20,7 +20,6 @@ class TestUser(unittest.TestCase):
         self.assertTrue(usr1.inProgressWorkouts == {})
         self.assertTrue(usr1.savedWorkouts == {})
 
-
         """
         Workout flow - User keeps getting workouts until they find one they like,
         then they start the workout. They can pause multiple times during a workout,

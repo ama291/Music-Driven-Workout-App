@@ -3,25 +3,32 @@
 from datetime import datetime
 
 class Goal(object):
+    """
+    Class for user Goals; goals help users concretely measure their progress
+    and feel a sense of achievement.
+    Goals are described by what categories e.g. "cardio" and muscleGroups e.g. "biceps" they are in.
+    Users can choose to be notified about certain goals and how long the goal will last for.
+    """
     def __init__(self, name, description, goalNum, categories,
         muscleGroups, duration, daysPerWeek, notify):
         """
         name: string
+        goalNum: integer
         description: string
         duration: int (number of days)
         days per week: int (<=7)
         notifications: boolean
         """
-        if(name == ""):
+        if(name == "" or name == None):
             print("name can't be empty string")
             raise ValueError
-        if(goalNum < 0):
+        if(goalNum < 0 or goalNum == None):
             print("goalNum can't be less than 0")
             raise ValueError
-        if(duration < 0):
+        if(duration < 0 or duration == None):
             print("duration can't be less than 0")
             raise ValueError
-        if(daysPerWeek < 0):
+        if(daysPerWeek < 0 or daysPerWeek == None):
             print("daysPerWeek can't be less than 0")
             raise ValueError
         self.name = name
