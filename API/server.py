@@ -34,6 +34,8 @@ def apiGetWorkout():
 	equipment = request.form.get('equipment')
 	if (equipment != None):
 		equipment = equipment.split(",")
+	else:
+		equipment = []
 	duration = int(request.form.get('duration'))
 	difficulty = request.form.get('difficulty')
 	cats = request.form.get('categories')
