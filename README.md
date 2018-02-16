@@ -96,23 +96,39 @@ Note: In the python interpreter, json.loads() should be called on the "Result" o
 proper string to pass to startworkout. The workout id use in following commands is in this string, under "ID".
 
 Get workout using command-
-$ curl --data "userid=0&equipment=Body Only,Kettlebells&duration=50&difficulty=Intermediate&categories=Cardio,Stretching&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/ <br>
+
+    $ curl --data "userid=0&equipment=Body Only,Kettlebells&duration=50&difficulty=Intermediate&categories=Cardio,Stretching&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/ 
+
 Start Workout using- (should return 0)
-$ curl --data "userid=0&workout=(Use string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/ <br>
+
+    $ curl --data "userid=0&workout=(Use string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/
+
 Try to start Workout again using- (should return 2)
-$ curl --data "userid=0&workout=(Use string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/ <br>
+
+    $ curl --data "userid=0&workout=(Use string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/ 
+
 Pause the workout using- (should return 0)
-$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/pauseworkout/ <br>
+
+    $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/pauseworkout/
+
 Pause the workout again using- (should return 0)
-$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/pauseworkout/ <br>
+
+    $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/pauseworkout/
+
 Quit the workout using- (should return 0)
-$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/quitworkout/ <br>
+
+    $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/quitworkout/
+
 Try to quit again (should return 2)
-$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/quitworkout/ <br>
+
+    $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/quitworkout/
+
 Try to pause workout that has been quit- (should return 2)
-$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/pauseworkout/ <br>
+    
+    $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/pauseworkout/
 Try to save workout that has been quit- (should return 2)
-$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/saveworkout/ <br>
+
+    $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/saveworkout/
 
 
 Get workout using-
