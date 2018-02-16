@@ -130,25 +130,41 @@ Try to save workout that has been quit- (should return 2)
 
     $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/saveworkout/
 
-
 Get workout using-
-$ curl --data "userid=0&equipment=Dumbbell&duration=30&difficulty=Beginner&musclegroups=Biceps&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/ <br>
+
+    $ curl --data "userid=0&equipment=Dumbbell&duration=30&difficulty=Beginner&musclegroups=Biceps&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/
+
 Start Workout using- (should return 0)
-$ curl --data "userid=0&workout=(Use string returned by getworkout, i.e. "Result")&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/ <br>
+
+    $ curl --data "userid=0&workout=(Use string returned by getworkout, i.e. "Result")&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/
+
 Save the workout using - (should return 0)
-$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/saveworkout/ <br>
+    
+    $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/saveworkout/
+
 Try to save again (should return 2)
-$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/saveworkout/ <br>
+
+    $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/saveworkout/
+
 Start saved workout using - (should return 0)
-$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startsavedworkout/ <br>
+
+    $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startsavedworkout/
+
 Unsave workout using- (should return 0)
-$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/unsaveworkout/ <br>
+
+    $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/unsaveworkout/
+
 Try to unsave workout again - (should return 2)
-$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/unsaveworkout/ <br>
+
+    $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/unsaveworkout/
+
 Try to start saved workout after unsave - (should return 2)
-$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startsavedworkout/ <br>
+
+    $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startsavedworkout/
+
 Try to quit workout that has been unsaved - (should return 2)
-$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/quitworkout/ <br>
+
+    $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/quitworkout/ <br>
 
 Workouts can be created with a variety of inputs. Options for muscle groups, category, and equipment can be found at https://www.bodybuilding.com/exercises/finder.
 Only one of categories or muscle groups should be included in getworkout, not both.
