@@ -1,23 +1,119 @@
 <html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
 	<body>
-		<h1>Music-Driven-Workout-App API</h1>
-		<h2>Documentation:</h2>
-		<h3>Database Access:</h3>
-		<p>To access the database, make POST requests to http://138.197.49.155:8000/api/database/</p>
-		<p>Required parameters: query, key</p>
-		<p>Request Example: /Scripts/testrequest.py</p>
+		<h1>Music-Driven-Workout-App API Documentation</h1>
+
+        <h2>Testing Functionality of our API</h2>
+        <p>
+            You can make calls by
+        </p>
+        <pre>curl --data "query=SELECT * FROM exercises&key=SoftCon2018" http://138.197.49.155:8000/api/database/</pre>
+
+        <!-- Workout Functions -->
+        <h2>Get Workout:</h2>
+		<p><b>Route:</b> /api/workouts/getworkout</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, equipment, duration, difficulty, categories, musclegroups, themes, key</p>
+		<p><b>Description:</b> Pass in the above parameters and get a json string containing a workout matching those filters</p>
+
+        <h2>Start Workout:</h2>
+		<p><b>Route:</b> /api/workouts/startworkout/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, workout, key</p>
+		<p><b>Description:</b> Attempts to start workout matching above parameters. Returns status indicating whether the workout was started successfully or failed either due to an inability to update the users table or the workout is already in progress.</p>
+
+        <h2>Pause Workout:</h2>
+		<p><b>Route:</b> /api/workouts/pauseworkout/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, workoutid, key</p>
+		<p><b>Description:</b> Attempts to pause the workout in progress. Fails if user table cannot be updated or workout not in progress.</p>
+
+        <h2>Quit Workout:</h2>
+		<p><b>Route:</b> /api/workouts/quitworkout/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, workoutid, key</p>
+		<p><b>Description:</b> Attempts to quit the workout. Fails if user table cannot be updated or workout not in progress.</p>
+
+        <h2>Save Workout:</h2>
+		<p><b>Route:</b> /api/workouts/saveworkout/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, workoutid, key</p>
+		<p><b>Description:</b> Attempts to save workout for user. Fails if user table cannot be updated or workout already saved/not in progress.</p>
+
+        <h2>Get Saved Workouts:</h2>
+		<p><b>Route:</b> /api/workouts/workoutssaved/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, key</p>
+		<p><b>Description:</b> Submit userid and database access key to get a json string of all the user's saved workouts.</p>
+
+        <h2>Get In-Progress Workouts:</h2>
+		<p><b>Route:</b> /api/workouts/workoutsinprogress/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, key</p>
+		<p><b>Description:</b> Submit userid and database access key to get a json string of all the user's in-progress workouts.</p>
+
+
+        <!-- Fitness Functions -->
+        <h2>Accelerometer Frequency:</h2>
+		<p><b>Route:</b> /api/fitness/accel/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> data, key</p>
+		<p><b>Description:</b> Submit JSON accelerometer data from the iOS app, receive a calculated frequency.</p>
+
+		<h2>Get Tracked Exercises:</h2>
+		<p><b>Route:</b> /api/fitness/tracked/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, key</p>
+		<p><b>Description:</b> Submit user id, receive a list of tracked exercises.</p>
+
+		<h2>Get Fitness Test:</h2>
+		<p><b>Route:</b> /api/fitness/test/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, categories, numExercises, key</p>
+		<p><b>Description:</b> Submit user id, exercise category, and number of exercises, receive data from exercise database.</p>
+
+		<h2>Check Exercise Tracked:</h2>
+		<p><b>Route:</b> /api/fitness/istracked/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, exid, key</p>
+		<p><b>Description:</b> Submit user id and exercise id, receive a boolean on whether exercise is tracked.</p>
+
+        <h2>Toggle Exercise Tracking:</h2>
+        <p><b>Route:</b> /api/fitness/toggletracked/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, exid, key</p>
+		<p><b>Description:</b> Submit userId and exerciseId, toggle the exercise's tracked status. Receive success or failure.</p>
+
+
+        <!-- Database -->
+		<h2>Database</h2>
+		<p><b>Route:</b> /api/database/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> query, key</p>
+		<p><b>Description:</b> Run a query on the database.</p>
+		<p>The users table in the database was created with:</p>
+		<code>CREATE TABLE users (id integer, name varchar(50), tracked varchar(9999), untracked varchar(9999), goals varchar(9999), themes varchar(9999), competition varchar(9999), inProgressWorkouts varchar(9999), savedWorkouts varchar(9999));</code>
+        <p>The exercises table in the database was created with: </p>
+        <code>CREATE TABLE exercises (id integer, name varchar(512), type varchar(512), muscle varchar(512), equipment varchar(512), level varchar(512), images varchar(9999), guide varchar(9999));</code>
+
+        <h3>Request Example:</h3>
+		<p>/Scripts/testrequest.py</p>
 		<pre>
 #testrequest.py
 import requests
 
 #make request to API
-r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': 'select * from users', 'key': 'password is in test file'})
-print(r.json())
-		</pre>
-		<p>The users table in the database was created with: </p>
-		<code>CREATE TABLE users (id integer, name varchar(50), tracked varchar(9999), untracked varchar(9999), goals varchar(9999), themes varchar(9999), competition varchar(9999), inProgressWorkouts varchar(9999), savedWorkouts varchar(9999));</code>
-		<p>The varchar(9999) fields are meant to hold JSON objects as strings.</p>
-        <p>The exercises table in the database was created with: </p>
-        <code>CREATE TABLE exercises (id integer, name varchar(512), type varchar(512), muscle varchar(512), equipment varchar(512), level varchar(512), images varchar(9999), guide varchar(9999)); </code>
+r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': 'select * from users', 'key': 'masterKey'})
+print(r.json())</pre>
+
+		<h3>Response Example:</h3>
+		<p>Each API route will give a JSON response in this format:</p>
+		<b>Success: </b><code>{"Result": data, "Status": "Success"}</code>
+		<br />
+		<b>Failure: </b><code>{"Status": "Failure - message"}</code>
+        <br />
+        <br />
 	</body>
 </html>

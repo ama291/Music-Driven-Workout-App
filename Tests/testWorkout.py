@@ -1,7 +1,6 @@
 import unittest
 from Scripts.workout import Workout
 from Scripts.exercise import Exercise
-from Scripts.userexercise import UserExercise
 from Scripts.user import User
 
 
@@ -22,83 +21,90 @@ class TestWorkout(unittest.TestCase):
     difficulty = "Intermediate"
     categories = ["Cardio", "Stretching"]
     equipment = ["Body Only"]
-    workout1 = usr1.getWorkout(equipment,duration, difficulty, categories=categories)
+    # workout1 = usr1.getWorkout(equipment,duration, difficulty, categories=categories)
 
-    # test workout properties match input parameters and has exercises
-    self.assertEqual(workout1.uid, usr1.ID)
-    self.assertEqual(workout1.duration, duration)
-    self.assertEqual(workout1.difficulty, difficulty)
-    self.assertEqual(workout1.categories, categories)
-    self.assertEqual(workout1.muscleGroups, None)
-    self.assertEqual(workout1.currExercise, 0)
-    self.assertTrue(len(workout1.Exercises) > 0)
+    # # test workout properties match input parameters and has exercises
+    # self.assertEqual(workout1.uid, usr1.ID)
+    # self.assertEqual(workout1.duration, duration)
+    # self.assertEqual(workout1.difficulty, difficulty)
+    # self.assertEqual(workout1.categories, categories)
+    # self.assertEqual(workout1.muscleGroups, None)
+    # self.assertEqual(workout1.currExercise, 0)
+    # self.assertTrue(len(workout1.Exercises) > 0)
     
-    #test excercises in workout are unique 
-    for i in range(len(workout1.Excercises)):
-      for j in range(len(workout1.Excercises)):
-        if i != j:
-          self.assertFalse(workout1.Excercises[i].name == workout1.Excercises[j].name)
+    # #test excercises in workout are unique 
+    # for i in range(len(workout1.Excercises)):
+    #   for j in range(len(workout1.Excercises)):
+    #     if i != j:
+    #       self.assertFalse(workout1.Excercises[i].name == workout1.Excercises[j].name)
       
-    #test total duration matches or is under user specification
-    total_duration = 0
-    for i in range(len(workout1.Excercises)):
-      total_duration = workout1.Excercises[i].duration + total_duration
-    self.assertFalse(total_duration > duration)
+    # #test total duration matches or is under user specification
+    # total_duration = 0
+    # for i in range(len(workout1.Excercises)):
+    #   total_duration = workout1.Excercises[i].duration + total_duration
+    # self.assertFalse(total_duration > duration)
     
-    #test duration is within required range
-    for i in range(len(workout1.Excercises)):
-      self.assertTrue(workout1.Excercises[i].range_start >= workout1.Excercises[i].duration <= workout1.Excercises[i].range_end)
+    # #test duration is within required range
+    # for i in range(len(workout1.Excercises)):
+    #   self.assertTrue(workout1.Excercises[i].range_start >= workout1.Excercises[i].duration <= workout1.Excercises[i].range_end)
     
-    #test if each exercise is from the correct category
-    for i in range(len(workout1.Excercises)):
-      self.assertTrue(workout1.Excercises[i].category in categories)
+    # #test if each exercise is from the correct category
+    # for i in range(len(workout1.Excercises)):
+    #   self.assertTrue(workout1.Excercises[i].category in categories)
       
-    #test if each exercise has correct equipment requirement
-    for i in range(len(workout1.Excercises)):
-      self.assertTrue(workout1.Excercises[i].equipment in equipment)
-
-    # muscle group condition
-    duration = 30
-    difficulty = "Beginner"
-    muscleGroups = ["Chest", "Shoulders", "Biceps"]
-    equipment = ["Kettlebells", "Machine"]
-    workout2 = usr1.getWorkout(equipment,duration, difficulty, muscleGroups=muscleGroups)
-
-    # test workout properties match input parameters and has exercises
-    self.assertEqual(workout2.uid, usr1.ID)
-    self.assertEqual(workout2.duration, duration)
-    self.assertEqual(workout2.difficulty, difficulty)
-    self.assertEqual(workout2.categories, None)
-    self.assertEqual(workout2.muscleGroups, muscleGroups)
-    self.assertEqual(workout2.currExercise, 0)
-    self.assertTrue(len(workout2.Exercises) > 0)
-
-    #test array of excercises non empty
-    assertTrue(len(workout2.Excercises) != 0)
-    
-    #test excercises in workout are unique 
-    for i in range(len(workout2.Excercises)):
-      for j in range(len(workout2.Excercises)):
-        if i != j:
-          self.assertFalse(workout2.Excercises[i].name == workout2.Excercises[j].name)
+    # #test if each exercise has correct equipment requirement
+    # for i in range(len(workout1.Excercises)):
+    #   self.assertTrue(workout1.Excercises[i].equipment in equipment)
       
-    #test total duration matches or is under user specification
-    total_duration = 0
-    for i in range(len(workout2.Excercises)):
-      total_duration = workout2.Excercises[i].duration + total_duration
-    self.assertFalse(total_duration > duration)
-    
-    #test duration is within required range
-    for i in range(len(workout2.Excercises)):
-      self.assertTrue(workout2.Excercises[i].range_start >= workout2.Excercises[i].duration <= workout2.Excercises[i].range_end)
+      #test if each exercise has correct difficulty level
+      for i in range(len(workout1.Excercises)):
+        self.assertEqual(workout1.Excercises[i].difficulty,difficulty)
+    # # muscle group condition
+    # duration = 30
+    # difficulty = "Beginner"
+    # muscleGroups = ["Chest", "Shoulders", "Biceps"]
+    # equipment = ["Kettlebells", "Machine"]
+    # workout2 = usr1.getWorkout(equipment,duration, difficulty, muscleGroups=muscleGroups)
 
-    #test if each exercise is from the correct muscle group
-    for i in range(len(workout2.Excercises)):
-      self.assertTrue(workout2.Excercises[i].muscleGroup in muscleGroups)
+    # # test workout properties match input parameters and has exercises
+    # self.assertEqual(workout2.uid, usr1.ID)
+    # self.assertEqual(workout2.duration, duration)
+    # self.assertEqual(workout2.difficulty, difficulty)
+    # self.assertEqual(workout2.categories, None)
+    # self.assertEqual(workout2.muscleGroups, muscleGroups)
+    # self.assertEqual(workout2.currExercise, 0)
+    # self.assertTrue(len(workout2.Exercises) > 0)
+
+    # #test array of excercises non empty
+    # assertTrue(len(workout2.Excercises) != 0)
+    
+    # #test excercises in workout are unique 
+    # for i in range(len(workout2.Excercises)):
+    #   for j in range(len(workout2.Excercises)):
+    #     if i != j:
+    #       self.assertFalse(workout2.Excercises[i].name == workout2.Excercises[j].name)
       
-    #test if each exercise has correct equipment requirement
-    for i in range(len(workout2.Excercises)):
-      self.assertTrue(workout2.Excercises[i].equipment in equipment)
+    # #test total duration matches or is under user specification
+    # total_duration = 0
+    # for i in range(len(workout2.Excercises)):
+    #   total_duration = workout2.Excercises[i].duration + total_duration
+    # self.assertFalse(total_duration > duration)
+    
+    # #test duration is within required range
+    # for i in range(len(workout2.Excercises)):
+    #   self.assertTrue(workout2.Excercises[i].range_start >= workout2.Excercises[i].duration <= workout2.Excercises[i].range_end)
+
+    # #test if each exercise is from the correct muscle group
+    # for i in range(len(workout2.Excercises)):
+    #   self.assertTrue(workout2.Excercises[i].muscleGroup in muscleGroups)
+      
+    # #test if each exercise has correct equipment requirement
+    # for i in range(len(workout2.Excercises)):
+    #   self.assertTrue(workout2.Excercises[i].equipment in equipment)
+      
+      #test if each exercise has correct difficulty level
+      for i in range(len(workout2.Excercises)):
+        self.assertEqual(workout2.Excercises[i].difficulty,difficulty)
 
 
 if __name__ == '__main__':

@@ -1,56 +1,38 @@
+import numpy.fft as fft
+from numpy import abs
 import json
-import os
-import peakutils
-import numpy as np
-from scipy.signal import savgol_filter
 
 class Log(object):
-    measurements = ["xAccl", "yAccl", "zAccl"]
-    def __init__(self, data):
-        time0 = data[0]["timestamp"]
-        self.times = []
-        self.xAccl = []
-        self.yAccl = []
-        self.zAccl = []
-        for measurement in data:
-            self.times.append(measurement["timestamp"] - time0)
-            self.xAccl.append(measurement["xAccl"])
-            self.yAccl.append(measurement["yAccl"])
-            self.zAccl.append(measurement["zAccl"])
+    def __init__(self, log_file, data=False):
+        #note if data is false, we extract from log_file location, else we assume log_file is data
+        if (not data):
+            with open(log_file, 'r') as fd:
+                data = json.load(fd)
+        else:
+            data = log_file
+        x_accl = [item['xAccl'] for item in data]
+        y_accl = [item['yAccl'] for item in data]
+        z_accl = [item['zAccl'] for item in data]
+        timestamp = [item['timestamp'] for item in data]
 
-    def getPeaks(self, thres, min_dist):
-        for m in self.measurements:
-            x = np.array(self.times)
-            y0 = np.array(self.__dict__[m])
-            amt = 25
-            y1 = savgol_filter(y0, amt, 2, mode="nearest")
-            for y in [y0,y1]:
-                indexes = peakutils.indexes(y, thres=thres)
-        return len(indexes)
+        fs = (len(timestamp) - 1) / (timestamp[-1] - timestamp[0])
+        x_fft = list(abs(fft.fft(x_accl)))[:int(len(timestamp)/2)]
+        y_fft = list(abs(fft.fft(y_accl)))[:int(len(timestamp)/2)]
+        z_fft = list(abs(fft.fft(z_accl)))[:int(len(timestamp)/2)]
+        freq = [fs/len(timestamp)*index for index in range(int(len(timestamp) /2))]
+        self.xFreq = self.bestFrequency(x_fft, freq)
+        self.yFreq = self.bestFrequency(y_fft, freq)
+        self.zFreq = self.bestFrequency(z_fft, freq)
+        self.freq = self.xFreq
+
+    #removes the data where frequency is 0
+    def bestFrequency(self, ffts, freqs):
+        nffts = ffts[1:]
+        mfreq = freqs[1:]
+        sarr = sorted(zip(ffts, freqs), key=lambda x: x[0])
+        for i in range(1, len(sarr)):
+            if sarr[-i][1] != 0:
+                return sarr[-i][1]
 
     def getFrequency(self):
-        return 60 * self.getPeaks(.5, 5) / max(self.times) 
-
-def LogFromFile(filepath):
-    with open(filepath) as f:
-        data = json.load(f)
-    log = Log(data)
-    return log
-
-if __name__ == '__main__':
-    folder = "Logs/"
-
-    ct = 0
-
-    files = os.listdir(folder)
-    for i in range(len(files)):
-        ct += 1
-        if ct != 2:
-            pass#continue
-        file = files[i]
-        filepath = os.path.join(folder, file)
-        with open(filepath) as f:
-            data = json.load(f)
-        log = Log(data)
-        log.getPeaks(0.5, 5)
-        print(log.getFrequency())
+        return self.freq

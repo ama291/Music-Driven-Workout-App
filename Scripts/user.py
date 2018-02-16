@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 from Scripts.workout import Workout
+import requests
+
+dbURL = "http://138.197.49.155:8000/api/database/"
+key = "SoftCon2018"
 
 class User(object):
     def __init__(self, ID, name, tracked, untracked, goals,
