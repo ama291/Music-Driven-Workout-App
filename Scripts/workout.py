@@ -21,8 +21,8 @@ class Workout(object):
         self.currExercise = idx
 
     def generateWorkout(self):
-        limit = 40 # number of exercises for each trial, can be tuned
-        trials = 5 # number of runs of algorithm, can be tuned
+        limit = 30 # number of exercises for each trial, can be tuned
+        trials = 10 # number of runs of algorithm, can be tuned
         results = [[]] * trials
         attributes = ['name', 'type', 'muscle', 'level', 'equipment',
                         'range_start', 'range_end', 'increment', 'rpm']
@@ -79,7 +79,13 @@ class Workout(object):
         self.duration = best
         self.Exercises = finalExercises
 
-        # TODO - if tested on, get rpm from user, scaled to difficulty
+        for ex in self.Exercises:
+            query = 'select rate from userexercises where exID = %s and timestamp \
+             = (select max(timestamp) from userexercises where exID = %s) limit 1' % (str(ex.id), str(ex.id))
+            r = requests.post('http://138.197.49.155:8000/api/database/',
+                              data={'query': query, 'key': 'SoftCon2018'})
+            if r.json()["Status"] == "Success" and len(r.json()["Result"]) > 0:
+                ex.rpm = r.json()["Result"][0][0]
         return True
 
 
