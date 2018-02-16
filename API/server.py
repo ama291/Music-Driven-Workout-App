@@ -230,9 +230,6 @@ def apiGetTracked():
 
 @app.route('/api/fitness/test/', methods=['POST'])
 def apiGetFitness():
-	userid = request.form.get('userid')
-	if (userid != None):
-		userid = int(userid)
 	categories = request.form.get('categories')
 	if (categories != None):
 		categories = categories.split(",")
@@ -243,7 +240,7 @@ def apiGetFitness():
 		temp = exerciseids
 		exerciseids = list(map(int, temp))
 	key = request.form.get('key')
-	params = [userid, categories, numexercises, key]
+	params = [categories, numexercises, key]
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
@@ -290,7 +287,7 @@ def apiCheckTracked():
 		response =toggleTracked(userid, exid)
 	except Exception as e:
 		return failure(str(e))
-		
+
 #api messages
 def failure(msg):
 	return Response(json.dumps({"Status": "Failure - " + msg}), mimetype='application/json')
