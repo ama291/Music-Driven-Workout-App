@@ -26,7 +26,6 @@ def index():
 def getApi():
 	return standardRes("Welcome to the API")
 
-#TODO
 @app.route('/api/workouts/getworkout/', methods=['POST'])
 def apiGetWorkout():
 	userid = int(request.form.get('userid'))
@@ -56,7 +55,6 @@ def apiGetWorkout():
 	except Exception as e:
 		return failure(str(e))
 
-#TODO
 @app.route('/api/workouts/startworkout/', methods=['POST'])
 def apiStartWorkout():
 	userid = int(request.form.get('userid'))
@@ -68,15 +66,14 @@ def apiStartWorkout():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		response = standardRes(startWorkout(userid, workout))
-		return standardRes(response)
+		response = startWorkout(userid, workout)
+		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
 
-#TODO
 @app.route('/api/workouts/pauseworkout/', methods=['POST'])
 def apiPauseWorkout():
-	userid = request.form.get('userid')
+	userid = int(request.form.get('userid'))
 	workoutid = request.form.get('workoutid')
 	key = request.form.get('key')
 	params = [userid, workoutid, key]
@@ -85,7 +82,8 @@ def apiPauseWorkout():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return standardRes(pauseWorkout(userid, workoutid))
+		response = pauseWorkout(userid, workoutid, 0)
+		return standardRes(response)
 	except Exception as e:
 		return failure(str(e))
 
