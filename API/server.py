@@ -3,6 +3,7 @@ import json
 import sqlite3
 from Scripts.log import Log
 from Scripts.driver import *
+from Scripts.fitnessTest import *
 
 app = Flask(__name__)
 app.config['DEBUG'] = False
@@ -27,7 +28,7 @@ def getApi():
 
 #TODO
 @app.route('/api/workouts/getworkout/', methods=['POST'])
-def getWorkout():
+def apiGetWorkout():
 	userid = request.form.get('userid')
 	equipment = request.form.get('equipment')
 	duration = request.form.get('duration')
@@ -44,6 +45,106 @@ def getWorkout():
 	try:
 		return failure("Route not configured")
 		#return standardRes(getWorkout(userid, equipment, duration, difficulty, categories = cats, muscleGroups = groups, themes = thems))
+	except Exception as e:
+		return failure(str(e))
+
+#TODO
+@app.route('/api/workouts/startworkout/', methods=['POST'])
+def apiStartWorkout():
+	userid = request.form.get('userid')
+	workout = request.form.get('workout')
+	key = request.form.get('key')
+	params = [userid, workout, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		return failure("Route not configured")
+		#return standardRes(startWorkout(userid, workout))
+	except Exception as e:
+		return failure(str(e))
+
+#TODO
+@app.route('/api/workouts/pauseworkout/', methods=['POST'])
+def apiPauseWorkout():
+	userid = request.form.get('userid')
+	workoutid = request.form.get('workoutid')
+	key = request.form.get('key')
+	params = [userid, workoutid, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		return failure("Route not configured")
+		#return standardRes(pauseWorkout(userid, workoutid))
+	except Exception as e:
+		return failure(str(e))
+
+#TODO
+@app.route('/api/workouts/quitworkout/', methods=['POST'])
+def apiQuitWorkout():
+	userid = request.form.get('userid')
+	workoutid = request.form.get('workoutid')
+	key = request.form.get('key')
+	params = [userid, workoutid, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		return failure("Route not configured")
+		#return standardRes(quitWorkout(userid, workoutid))
+	except Exception as e:
+		return failure(str(e))
+
+#TODO
+@app.route('/api/workouts/saveworkout/', methods=['POST'])
+def apiSaveWorkout():
+	userid = request.form.get('userid')
+	workoutid = request.form.get('workoutid')
+	key = request.form.get('key')
+	params = [userid, workoutid, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		return failure("Route not configured")
+		#return standardRes(saveWorkout(userid, workoutid))
+	except Exception as e:
+		return failure(str(e))
+
+#TODO
+@app.route('/api/workouts/workoutssaved/', methods=['POST'])
+def apiWorkoutsSaved():
+	userid = request.form.get('userid')
+	key = request.form.get('key')
+	params = [userid, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		return failure("Route not configured")
+		#return standardRes(workoutsSaved(userid))
+	except Exception as e:
+		return failure(str(e))
+
+#TODO
+@app.route('/api/workouts/workoutsinprogress/', methods=['POST'])
+def apiWorkoutsInProgress():
+	userid = request.form.get('userid')
+	key = request.form.get('key')
+	params = [userid, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		return failure("Route not configured")
+		#return standardRes(workoutsInProgress(userid))
 	except Exception as e:
 		return failure(str(e))
 
@@ -64,7 +165,7 @@ def accel():
 
 #TODO
 @app.route('/api/fitness/tracked/', methods=['POST'])
-def getTracked():
+def apiGetTracked():
 	userid = request.form.get('userid')
 	key = request.form.get('key')
 	params = [userid, key]
@@ -80,7 +181,7 @@ def getTracked():
 
 #TODO
 @app.route('/api/fitness/test/', methods=['POST'])
-def getFitness():
+def apiGetFitness():
 	userid = request.form.get('userid')
 	categories = request.form.get('categories')
 	numexercises = request.form.get('numexercises')
@@ -98,7 +199,7 @@ def getFitness():
 
 #TODO
 @app.route('/api/fitness/istracked/', methods=['POST'])
-def isTracked():
+def apiIsTracked():
 	userid = request.form.get('userid')
 	exid = request.form.get('exid')
 	key = request.form.get('key')
@@ -115,7 +216,7 @@ def isTracked():
 
 #TODO
 @app.route('/api/fitness/toggletracked/', methods=['POST'])
-def checkTracked():
+def apiCheckTracked():
 	userid = request.form.get('userid')
 	exid = request.form.get('exid')
 	key = request.form.get('key')
