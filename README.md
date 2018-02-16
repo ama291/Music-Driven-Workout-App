@@ -33,7 +33,7 @@ Place scripts in the "Scripts" folder, import them where necessary.
 
 ## Milestone 3b Progress
 
-### Front End and Infrastructure
+## Front End and Infrastructure
 
 The server, API, and testing infrastructure is described above.
 
@@ -140,7 +140,7 @@ We also changed the function prototype for user.getWorkout, removing the default
 the parameter ordering to match the Workout class construction order. The default values were shifted
 to the higher-level function in driver.py.
 
-### Fitness Test
+## Fitness Test
 
 #### Description
 
@@ -159,7 +159,7 @@ For this iteration, we focused on setting up fitness testing with the following 
 * For getting a fitness test:
     * Route
         * TODO
-    * Procedure 
+    * Procedure
         * Call the API function with given arguments
     * Cases
         * `categories` can be  `"Cardio"`, `"Olympic Weightlifting"`, `"Plyometrics"`, `"Powerlifting"`, `"Strength"`, `"Stretching"`, or `"Strongman"`. Pass in any number for `"numExercises"`. `trackedIDs` should be a list of numbers
@@ -172,13 +172,13 @@ For this iteration, we focused on setting up fitness testing with the following 
         3. Count the number of repetitions while the timer is running
         4. Calculate frequency per second (divide by 30 for 30 seconds)
     * Expected result
-        * The time you calculate should be similar (within 0.1) to the result displayed, or (TODO) an integer multiple or fraction of the result displayed (probably 2x or ½x). 
+        * The time you calculate should be similar (within 0.1) to the result displayed, or (TODO) an integer multiple or fraction of the result displayed (probably 2x or ½x).
         * The frequency should be higher for faster movements
     * Cases
         * Move the phone in a regular motion with a slow period, back and forth, period ~2 seconds
         * Move phone in a somewhat faster period
         * Move phone in a regular pattern but pause in the middle to place it on the table for five seconds
-        * Move phone in a regular pattern, pause in the middle and shake it vigorously 
+        * Move phone in a regular pattern, pause in the middle and shake it vigorously
         * Move phone with a frequency that begins quick but decreases
     * *Note*: these cases are approximately in order of increasing difficulty. The last ones may be less accurate.
 * For getting previous results:
@@ -208,7 +208,7 @@ Lucy Newman and Gregory Howlett-Gomez worked on this part of the project. Lucy w
 
 TODO
 
-### Goals, Themes, and Competitions
+## Goals, Themes, and Competitions
 
 #### Description
 
@@ -235,7 +235,7 @@ For this iteration, we focused on setting up the general goals, themes, and comp
 * For removing a goal:
     * User should be able to remove a specified goal
     * User will no longer see it in the list of all their goals once removed
-    * Will error if user tries to remove a goal that they do not already have in their goals 
+    * Will error if user tries to remove a goal that they do not already have in their goals
 * For removing a theme:
     * User should be able to remove a specified theme
     * User will no longer see it in the list of all their themes once removed
@@ -249,4 +249,4 @@ Julia Xu and Jessica Wang worked on this part of the project. Julia added method
 
 #### Changes
 
-We did not see any significant changes from our original proposal, though while we do have functions for editing goals like `addCategory` and `addMuscleGroup` and `editGoalDescription` that are implemented in goal.py, we decided not to test those functions in the acceptance tests yet since they are not mandatory, and users can still benefit effectively from the motivating properties of goals by just adding and removing them. We also did not implement getting fitness info because that was naturally more focused on by the Fitness Test and Apple Watch team, and it would have been superfluous for us to have worked on it as well; it is possible in iteration 2 we will combine Goals and Fitness tests more cohesively to enhance the user experience and help users make goals based on their current level of fitness and their fitness test results. 
+We did not see any significant changes from our original proposal, though while we do have functions for editing goals like `addCategory` and `addMuscleGroup` and `editGoalDescription` that are implemented in goal.py, we decided not to test those functions in the acceptance tests yet since they are not mandatory, and users can still benefit effectively from the motivating properties of goals by just adding and removing them. We also did not implement getting fitness info because that was naturally more focused on by the Fitness Test and Apple Watch team, and it would have been superfluous for us to have worked on it as well; it is possible in iteration 2 we will combine Goals and Fitness tests more cohesively to enhance the user experience and help users make goals based on their current level of fitness and their fitness test results.
