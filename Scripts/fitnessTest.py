@@ -118,7 +118,7 @@ def getPreviousResults(userID, exID):
 
 
 ## Add route
-def checkTracked(userID, exID): 
+def isTracked(userID, exID): 
     """
     return (boolean): whether the exercises is tracked
     """
@@ -134,7 +134,7 @@ def addExercise(userID, exID, timestamp, rate):
     """
     return (boolean): True upon success
     """
-    ct = checkTracked(userID, exID)
+    ct = isTracked(userID, exID)
     if ct == True:
         trackBit = 1
     else:
@@ -170,7 +170,7 @@ def toggleTracked(userID, exID, clear=False):
     if clear:
         trackBit = 0
     else:
-        tracked = checkTracked(userID, exID)
+        tracked = isTracked(userID, exID)
     trackBit = 1 - tracked
     query = "UPDATE userexercises SET tracked = %d WHERE userID = '%s' AND exID = '%s'" % (trackBit, userID, exID)
     r = requests.post(dbURL, data = {'query':query, 'key':key})

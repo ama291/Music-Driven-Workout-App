@@ -214,13 +214,16 @@ For this iteration, we focused on setting up a back end for fitness testing with
     * *Note*: these cases are approximately in order of increasing difficulty. The last ones may be less accurate.
 * For getting previous results:
     * We did not write an API route for this yet
-* For tracking and un-tracking:
-    * Route
+* For tracking and un-tracking and checking if an exercise is tracked:
+    * Routes
         * `/api/fitness/toggletracked/`
+        * `/api/fitness/istracked`
     * Procedure
         * Call toggle exercise repeatedly
+        * Call isTracked in between
     * Expected result
         * The tracked bit should alternate between 0 and 1
+        * When the returned track bit is 1 for toggling tracked, the subsequent return for isTracked should be true. Otherwise, false.
     * Cases
         * `userID`: 1, `exID`: 12
         * You can also add a new userexercise to the database to ensure that it becomes 1 the first time you toggle it.
@@ -233,15 +236,6 @@ For this iteration, we focused on setting up a back end for fitness testing with
         * Try the things we do for `getTrackedExercises` in the unit tests
     * Expected result
         * See unit tests
-* For checking if an exercise is tracked:
-    * Route
-        * `/api/fitness/istracked`
-    * Procedure
-        * Pass the `userID` and `exID` to the given route
-    * Cases
-        * See unit tests
-    * Expected result
-        * see unit tests
 
 #### Who Did What
 

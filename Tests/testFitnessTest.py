@@ -22,16 +22,16 @@ class TestFitnessTest(unittest.TestCase):
 
         ## Test adding an exercise
         self.assertTrue(ft.addExercise(ID, 12, time, 30.5))
-        self.assertFalse(ft.checkTracked(ID, 12))
-        self.assertFalse(ft.checkTracked(90243, 12))
-        self.assertFalse(ft.checkTracked(ID, 1065))
+        self.assertFalse(ft.isTracked(ID, 12))
+        self.assertFalse(ft.isTracked(90243, 12))
+        self.assertFalse(ft.isTracked(ID, 1065))
 
         ## Test toggle exercise
         self.assertRaises(AssertionError, ft.toggleTracked, 1, 1065)
         self.assertEqual(ft.toggleTracked(ID,12), [ID,12,1])
-        self.assertTrue(ft.checkTracked(ID,12))
+        self.assertTrue(ft.isTracked(ID,12))
         self.assertEqual(ft.toggleTracked(ID,12), [ID,12,0])
-        self.assertFalse(ft.checkTracked(ID,12))
+        self.assertFalse(ft.isTracked(ID,12))
 
         ## Test getting tracked exercises
         self.assertEqual(ft.getTrackedExercises(2438983), [])
@@ -43,12 +43,12 @@ class TestFitnessTest(unittest.TestCase):
         resIDs = list(map(lambda x: x[0], exs))
         self.assertEqual(exIDs, resIDs)
         for exID in resIDs:
-            self.assertTrue(ft.checkTracked(ID2, exID))
+            self.assertTrue(ft.isTracked(ID2, exID))
 
         ## Test is tracked
-        self.assertFalse(ft.checkTracked(ID, 12))
+        self.assertFalse(ft.isTracked(ID, 12))
         ft.toggleTracked(ID, 12)
-        self.assertTrue(ft.checkTracked(ID, 12))
+        self.assertTrue(ft.isTracked(ID, 12))
 
         ## Test get untractked IDs
         self.assertRaises(AssertionError, ft.getUntrackedIDs, ["fskj"], 3, [])
