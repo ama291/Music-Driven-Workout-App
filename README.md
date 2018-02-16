@@ -33,17 +33,25 @@ Place scripts in the "Scripts" folder, import them where necessary.
 
 ## Milestone 3b Progress
 
-## Front End and Infrastructure
+## Front End & Infrastructure
 
 The server, API, and testing infrastructure is described above.
 
 #### Description of Front End
 
+For this iteration we dabbled in learning XCode and Swift to create a basic iOS app interface. We expect to have this much more full developed in the next iteration as more back-end work has finally been developed.
+
+Our main focus in this iteration was the development of the API routes. Our biggest changes can be found in server.py and our documentation for what functions our API works with and how to call those functions through the API can be found in our API/templates/index.html file. This is hosted on our server at http://138.197.49.155:8000/.
+
+We also did some more database infrastructure work. Accessing the database by the backend remains mostly the same. From the front-end, we had to change the route to it to go through a different port than all of the other API requests as our server can currently only handle one request at a time in each port.
+
 #### Who Did What
+
+Implementing the API routes in server.py was handled by Alex. Documentation was handled by Chris. Test inputs for the API acceptance tests were provided by individuals from each of the other departments.
 
 #### Changes
 
-### Working Out
+## Working Out
 
 #### Description
 
