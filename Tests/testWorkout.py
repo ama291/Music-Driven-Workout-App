@@ -27,8 +27,8 @@ class TestWorkout(unittest.TestCase):
 
     # test workout properties match input parameters and has exercises
     self.assertEqual(workout1.uid, usr1.ID)
-    self.assertEqual(workout1.duration, duration)
-    self.assertTrue(workout1.difficulty <= difficulty)
+    self.assertTrue(workout1.duration <= duration) # best duration we could get should not be over input duration
+    self.assertEqual(workout1.difficulty, difficulty)
     self.assertEqual(workout1.categories, categories)
     self.assertEqual(workout1.muscleGroups, None)
     self.assertEqual(workout1.currExercise, 0)
@@ -39,12 +39,6 @@ class TestWorkout(unittest.TestCase):
       for j in range(len(workout1.Exercises)):
         if i != j:
           self.assertFalse(workout1.Exercises[i].name == workout1.Exercises[j].name)
-      
-    #test total duration matches or is under user specification
-    total_duration = 0
-    for i in range(len(workout1.Exercises)):
-      total_duration = workout1.Exercises[i].duration + total_duration
-    self.assertFalse(total_duration > duration)
     
     #test duration is within required range
     for i in range(len(workout1.Exercises)):
@@ -73,8 +67,8 @@ class TestWorkout(unittest.TestCase):
 
     # test workout properties match input parameters and has exercises
     self.assertEqual(workout2.uid, usr1.ID)
-    self.assertEqual(workout2.duration, duration)
-    self.assertTrue(workout2.difficulty <= difficulty)
+    self.assertTrue(workout2.duration <= duration) # best duration we could get should not be over input duration
+    self.assertEqual(workout2.difficulty, difficulty)
     self.assertEqual(workout2.categories, None)
     self.assertEqual(workout2.muscleGroups, muscleGroups)
     self.assertEqual(workout2.currExercise, 0)
@@ -88,13 +82,7 @@ class TestWorkout(unittest.TestCase):
       for j in range(len(workout2.Exercises)):
         if i != j:
           self.assertFalse(workout2.Exercises[i].name == workout2.Exercises[j].name)
-      
-    #test total duration matches or is under user specification
-    total_duration = 0
-    for i in range(len(workout2.Exercises)):
-      total_duration = workout2.Exercises[i].duration + total_duration
-    self.assertFalse(total_duration > duration)
-    
+
     #test duration is within required range
     for i in range(len(workout2.Exercises)):
       self.assertTrue(workout2.Exercises[i].range_start <= workout2.Exercises[i].duration <= workout2.Exercises[i].range_end)
