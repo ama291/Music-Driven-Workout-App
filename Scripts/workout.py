@@ -24,7 +24,7 @@ class Workout(object):
         limit = 30 # number of exercises for each trial, can be tuned
         trials = 10 # number of runs of algorithm, can be tuned
         results = [[]] * trials
-        attributes = ['ID', 'name', 'type', 'muscle', 'level', 'equipment',
+        attributes = ['id', 'name', 'type', 'muscle', 'level', 'equipment',
                         'range_start', 'range_end', 'increment', 'rpm']
         equipment = ', '.join("\'" + e + "\'" for e in self.equipment)
 
