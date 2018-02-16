@@ -103,13 +103,13 @@ to the higher-level function in driver.py.
 
 #### Description
 
-For this iteration, we focused on setting up fitness testing with the following use cases:
+For this iteration, we focused on setting up a back end for fitness testing with the following use cases:
 
 * A user can begin a fitness test. The `getFitnessTest()` function creates a list of exercises from the exercises database table that will be recommended to the user for the test.
 
 * A user can complete an exercise in a fitness test. There will be a button for them to begin the test in the front end, that causes the phone to begin collecting accelerometer logs. These logs are sent to the server to be analyzed for frequency. `processMotionData()` calls `Log.getFrequency()` to determine a frequency from the result, and then saves it to the database along with a timestamp.
 
-* A user can view their results to a fitness test. Since results are displayed by date, we can show how they have progressed over time on an exercise. The front end can display a graph.
+* A user can view their results to a fitness test. Since results are displayed by date, we can show how they have progressed over time on an exercise. The front end will later display these results as a graph.
 
 * A user can track and untrack exercises. `checkTracked()` checks whether an exercise is tracked and the UI will (in the second iteration) display a button to Add or Remove the exercise from tracked, depending on the result. `toggleTracked()` toggles the bit in the userexercise database, indicating whether the exercise is tracked. When they begin the test, they are specifically asked which tracked exercises they want to complete, and the rest of the exercises are recommended randomly from the database.
 
@@ -117,7 +117,7 @@ For this iteration, we focused on setting up fitness testing with the following 
 
 * For getting a fitness test:
     * Route
-        * TODO
+        * `/api/fitness/test/`
     * Procedure 
         * Call the API function with given arguments
     * Cases
@@ -143,16 +143,7 @@ For this iteration, we focused on setting up fitness testing with the following 
         * Move phone with a frequency that begins quick but decreases
     * *Note*: these cases are approximately in order of increasing difficulty. The last ones may be less accurate.
 * For getting previous results:
-    * Route
-        * TODO
-    * Procedure
-        * Call API function with the give arguments
-    * Cases
-        * `userID`: 1, `exID`: 144
-        * Choose a high random number for `userID` (probably not in the database) or a number above 1064 for `exID` (definitely not in the database)
-    * Expected result
-        * For the first case, `[[139, 1, 144, '2012-12-12 12:12:12', 30.5, 0], [140, 1, 144, '2012-12-12 12:18:12', 30.5, 0]]`
-        * If the `userID` or `exID` are not in the database, you will get the empty list
+    * We did not write an API route for this yet
 * For tracking and un-tracking:
     * Route
         * `/api/fitness/toggletracked/`
@@ -163,6 +154,24 @@ For this iteration, we focused on setting up fitness testing with the following 
     * Cases
         * `userID`: 1, `exID`: 12
         * You can also add a new userexercise to the database to ensure that it becomes 1 the first time you toggle it.
+* For getting tracked exercises: 
+    * Route
+        * `/api/fitness/tracked`
+    * Procedure
+        * Pass userID to the given route
+    * Cases
+        * Try the things we do for `getTrackedExercises` in the unit tests
+    * Expected result
+        * See unit tests
+* For checking if an exercise is tracked:
+    * Route
+        * `/api/fitness/istracked`
+    * Procedure
+        * Pass the `userID` and `exID` to the given route
+    * Cases
+        * See unit tests
+    * Expected result
+        * see unit tests
 
 #### Who Did What
 
@@ -172,7 +181,9 @@ Lucy Newman and Gregory Howlett-Gomez worked on this part of the project. Lucy w
 
 We made the following significant changes:
 - Added a userexercises table to the database for saving results from a fitness test. The previous method required saving a list of exercises in a single cell, and it seemed beneficial to set it up as separate rows so that we could get fitness test results from the database, or add them, in a single query.
-- Removed the fitness test functionality from the `User` class. Now that the userexercises are a separate database, it is unnecessary to have this functionality in the `User` class. Keeping it in the `User` class would require making an extra database call to get `User`
+- Removed the fitness test functionality from the `User` class. Now that the userexercises are a separate database, it is unnecessary to have this functionality in the `User` class. Keeping it in the `User` class would require making an extra database call to get `User`, parsing the resulting JSON, and passing it to a constructor. We save those function calls by removing this functionality from the `User` class.
+- Removed the `UserExercise` class altogether. Since we aren't storing the fitness test results as a list in the users database, we decided to work directly with the `userexercises` database, and not create a class, to avoid unnecessary steps in creating it.
+- Removed the associated tests and added new tests in `Tests/testFitnessTest.py` for our current version.
 
 ### Goals, Themes, and Competitions
 
@@ -193,5 +204,3 @@ We did not yet write API routes for goals, themes, and competitions.
 #### Who Did What
 
 Julia Xu and Jessica Wang worked on this part of the project. Julia added methods for the driver.py file to allow users to add/remove goals/themes/competitions, the theme and goal classes and unit tests for both. Jessica added the competition class and unit tests for it.
-
-#### Changes
