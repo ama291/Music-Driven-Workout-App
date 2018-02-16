@@ -9,6 +9,10 @@ SUCCESS = 0
 DB_FAILURE = 1
 FAILURE = 2
 
+"""
+Collection of functions that help Users interact with the database
+"""
+
 def getUser(uid):
     """
     :param uid: user ID
@@ -251,7 +255,7 @@ def removeGoal(uid, goal):
     """
     :param uid: user ID
     :param goal: goal to remove
-    :return: 0 - success, 1 - failure to remove goals from db, 2 - goal never added
+    :return: 0 - success, 1 - failure to remove goals from db, 2 - goal never added (failed on the user's side)
     """
     user = getUser(uid)
     if(user.removeGoal(goal)):
@@ -270,6 +274,7 @@ def addTheme(uid, theme):
     """
     :param uid: user ID
     :param theme: theme to add
+    :return: 0 - success, 1 - failure to update users table
     """
     user = getUser(uid)
     if user is None:
@@ -289,6 +294,7 @@ def removeTheme(uid, theme):
     """
     :param uid: user ID
     :param theme: theme to remove
+    :return: 0 - success, 1 - failure to update users table, 2 - theme not previously in user's themes
     """
     user = getUser(uid)
     if(user.removeTheme(theme)):
@@ -305,6 +311,8 @@ def removeTheme(uid, theme):
 
 def addCompetition(uid, competition):
     """
+    to be used in iteration2
+    
     :param uid: user ID
     :param competition: competition to add
     """
@@ -324,6 +332,8 @@ def addCompetition(uid, competition):
 
 def removeCompetition(uid, competition):
     """
+    to be used in iteration2
+    
     :param uid: user ID
     :param competition: competition to remove
     """
