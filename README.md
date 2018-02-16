@@ -295,7 +295,7 @@ For this iteration, we focused on setting up the general goals, themes, and comp
 
 #### Acceptance Tests
 
-We did not yet write API routes for goals, themes, and competitions.
+We did not yet write API routes for goals, themes, and competitions. This section implements higher-level functionality that depends a lot on the other groups, so we decided to hold off on writing routes for this until the second iteration.
 
 #### Who Did What
 
