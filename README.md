@@ -226,7 +226,7 @@ For this iteration, we focused on setting up a back end for fitness testing with
         3. Count the number of repetitions while the timer is running
         4. Calculate frequency per second (divide by 30 for 30 seconds)
     * Expected result
-        * The time you calculate should be similar (within 0.1) to the result displayed, or (TODO) an integer multiple or fraction of the result displayed (probably 2x or ½x). When returning a tempo for the Work Out, we will sometimes scale frequencies by an integer to get a tempo in a reasonable range (say, 80-130 bmp). So, it is okay that sometimes the algorithm may pick up on something that is half or double the desired frequency.
+        * The time you calculate should be similar (within 0.1) to the result displayed, or (TODO) an integer multiple or fraction of the result displayed (probably 2x or ½x). When returning a tempo for the Work Out, we will sometimes scale frequencies by an integer to get a tempo in a reasonable range (say, 80-130 bmp). In this case, the user would do a single exercise in two or four beats, or in 3/4 time, 3 beats. So, it is okay that sometimes the algorithm may pick up on something that is half or double the desired frequency.
         * For the same pattern of movement, frequency should be higher for faster movements
     * Cases
         * Move the phone in a regular motion with a slow period, back and forth, period ~2 seconds
