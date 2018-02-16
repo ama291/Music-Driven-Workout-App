@@ -9,7 +9,7 @@ def randrange(start, stop, step):
 
 class Exercise(object):
 
-    def __init__(self,id,name, difficulty, category, muscleGroup, equipment, images, range, increment, rpm):
+    def __init__(self, id, name, difficulty, category, muscleGroup, equipment, images, range, increment, rpm):
         self.id = id   
         self.name = name
         self.difficulty = difficulty
@@ -28,5 +28,5 @@ class Exercise(object):
         return string
 
     def __eq__(self, other):
-        return self.name == other.name
+        return self.id == other.id
         

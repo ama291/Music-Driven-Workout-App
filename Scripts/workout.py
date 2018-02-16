@@ -42,8 +42,7 @@ class Workout(object):
 
                 r = requests.post('http://138.197.49.155:8000/api/database/',
                     data={'query': query, 'key': 'SoftCon2018'})
-                
-                print(r.json()['Status'])
+
                 if r.json()['Status'] != 'Success':
                     return False
                 results[i] = r.json()['Result']
@@ -59,8 +58,6 @@ class Workout(object):
                 
                 r = requests.post('http://138.197.49.155:8000/api/database/',
                     data={'query': query, 'key': 'SoftCon2018'})
-                
-                print(r.json()['Status'])
 
                 if r.json()['Status'] != 'Success':
                     return False
@@ -76,7 +73,6 @@ class Workout(object):
         for i in range(trials):
             dur, exercises = self.pickExercises(results[i], attributes)
             if dur > best:
-                print('reset best on iter' + str(i))
                 best, finalExercises = dur, exercises
             if best == self.duration:
                 break
