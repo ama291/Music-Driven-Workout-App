@@ -85,7 +85,7 @@ The acceptance tests below test all functionality of the workout-related functio
 are not tested in testDriver.py).
 
 Get workout using command-
-$ curl --data "userid=0&equipment=Body Only,Kettlebells&duration=50&difficulty=Intermediate&categories=Cardio,Stretching&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/
+$ curl --data "userid=0&equipment=Body Only,Kettlebells&duration=50&difficulty=Intermediate&categories=Cardio,Stretching&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/ <br>
 Start Workout using- (should return 0)
 $ curl --data "userid=0&workout=(Use string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/
 Try to start Workout again using- (should return 2)
