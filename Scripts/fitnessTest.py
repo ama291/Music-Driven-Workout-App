@@ -179,5 +179,3 @@ def toggleTracked(userID, exID, clear=False):
     assert r.status_code == requests.codes.ok
     return [userID, exID, trackBit]
 
-print(toggleTracked(1,12))
-
