@@ -236,16 +236,15 @@ def addGoal(uid, goal):
         return DB_FAILURE
 
     user.addGoal(goal)
-    db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
-    cursor = db.cursor()
-    goalString = "\'" + jsonpickle.encode(user.goals) + "\'"
-    sql = 'UPDATE users SET goals = %s WHERE id = %s' % (goalString, str(uid))
-    try:
-        cursor.execute(sql)
-        db.commit()
+
+    goalString = jsonpickle.encode(user.goals)
+    goalString = "'" + goalString + "'"
+    sql = "UPDATE users SET goals = %s WHERE id = %d" % (goalString, uid)
+    r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': sql, 'key': 'SoftCon2018'})
+    if r.json()['Status'] == 'Success':
+
         return SUCCESS
-    except:
-        db.rollback()
+    else:
         return DB_FAILURE
 
 def removeGoal(uid, goal):
@@ -255,20 +254,14 @@ def removeGoal(uid, goal):
     :return: 0 - success, 1 - failure to remove goals from db, 2 - goal never added
     """
     user = getUser(uid)
-    if user is None:
-        return DB_FAILURE
-
-    if user.removeGoal(goal):
-        db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
-        cursor = db.cursor()
-        goalString = "\'" + jsonpickle.encode(user.goals) + "\'"
-        sql = 'UPDATE users SET goals = %s WHERE id = %s' % (goalString, str(uid))
-        try:
-            cursor.execute(sql)
-            db.commit()
+    if(user.removeGoal(goal)):
+        goalString = "'" + jsonpickle.encode(user.goals) + "'"
+        sql = "UPDATE users SET goals = %s WHERE id = %s""" % (goalString, uid)
+        r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': sql, 'key': 'SoftCon2018'})
+        if r.json()['Status'] == 'Success':
+    
             return SUCCESS
-        except:
-            db.rollback()
+        else:
             return DB_FAILURE
     else:
         return FAILURE
@@ -283,16 +276,13 @@ def addTheme(uid, theme):
         return DB_FAILURE
 
     user.addTheme(theme)
-    db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
-    cursor = db.cursor()
-    themeString = "\'" + jsonpickle.encode(user.themes) + "\'"
-    sql = 'UPDATE users SET themes = %s WHERE id = %s' % (themeString, str(uid))
-    try:
-        cursor.execute(sql)
-        db.commit()
+    themeString = "'" + jsonpickle.encode(user.themes)+ "'"
+    sql = "UPDATE users SET themes = %s WHERE id = %s" % (themeString, uid)
+    r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': sql, 'key': 'SoftCon2018'})
+    if r.json()['Status'] == 'Success':
+    
         return SUCCESS
-    except:
-        db.rollback()
+    else:
         return DB_FAILURE
 
 def removeTheme(uid, theme):
@@ -301,20 +291,14 @@ def removeTheme(uid, theme):
     :param theme: theme to remove
     """
     user = getUser(uid)
-    if user is None:
-        return DB_FAILURE
-
-    if user.removeTheme(theme):
-        db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
-        cursor = db.cursor()
-        themeString = "\'" + jsonpickle.encode(user.themes) + "\'"
-        sql = 'UPDATE users SET themes = %s WHERE id = %s' % (themeString, str(uid))
-        try:
-            cursor.execute(sql)
-            db.commit()
+    if(user.removeTheme(theme)):
+        themeString = "'" +jsonpickle.encode(user.themes)+"'"
+        sql = "UPDATE users SET themes = %s WHERE id = %s" % (themeString, uid)
+        r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': sql, 'key': 'SoftCon2018'})
+        if r.json()['Status'] == 'Success':
+    
             return SUCCESS
-        except:
-            db.rollback()
+        else:
             return DB_FAILURE
     else:
         return FAILURE
@@ -329,16 +313,13 @@ def addCompetition(uid, competition):
         return DB_FAILURE
 
     user.addCompetition(competition)
-    db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
-    cursor = db.cursor()
-    compString = "\'" + jsonpickle.encode(user.competitions) + "\'"
-    sql = 'UPDATE users SET competition = %s WHERE id = %s' % (compString, str(uid))
-    try:
-        cursor.execute(sql)
-        db.commit()
+    compString = "'" +jsonpickle.encode(user.competitions)+"'"
+    sql = "UPDATE users SET competition = %s WHERE id = %s" % (compString, uid)
+    r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': sql, 'key': 'SoftCon2018'})
+    if r.json()['Status'] == 'Success':
+   
         return SUCCESS
-    except:
-        db.rollback()
+    else:
         return DB_FAILURE
 
 def removeCompetition(uid, competition):
@@ -347,20 +328,14 @@ def removeCompetition(uid, competition):
     :param competition: competition to remove
     """
     user = getUser(uid)
-    if user is None:
-        return DB_FAILURE
+    if(user.removeCompetition(competition)):
+        compString = "'" +jsonpickle.encode(user.competitions)+"'"
+        sql = "UPDATE users SET competition = %s WHERE id = %s" % (compString, uid)
+        r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': sql, 'key': 'SoftCon2018'})
+        if r.json()['Status'] == 'Success':
 
-    if user.removeCompetition(competition):
-        db = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db")
-        cursor = db.cursor()
-        compString = "\'" + jsonpickle.encode(user.competitions) + "\'"
-        sql = 'UPDATE users SET competition = %s WHERE id = %s' % (compString, str(uid))
-        try:
-            cursor.execute(sql)
-            db.commit()
             return SUCCESS
-        except:
-            db.rollback()
+        else:
             return DB_FAILURE
     else:
         return FAILURE

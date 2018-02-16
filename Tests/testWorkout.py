@@ -66,6 +66,10 @@ class TestWorkout(unittest.TestCase):
     duration = 30
     difficulty = "Beginner"
     workout2 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty)
+      
+    #test if each exercise has correct difficulty level
+    for i in range(len(workout1.Exercises)):
+      self.assertEqual(workout1.Exercises[i].difficulty,difficulty)
 
     # test workout properties match input parameters and has exercises
     self.assertEqual(workout2.uid, usr1.ID)
@@ -102,6 +106,10 @@ class TestWorkout(unittest.TestCase):
     #test if each exercise has correct equipment requirement
     for i in range(len(workout2.Exercises)):
       self.assertTrue(workout2.Exercises[i].equipment in equipment)
+      
+    #test if each exercise has correct difficulty level
+    for i in range(len(workout2.Exercises)):
+      self.assertEqual(workout2.Exercises[i].difficulty,difficulty)
 
 
 if __name__ == '__main__':
