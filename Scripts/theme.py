@@ -2,14 +2,19 @@
 #from Scripts.user import User
 
 class Theme(object):
+    """
+    Class for creating themes that users can use to help motivate themselves.
+    Themes can be based around an artist or genre.
+    Users can choose how many workouts the theme is used for.
+    """
     def __init__(self, name, theme, numWorkouts):
-        if(name == ""):
+        if(name == "" or name == None):
             print("name can't be empty string")
             raise ValueError
-        if(numWorkouts < 0):
+        if(numWorkouts < 0 or numWorkouts == None):
             print("numWorkouts can't be less than 0")
             raise ValueError
-        if(theme == ""):
+        if(theme == "" or theme == None):
             print("theme can't be empty")
             raise ValueError
         self.name = name
@@ -29,4 +34,4 @@ class Theme(object):
             return False
         else:
             self.numWorkouts = _numWorkouts
-            return True 
+            return True
