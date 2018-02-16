@@ -284,6 +284,7 @@ def apiCheckTracked():
 		return failure("Invalid authentication")
 	try:
 		response = toggleTracked(userid, exid)
+		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
 
