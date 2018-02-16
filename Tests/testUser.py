@@ -10,8 +10,8 @@ from datetime import datetime
 class TestUser(unittest.TestCase):
 
     def test(self):
-        ## test constructor (ID, name tracked, 
-        ## untracked, goals, themes, competition, 
+        ## test constructor (ID, name tracked,
+        ## untracked, goals, themes, competition,
         ## inProgressWorkouts, savedWorkouts)
         usr1 = User(1, "Alex", [], [], [], [], [], {}, {})
         self.assertEqual(usr1.name, "Alex")
@@ -20,16 +20,16 @@ class TestUser(unittest.TestCase):
         self.assertTrue(usr1.inProgressWorkouts == {})
         self.assertTrue(usr1.savedWorkouts == {})
 
-    
+
         """
         Workout flow - User keeps getting workouts until they find one they like,
         then they start the workout. They can pause multiple times during a workout,
-        and resuming the workout should bring them to the exercise that was paused 
-        on. The user can also choose to quit rather than resume. Once a new workout 
+        and resuming the workout should bring them to the exercise that was paused
+        on. The user can also choose to quit rather than resume. Once a new workout
         is complete, the user can either quit or save the workout. A new workout can
         only be saved once it has been completed. The user can start a saved workout,
-        but there can only one version of this saved workout in progress at a time. 
-        Once the saved workout is completed, the user can quit or unsave the workout. 
+        but there can only one version of this saved workout in progress at a time.
+        Once the saved workout is completed, the user can quit or unsave the workout.
         The user can also separately unsave the workout, and this also removes any in
         progress version of the workout. Visiting the proper page loads in all in
         progress and saved workouts for the user to see, from here they can choose
@@ -157,8 +157,10 @@ class TestUser(unittest.TestCase):
 
         # test add theme
         theme1 = Theme("Beyonce theme", "Beyonce", 5)
-        usr1.addTheme(theme1)
+        self.assertTrue(usr1.addTheme(theme1))
         self.assertTrue(theme1 in usr1.themes)
+        theme2 = Theme("Beyonce theme", "Beyonce", 5)
+        self.assertFalse(usr1.addTheme(theme2))
 
         # test remove theme
         theme2 = Theme("Taylor Swift theme", "Taylor Swift", 5)

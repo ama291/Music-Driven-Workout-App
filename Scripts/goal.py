@@ -12,6 +12,18 @@ class Goal(object):
         days per week: int (<=7)
         notifications: boolean
         """
+        if(name == ""):
+            print("name can't be empty string")
+            raise ValueError
+        if(goalNum < 0):
+            print("goalNum can't be less than 0")
+            raise ValueError
+        if(duration < 0):
+            print("duration can't be less than 0")
+            raise ValueError
+        if(daysPerWeek < 0):
+            print("daysPerWeek can't be less than 0")
+            raise ValueError
         self.name = name
         self.description = description
         self.progress = 0
