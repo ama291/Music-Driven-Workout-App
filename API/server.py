@@ -43,8 +43,7 @@ def apiGetWorkout():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return failure("Route not configured")
-		#return standardRes(getWorkout(userid, equipment, duration, difficulty, categories = cats, muscleGroups = groups, themes = thems))
+		return standardRes(getWorkout(userid, equipment, duration, difficulty, categories = cats, muscleGroups = groups, themes = thems))
 	except Exception as e:
 		return failure(str(e))
 
@@ -60,8 +59,7 @@ def apiStartWorkout():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return failure("Route not configured")
-		#return standardRes(startWorkout(userid, workout))
+		return standardRes(startWorkout(userid, workout))
 	except Exception as e:
 		return failure(str(e))
 
@@ -77,8 +75,7 @@ def apiPauseWorkout():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return failure("Route not configured")
-		#return standardRes(pauseWorkout(userid, workoutid))
+		return standardRes(pauseWorkout(userid, workoutid))
 	except Exception as e:
 		return failure(str(e))
 
@@ -94,8 +91,7 @@ def apiQuitWorkout():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return failure("Route not configured")
-		#return standardRes(quitWorkout(userid, workoutid))
+		return standardRes(quitWorkout(userid, workoutid))
 	except Exception as e:
 		return failure(str(e))
 
@@ -111,8 +107,7 @@ def apiSaveWorkout():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return failure("Route not configured")
-		#return standardRes(saveWorkout(userid, workoutid))
+		return standardRes(saveWorkout(userid, workoutid))
 	except Exception as e:
 		return failure(str(e))
 
@@ -127,8 +122,7 @@ def apiWorkoutsSaved():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return failure("Route not configured")
-		#return standardRes(workoutsSaved(userid))
+		return standardRes(workoutsSaved(userid))
 	except Exception as e:
 		return failure(str(e))
 
@@ -143,8 +137,7 @@ def apiWorkoutsInProgress():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return failure("Route not configured")
-		#return standardRes(workoutsInProgress(userid))
+		return standardRes(workoutsInProgress(userid))
 	except Exception as e:
 		return failure(str(e))
 
