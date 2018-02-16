@@ -39,7 +39,7 @@ class Workout(object):
             
             for i in range(trials):
 
-                r = requests.post('http://138.197.49.155:8000/api/database/',
+                r = requests.post('http://138.197.49.155:5000/api/database/',
                     data={'query': query, 'key': 'SoftCon2018'})
 
                 if r.json()['Status'] != 'Success':
@@ -55,7 +55,7 @@ class Workout(object):
 
             for i in range(trials):
                 
-                r = requests.post('http://138.197.49.155:8000/api/database/',
+                r = requests.post('http://138.197.49.155:5000/api/database/',
                     data={'query': query, 'key': 'SoftCon2018'})
 
                 if r.json()['Status'] != 'Success':
@@ -82,7 +82,7 @@ class Workout(object):
         for ex in self.Exercises:
             query = 'select rate from userexercises where exID = %s and timestamp \
              = (select max(timestamp) from userexercises where exID = %s) limit 1' % (str(ex.id), str(ex.id))
-            r = requests.post('http://138.197.49.155:8000/api/database/',
+            r = requests.post('http://138.197.49.155:5000/api/database/',
                               data={'query': query, 'key': 'SoftCon2018'})
             if r.json()["Status"] == "Success" and len(r.json()["Result"]) > 0:
                 ex.rpm = r.json()["Result"][0][0]

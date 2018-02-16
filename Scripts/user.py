@@ -2,7 +2,7 @@
 from Scripts.workout import Workout
 import requests
 
-dbURL = "http://138.197.49.155:8000/api/database/"
+dbURL = "http://138.197.49.155:5000/api/database/"
 key = "SoftCon2018"
 
 class User(object):
