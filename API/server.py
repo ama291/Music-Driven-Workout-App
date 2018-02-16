@@ -188,12 +188,12 @@ def apiGetFitness():
 	numexercises = request.form.get('numexercises')
 	key = request.form.get('key')
 	params = [userid, categories, numexercises, key]
-	if (None in params):		
+	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return failure("Route not configured") 
+		return failure("Route not configured")
 		#return standardRes(getFitnessTest(categories, numExercises, getTrackedExercises(userid))
 	except Exception as e:
 		return failure(str(e))

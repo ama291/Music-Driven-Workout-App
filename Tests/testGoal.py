@@ -6,6 +6,8 @@ class TestGoal(unittest.TestCase):
 
     def test(self):
         goal1 = Goal("goal1", "Complete 5 workouts", 5, ["arms"], ["bicepts"], 14, 3, True)
+        #goal2 = Goal("","",-1,[],[],-1,-1,True) <-- correctly causes ValueError
+        #goal3 = Goal(None, None, 5, [],[],None, None, True) <-- correctly causes ValueError
 
         ## test constructor
         self.assertEqual(goal1.name, "goal1")

@@ -206,7 +206,12 @@ class User(object):
         return False
 
     def addTheme(self, theme):
-        self.themes.append(theme)
+        if(theme in self.themes):
+            print("duplicate theme!")
+            return False
+        else:
+            self.themes.append(theme)
+            return True 
 
     def removeTheme(self, theme):
         if theme in self.themes:
