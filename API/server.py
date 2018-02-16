@@ -24,7 +24,8 @@ def index():
 #sample route for how api routing works
 @app.route('/api')
 def getApi():
-	return standardRes("Welcome to the API");
+	f = open("../../flaskapp.log", "r") 
+	return standardRes(f);
 
 #TODO
 @app.route('/api/workouts/getworkout/', methods=['POST'])
@@ -37,6 +38,13 @@ def apiGetWorkout():
 	groups = request.form.get('musclegroups').split(",")
 	thems = request.form.get('themes').split(",")
 	key = request.form.get('key')
+	listparams = [equipment, cats, groups, thems]
+	try:
+		for l in listparams:
+			if (l != None):
+				l = l.split(",")
+	except:
+		return failure("Invalid parameters")
 	params = [userid, equiment, duration, difficulty, key]
 	if (None in params):
 		return failure("Invalid parameters")
