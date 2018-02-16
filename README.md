@@ -210,4 +210,4 @@ Julia Xu and Jessica Wang worked on this part of the project. Julia added method
 
 #### Changes
 
-We did not see any significant changes from our original proposal. TODO
+We did not see any significant changes from our original proposal, though while we do have functions for editing goals like `addCategory` and `addMuscleGroup` and `editGoalDescription` that are implemented in goal.py, we decided not to test those functions in the acceptance tests yet since they are not mandatory, and users can still benefit effectively from the motivating properties of goals by just adding and removing them. We also did not implement getting fitness info because that was naturally more focused on by the Fitness Test and Apple Watch team, and it would have been superfluous for us to have worked on it as well; it is possible in iteration 2 we will combine Goals and Fitness tests more cohesively to enhance the user experience and help users make goals based on their current level of fitness and their fitness test results. 

@@ -5,18 +5,14 @@
 	<body>
 		<h1>Music-Driven-Workout-App API Documentation</h1>
 
+        <!-- Intro/README -->
         <h2>Testing Functionality of our API</h2>
-        <p>
-            First, you'll need to set up a local environment through the shell:
-        </p>
+        <p>First, you'll need to set up a local environment through the shell:</p>
         <pre>
 $ source setup.sh   # install necessary dependencies and enter environment
 $ sh server.sh      # Begin serving our API.server </pre>
-        <p>
-            We include example test commands beneath each API section, but the general format is:
-        </p>
-        <pre>
-$ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[API ROUTE]/</pre>
+        <p>We include example test commands beneath each API section, but the general format is:</p>
+        <pre>$ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[API ROUTE]/</pre>
 
         <!-- Workout Functions -->
         <h2>Get Workout:</h2>
@@ -27,7 +23,11 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/workouts/getworkout/
+                $ curl --data "userid=0&equipment=Body Only,Kettlebells&duration=50&difficulty=Intermediate&categories=Cardio,Stretching" http://138.197.49.155:8000/api/workouts/getworkout/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -39,7 +39,11 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/workouts/startworkout/
+                $ curl --data "userid=0&workout=...&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -51,7 +55,11 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/workouts/pauseworkout/
+                $ curl --data "userid=0&workoutid=0&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/pauseworkout/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -63,7 +71,11 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/workouts/quitworkout/
+                $ curl --data "userid=0&workoutid=0&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/quitworkout/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -76,6 +88,10 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             <b>Sample Test: </b>
             <code>
                 $ curl --data "" http://138.197.49.155:8000/api/workouts/saveworkout/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -87,7 +103,11 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/workouts/workoutssaved/
+                $ curl --data "userid=0&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/workoutssaved/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -99,7 +119,11 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/workouts/workoutsinprogress/
+                $ curl --data "userid=0&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/workoutsinprogress/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -113,7 +137,11 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/fitness/accel/
+                $ curl --data "data=...&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/accel/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -125,19 +153,27 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/fitness/tracked/
+                $ curl --data "userid=0&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/tracked/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
 		<h2>Get Fitness Test:</h2>
 		<p><b>Route:</b> /api/fitness/test/</p>
 		<p><b>Methods:</b> POST</p>
-		<p><b>Required parameters:</b> userid, categories, numExercises, key</p>
+		<p><b>Required parameters:</b> userid, categories, numexercises, key</p>
 		<p><b>Description:</b> Submit user id, exercise category, and number of exercises, receive data from exercise database.</p>
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/fitness/test/
+                $ curl --data "userid=0&categories=Cardio,Weightifting,Strength&numexercises=10&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/test/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -149,7 +185,11 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/fitness/istracked/
+                $ curl --data "userid=0&exid=0&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/istracked/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -161,7 +201,11 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/fitness/toggletracked/
+                $ curl --data "userid=0&exid=0&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/toggletracked/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
