@@ -91,18 +91,23 @@ def getFitnessTest(categories, numExercises, trackedIDs):
     assert len(exercises) == numExercises
     return exercises
 
-
 ## Add route
-def checkTracked(userID, exID): 
-    query = "SELECT * FROM userexercises WHERE userID = %s AND exID = %s" % (userID, exID)
+def getPreviousResults(userID, exID):
+    query = "SELECT * FROM userexercises WHERE userID = '%s' AND exID = %s" % (userID, exID)
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     if r.status_code != requests.codes.ok or "Result" not in r.json():
         #TODO
         return False
     res = r.json()["Result"]
-    if len(res) == 0:
+    return res
+
+
+## Add route
+def checkTracked(userID, exID): 
+    exs = getPreviousResults(userID, exID)
+    if len(exs) == 0:
         return False
-    elif res[0][5] == 1: ##tracked bit
+    elif exs[0][5] == 1: ##tracked bit
         return True
     return False
 
@@ -122,6 +127,7 @@ def addExercise(userID, exID, timestamp, rate):
         #TODO
         pass
     return True
+
 
 ## Add route
 def processMotionData(userID, exID, timestamp, rawdata):

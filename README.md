@@ -59,28 +59,63 @@ The server, API, and testing infrastructure is described above.
 
 For this iteration, we focused on setting up fitness testing with the following use cases:
 
-* A user can begin a fitness test. The `User.testFitness()` method creates a list of UserExercise objects that will be recommended to them for the test.
+* A user can begin a fitness test. The `getFitnessTest()` function creates a list of exercises from the exercises database table that will be recommended to the user for the test.
 
-* A user can complete an exercise in a fitness test. There will be a button for them to begin the test in the front end, that causes the phone to begin collecting accelerometer logs. These logs are sent to the server to be analyzed for frequency. `UserExercise.addFrequency()` saves a frequency to a `UserExercise`, which will be added to the `User.tracked` or `User.untracked`, depending on if they are tracking the exercise. The computation is done in `Log.getFrequency()`.
+* A user can complete an exercise in a fitness test. There will be a button for them to begin the test in the front end, that causes the phone to begin collecting accelerometer logs. These logs are sent to the server to be analyzed for frequency. `processMotionData()` calls `Log.getFrequency()` to determine a frequency from the result, and then saves it to the database along with a timestamp.
 
 * A user can view their results to a fitness test. Since results are displayed by date, we can show how they have progressed over time on an exercise. The front end can display a graph.
 
-* A user can track (`User.trackEx()`) and untrack (`User.untrackEx()`) exercises. When they begin the test, they are specifically asked which tracked exercises they want to complete, and the rest of the exercises are recommended randomly from the database.
+* A user can track and untrack exercises. `checkTracked()` checks whether an exercise is tracked and the UI will (in the second iteration) display a button to Add or Remove the exercise from tracked, depending on the result. `toggleTracked()` toggles the bit in the userexercise database, indicating whether the exercise is tracked. When they begin the test, they are specifically asked which tracked exercises they want to complete, and the rest of the exercises are recommended randomly from the database.
 
 #### Acceptance Tests
 
-* For beginning a fitness test:
-    * TODO
+* For getting a fitness test:
+    * Route
+        * TODO
+    * Procedure 
+        * Call the API function with given arguments
+    * Cases
+        * `categories` can be  `"Cardio"`, `"Olympic Weightlifting"`, `"Plyometrics"`, `"Powerlifting"`, `"Strength"`, `"Stretching"`, or `"Strongman"`. Pass in any number for `"numExercises"`. `trackedIDs` should be a list of numbers
+    * Expected result
+        * If the categories are valid, the number of exercises is a positive number, and the number of tracked IDs is less than `numExercise`, then you should get a success. There should be `numExercises` exercises that are all be in the right category, and none of them should be in the `trackedIDs` list. Otherwise, you should get a failure.
 * For determining frequency from a log:
-    * TODO
-* For getting sorted results:
-    * TODO
+    * Procedure
+        1. Click begin on the fitness test section
+        2. Move the phone in the pattern described below
+        3. Count the number of repetitions while the timer is running
+        4. Calculate frequency per second (divide by 30 for 30 seconds)
+    * Expected result
+        * The time you calculate should be similar (within 0.1) to the result displayed, or (TODO) an integer multiple or fraction of the result displayed (probably 2x or ½x). 
+        * The frequency should be higher for faster movements
+    * Cases
+        * Move the phone in a regular motion with a slow period, back and forth, period ~2 seconds
+        * Move phone in a somewhat faster period
+        * Move phone in a regular pattern but pause in the middle to place it on the table for five seconds
+        * Move phone in a regular pattern, pause in the middle and shake it vigorously 
+        * Move phone with a frequency that begins quick but decreases
+    * *Note*: these cases are approximately in order of increasing difficulty. The last ones may be less accurate.
+* For getting previous results:
+    * Route
+        * TODO
+    * Procedure
+        * Call API function with the give arguments
+    * Cases
+        * `userID`: 1, `exID`: 144
+    * Expected result
+        * `[[139, 1, 144, '2012-12-12 12:12:12', 30.5, 0], [140, 1, 144, '2012-12-12 12:18:12', 30.5, 0]]`
 * For tracking and un-tracking:
-    * TODO
+    * Route
+        * TODO
+    * Procedure
+        * Call toggle exercise repeatedly
+    * Expected result
+        * The tracked bit should alternate between 0 and 1
+    * Cases
+        * `userID` = 1, `exID` = 12
 
 #### Who Did What
 
-Lucy Newman and Gregory Howlett-Gomez worked on this part of the project. (TODO: more specific details)
+Lucy Newman and Gregory Howlett-Gomez worked on this part of the project. Lucy wrote the functions in `Scripts/fitnessTest.py`, for tracking and un-tracking exercises, getting a list of exercises for a fitness test, and adding a fitness test result to the database. Gregory wrote the functions in `Scripts/log.py` for determining frequency of a exercise movements from accelerometer log data. They wrote test cases for their code in '`Tests/testFitnessTest.py` and `Tests/testLog.py`, respectively.
 
 #### Changes
 

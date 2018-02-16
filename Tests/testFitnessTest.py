@@ -72,5 +72,9 @@ class TestFitnessTest(unittest.TestCase):
         self.assertTrue(diff < tolerance)
         #TODO: Add check that this is in the database
 
+        ## test getting previous results
+        expected = [[139, 1, 144, '2012-12-12 12:12:12', 30.5, 0], [140, 1, 144, '2012-12-12 12:18:12', 30.5, 0]]
+        self.assertEqual(ft.getPreviousResults(1, 144), expected)
+
 if __name__ == '__main__':
     unittest.main()
