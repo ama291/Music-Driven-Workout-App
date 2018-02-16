@@ -44,7 +44,7 @@ def apiGetWorkout():
 				l = l.split(",")
 	except:
 		return failure("Invalid parameters")
-	params = [userid, equiment, duration, difficulty, key]
+	params = [userid, equipment, duration, difficulty, key]
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
