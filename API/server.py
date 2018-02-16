@@ -161,7 +161,7 @@ def accel():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		log1 = Log(json.loads(data))
+		log1 = Log(json.loads(data), data=False)
 		return standardRes(log1.getFrequency())
 	except Exception as e:
 		return failure(str(e))
