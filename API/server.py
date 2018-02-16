@@ -51,7 +51,8 @@ def getWorkout():
 def accel():
 	data = request.form.get('data')
 	key = request.form.get('key')
-	if (data == None or key == None):
+	params = [data, key]
+	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
@@ -66,7 +67,8 @@ def accel():
 def getTracked():
 	userid = request.form.get('userid')
 	key = request.form.get('key')
-	if (userid == None or key == None):
+	params = [userid, key]
+	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
@@ -81,9 +83,10 @@ def getTracked():
 def getFitness():
 	userid = request.form.get('userid')
 	categories = request.form.get('categories')
-	numExercises = request.form.get('numExercises')
+	numexercises = request.form.get('numexercises')
 	key = request.form.get('key')
-	if (userid == None or categories == None or numExercises == None or key == None):
+	params = [userid, categories, numexercises, key]
+	if (None in params):		
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
@@ -99,7 +102,8 @@ def isTracked():
 	userid = request.form.get('userid')
 	exid = request.form.get('exid')
 	key = request.form.get('key')
-	if (userid == None or exid == None or key == None):
+	params = [userid, exid, key]
+	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
@@ -115,7 +119,8 @@ def checkTracked():
 	userid = request.form.get('userid')
 	exid = request.form.get('exid')
 	key = request.form.get('key')
-	if (userid == None or exid == None or key == None):
+	params = [userid, exid, key]
+	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
