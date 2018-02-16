@@ -29,7 +29,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "userid=0&equipment=Body Only,Kettleballs&duration=50&difficulty=Intermediate&categories=Cardio,Stretching&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/getworkout/
+                $ curl --data "userid=0&equipment=Body Only,Kettleballs&duration=50&difficulty=Intermediate&categories=Cardio,Stretching&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/
             </code> <br>
             <b>Expected Test Output: </b>
             <pre>
@@ -45,7 +45,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "userid=0&workout=...&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/startworkout/
+                $ curl --data "userid=0&workout={\\\"duration\\\": 49.0, \\\"themes\\\": null, \\\"ID\\\": \\\"953fabd0-7352-43d5-8ff3-ae03144d838d\\\", \\\"uid\\\": 0, \\\"equipment\\\": [\\\"Body Only\\\", \\\"Kettleball\\\", \\\"Body Only\\\"], \\\"difficulty\\\": \\\"Intermediate\\\", \\\"Exercises\\\": [{\\\"duration\\\": 15.0, \\\"range_start\\\": 15, \\\"images\\\": [], \\\"range_end\\\": 34, \\\"py/object\\\": \\\"Scripts.exercise.Exercise\\\", \\\"category\\\": \\\"Cardio\\\", \\\"name\\\": \\\"High Knee Jog\\\", \\\"difficulty\\\": \\\"Intermediate\\\", \\\"rpm\\\": 40, \\\"equipment\\\": \\\"Body Only\\\", \\\"increment\\\": 5.0, \\\"muscleGroup\\\": \\\"Quadriceps\\\"}, {\\\"duration\\\": 19.0, \\\"range_start\\\": 14, \\\"images\\\": [], \\\"range_end\\\": 40, \\\"py/object\\\": \\\"Scripts.exercise.Exercise\\\", \\\"category\\\": \\\"Cardio\\\", \\\"name\\\": \\\"Football Up-Down\\\", \\\"difficulty\\\": \\\"Intermediate\\\", \\\"rpm\\\": 52, \\\"equipment\\\": \\\"Body Only\\\", \\\"increment\\\": 5.0, \\\"muscleGroup\\\": \\\"Quadriceps\\\"}, {\\\"duration\\\": 14.0, \\\"range_start\\\": 14, \\\"images\\\": [], \\\"range_end\\\": 34, \\\"py/object\\\": \\\"Scripts.exercise.Exercise\\\", \\\"category\\\": \\\"Cardio\\\", \\\"name\\\": \\\"Burpee\\\", \\\"difficulty\\\": \\\"Intermediate\\\", \\\"rpm\\\": 40, \\\"equipment\\\": \\\"Body Only\\\", \\\"increment\\\": 5.0, \\\"muscleGroup\\\": \\\"Quadriceps\\\"}, {\\\"duration\\\": 1.0, \\\"range_start\\\": 1, \\\"images\\\": [], \\\"range_end\\\": 3, \\\"py/object\\\": \\\"Scripts.exercise.Exercise\\\", \\\"category\\\": \\\"Stretching\\\", \\\"name\\\": \\\"All Fours Quad Stretch\\\", \\\"difficulty\\\": \\\"Intermediate\\\", \\\"rpm\\\": 2, \\\"equipment\\\": \\\"Body Only\\\", \\\"increment\\\": 0.5, \\\"muscleGroup\\\": \\\"Quadriceps\\\"}], \\\"categories\\\": [\\\"Cardio\\\", \\\"Stretching\\\"], \\\"py/object\\\": \\\"Scripts.workout.Workout\\\", \\\"muscleGroups\\\": null, \\\"currExercise\\\": 0}&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/
             </code> <br>
             <b>Expected Test Output: </b>
             <code>
@@ -62,7 +62,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "userid=0&workoutid=0&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/pauseworkout/
+                $ curl --data "userid=0&workoutid=0&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/pauseworkout/
             </code> <br>
             <b>Expected Test Output: </b>
             <code>
@@ -79,7 +79,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "userid=0&workoutid=0&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/quitworkout/
+                $ curl --data "userid=0&workoutid=0&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/quitworkout/
             </code> <br>
             <b>Expected Test Output: </b>
             <code>
@@ -96,7 +96,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "userid=0&workoutid=0&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/saveworkout/
+                $ curl --data "userid=0&workoutid=0&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/saveworkout/
             </code> <br>
             <b>Expected Test Output: </b>
             <code>
@@ -113,7 +113,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "userid=0&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/workoutssaved/
+                $ curl --data "userid=0&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/workoutssaved/
             </code> <br>
             <b>Expected Test Output: </b>
             <code>
@@ -130,7 +130,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "userid=0&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/workoutsinprogress/
+                $ curl --data "userid=0&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/workoutsinprogress/
             </code> <br>
             <b>Expected Test Output: </b>
             <code>
@@ -149,7 +149,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "data=0&key=SoftCon2018" http://138.197.49.155:5000/api/fitness/accel/
+                $ curl --data "data={'yAccl' : 0.0409393310546875,'zAccl' : -0.9855194091796875, 'timestamp' : 72894.431726791678, 'xAccl' : 0.234344482421875}&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/accel/
             </code> <br>
             <b>Expected Test Output: </b>
             <code>
@@ -166,11 +166,11 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "userid=0&key=SoftCon2018" http://138.197.49.155:5000/api/fitness/tracked/
+                $ curl --data "userid=0&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/tracked/
             </code> <br>
             <b>Expected Test Output: </b>
             <code>
-
+                {"Result": "[]", "Status": "Success"}
             </code>
         </p>
 
@@ -183,7 +183,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "userid=0&categories=Cardio,Weightifting,Strength&numexercises=10&key=SoftCon2018" http://138.197.49.155:5000/api/fitness/test/
+                $ curl --data "userid=0&categories=Cardio,Weightifting,Strength&numexercises=10&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/test/
             </code> <br>
             <b>Expected Test Output: </b>
             <code>
@@ -200,7 +200,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "userid=0&exid=0&key=SoftCon2018" http://138.197.49.155:5000/api/fitness/istracked/
+                $ curl --data "userid=0&exid=0&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/istracked/
             </code> <br>
             <b>Expected Test Output: </b>
             <code>
@@ -217,7 +217,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "userid=0&exid=0&key=SoftCon2018" http://138.197.49.155:5000/api/fitness/toggletracked/
+                $ curl --data "userid=0&exid=0&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/toggletracked/
             </code> <br>
             <b>Expected Test Output: </b>
             <code>
@@ -244,7 +244,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 import requests
 
 #make request to API
-r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': 'SELECT * FROM users', 'key': 'masterKey'})
+r = requests.post('http://138.197.49.155:5000/api/database/', data = {'query': 'SELECT * FROM users', 'key': 'masterKey'})
 print(r.json())</pre>
 
 		<h3>Response Example:</h3>
