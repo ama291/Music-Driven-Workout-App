@@ -191,7 +191,7 @@ def apiWorkoutsInProgress():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		response = workoutsinprogress(userid)
+		response = workoutsInProgress(userid)
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
