@@ -30,14 +30,14 @@ def getApi():
 @app.route('/api/workouts/getworkout/', methods=['POST'])
 def apiGetWorkout():
 	userid = request.form.get('userid')
-	equipment = request.form.get('equipment')
+	equipment = request.form.get('equipment').split(",")
 	duration = request.form.get('duration')
 	difficulty = request.form.get('difficulty')
-	cats = request.form.get('categories')
-	groups = request.form.get('musclegroups')
-	thems = request.form.get('themes')
+	cats = request.form.get('categories').split(",")
+	groups = request.form.get('musclegroups').split(",")
+	thems = request.form.get('themes').split(",")
 	key = request.form.get('key')
-	params = [userid, equiment, duration, difficulty, cats, groups, thems, key]
+	params = [userid, equiment, duration, difficulty, key]
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
