@@ -14,7 +14,7 @@ class TestDriver(unittest.TestCase):
 
     def test(self):
         ##test getUser
-        r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': "UPDATE users SET goals='[]',themes='[]',competition='[]' where id=2", 'key': 'SoftCon2018'})
+        r = requests.post('http://138.197.49.155:5000/api/database/', data = {'query': "UPDATE users SET goals='[]',themes='[]',competition='[]' where id=2", 'key': 'SoftCon2018'})
         print(r.json()) #clear goals,themes,competitions for testUser for consistent testing
 
         testUser = getUser(2)
