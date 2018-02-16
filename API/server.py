@@ -24,7 +24,7 @@ def index():
 #sample route for how api routing works
 @app.route('/api')
 def getApi():
-	f = open("../../flaskapp.log", "r") 
+	f = open("/../../flaskapp.log", "r") 
 	return standardRes(f);
 
 #TODO
