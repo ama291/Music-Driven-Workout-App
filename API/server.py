@@ -3,7 +3,7 @@ import json
 import sqlite3
 from Scripts.log import Log
 from Scripts.driver import *
-from Scripts.fitnesstest import *
+from Scripts.fitnessTest import *
 
 app = Flask(__name__)
 app.config['DEBUG'] = False
