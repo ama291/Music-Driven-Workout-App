@@ -121,10 +121,12 @@ For this iteration, we focused on setting up fitness testing with the following 
     * Procedure 
         * Call the API function with given arguments
     * Cases
-        * `categories` can be  `"Cardio"`, `"Olympic Weightlifting"`, `"Plyometrics"`, `"Powerlifting"`, `"Strength"`, `"Stretching"`, or `"Strongman"`. Pass in any number for `"numExercises"`. `trackedIDs` should be a list of numbers
+        * `categories` can be  `"Cardio"`, `"Olympic Weightlifting"`, `"Plyometrics"`, `"Powerlifting"`, `"Strength"`, `"Stretching"`, or `"Strongman"`. Pass in any number for `numExercises`. `trackedIDs` should be a list of numbers
     * Expected result
         * If the categories are valid, the number of exercises is a positive number, and the number of tracked IDs is less than `numExercise`, then you should get a success. There should be `numExercises` exercises that are all be in the right category, and none of them should be in the `trackedIDs` list. Otherwise, you should get a failure.
 * For determining frequency from a log:
+    * Route
+        * `/api/fitness/accel/`
     * Procedure
         1. Click begin on the fitness test section
         2. Move the phone in the pattern described below
@@ -147,17 +149,20 @@ For this iteration, we focused on setting up fitness testing with the following 
         * Call API function with the give arguments
     * Cases
         * `userID`: 1, `exID`: 144
+        * Choose a high random number for `userID` (probably not in the database) or a number above 1064 for `exID` (definitely not in the database)
     * Expected result
-        * `[[139, 1, 144, '2012-12-12 12:12:12', 30.5, 0], [140, 1, 144, '2012-12-12 12:18:12', 30.5, 0]]`
+        * For the first case, `[[139, 1, 144, '2012-12-12 12:12:12', 30.5, 0], [140, 1, 144, '2012-12-12 12:18:12', 30.5, 0]]`
+        * If the `userID` or `exID` are not in the database, you will get the empty list
 * For tracking and un-tracking:
     * Route
-        * TODO
+        * `/api/fitness/toggletracked/`
     * Procedure
         * Call toggle exercise repeatedly
     * Expected result
         * The tracked bit should alternate between 0 and 1
     * Cases
-        * `userID` = 1, `exID` = 12
+        * `userID`: 1, `exID`: 12
+        * You can also add a new userexercise to the database to ensure that it becomes 1 the first time you toggle it.
 
 #### Who Did What
 
@@ -165,7 +170,9 @@ Lucy Newman and Gregory Howlett-Gomez worked on this part of the project. Lucy w
 
 #### Changes
 
-TODO
+We made the following significant changes:
+- Added a userexercises table to the database for saving results from a fitness test. The previous method required saving a list of exercises in a single cell, and it seemed beneficial to set it up as separate rows so that we could get fitness test results from the database, or add them, in a single query.
+- Removed the fitness test functionality from the `User` class. Now that the userexercises are a separate database, it is unnecessary to have this functionality in the `User` class. Keeping it in the `User` class would require making an extra database call to get `User`
 
 ### Goals, Themes, and Competitions
 
@@ -181,18 +188,7 @@ For this iteration, we focused on setting up the general goals, themes, and comp
 
 #### Acceptance Tests
 
-* For creating a goal:
-    * TODO
-* For creating a theme:
-    * TODO
-* For creating a competition:
-    * TODO
-* For removing a goal:
-    * TODO
-* For removing a theme:
-    * TODO
-* For removing a competition:
-    * TODO
+We did not yet write API routes for goals, themes, and competitions.
 
 #### Who Did What
 
