@@ -43,15 +43,61 @@ The server, API, and testing infrastructure is described above.
 
 #### Changes
 
-### Wokring Out
+### Working Out
 
 #### Description
 
+For this iteration, we focused on the various interactions a user can have with workouts,
+as well as an algorithm to generate the workouts.
+
+The flow of interactions with workouts is as follows:
+A user generates a workout with a given set of inputs, and they can regenerate as many times as they like
+(a summary of the workout returned will be displayed in the app). From there, they can choose to start the workout.
+The user can pause and resume multiple times during the workout, upon a pause they can also exit the workout
+and return to it later in via a In Progress section of a View Workouts page in the app. Resuming a workout in
+this manner will bring the user to the exercise that the workout was paused on. Once a new workout is complete,
+the user can either quit or save the workout. The user can start a saved workout via a Saved
+section of a View Workouts page in the app. From here, the user can also unsave a workout, which removes any
+in progress version of the workout.
+
+The algorithm to generate workouts is in the generateWorkout function of workout.py. One input is the user's desired duration,
+and the algorithm tries to get as close to that duration as possible. For a given number of runs, a random set of exercises
+matching the user's inputs are retrieved from the database, and subset of these exercises is chosen for the workout.
+The workout chosen is the one that gets the closest to the desired duration. Choosing random sets of exercises ensures
+variability in the workouts. As another technique to ensure variability, we set a range of possible durations for each exercise,
+and we randomly choose a duration within that range, with a given increment. If the user has tested on an exercise, they
+will be given that rpm; otherwise, they will be given the suggested rpm that has been retrieved from the database for that
+exercise.
+
+The exercises scraped from bodybuilding.com did not have any information about duration or rpm (it was also not
+available in any single source), so we added these fields to the database. For each exercise, we filled in these
+fields based on a reasonable range of values for its corresponding category.
+
+We have not yet dealt with getting music that matches the beat of each exercise, that will be the next iteration.
+At that time, we will apply the themes chosen by the user.
+
+For this component, the API routes to functions in driver.py, which generally retrieves the user from the database,
+builds a User instance from that information, and calls the associated function in user.py.
+
 #### Acceptance Tests
+
 
 #### Who Did What
 
+Larissa did the unit tests for the workout-related user functions. Manasvi did the unit tests for the Workout class.
+
+Larissa wrote the getUser and all workout-related functions in driver.py. Together, Manasvi and Larissa
+added the necessary information for generating workouts into the database (i.e. duration range, increment, and suggested
+rpm). We also wrote the generateWorkout function in workout.py together. Manasvi then tested the algorithm with a variety
+of inputs, tuning the number of exercises retrieved for each run and the number of runs.
+
 #### Changes
+
+We added an id to the exercises class, since that field is available in the database.
+
+We also changed the function prototype for user.getWorkout, removing the defaults values and changing
+the parameter ordering to match the Workout class construction order. The default values were shifted
+to the higher-level function in driver.py.
 
 ### Fitness Test
 

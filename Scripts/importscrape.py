@@ -12,6 +12,12 @@ dbKey = 'SoftCon2018'
 jFile = 'Logs/exercises.json'
 
 with open(jFile) as src:
+    # Empty out the exercises table
+    print("Emptying out the exercises table...")
+    r = requests.post(db, data = {'key': dbKey, 'query': 'DELETE FROM exercises'})
+    print("\t" + r.json()["Status"])
+
+    print("Populating exercises table...")
     i = 0
     for line in src:
         # Load our json object from a line in the nlj file
@@ -37,3 +43,5 @@ with open(jFile) as src:
                     + 'VALUES (%d, %s, %s, %s, %s, %s)' \
                     % (_id, _name, _type, _muscle, _equipment, _level)})
         print(r.json()["Status"])
+
+    print("importscrape.py Complete")
