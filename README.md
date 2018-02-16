@@ -43,13 +43,11 @@ For this iteration we dabbled in learning XCode and Swift to create a basic iOS 
 
 Our main focus in this iteration was the development of the API routes. Our biggest changes can be found in server.py and our documentation for what functions our API works with and how to call those functions through the API can be found in our API/templates/index.html file. This is hosted on our server at http://138.197.49.155:8000/.
 
-We also did some more database infrastructure work. Accessing the database by the backend remains mostly the same. From the front-end, we had to change the route to it to go through a different port than all of the other API requests as our server can currently only handle one request at a time in each port.
+We also did some more database infrastructure work. Accessing the database by the backend remains mostly the same. From the front-end, we modified the database to be access through a different port than the other API requests.
 
 #### Who Did What
 
 Implementing the API routes in server.py was handled by Alex. Documentation was handled by Chris. Test inputs for the API acceptance tests were provided by individuals from each of the other departments.
-
-#### Changes
 
 ## Working Out
 
@@ -97,7 +95,7 @@ proper string to pass to startworkout. The workout id use in following commands 
 
 Get workout using command-
 
-    $ curl --data "userid=0&equipment=Body Only,Kettlebells&duration=50&difficulty=Intermediate&categories=Cardio,Stretching&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/ 
+    $ curl --data "userid=0&equipment=Body Only,Kettlebells&duration=50&difficulty=Intermediate&categories=Cardio,Stretching&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/
 
 Start Workout using- (should return 0)
 
@@ -105,7 +103,7 @@ Start Workout using- (should return 0)
 
 Try to start Workout again using- (should return 2)
 
-    $ curl --data "userid=0&workout=(Use string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/ 
+    $ curl --data "userid=0&workout=(Use string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/
 
 Pause the workout using- (should return 0)
 
@@ -124,7 +122,7 @@ Try to quit again (should return 2)
     $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/quitworkout/
 
 Try to pause workout that has been quit- (should return 2)
-    
+
     $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/pauseworkout/
 Try to save workout that has been quit- (should return 2)
 
@@ -139,7 +137,7 @@ Start Workout using- (should return 0)
     $ curl --data "userid=0&workout=(Use string returned by getworkout, i.e. "Result")&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/
 
 Save the workout using - (should return 0)
-    
+
     $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getworkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/saveworkout/
 
 Try to save again (should return 2)
@@ -212,7 +210,7 @@ For this iteration, we focused on setting up a back end for fitness testing with
         * Example:
 
         curl --data "userid=1&categories=Strength,Cardio&numexercises=5&exerciseids=1,2,3&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/test/
-        
+
     * Expected result
         * If the categories are valid, the number of exercises is a positive number, and the number of tracked IDs is less than `numExercise`, then you should get a success. There should be `numExercises` exercises that are all be in the right category, and none of them should be in the `trackedIDs` list. Otherwise, you should get a failure.
 * For determining frequency from a log:
