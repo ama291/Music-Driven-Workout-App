@@ -28,43 +28,43 @@ print(r.json())
 		<p><b>Route:</b> /api/workouts/getworkout</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, equipment, duration, difficulty, categories, musclegroups, themes, key</p>
-		<p><b>Description:</b> </p>
+		<p><b>Description:</b> Pass in the above parameters and get a json string containing a workout matching those filters</p>
 
         <h2>Start Workout:</h2>
 		<p><b>Route:</b> /api/workouts/startworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, workout, key</p>
-		<p><b>Description:</b> </p>
+		<p><b>Description:</b> Attempts to start workout matching above parameters. Returns status indicating whether the workout was started successfully or failed either due to an inability to update the users table or the workout is already in progress.</p>
 
         <h2>Pause Workout:</h2>
 		<p><b>Route:</b> /api/workouts/pauseworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, workoutid, key</p>
-		<p><b>Description:</b> </p>
+		<p><b>Description:</b> Attempts to pause the workout in progress. Fails if user table cannot be updated or workout not in progress.</p>
 
         <h2>Quit Workout:</h2>
 		<p><b>Route:</b> /api/workouts/quitworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, workoutid, key</p>
-		<p><b>Description:</b> </p>
+		<p><b>Description:</b> Attempts to quit the workout. Fails if user table cannot be updated or workout not in progress.</p>
 
         <h2>Save Workout:</h2>
 		<p><b>Route:</b> /api/workouts/saveworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, workoutid, key</p>
-		<p><b>Description:</b> </p>
+		<p><b>Description:</b> Attempts to save workout for user. Fails if user table cannot be updated or workout already saved/not in progress.</p>
 
         <h2>Get Saved Workouts:</h2>
 		<p><b>Route:</b> /api/workouts/workoutssaved/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
-		<p><b>Description:</b> </p>
+		<p><b>Description:</b> Submit userid and database access key to get a json string of all the user's saved workouts.</p>
 
         <h2>Get In-Progress Workouts:</h2>
 		<p><b>Route:</b> /api/workouts/workoutsinprogress/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
-		<p><b>Description:</b> </p>
+		<p><b>Description:</b> Submit userid and database access key to get a json string of all the user's in-progress workouts.</p>
 
 
         <!-- Fitness Functions -->
