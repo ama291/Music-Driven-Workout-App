@@ -118,9 +118,9 @@ def getPreviousResults(userID, exID):
 
 
 ## Add route
-def checkTracked(userID, exID): 
+def isTracked(userID, exID): 
     """
-    
+    return (boolean): whether the exercises is tracked
     """
     exs = getPreviousResults(userID, exID)
     if exs == []:
@@ -131,7 +131,10 @@ def checkTracked(userID, exID):
 
 
 def addExercise(userID, exID, timestamp, rate):
-    ct = checkTracked(userID, exID)
+    """
+    return (boolean): True upon success
+    """
+    ct = isTracked(userID, exID)
     if ct == True:
         trackBit = 1
     else:
@@ -141,14 +144,15 @@ def addExercise(userID, exID, timestamp, rate):
      VALUES (%d,%d,'%s',%f,%d)" % \
      (userID, exID, timestamp, rate, trackBit)
     r = requests.post(dbURL, data = {'query':query, 'key':key})
-    if r.status_code != requests.codes.ok:
-        #TODO
-        pass
+    assert r.status_code == requests.codes.ok
     return True
 
 
 ## Add route
 def processMotionData(userID, exID, timestamp, rawdata):
+    """
+    return (float): the rate of the exercise added
+    """
     log = Log(rawdata, data=True)
     rate = log.getFrequency()
     addExercise(userID, exID, timestamp, rate)
@@ -157,13 +161,16 @@ def processMotionData(userID, exID, timestamp, rawdata):
 
 ## Add route
 def toggleTracked(userID, exID, clear=False):
+    """
+    return (list): the userID, exID, and tracked bit
+    """
     tracked = getTrackedExercises(userID)
     exIDs = list(map(lambda x:x[0], tracked))
     assert exID in exIDs
     if clear:
         trackBit = 0
     else:
-        tracked = checkTracked(userID, exID)
+        tracked = isTracked(userID, exID)
     trackBit = 1 - tracked
     query = "UPDATE userexercises SET tracked = %d WHERE userID = '%s' AND exID = '%s'" % (trackBit, userID, exID)
     r = requests.post(dbURL, data = {'query':query, 'key':key})
