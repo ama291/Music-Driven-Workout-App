@@ -5,41 +5,51 @@
 	<body>
 		<h1>Music-Driven-Workout-App API Documentation</h1>
 
+        <!-- Intro/README -->
         <h2>Testing Functionality of our API</h2>
-        <p>
-            First, you'll need to set up a local environment through the shell:
-        </p>
+        <p>First, you'll need to set up a local environment through the shell:</p>
         <pre>
 $ source setup.sh   # install necessary dependencies and enter environment
 $ sh server.sh      # Begin serving our API.server </pre>
         <p>
+            Then, open a new terminal to run the tests. <br>
             We include example test commands beneath each API section, but the general format is:
         </p>
         <pre>
-$ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[API ROUTE]/</pre>
+$ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:5000/[API ROUTE]/  # run tests through local version of API
+$ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[API ROUTE]/  # run tests through server API </pre>
 
         <!-- Workout Functions -->
         <h2>Get Workout:</h2>
 		<p><b>Route:</b> /api/workouts/getworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, equipment, duration, difficulty, categories, musclegroups, themes, key</p>
-		<p><b>Description:</b> Pass in the above parameters and get a json string containing a workout matching those filters</p>
+        <p><b>Returns:</b> empty json (i.e. ‘{}’) or workout json (see inProgressWorkouts of user 0 in users table for example)</p>
+        <p><b>Description:</b> Pass in the above parameters and get a json string containing a workout matching those filters</p>
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/workouts/getworkout/
-            </code>
+                $ curl --data "userid=0&equipment=Body Only,Kettleballs&duration=50&difficulty=Intermediate&categories=Cardio,Stretching&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/getworkout/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <pre>
+{"Result": "\"{\\\"py/object\\\": \\\"Scripts.workout.Workout\\\", \\\"Exercises\\\": [{\\\"py/object\\\": \\\"Scripts.exercise.Exercise\\\", \\\"category\\\": \\\"Cardio\\\", \\\"difficulty\\\": \\\"Intermediate\\\", \\\"duration\\\": 20.0, \\\"equipment\\\": \\\"Body Only\\\", \\\"images\\\": [], \\\"increment\\\": 5.0, \\\"muscleGroup\\\": \\\"Quadriceps\\\", \\\"name\\\": \\\"High Knee Jog\\\", \\\"range_end\\\": 34, \\\"range_start\\\": 15, \\\"rpm\\\": 40}, {\\\"py/object\\\": \\\"Scripts.exercise.Exercise\\\", \\\"category\\\": \\\"Cardio\\\", \\\"difficulty\\\": \\\"Intermediate\\\", \\\"duration\\\": 29.0, \\\"equipment\\\": \\\"Body Only\\\", \\\"images\\\": [], \\\"increment\\\": 5.0, \\\"muscleGroup\\\": \\\"Quadriceps\\\", \\\"name\\\": \\\"Burpee\\\", \\\"range_end\\\": 34, \\\"range_start\\\": 14, \\\"rpm\\\": 40}, {\\\"py/object\\\": \\\"Scripts.exercise.Exercise\\\", \\\"category\\\": \\\"Stretching\\\", \\\"difficulty\\\": \\\"Intermediate\\\", \\\"duration\\\": 1.0, \\\"equipment\\\": \\\"Body Only\\\", \\\"images\\\": [], \\\"increment\\\": 0.5, \\\"muscleGroup\\\": \\\"Quadriceps\\\", \\\"name\\\": \\\"All Fours Quad Stretch\\\", \\\"range_end\\\": 3, \\\"range_start\\\": 1, \\\"rpm\\\": 2}], \\\"ID\\\": \\\"4ecda48d-65db-4e4c-9c92-05277fc95d1f\\\", \\\"categories\\\": [\\\"Cardio\\\", \\\"Stretching\\\"], \\\"currExercise\\\": 0, \\\"difficulty\\\": \\\"Intermediate\\\", \\\"duration\\\": 50.0, \\\"equipment\\\": [\\\"Body Only\\\", \\\"Kettleballs\\\", \\\"Body Only\\\"], \\\"muscleGroups\\\": null, \\\"themes\\\": null, \\\"uid\\\": 0}\"", "Status": "Success"} </pre>
         </p>
 
         <h2>Start Workout:</h2>
 		<p><b>Route:</b> /api/workouts/startworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, workout, key</p>
-		<p><b>Description:</b> Attempts to start workout matching above parameters. Returns status indicating whether the workout was started successfully or failed either due to an inability to update the users table or the workout is already in progress.</p>
+        <p><b>Returns:</b> 0 - success, 1 - failure to update users table, 2 - workout already in progress</p>
+    	<p><b>Description:</b> Attempts to start workout matching above parameters. Returns status indicating whether the workout was started successfully or failed either due to an inability to update the users table or the workout is already in progress.</p>
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/workouts/startworkout/
+                $ curl --data "userid=0&workout=...&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/startworkout/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -47,11 +57,16 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/workouts/pauseworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, workoutid, key</p>
-		<p><b>Description:</b> Attempts to pause the workout in progress. Fails if user table cannot be updated or workout not in progress.</p>
+        <p><b>Returns:</b> 0 - success, 1 - failure to update users table, 2 - workout not in progress</p>
+        <p><b>Description:</b> Attempts to pause the workout in progress. Fails if user table cannot be updated or workout not in progress.</p>
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/workouts/pauseworkout/
+                $ curl --data "userid=0&workoutid=0&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/pauseworkout/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+                {"Result": "2", "Status": "Success"}
             </code>
         </p>
 
@@ -59,11 +74,16 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/workouts/quitworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, workoutid, key</p>
-		<p><b>Description:</b> Attempts to quit the workout. Fails if user table cannot be updated or workout not in progress.</p>
+        <p><b>Returns:</b> 0 - success, 1 - failure to update users table, 2 - workout was not in progress</p>
+        <p><b>Description:</b> Attempts to quit the workout. Fails if user table cannot be updated or workout not in progress.</p>
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/workouts/quitworkout/
+                $ curl --data "userid=0&workoutid=0&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/quitworkout/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+                {"Result": "2", "Status": "Success"}
             </code>
         </p>
 
@@ -71,11 +91,16 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/workouts/saveworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, workoutid, key</p>
-		<p><b>Description:</b> Attempts to save workout for user. Fails if user table cannot be updated or workout already saved/not in progress.</p>
+        <p><b>Returns:</b> 0 - success, 1 - failure to update users table, 2 - workout not in progress or already saved</p>
+        <p><b>Description:</b> Attempts to save workout for user. Fails if user table cannot be updated or workout already saved/not in progress.</p>
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/workouts/saveworkout/
+                $ curl --data "userid=0&workoutid=0&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/saveworkout/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+                {"Result": "2", "Status": "Success"}
             </code>
         </p>
 
@@ -83,11 +108,16 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/workouts/workoutssaved/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
-		<p><b>Description:</b> Submit userid and database access key to get a json string of all the user's saved workouts.</p>
+        <p><b>Returns:</b> json string (see inProgressWorkouts of user 0 in users table for example)</p>
+        <p><b>Description:</b> Submit userid and database access key to get a json string of all the user's saved workouts.</p>
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/workouts/workoutssaved/
+                $ curl --data "userid=0&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/workoutssaved/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -95,11 +125,16 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/workouts/workoutsinprogress/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
-		<p><b>Description:</b> Submit userid and database access key to get a json string of all the user's in-progress workouts.</p>
+        <p><b>Returns:</b> json string (see inProgressWorkouts of user 0 in users table for example)</p>
+        <p><b>Description:</b> Submit userid and database access key to get a json string of all the user's in-progress workouts.</p>
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/workouts/workoutsinprogress/
+                $ curl --data "userid=0&key=SoftCon2018" http://138.197.49.155:5000/api/workouts/workoutsinprogress/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -109,11 +144,16 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/fitness/accel/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> data, key</p>
+        <p><b>Returns:</b> </p>
 		<p><b>Description:</b> Submit JSON accelerometer data from the iOS app, receive a calculated frequency.</p>
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/fitness/accel/
+                $ curl --data "data=0&key=SoftCon2018" http://138.197.49.155:5000/api/fitness/accel/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -121,23 +161,33 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/fitness/tracked/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
+        <p><b>Returns:</b> An array of arrays, each inner array representing an row in the exercise database</p>
 		<p><b>Description:</b> Submit user id, receive a list of tracked exercises.</p>
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/fitness/tracked/
+                $ curl --data "userid=0&key=SoftCon2018" http://138.197.49.155:5000/api/fitness/tracked/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
 		<h2>Get Fitness Test:</h2>
 		<p><b>Route:</b> /api/fitness/test/</p>
 		<p><b>Methods:</b> POST</p>
-		<p><b>Required parameters:</b> userid, categories, numExercises, key</p>
-		<p><b>Description:</b> Submit user id, exercise category, and number of exercises, receive data from exercise database.</p>
+		<p><b>Required parameters:</b> userid, categories, numexercises, key</p>
+        <p><b>Returns:</b> An array of arrays, each inner array representing an row in the exercise database</p>
+        <p><b>Description:</b> Submit user id, exercise category, and number of exercises, receive data from exercise database.</p>
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/fitness/test/
+                $ curl --data "userid=0&categories=Cardio,Weightifting,Strength&numexercises=10&key=SoftCon2018" http://138.197.49.155:5000/api/fitness/test/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -145,11 +195,16 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/fitness/istracked/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, exid, key</p>
+        <p><b>Returns:</b> Boolean; 0 = false, 1 = true</p>
 		<p><b>Description:</b> Submit user id and exercise id, receive a boolean on whether exercise is tracked.</p>
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/fitness/istracked/
+                $ curl --data "userid=0&exid=0&key=SoftCon2018" http://138.197.49.155:5000/api/fitness/istracked/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 
@@ -157,11 +212,16 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p><b>Route:</b> /api/fitness/toggletracked/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, exid, key</p>
+        <p><b>Returns:</b> success message</p>
 		<p><b>Description:</b> Submit userId and exerciseId, toggle the exercise's tracked status. Receive success or failure.</p>
         <p>
             <b>Sample Test: </b>
             <code>
-                $ curl --data "" http://138.197.49.155:8000/api/fitness/toggletracked/
+                $ curl --data "userid=0&exid=0&key=SoftCon2018" http://138.197.49.155:5000/api/fitness/toggletracked/
+            </code> <br>
+            <b>Expected Test Output: </b>
+            <code>
+
             </code>
         </p>
 

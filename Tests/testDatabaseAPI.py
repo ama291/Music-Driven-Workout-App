@@ -3,7 +3,7 @@ import unittest
 import requests
 import json
 
-db = 'http://138.197.49.155:8000/api/database/'
+db = 'http://138.197.49.155:5000/api/database/'
 
 class testDatabaseAPI(unittest.TestCase):
 

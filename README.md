@@ -81,6 +81,47 @@ builds a User instance from that information, and calls the associated function 
 
 #### Acceptance Tests
 
+The acceptance tests below test all functionality of the workout-related functions in driver.py (hence these functions
+are not tested in testDriver.py).
+
+Get workout using command-
+$ curl --data "userid=0&equipment=Body Only,Kettlebells&duration=50&difficulty=Intermediate&categories=Cardio,Stretching&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/ <br>
+Start Workout using- (should return 0)
+$ curl --data "userid=0&workout=(Use string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/ <br>
+Try to start Workout again using- (should return 2)
+$ curl --data "userid=0&workout=(Use string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/ <br>
+Pause the workout using- (should return 0)
+$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/pauseworkout/ <br>
+Pause the workout again using- (should return 0)
+$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/pauseworkout/ <br>
+Quit the workout using- (should return 0)
+$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/quitworkout/ <br>
+Try to quit again (should return 2)
+$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/quitworkout/ <br>
+Try to pause workout that has been quit- (should return 2)
+$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/pauseworkout/ <br>
+Try to save workout that has been quit- (should return 2)
+$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/saveworkout/ <br>
+
+Get workout using-
+$ curl --data "userid=0&equipment=Dumbbell&duration=30&difficulty=Beginner&musclegroups=Biceps&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/ <br>
+Save the workout using - (should return 0)
+$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/saveworkout/ <br>
+Try to save again (should return 2)
+$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/saveworkout/ <br>
+Start saved workout using - (should return 0)
+$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startsavedworkout/ <br>
+Unsave workout using- (should return 0)
+$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/unsaveworkout/ <br>
+Try to unsave workout again - (should return 2)
+$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/unsaveworkout/ <br>
+Try to start saved workout after unsave - (should return 2)
+$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startsavedworkout/ <br>
+Try to quit workout that has been unsaved - (should return 2)
+$ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout)&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/quitworkout/ <br>
+
+Workouts can be created with a variety of inputs. Options for muscle groups, category, and equipment can be found at https://www.bodybuilding.com/exercises/finder.
+Only one of categories or muscle groups should be included in getWorkout, not both.
 
 #### Who Did What
 
@@ -189,13 +230,13 @@ We made the following significant changes:
 
 #### Description
 
-For this iteration, we focused on setting up the general goals, themes, and competitions infrastructure as well as integrating changes to them with the database:
+For this iteration, we focused on setting up the general goals, themes, and competitions infrastructure as well as integrating changes to them with the database (competitions is not fully tested and implemented in this iteration since it will be focused on in iteration 2):
 
 * A user can add and remove goals. The `addGoal()` and `removeGoal()` methods allow the user to specify goals geared towards certain muscle groups and categories
 
-* A user can add and remove themes. These are based on specific genres or artists, and the user can choose how many workouts use the theme
+* A user can add and remove themes. These are based on specific genres or artists, and the user can choose how many workouts use the theme is used for.
 
-* A user can create, join, and leave competitions. These can have specific exercises added to them, the amount of time they span can be edited, participants can be added or removed, and a winner(s) is eventually chosen
+* (A user can create, join, remove, and leave competitions. These can have specific exercises added to them, the amount of time they span can be edited, participants can be added or removed, and a winner(s) is eventually chosen) (will finalize in iteration 2)
 
 #### Acceptance Tests
 
@@ -203,4 +244,8 @@ We did not yet write API routes for goals, themes, and competitions.
 
 #### Who Did What
 
-Julia Xu and Jessica Wang worked on this part of the project. Julia added methods for the driver.py file to allow users to add/remove goals/themes/competitions, the theme and goal classes and unit tests for both. Jessica added the competition class and unit tests for it.
+Julia Xu and Jessica Wang worked on this part of the project. Julia added methods for the driver.py file to allow users to add/remove goals/themes/competitions and have those changes be reflected in the database, tests for those functions (seen in testDriver.py)the theme and goal classes (Theme.py, Goal.py) and unit tests for both (testTheme.py, testGoal.py). Jessica added the competition (Competition.py) class and unit tests for it (testCompetition.py) and also worked on tests for add/remove goals, themes, and competitions for users (testUser.py).
+
+#### Changes
+
+We did not see any significant changes from our original proposal, though while we do have functions for editing goals like `addCategory` and `addMuscleGroup` and `editGoalDescription` that are implemented in goal.py, we decided not to test those functions in the acceptance tests yet since they are not mandatory, and users can still benefit effectively from the motivating properties of goals by just adding and removing them. We also did not implement getting fitness info because that was naturally more focused on by the Fitness Test and Apple Watch team, and it would have been superfluous for us to have worked on it as well; it is possible in iteration 2 we will combine Goals and Fitness tests more cohesively to enhance the user experience and help users make goals based on their current level of fitness and their fitness test results. 
