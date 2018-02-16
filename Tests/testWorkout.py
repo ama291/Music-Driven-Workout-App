@@ -55,7 +55,10 @@ class TestWorkout(unittest.TestCase):
     # #test if each exercise has correct equipment requirement
     # for i in range(len(workout1.Excercises)):
     #   self.assertTrue(workout1.Excercises[i].equipment in equipment)
-
+      
+      #test if each exercise has correct difficulty level
+      for i in range(len(workout1.Excercises)):
+        self.assertEqual(workout1.Excercises[i].difficulty,difficulty)
     # # muscle group condition
     # duration = 30
     # difficulty = "Beginner"
@@ -98,6 +101,10 @@ class TestWorkout(unittest.TestCase):
     # #test if each exercise has correct equipment requirement
     # for i in range(len(workout2.Excercises)):
     #   self.assertTrue(workout2.Excercises[i].equipment in equipment)
+      
+      #test if each exercise has correct difficulty level
+      for i in range(len(workout2.Excercises)):
+        self.assertEqual(workout2.Excercises[i].difficulty,difficulty)
 
 
 if __name__ == '__main__':
