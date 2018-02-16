@@ -9,7 +9,7 @@ class testDatabaseAPI(unittest.TestCase):
 
     def test(self):
         # Test Access with keys
-        r = requests.post(, data = {'query': 'SELECT * FROM users'})
+        r = requests.post(db, data = {'query': 'SELECT * FROM users'})
         self.assertEqual("Failure - Invalid parameters", r.json()["Status"])
         r = requests.post(db, data = {'query': 'SELECT * FROM users', 'key': 'Incorrect Key'})
         self.assertEqual("Failure - Invalid authentication", r.json()["Status"])
