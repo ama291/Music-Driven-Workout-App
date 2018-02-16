@@ -94,7 +94,6 @@ def getFitnessTest(categories, numExercises, trackedIDs):
     numUntracked = numExercises - len(trackedIDs)    
     untrackedIDs = getUntrackedIDs(categories, numUntracked, trackedIDs)
     exerciseIDs = trackedIDs + untrackedIDs
-    return exercises
     assert len(exerciseIDs) == numExercises
     exercises = []
     for ID in exerciseIDs:
@@ -104,6 +103,8 @@ def getFitnessTest(categories, numExercises, trackedIDs):
         exercises.append(r.json()["Result"][0])
     assert len(exercises) == numExercises
     return exercises
+
+getFitnessTest
 
 ## Add route
 def getPreviousResults(userID, exID):
@@ -177,4 +178,6 @@ def toggleTracked(userID, exID, clear=False):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     return [userID, exID, trackBit]
+
+print(toggleTracked(1,12))
 

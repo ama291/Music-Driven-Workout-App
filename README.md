@@ -174,6 +174,10 @@ For this iteration, we focused on setting up a back end for fitness testing with
         * Call the API function with given arguments
     * Cases
         * `categories` can be  `"Cardio"`, `"Olympic Weightlifting"`, `"Plyometrics"`, `"Powerlifting"`, `"Strength"`, `"Stretching"`, or `"Strongman"`. Pass in any number for `numExercises`. `trackedIDs` should be a list of numbers
+        * Example:
+
+        curl --data "userid=1&categories=Strength,Cardio&numexercises=5&exerciseids=1,2,3&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/test/
+        
     * Expected result
         * If the categories are valid, the number of exercises is a positive number, and the number of tracked IDs is less than `numExercise`, then you should get a success. There should be `numExercises` exercises that are all be in the right category, and none of them should be in the `trackedIDs` list. Otherwise, you should get a failure.
 * For determining frequency from a log:
@@ -222,7 +226,7 @@ For this iteration, we focused on setting up a back end for fitness testing with
     * Cases
         * For User 1:
 
-         curl --data "userid=1&exid=12&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/istracked/
+         curl --data "userid=1&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/tracked/
 
         * Try the things we do for `getTrackedExercises` in the unit tests
     * Expected result
