@@ -5,23 +5,11 @@
 	<body>
 		<h1>Music-Driven-Workout-App API Documentation</h1>
 
-		<h2>Request Example:</h2>
-		<p>/Scripts/testrequest.py</p>
-		<pre>
-#testrequest.py
-import requests
-
-#make request to API
-r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': 'select * from users', 'key': 'masterKey'})
-print(r.json())
-		</pre>
-
-		<h2>Response Example:</h2>
-		<p>Each API route will give a JSON response in this format:</p>
-		<b>Success: </b><code>{"Result": data, "Status": "Success"}</code>
-		<br />
-		<b>Failure: </b><code>{"Status": "Failure - message"}</code>
-
+        <h2>Testing Functionality of our API</h2>
+        <p>
+            You can make calls by
+        </p>
+        <pre>curl --data "query=SELECT * FROM exercises&key=SoftCon2018" http://138.197.49.155:8000/api/database/</pre>
 
         <!-- Workout Functions -->
         <h2>Get Workout:</h2>
@@ -100,7 +88,7 @@ print(r.json())
 
 
         <!-- Database -->
-		<h2>Database Access:</h2>
+		<h2>Database</h2>
 		<p><b>Route:</b> /api/database/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> query, key</p>
@@ -109,6 +97,22 @@ print(r.json())
 		<code>CREATE TABLE users (id integer, name varchar(50), tracked varchar(9999), untracked varchar(9999), goals varchar(9999), themes varchar(9999), competition varchar(9999), inProgressWorkouts varchar(9999), savedWorkouts varchar(9999));</code>
         <p>The exercises table in the database was created with: </p>
         <code>CREATE TABLE exercises (id integer, name varchar(512), type varchar(512), muscle varchar(512), equipment varchar(512), level varchar(512), images varchar(9999), guide varchar(9999));</code>
+
+        <h3>Request Example:</h3>
+		<p>/Scripts/testrequest.py</p>
+		<pre>
+#testrequest.py
+import requests
+
+#make request to API
+r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': 'select * from users', 'key': 'masterKey'})
+print(r.json())</pre>
+
+		<h3>Response Example:</h3>
+		<p>Each API route will give a JSON response in this format:</p>
+		<b>Success: </b><code>{"Result": data, "Status": "Success"}</code>
+		<br />
+		<b>Failure: </b><code>{"Status": "Failure - message"}</code>
         <br />
         <br />
 	</body>

@@ -43,7 +43,7 @@ The server, API, and testing infrastructure is described above.
 
 #### Changes
 
-### Wokring Out
+### Working Out
 
 #### Description
 
