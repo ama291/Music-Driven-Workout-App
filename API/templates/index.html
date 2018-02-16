@@ -1,23 +1,62 @@
 <html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
 	<body>
-		<h1>Music-Driven-Workout-App API</h1>
-		<h2>Documentation:</h2>
-		<h3>Database Access:</h3>
-		<p>To access the database, make POST requests to http://138.197.49.155:8000/api/database/</p>
-		<p>Required parameters: query, key</p>
-		<p>Request Example: /Scripts/testrequest.py</p>
+		<h1>Music-Driven-Workout-App API Documentation</h1>
+		
+		<h2>Request Example:</h2>
+		<p>/Scripts/testrequest.py</p>
 		<pre>
 #testrequest.py
 import requests
 
 #make request to API
-r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': 'select * from users', 'key': 'password is in test file'})
+r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': 'select * from users', 'key': 'masterKey'})
 print(r.json())
 		</pre>
-		<p>The users table in the database was created with: </p>
+		
+		<h2>Response Example:</h2>
+		<p>Each API route will give a JSON response in this format:</p>
+		<b>Success: </b><code>{"Result": data, "Status": "Success"}</code>
+		<br />
+		<b>Failure: </b><code>{"Status": "Failure - message"}</code>	
+
+		
+        <h2>Accelerometer Frequency:</h2>
+		<p><b>Route:</b> /api/fitness/accel/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> data, key</p>
+		<p><b>Description:</b> Submit JSON accelerometer data from the iOS app, receive a calculated frequency.</p>
+
+		<h2>Get Tracked Exercises:</h2>
+		<p><b>Route:</b> /api/fitness/tracked/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, key</p>
+		<p><b>Description:</b> Submit user id, receive a list of tracked exercises.</p>
+
+		<h2>Get Fitness Test:</h2>
+		<p><b>Route:</b> /api/fitness/test/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, categories, numExercises, key</p>
+		<p><b>Description:</b> Submit user id, exercise category, and number of exercises, receive data from exercise database.</p>
+
+		<h2>Check Exercise Tracked:</h2>
+		<p><b>Route:</b> /api/fitness/istracked/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, exid, key</p>
+		<p><b>Description:</b> Submit user id and exercise id, receive a boolean on whether exercise is tracked.</p>
+
+		<h2>Database Access:</h2>
+		<p><b>Route:</b> /api/database/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> query, key</p>
+		<p><b>Description:</b> Run a query on the database.</p>
+		<p>The users table in the database was created with:</p>
 		<code>CREATE TABLE users (id integer, name varchar(50), tracked varchar(9999), untracked varchar(9999), goals varchar(9999), themes varchar(9999), competition varchar(9999), inProgressWorkouts varchar(9999), savedWorkouts varchar(9999));</code>
-		<p>The varchar(9999) fields are meant to hold JSON objects as strings.</p>
         <p>The exercises table in the database was created with: </p>
-        <code>CREATE TABLE exercises (id integer, name varchar(512), type varchar(512), muscle varchar(512), equipment varchar(512), level varchar(512), images varchar(9999), guide varchar(9999)); </code>
+        <code>CREATE TABLE exercises (id integer, name varchar(512), type varchar(512), muscle varchar(512), equipment varchar(512), level varchar(512), images varchar(9999), guide varchar(9999));</code>
+        <br />
+        <br />
 	</body>
 </html>

@@ -12,12 +12,12 @@ FAILURE = 2
 def getUser(uid):
     """
     :param uid: user ID
-    :return: User instance, None if error
+    :return: User instance, None if error or user does not exist
     """
     query = 'SELECT * FROM users where id = %s' % str(uid)
     r = requests.post('http://138.197.49.155:8000/api/database/', data = {'query': query, 'key': 'SoftCon2018'})
 
-    if r.json()['Status'] != 'Success':
+    if r.json()['Status'] != 'Success' or len(r.json()['Result']) == 0:
         return None
 
     dbEntry = r.json()['Result'][0]
@@ -63,14 +63,6 @@ def updateAllWorkouts(user):
         return SUCCESS
     else:
         return DB_FAILURE
-
-
-# getFitnessTest
-# exIndexTracked
-# exIndexUntracked
-# hasEx
-# trackEx
-# untrackEx
 
 
 def getWorkout(uid, equipment, duration, difficulty, categories = None, muscleGroups = None, themes = None):
@@ -209,8 +201,11 @@ def workoutsInProgress(uid):
     """
     query = 'SELECT inProgressWorkouts FROM users where id = %s' % str(uid)
     r = requests.post('http://138.197.49.155:8000/api/database/', data={'query': query, 'key': 'SoftCon2018'})
-    dbEntry = r.json()['Result'][0]
-    return dbEntry[7]
+    if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
+        return '{}'
+    else:
+        dbEntry = r.json()['Result'][0]
+        return dbEntry[7]
 
 
 def workoutsSaved(uid):
@@ -220,8 +215,11 @@ def workoutsSaved(uid):
     """
     query = 'SELECT inProgressWorkouts FROM users where id = %s' % str(uid)
     r = requests.post('http://138.197.49.155:8000/api/database/', data={'query': query, 'key': 'SoftCon2018'})
-    dbEntry = r.json()['Result'][0]
-    return dbEntry[8]
+    if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
+        return '{}'
+    else:
+        dbEntry = r.json()['Result'][0]
+        return dbEntry[8]
 
 
 def addGoal(uid, goal):
