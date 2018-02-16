@@ -22,15 +22,19 @@ class TestFitnessTest(unittest.TestCase):
 
         ## Test adding an exercise
         self.assertTrue(ft.addExercise(ID, 12, time, 30.5))
-        self.assertFalse(ft.checkTracked(ID, 12))
+        self.assertFalse(ft.isTracked(ID, 12))
+        self.assertFalse(ft.isTracked(90243, 12))
+        self.assertFalse(ft.isTracked(ID, 1065))
 
         ## Test toggle exercise
+        self.assertRaises(AssertionError, ft.toggleTracked, 1, 1065)
         self.assertEqual(ft.toggleTracked(ID,12), [ID,12,1])
-        self.assertTrue(ft.checkTracked(ID,12))
+        self.assertTrue(ft.isTracked(ID,12))
         self.assertEqual(ft.toggleTracked(ID,12), [ID,12,0])
-        self.assertFalse(ft.checkTracked(ID,12))
+        self.assertFalse(ft.isTracked(ID,12))
 
         ## Test getting tracked exercises
+        self.assertEqual(ft.getTrackedExercises(2438983), [])
         exIDs = [12,24,36,48]
         for exID in exIDs:
             ft.addExercise(ID2, exID, time, 64.0)
@@ -39,14 +43,16 @@ class TestFitnessTest(unittest.TestCase):
         resIDs = list(map(lambda x: x[0], exs))
         self.assertEqual(exIDs, resIDs)
         for exID in resIDs:
-            self.assertTrue(ft.checkTracked(ID2, exID))
+            self.assertTrue(ft.isTracked(ID2, exID))
 
         ## Test is tracked
-        self.assertFalse(ft.checkTracked(ID, 12))
+        self.assertFalse(ft.isTracked(ID, 12))
         ft.toggleTracked(ID, 12)
-        self.assertTrue(ft.checkTracked(ID, 12))
+        self.assertTrue(ft.isTracked(ID, 12))
 
         ## Test get untractked IDs
+        self.assertRaises(AssertionError, ft.getUntrackedIDs, ["fskj"], 3, [])
+        self.assertRaises(AssertionError, ft.getUntrackedIDs, cats, -1, [])
         trackedIDs = [23,56]
         IDs = ft.getUntrackedIDs(cats, 4, trackedIDs)
         self.assertEqual(len(IDs), 4)
@@ -54,7 +60,11 @@ class TestFitnessTest(unittest.TestCase):
             self.assertFalse(ID in trackedIDs)
 
         ## Test get fitness test
-        tests = ft.getFitnessTest(cats, 5, [412,421])
+        exIDs = [412,421]
+        self.assertRaises(AssertionError, ft.getFitnessTest, ["djfs"], 5, [])
+        self.assertRaises(AssertionError, ft.getFitnessTest, cats, -1, [])
+        self.assertRaises(AssertionError, ft.getFitnessTest, cats, 1, exIDs)
+        tests = ft.getFitnessTest(cats, 5, exIDs)
         self.assertEqual(len(tests), 5)
         IDs = list(map(lambda x: x[0], tests))
         self.assertTrue(412 in IDs)
@@ -75,6 +85,7 @@ class TestFitnessTest(unittest.TestCase):
         ## test getting previous results
         expected = [[139, 1, 144, '2012-12-12 12:12:12', 30.5, 0], [140, 1, 144, '2012-12-12 12:18:12', 30.5, 0]]
         self.assertEqual(ft.getPreviousResults(1, 144), expected)
+        self.assertEqual(ft.getPreviousResults(1, 1065), [])
 
 if __name__ == '__main__':
     unittest.main()

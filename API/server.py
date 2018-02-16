@@ -9,13 +9,6 @@ app = Flask(__name__)
 app.config['DEBUG'] = False
 masterKey = "SoftCon2018"
 
-#database connections - path to data.db on server /Project/Music-Driven-Workout-App/data.db
-try:
-	conn = sqlite3.connect("/Project/Music-Driven-Workout-App/data.db", isolation_level=None)
-	c = conn.cursor()
-except:
-	print("Local testing detected - no database")
-
 #documentation page
 @app.route('/')
 def index():
@@ -237,9 +230,6 @@ def apiGetTracked():
 
 @app.route('/api/fitness/test/', methods=['POST'])
 def apiGetFitness():
-	userid = request.form.get('userid')
-	if (userid != None):
-		userid = int(userid)
 	categories = request.form.get('categories')
 	if (categories != None):
 		categories = categories.split(",")
@@ -250,7 +240,7 @@ def apiGetFitness():
 		temp = exerciseids
 		exerciseids = list(map(int, temp))
 	key = request.form.get('key')
-	params = [userid, categories, numexercises, key]
+	params = [categories, numexercises, key]
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
@@ -293,24 +283,7 @@ def apiCheckTracked():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		return failure("Route not configured")
 		response =toggleTracked(userid, exid)
-	except Exception as e:
-		return failure(str(e))
-
-@app.route('/api/database/', methods=['POST'])
-def queryDatabase():
-	query = request.form.get('query')
-	key = request.form.get('key')
-	params = [query, key]
-	if (None in params):
-		return failure("Invalid parameters")
-	if (key != masterKey):
-		return failure("Invalid authentication")
-	try:
-		c.execute(query)
-		result = c.fetchall()
-		return standardRes(result)
 	except Exception as e:
 		return failure(str(e))
 

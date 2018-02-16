@@ -33,7 +33,7 @@ Place scripts in the "Scripts" folder, import them where necessary.
 
 ## Milestone 3b Progress
 
-### Front End and Infrastructure
+## Front End and Infrastructure
 
 The server, API, and testing infrastructure is described above.
 
@@ -85,7 +85,9 @@ The acceptance tests below test all functionality of the workout-related functio
 are not tested in testDriver.py).
 
 Get workout using command-
-$ curl --data "userid=0&equipment=Body Only,Kettlebells&duration=50&difficulty=Intermediate&categories=Cardio,Stretching&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/ <br>
+
+    $ curl --data "userid=0&equipment=Body Only,Kettlebells&duration=50&difficulty=Intermediate&categories=Cardio,Stretching&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/ <br>
+
 Start Workout using- (should return 0)
 $ curl --data "userid=0&workout=(Use string returned by getWorkout, i.e. "Result")&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/startworkout/ <br>
 Try to start Workout again using- (should return 2)
@@ -102,6 +104,7 @@ Try to pause workout that has been quit- (should return 2)
 $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout, i.e. "ID")&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/pauseworkout/ <br>
 Try to save workout that has been quit- (should return 2)
 $ curl --data "userid=0&workoutid=(Use the workout id from the string returned by getWorkout, i.e. "ID")&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/saveworkout/ <br>
+
 
 Get workout using-
 $ curl --data "userid=0&equipment=Dumbbell&duration=30&difficulty=Beginner&musclegroups=Biceps&key=SoftCon2018" http://138.197.49.155:8000/api/workouts/getworkout/ <br>
@@ -140,17 +143,17 @@ We also changed the function prototype for user.getWorkout, removing the default
 the parameter ordering to match the Workout class construction order. The default values were shifted
 to the higher-level function in driver.py.
 
-### Fitness Test
+## Fitness Test
 
 #### Description
 
-For this iteration, we focused on setting up fitness testing with the following use cases:
+For this iteration, we focused on setting up a back end for fitness testing with the following use cases:
 
 * A user can begin a fitness test. The `getFitnessTest()` function creates a list of exercises from the exercises database table that will be recommended to the user for the test.
 
 * A user can complete an exercise in a fitness test. There will be a button for them to begin the test in the front end, that causes the phone to begin collecting accelerometer logs. These logs are sent to the server to be analyzed for frequency. `processMotionData()` calls `Log.getFrequency()` to determine a frequency from the result, and then saves it to the database along with a timestamp.
 
-* A user can view their results to a fitness test. Since results are displayed by date, we can show how they have progressed over time on an exercise. The front end can display a graph.
+* A user can view their results to a fitness test. Since results are displayed by date, we can show how they have progressed over time on an exercise. The front end will later display these results as a graph.
 
 * A user can track and untrack exercises. `checkTracked()` checks whether an exercise is tracked and the UI will (in the second iteration) display a button to Add or Remove the exercise from tracked, depending on the result. `toggleTracked()` toggles the bit in the userexercise database, indicating whether the exercise is tracked. When they begin the test, they are specifically asked which tracked exercises they want to complete, and the rest of the exercises are recommended randomly from the database.
 
@@ -158,47 +161,55 @@ For this iteration, we focused on setting up fitness testing with the following 
 
 * For getting a fitness test:
     * Route
-        * TODO
-    * Procedure 
+        * `/api/fitness/test/`
+    * Procedure
         * Call the API function with given arguments
     * Cases
-        * `categories` can be  `"Cardio"`, `"Olympic Weightlifting"`, `"Plyometrics"`, `"Powerlifting"`, `"Strength"`, `"Stretching"`, or `"Strongman"`. Pass in any number for `"numExercises"`. `trackedIDs` should be a list of numbers
+        * `categories` can be  `"Cardio"`, `"Olympic Weightlifting"`, `"Plyometrics"`, `"Powerlifting"`, `"Strength"`, `"Stretching"`, or `"Strongman"`. Pass in any number for `numExercises`. `trackedIDs` should be a list of numbers
     * Expected result
         * If the categories are valid, the number of exercises is a positive number, and the number of tracked IDs is less than `numExercise`, then you should get a success. There should be `numExercises` exercises that are all be in the right category, and none of them should be in the `trackedIDs` list. Otherwise, you should get a failure.
 * For determining frequency from a log:
+    * Route
+        * `/api/fitness/accel/`
     * Procedure
         1. Click begin on the fitness test section
         2. Move the phone in the pattern described below
         3. Count the number of repetitions while the timer is running
         4. Calculate frequency per second (divide by 30 for 30 seconds)
     * Expected result
-        * The time you calculate should be similar (within 0.1) to the result displayed, or (TODO) an integer multiple or fraction of the result displayed (probably 2x or ½x). 
+        * The time you calculate should be similar (within 0.1) to the result displayed, or (TODO) an integer multiple or fraction of the result displayed (probably 2x or ½x).
         * The frequency should be higher for faster movements
     * Cases
         * Move the phone in a regular motion with a slow period, back and forth, period ~2 seconds
         * Move phone in a somewhat faster period
         * Move phone in a regular pattern but pause in the middle to place it on the table for five seconds
-        * Move phone in a regular pattern, pause in the middle and shake it vigorously 
+        * Move phone in a regular pattern, pause in the middle and shake it vigorously
         * Move phone with a frequency that begins quick but decreases
     * *Note*: these cases are approximately in order of increasing difficulty. The last ones may be less accurate.
 * For getting previous results:
-    * Route
-        * TODO
-    * Procedure
-        * Call API function with the give arguments
-    * Cases
-        * `userID`: 1, `exID`: 144
-    * Expected result
-        * `[[139, 1, 144, '2012-12-12 12:12:12', 30.5, 0], [140, 1, 144, '2012-12-12 12:18:12', 30.5, 0]]`
-* For tracking and un-tracking:
-    * Route
-        * TODO
+    * We did not write an API route for this yet
+* For tracking and un-tracking and checking if an exercise is tracked:
+    * Routes
+        * `/api/fitness/toggletracked/`
+        * `/api/fitness/istracked`
     * Procedure
         * Call toggle exercise repeatedly
+        * Call isTracked in between
     * Expected result
         * The tracked bit should alternate between 0 and 1
+        * When the returned track bit is 1 for toggling tracked, the subsequent return for isTracked should be true. Otherwise, false.
     * Cases
-        * `userID` = 1, `exID` = 12
+        * `userID`: 1, `exID`: 12
+        * You can also add a new userexercise to the database to ensure that it becomes 1 the first time you toggle it.
+* For getting tracked exercises:
+    * Route
+        * `/api/fitness/tracked`
+    * Procedure
+        * Pass userID to the given route
+    * Cases
+        * Try the things we do for `getTrackedExercises` in the unit tests
+    * Expected result
+        * See unit tests
 
 #### Who Did What
 
@@ -206,9 +217,13 @@ Lucy Newman and Gregory Howlett-Gomez worked on this part of the project. Lucy w
 
 #### Changes
 
-TODO
+We made the following significant changes:
+- Added a userexercises table to the database for saving results from a fitness test. The previous method required saving a list of exercises in a single cell, and it seemed beneficial to set it up as separate rows so that we could get fitness test results from the database, or add them, in a single query.
+- Removed the fitness test functionality from the `User` class. Now that the userexercises are a separate database, it is unnecessary to have this functionality in the `User` class. Keeping it in the `User` class would require making an extra database call to get `User`, parsing the resulting JSON, and passing it to a constructor. We save those function calls by removing this functionality from the `User` class.
+- Removed the `UserExercise` class altogether. Since we aren't storing the fitness test results as a list in the users database, we decided to work directly with the `userexercises` database, and not create a class, to avoid unnecessary steps in creating it.
+- Removed the associated tests and added new tests in `Tests/testFitnessTest.py` for our current version.
 
-### Goals, Themes, and Competitions
+## Goals, Themes, and Competitions
 
 #### Description
 
@@ -222,26 +237,7 @@ For this iteration, we focused on setting up the general goals, themes, and comp
 
 #### Acceptance Tests
 
-* For creating a goal:
-    * User should be able to create a goal and input all the appropriate information (name, description, duration, notifications, etc.)
-    * User should be able to see this new goal and all their other goals in an easily readable list
-    * Will error if user tries to make goals with invalid parameters, such as empty name or negative duration
-* For creating a theme:
-    * User should be able to create a theme and input all the appropriate information (name, theme i.e. artist or genre it is based on, number of workouts to use it for)
-    * User should be able to see all of their themes and their newly created themes in an easily readable list
-    * Will error if user tries to make theme with empty name, theme, or negative number of workouts
-* For creating a competition:
-    * Will be implemented in iteration 2
-* For removing a goal:
-    * User should be able to remove a specified goal
-    * User will no longer see it in the list of all their goals once removed
-    * Will error if user tries to remove a goal that they do not already have in their goals 
-* For removing a theme:
-    * User should be able to remove a specified theme
-    * User will no longer see it in the list of all their themes once removed
-    * Will error if user tries to remove a theme that they do not already have in their themes
-* For removing a competition:
-    * Will be implemented in iteration 2
+We did not yet write API routes for goals, themes, and competitions.
 
 #### Who Did What
 
@@ -249,4 +245,4 @@ Julia Xu and Jessica Wang worked on this part of the project. Julia added method
 
 #### Changes
 
-We did not see any significant changes from our original proposal, though while we do have functions for editing goals like `addCategory` and `addMuscleGroup` and `editGoalDescription` that are implemented in goal.py, we decided not to test those functions in the acceptance tests yet since they are not mandatory, and users can still benefit effectively from the motivating properties of goals by just adding and removing them. We also did not implement getting fitness info because that was naturally more focused on by the Fitness Test and Apple Watch team, and it would have been superfluous for us to have worked on it as well; it is possible in iteration 2 we will combine Goals and Fitness tests more cohesively to enhance the user experience and help users make goals based on their current level of fitness and their fitness test results. 
+We did not see any significant changes from our original proposal, though while we do have functions for editing goals like `addCategory` and `addMuscleGroup` and `editGoalDescription` that are implemented in goal.py, we decided not to test those functions in the acceptance tests yet since they are not mandatory, and users can still benefit effectively from the motivating properties of goals by just adding and removing them. We also did not implement getting fitness info because that was naturally more focused on by the Fitness Test and Apple Watch team, and it would have been superfluous for us to have worked on it as well; it is possible in iteration 2 we will combine Goals and Fitness tests more cohesively to enhance the user experience and help users make goals based on their current level of fitness and their fitness test results.
