@@ -44,7 +44,8 @@ class ExerciseViewController: UIViewController {
     var motionManager = CMMotionManager()
     var motionData: [[String : Double]] = []
     var timer = Timer()
-    
+    var frequency = ""
+
     
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var frequencyLabel: UILabel!
@@ -81,12 +82,10 @@ class ExerciseViewController: UIViewController {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let decoder = JSONDecoder()
-        var frequency = ""
         do {
             let data = try? JSONSerialization.data(withJSONObject: self.motionData, options: .prettyPrinted)
             let json = String(data: data!, encoding: .utf8)
             if let json = json { // converting to a string
-                print(json)
                 let url = URL(string: "http://138.197.49.155:8000/api/fitness/accel/")!
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
@@ -101,9 +100,9 @@ class ExerciseViewController: UIViewController {
                     if let data = responseData {
                         do {
                             let jsonResponse = try decoder.decode(jsonRequest.self, from: data)
-                            frequency = String(describing: jsonResponse.Result)
-                            //need to fix this to callback
-                            self.frequencyLabel.text = frequency
+                            self.frequency = String(describing: jsonResponse.Result)
+                            print(self.frequency)
+                            self.updateLabel()
                         }
                         catch {
                             return
@@ -116,4 +115,10 @@ class ExerciseViewController: UIViewController {
             }
         }
     }
+    
+    @objc func updateLabel() {
+        //need to fix this to callback
+        self.frequencyLabel.text = self.frequency
+    }
+    
 }

@@ -144,9 +144,9 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/fitness/accel/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> data, key</p>
-        <p><b>Returns:</b> </p>
+        <p><b>Returns:</b> Frequency of movement based on acceleration data taken from phone</p>
 		<p><b>Description:</b> Submit JSON accelerometer data from the iOS app, receive a calculated frequency.</p>
-        <p>
+        <!-- <p>
             <b>Sample Test: </b>
             <code>
                 $ curl --data "data={'yAccl' : 0.0409393310546875,'zAccl' : -0.9855194091796875, 'timestamp' : 72894.431726791678, 'xAccl' : 0.234344482421875}&key=SoftCon2018" http://138.197.49.155:8000/api/fitness/accel/
@@ -155,7 +155,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             <code>
 
             </code>
-        </p>
+        </p> -->
 
 		<h2>Get Tracked Exercises:</h2>
 		<p><b>Route:</b> /api/fitness/tracked/</p>
@@ -204,7 +204,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             </code> <br>
             <b>Expected Test Output: </b>
             <code>
-
+                {"Result": "false", "Status": "Success"}
             </code>
         </p>
 
