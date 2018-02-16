@@ -171,31 +171,41 @@ TODO
 
 #### Description
 
-For this iteration, we focused on setting up the general goals, themes, and competitions infrastructure as well as integrating changes to them with the database:
+For this iteration, we focused on setting up the general goals, themes, and competitions infrastructure as well as integrating changes to them with the database (competitions is not fully tested and implemented in this iteration since it will be focused on in iteration 2):
 
 * A user can add and remove goals. The `addGoal()` and `removeGoal()` methods allow the user to specify goals geared towards certain muscle groups and categories
 
-* A user can add and remove themes. These are based on specific genres or artists, and the user can choose how many workouts use the theme
+* A user can add and remove themes. These are based on specific genres or artists, and the user can choose how many workouts use the theme is used for.
 
-* A user can create, join, and leave competitions. These can have specific exercises added to them, the amount of time they span can be edited, participants can be added or removed, and a winner(s) is eventually chosen
+* (A user can create, join, remove, and leave competitions. These can have specific exercises added to them, the amount of time they span can be edited, participants can be added or removed, and a winner(s) is eventually chosen) (will finalize in iteration 2)
 
 #### Acceptance Tests
 
 * For creating a goal:
-    * TODO
+    * User should be able to create a goal and input all the appropriate information (name, description, duration, notifications, etc.)
+    * User should be able to see this new goal and all their other goals in an easily readable list
+    * Will error if user tries to make goals with invalid parameters, such as empty name or negative duration
 * For creating a theme:
-    * TODO
+    * User should be able to create a theme and input all the appropriate information (name, theme i.e. artist or genre it is based on, number of workouts to use it for)
+    * User should be able to see all of their themes and their newly created themes in an easily readable list
+    * Will error if user tries to make theme with empty name, theme, or negative number of workouts
 * For creating a competition:
-    * TODO
+    * Will be implemented in iteration 2
 * For removing a goal:
-    * TODO
+    * User should be able to remove a specified goal
+    * User will no longer see it in the list of all their goals once removed
+    * Will error if user tries to remove a goal that they do not already have in their goals 
 * For removing a theme:
-    * TODO
+    * User should be able to remove a specified theme
+    * User will no longer see it in the list of all their themes once removed
+    * Will error if user tries to remove a theme that they do not already have in their themes
 * For removing a competition:
-    * TODO
+    * Will be implemented in iteration 2
 
 #### Who Did What
 
-Julia Xu and Jessica Wang worked on this part of the project. Julia added methods for the driver.py file to allow users to add/remove goals/themes/competitions, the theme and goal classes and unit tests for both. Jessica added the competition class and unit tests for it.
+Julia Xu and Jessica Wang worked on this part of the project. Julia added methods for the driver.py file to allow users to add/remove goals/themes/competitions and have those changes be reflected in the database, tests for those functions (seen in testDriver.py)the theme and goal classes (Theme.py, Goal.py) and unit tests for both (testTheme.py, testGoal.py). Jessica added the competition (Competition.py) class and unit tests for it (testCompetition.py) and also worked on tests for add/remove goals, themes, and competitions for users (testUser.py).
 
 #### Changes
+
+We did not see any significant changes from our original proposal. TODO
