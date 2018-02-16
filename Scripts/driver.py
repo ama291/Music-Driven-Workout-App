@@ -91,6 +91,9 @@ def startWorkout(uid, workout):
     :param workout: json string
     :return: 0 - success, 1 - failure to update users table, 2 - workout already in progress
     """
+    if workout == '{}':
+        return FAILURE
+
     user = getUser(uid)
     if user is None:
         return DB_FAILURE
