@@ -81,30 +81,37 @@ def toggleTracked(userID, exID):
     data = {"userid": userID, "exid": exID, "key": key}
     return json.loads(makeRequest(route, data))
 
+def getExerciseFromID(exID):
+    route = "/api.fitness/getexercise/"
+    data = {"exid": exID, "key": key}
+    return json.loads(makeRequest(route, data))
+
+def getUserExercises(userID):
+    route = "/api.fitness/getuserexercises/"
+    data = {"userid": userID, "key": key}
+    return json.loads(makeRequest(route, data))
+
 
 if __name__ == '__main__':
     workout = getWorkout(0, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
     print("\nGet Workouts\n", workout)
-    # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
     print("\nStart Workout\n", startWorkout(0, workout))
     print("\nPause Workout\n", pauseWorkout(0, 0, False))
     print("\nQuit Workout\n", quitWorkout(0, 0))
     print("\nSave Workout\n", saveWorkout(0, 0))
     print("\nUnsave Workout\n", unsaveWorkout(0, 0))
-
-    ## TODO: Start saved workout breaks on workouts that haven't been saved
     print("\nStart Saved Workout\n", startSavedWorkout(0, 0))
-    
-    ## TODO: This isn't working?
+
+    ## TODO: The following things may not be working
+    # Start saved workout breaks on workouts that haven't been saved
+    # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
     # print("\nWorkouts Saved\n", workoutsSaved(0))
-    
-    ## TODO: This isn't working?
     # print("\nWorkouts In Progress\n", workoutsInProgress(0))
 
     print("\nIs Tracked\n", isTracked(1,12))
     cats = ["Strength", "Cardio"]
     print("\nget ftiness test\n", getFitnessTest(cats, 4, [12, 144]))
     print("\nToggle tracked\n", toggleTracked(1,12))
-
-    ## TODO: change filter() to list(filter()) somewhere
-    # print("\nGet tracked exercises\n", getTrackedExercises(1, cats))
+    print("\nGet tracked exercises\n", getTrackedExercises(1, cats))
+    print("\nGet Exercise from ID\n", getExerciseFromID(12))
+    print("\nGet User Exercises", getUserExercises(1,144))
