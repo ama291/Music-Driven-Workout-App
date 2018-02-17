@@ -216,14 +216,17 @@ def apiGetTracked():
 	userid = request.form.get('userid')
 	if (userid != None):
 		userid = int(userid)
+	categories = request.form.get('categories')
+	if (categories != None)
+		categories = categories.split(",")
 	key = request.form.get('key')
-	params = [userid, key]
+	params = [userid, categories, key]
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		response = getTrackedExercises(userid)
+		response = getTrackedExercises(userid, categories=categories)
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
@@ -271,7 +274,7 @@ def apiIsTracked():
 
 #TODO
 @app.route('/api/fitness/toggletracked/', methods=['POST'])
-def apiCheckTracked():
+def apiToggleTracked():
 	userid = request.form.get('userid')
 	if (userid != None):
 		userid = int(userid)
