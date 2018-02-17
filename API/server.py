@@ -292,7 +292,7 @@ def apiToggleTracked():
 		return failure(str(e))
 
 @app.route('/api/fitness/getexercise/', methods=['POST'])
-def apiGetFitness():
+def apiGetExercise():
 	exid = request.form.get('exid')
 	if (exid != None):
 		exid = int(exid)
@@ -308,7 +308,7 @@ def apiGetFitness():
 	except Exception as e:
 		return failure(str(e))
 
-@app.route('/api/fitenss/getuserexercises/', method=['POST'])
+@app.route('/api/fitenss/getuserexercises/', methods=['POST'])
 def apiGetUserExercises():
 	userid = request.form.get(userid)
 	if (userid != None):
