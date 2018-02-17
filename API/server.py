@@ -296,7 +296,7 @@ def apiGetExercise():
 	exid = request.form.get('exid')
 	if (exid != None):
 		exid = int(exid)
-	key = request.form.get(key)
+	key = request.form.get('key')
 	params = [exid, key]
 	if (None in params):
 		return failure("Invalid parameters")
@@ -310,10 +310,10 @@ def apiGetExercise():
 
 @app.route('/api/fitenss/getuserexercises/', methods=['POST'])
 def apiGetUserExercises():
-	userid = request.form.get(userid)
+	userid = request.form.get('userid')
 	if (userid != None):
 		userid = int(userid)
-	key = request = form.get(key)
+	key = request.form.get('key')
 	params = [userid, key]
 	if (None in params):
 		return failure("Invalid parameters")
@@ -330,6 +330,3 @@ def failure(msg):
 	return Response(json.dumps({"Status": "Failure - " + msg}), mimetype='application/json')
 def standardRes(data):
 	return Response(json.dumps({"Result": data, "Status": "Success"}), mimetype='application/json')
-
-print(getUserExercises(1))
-print(getExerciseFromID(12))

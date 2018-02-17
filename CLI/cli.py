@@ -2,8 +2,9 @@
 
 import click
 from regex import split
-from Scripts.fitnessTest import getExerciseFromID, getUserExercises
-from CLI.apiCalls import isTracked, toggleTracked, getFitnessTest, getTrackedExercises
+# from Scripts.fitnessTest import ...
+# from Scripts.driver import ...
+from CLI.apiCalls import isTracked, toggleTracked, getFitnessTest, getTrackedExercises, getExerciseFromID, getUserExercises
 
 dbURL = "http://138.197.49.155:5000/api/database/"
 key = "SoftCon2018"

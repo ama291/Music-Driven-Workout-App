@@ -3,6 +3,7 @@ import json
 import jsonpickle
 
 apiIP = "http://138.197.49.155:8000"
+# apiIP = "http://127.0.0.1:5000"
 key = "SoftCon2018"
 
 def getURL(rootURL, route):
@@ -114,7 +115,5 @@ if __name__ == '__main__':
     print("\nget ftiness test\n", getFitnessTest(cats, 4, [12, 144]))
     print("\nToggle tracked\n", toggleTracked(1,12))
     print("\nGet tracked exercises\n", getTrackedExercises(1, cats))
-    
-    ## TODO: These routes aren't working yet
-    # print("\nGet Exercise from ID\n", getExerciseFromID(12))
-    # print("\nGet User Exercises", getUserExercises(1))
+    print("\nGet Exercise from ID\n", getExerciseFromID(12))
+    print("\nGet User Exercises", getUserExercises(1))
