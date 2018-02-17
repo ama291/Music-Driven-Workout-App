@@ -2,8 +2,8 @@
 
 import click
 from regex import split
-from Scripts.fitnessTest import getExerciseFromID, getUserExercises, getTrackedExercises
-from CLI.apiCalls import isTracked, toggleTracked, getFitnessTest
+from Scripts.fitnessTest import getExerciseFromID, getUserExercises
+from CLI.apiCalls import isTracked, toggleTracked, getFitnessTest, getTrackedExercises
 
 dbURL = "http://138.197.49.155:5000/api/database/"
 dbURL = "http://127.0.0.1:5000/"

@@ -217,7 +217,7 @@ def apiGetTracked():
 	if (userid != None):
 		userid = int(userid)
 	categories = request.form.get('categories')
-	if (categories != None)
+	if (categories != None):
 		categories = categories.split(",")
 	key = request.form.get('key')
 	params = [userid, categories, key]
