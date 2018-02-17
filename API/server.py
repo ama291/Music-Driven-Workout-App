@@ -325,9 +325,11 @@ def apiGetUserExercises():
 	except Exception as e:
 		return failure(str(e))
 
-
 #api messages
 def failure(msg):
 	return Response(json.dumps({"Status": "Failure - " + msg}), mimetype='application/json')
 def standardRes(data):
 	return Response(json.dumps({"Result": data, "Status": "Success"}), mimetype='application/json')
+
+print(getUserExercises(1))
+print(getExerciseFromID(12))

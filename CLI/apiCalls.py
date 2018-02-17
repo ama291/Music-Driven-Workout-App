@@ -11,6 +11,7 @@ def getURL(rootURL, route):
 def makeRequest(route, data):
     url = getURL(apiIP, route)
     r = requests.post(url, data=data)
+    print(r)
     assert r.status_code == requests.codes.ok
     res = r.json()
     assert "Result" in res
@@ -82,12 +83,12 @@ def toggleTracked(userID, exID):
     return json.loads(makeRequest(route, data))
 
 def getExerciseFromID(exID):
-    route = "/api.fitness/getexercise/"
+    route = "/api/fitness/getexercise/"
     data = {"exid": exID, "key": key}
     return json.loads(makeRequest(route, data))
 
 def getUserExercises(userID):
-    route = "/api.fitness/getuserexercises/"
+    route = "/api/fitenss/getuserexercises/"
     data = {"userid": userID, "key": key}
     return json.loads(makeRequest(route, data))
 
@@ -113,5 +114,7 @@ if __name__ == '__main__':
     print("\nget ftiness test\n", getFitnessTest(cats, 4, [12, 144]))
     print("\nToggle tracked\n", toggleTracked(1,12))
     print("\nGet tracked exercises\n", getTrackedExercises(1, cats))
-    print("\nGet Exercise from ID\n", getExerciseFromID(12))
-    print("\nGet User Exercises", getUserExercises(1,144))
+    
+    ## TODO: These routes aren't working yet
+    # print("\nGet Exercise from ID\n", getExerciseFromID(12))
+    # print("\nGet User Exercises", getUserExercises(1))
