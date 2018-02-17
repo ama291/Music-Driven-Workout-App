@@ -71,9 +71,8 @@ def getUserExercises(userID):
 def getTrackedExercises(userID, categories=dbCategories):
     query = "SELECT DISTINCT * FROM userexercises WHERE userID = %d AND tracked = 1" % userID
     exs = getExercisesGeneric(userID, query)
-    tracked = filter(lambda x: x[2] in categories, exs)
+    tracked = list(filter(lambda x: x[2] in categories, exs))
     return tracked
-
 
 def getUntrackedIDs(categories, numUntracked, trackedIDs):
     """
