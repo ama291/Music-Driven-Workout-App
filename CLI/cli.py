@@ -2,9 +2,11 @@
 
 import click
 from regex import split
-from Scripts.fitnessTest import *
+from Scripts.fitnessTest import getExerciseFromID, getUserExercises, getTrackedExercises
+from CLI.apiCalls import isTracked, toggleTracked, getFitnessTest
 
 dbURL = "http://138.197.49.155:5000/api/database/"
+dbURL = "http://127.0.0.1:5000/"
 key = "SoftCon2018"
 
 
@@ -13,7 +15,8 @@ def cli():
     pass
 
 def trackOrUntrack(userID, exID, exName):
-    tracked = isTracked(userID, exID)
+    tracked = bool(isTracked(userID, exID))
+    print(tracked, type(tracked))
     if tracked:
         prompt = "Do you want to remove this exercise from your tracked exercises?"
     else:
@@ -73,7 +76,7 @@ def fitnessTest():
     categories = split(",\s*", click.prompt(categoriesPrompt, type=str))
     numEx = click.prompt("How many exercises do you want to test on?", type=int)
     trackedPrompt = getChoseTrackedString(userID, numEx, categories)
-    tracked = list(map(lambda x: int(x), split("\s*", click.prompt(trackedPrompt, type=str))))
+    tracked = list(map(lambda x: int(x), split(",\s*", click.prompt(trackedPrompt, type=str))))
     if len(tracked) > numEx:
         click.echo("You can't have more than %d suggested exercises. Truncating." % numEx)
         tracked = tracked[:numEx]
