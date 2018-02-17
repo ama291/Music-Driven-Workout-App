@@ -6,7 +6,6 @@ from Scripts.fitnessTest import getExerciseFromID, getUserExercises
 from CLI.apiCalls import isTracked, toggleTracked, getFitnessTest, getTrackedExercises
 
 dbURL = "http://138.197.49.155:5000/api/database/"
-dbURL = "http://127.0.0.1:5000/"
 key = "SoftCon2018"
 
 
