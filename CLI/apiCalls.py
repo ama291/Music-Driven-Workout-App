@@ -12,7 +12,6 @@ def getURL(rootURL, route):
 def makeRequest(route, data):
     url = getURL(apiIP, route)
     r = requests.post(url, data=data)
-    print(r)
     assert r.status_code == requests.codes.ok
     res = r.json()
     assert "Result" in res
