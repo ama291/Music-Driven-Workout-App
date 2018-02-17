@@ -16,7 +16,6 @@ def cli():
 
 def trackOrUntrack(userID, exID, exName):
     tracked = bool(isTracked(userID, exID))
-    print(tracked, type(tracked))
     if tracked:
         prompt = "Do you want to remove this exercise from your tracked exercises?"
     else:
