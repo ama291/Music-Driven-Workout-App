@@ -150,7 +150,7 @@ def isTracked(userID, exID):
     elif exs[0][5] == 1: ##tracked bit
         return True
     return False
-
+    
 
 def addExercise(userID, exID, timestamp, rate):
     """

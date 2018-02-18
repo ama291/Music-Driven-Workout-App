@@ -1,9 +1,18 @@
 import requests
 import json
 import jsonpickle
+from sys import argv
 
-# apiIP = "http://138.197.49.155:8000"
-apiIP = "http://127.0.0.1:5000"
+################################################################
+#
+#  usage: 
+#    local: python -m CLI.apiCalls "http://127.0.0.1:5000"
+#    remote: python -m CLI.apiCalls "http://138.197.49.155:8000"
+#
+################################################################
+
+# apiIP = argv[1]
+apiIP = "http://138.197.49.155:8000"
 key = "SoftCon2018"
 
 def getURL(rootURL, route):
@@ -16,6 +25,13 @@ def makeRequest(route, data):
     res = r.json()
     assert "Result" in res
     return res["Result"]
+
+def toBool(string):
+    assert string in ["true", "false"]
+    if string == "True":
+        return True
+    return False
+
 
 def getWorkout(uid, equipment, duration, difficulty, categories=None, muscleGroups=None, themes=None):
     route = "/api/workouts/getworkout/"
@@ -65,7 +81,7 @@ def workoutsInProgress(uid):
 def isTracked(userID, exID):
     route = "/api/fitness/istracked/"
     data = {"userid": userID, "exid": exID, "key": key}
-    return bool(makeRequest(route, data))
+    return toBool(makeRequest(route, data))
     
 def getTrackedExercises(userID, categories):
     route = "/api/fitness/tracked/"
@@ -113,8 +129,9 @@ if __name__ == '__main__':
     # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
     # print("\nWorkouts Saved\n", workoutsSaved(0))
     # print("\nWorkouts In Progress\n", workoutsInProgress(0))
-
+    
     print("\nIs Tracked\n", isTracked(1,12))
+    print("\nIs Tracked\n", isTracked(1,123))
     cats = ["Strength", "Cardio"]
     print("\nget ftiness test\n", getFitnessTest(cats, 4, [12, 144]))
     print("\nToggle tracked\n", toggleTracked(1,12))

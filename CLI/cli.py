@@ -4,11 +4,11 @@ import click
 from regex import split
 # from Scripts.fitnessTest import ...
 # from Scripts.driver import ...
-from CLI.apiCalls import isTracked, toggleTracked, getFitnessTest, getTrackedExercises, getExerciseFromID, getUserExercises
+from CLI.apiCalls import isTracked, toggleTracked, getFitnessTest, getTrackedExercises,\
+ getExerciseFromID, getUserExercises, getPreviousResults
 
 dbURL = "http://138.197.49.155:5000/api/database/"
 key = "SoftCon2018"
-
 
 @click.group()
 def cli():
@@ -18,10 +18,11 @@ def showPrevious(userID, exID):
     click.echo("Your previous results are")
     prev = getPreviousResults(userID, exID)
     for p in prev:
-        click.echo("%s: %d" % (p[3], p[4]))
+        click.echo("%s: %f" % (p[3], p[4]))
+
 
 def trackOrUntrack(userID, exID, exName):
-    tracked = bool(isTracked(userID, exID))
+    tracked = isTracked(userID, exID)
     if tracked:
         prompt = "Do you want to remove this exercise from your tracked exercises?"
     else:
@@ -32,6 +33,7 @@ def trackOrUntrack(userID, exID, exName):
         else:
             click.echo("You don't have trials of this exercise")
             click.echo("If this were an iPhone you would have just added one, so this wouldn't happen")
+
 
 def testEx(userID, exID):
     ex = getExerciseFromID(exID)
