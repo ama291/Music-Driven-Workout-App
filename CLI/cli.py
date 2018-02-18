@@ -14,6 +14,12 @@ key = "SoftCon2018"
 def cli():
     pass
 
+def showPrevious(userID, exID):
+    click.echo("Your previous results are")
+    prev = getPreviousResults(userID, exID)
+    for p in prev:
+        click.echo("%s: %d" % (p[3], p[4]))
+
 def trackOrUntrack(userID, exID, exName):
     tracked = bool(isTracked(userID, exID))
     if tracked:
@@ -38,6 +44,8 @@ def testEx(userID, exID):
     click.echo("If this were an iPhone you would do the exercise now, holding your phone")
     click.echo("Let's pretend you did it anyways")
     click.echo("If this were an iPhone we would show the frequency and add it to the database")
+    click.echo("Great job, you've completed %s" % name)
+    showPrevious(userID, exID)
     trackOrUntrack(userID, exID, name)
     click.echo("Done with exercise '%s'" % name)
 

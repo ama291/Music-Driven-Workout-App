@@ -2,8 +2,8 @@ import requests
 import json
 import jsonpickle
 
-apiIP = "http://138.197.49.155:8000"
-# apiIP = "http://127.0.0.1:5000"
+# apiIP = "http://138.197.49.155:8000"
+apiIP = "http://127.0.0.1:5000"
 key = "SoftCon2018"
 
 def getURL(rootURL, route):
@@ -92,6 +92,11 @@ def getUserExercises(userID):
     data = {"userid": userID, "key": key}
     return json.loads(makeRequest(route, data))
 
+def getPreviousResults(userID, exID):
+    route = "/api/fitness/getprevious/"
+    data = {"userid": userID, "exid": exID, "key": key}
+    return json.loads(makeRequest(route, data))
+
 
 if __name__ == '__main__':
     workout = getWorkout(0, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
@@ -116,3 +121,4 @@ if __name__ == '__main__':
     print("\nGet tracked exercises\n", getTrackedExercises(1, cats))
     print("\nGet Exercise from ID\n", getExerciseFromID(12))
     print("\nGet User Exercises", getUserExercises(1))
+    print("\nGet Previous Results\n", getPreviousResults(1,12))
