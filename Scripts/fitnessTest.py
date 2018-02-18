@@ -34,7 +34,7 @@ def getExerciseFromID(ID):
     return (exercise entry from database): the exercise corresponding to that 
     ID
     """
-    query = "SELECT * FROM exercises WHERE id = %d" % ID
+    query = "SELECT %d FROM exercises" % ID
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     ex = r.json()["Result"][0]
