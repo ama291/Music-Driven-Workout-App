@@ -219,7 +219,7 @@ def workoutsSaved(uid):
     :param uid: user ID
     :return: json string of saved workouts
     """
-    query = 'SELECT inProgressWorkouts FROM users where id = %s' % str(uid)
+    query = 'SELECT savedWorkouts FROM users where id = %s' % str(uid)
     r = requests.post('http://138.197.49.155:5000/api/database/', data={'query': query, 'key': 'SoftCon2018'})
     if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
         return '{}'
@@ -347,3 +347,5 @@ def removeCompetition(uid, competition):
             return DB_FAILURE
     else:
         return FAILURE
+
+print(workoutsSaved(0))
