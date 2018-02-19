@@ -69,7 +69,7 @@ def updateAllWorkouts(user):
         return DB_FAILURE
 
 
-def getWorkout(uid, equipment, duration, difficulty, categories = None, muscleGroups = None, themes = None):
+def getWorkout(uid, themes, categories, muscleGroups, equipment, duration, difficulty):
     """
     :param uid: Int
     :param equipment: List[String]
@@ -211,8 +211,7 @@ def workoutsInProgress(uid):
     if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
         return '{}'
     else:
-        dbEntry = r.json()['Result'][0]
-        return dbEntry[7]
+        return r.json()['Result'][0][0]
 
 
 def workoutsSaved(uid):
@@ -225,8 +224,7 @@ def workoutsSaved(uid):
     if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
         return '{}'
     else:
-        dbEntry = r.json()['Result'][0]
-        return dbEntry[8]
+        return r.json()['Result'][0][0]
 
 
 def addGoal(uid, goal):

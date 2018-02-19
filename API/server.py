@@ -37,9 +37,9 @@ def apiGetWorkout():
 	groups = request.form.get('musclegroups')
 	if (groups != None):
 		groups = groups.split(",")
-	thems = request.form.get('themes')
-	if (thems != None):
-		thems = equipment.split(",")
+	themes = request.form.get('themes')
+	if (themes != None):
+		themes = equipment.split(",")
 	key = request.form.get('key')
 	params = [userid, duration, difficulty, key]
 	if (None in params):
@@ -47,7 +47,7 @@ def apiGetWorkout():
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		response = getWorkout(userid, equipment, duration, difficulty, categories = cats, muscleGroups = groups, themes = thems)
+		response = getWorkout(userid, themes, cats, groups, equipment, duration, difficulty)
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
@@ -143,7 +143,7 @@ def apiUnSaveWorkout():
 		return failure(str(e))
 
 @app.route('/api/workouts/startsavedworkout/', methods=['POST'])
-def apiStartSaveWorkout():
+def apiStartSavedWorkout():
 	userid = request.form.get('userid')
 	if (userid != None):
 		userid = int(userid)
