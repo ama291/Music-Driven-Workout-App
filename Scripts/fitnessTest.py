@@ -40,19 +40,39 @@ def getExerciseFromID(ID):
     ex = r.json()["Result"][0]
     return ex
 
-## Add route
-def getTrackedExercises(userID):
+
+def getExercisesGeneric(userID, query):
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    res = r.json()["Result"]
+    ## TODO: set instead of list?
+    exercises = list(map(lambda x: getExerciseFromID(x[2]), res))
+    unique = []
+    for ex in exercises:
+        if ex not in unique:
+            unique.append(ex)
+    return unique
+
+def getUserExercises(userID):
     """
     return (list of exercises from database): a list of exercises that
     the user is tracking
     """
+    ## TODO: no need for distinct
     query = "SELECT DISTINCT * FROM userexercises WHERE userID = %d" % userID
-    r = requests.post(dbURL, data = {'query':query, 'key':key})
-    assert r.status_code == requests.codes.ok
-    res = r.json()["Result"]
-    exercises = list(map(lambda x: getExerciseFromID(x[2]), res))
+    exercises = getExercisesGeneric(userID, query)
     return exercises
 
+## Add route
+## TODO!!!: THIS SHOULD BE BY CATEGORIES
+## TODO!!!: WE NEED TO only return each exercise once
+## TODO!!!: ensure tracked bit is 1
+## TODO!!!: write another function where the tracked bit may not be 1
+def getTrackedExercises(userID, categories=dbCategories):
+    query = "SELECT DISTINCT * FROM userexercises WHERE userID = %d AND tracked = 1" % userID
+    exs = getExercisesGeneric(userID, query)
+    tracked = list(filter(lambda x: x[2] in categories, exs))
+    return tracked
 
 def getUntrackedIDs(categories, numUntracked, trackedIDs):
     """
@@ -130,7 +150,7 @@ def isTracked(userID, exID):
     elif exs[0][5] == 1: ##tracked bit
         return True
     return False
-
+    
 
 def addExercise(userID, exID, timestamp, rate):
     """
@@ -166,8 +186,8 @@ def toggleTracked(userID, exID, clear=False):
     """
     return (list): the userID, exID, and tracked bit
     """
-    tracked = getTrackedExercises(userID)
-    exIDs = list(map(lambda x:x[0], tracked))
+    exs = getUserExercises(userID)
+    exIDs = list(map(lambda x:x[0], exs))
     assert exID in exIDs
     if clear:
         trackBit = 0

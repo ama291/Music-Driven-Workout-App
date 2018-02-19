@@ -3,12 +3,12 @@ supervisorctl stop flaskapp
 
 #set up venv
 #virtualenv -p python3 env
-#source env/bin/activate
+source env/bin/activate
 
 #install requirements
-#while read line; do
-#	pip install $line
-#done <requirements.txt
+while read line; do
+	pip install $line
+done <requirements.txt
 
 #start app
 supervisorctl start flaskapp

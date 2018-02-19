@@ -216,14 +216,17 @@ def apiGetTracked():
 	userid = request.form.get('userid')
 	if (userid != None):
 		userid = int(userid)
+	categories = request.form.get('categories')
+	if (categories != None):
+		categories = categories.split(",")
 	key = request.form.get('key')
-	params = [userid, key]
+	params = [userid, categories, key]
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		response = getTrackedExercises(userid)
+		response = getTrackedExercises(userid, categories=categories)
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
@@ -271,7 +274,7 @@ def apiIsTracked():
 
 #TODO
 @app.route('/api/fitness/toggletracked/', methods=['POST'])
-def apiCheckTracked():
+def apiToggleTracked():
 	userid = request.form.get('userid')
 	if (userid != None):
 		userid = int(userid)
@@ -287,6 +290,59 @@ def apiCheckTracked():
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
+
+@app.route('/api/fitness/getexercise/', methods=['POST'])
+def apiGetExercise():
+	exid = request.form.get('exid')
+	if (exid != None):
+		exid = int(exid)
+	key = request.form.get('key')
+	params = [exid, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		response = getExerciseFromID(exid)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
+@app.route('/api/fitenss/getuserexercises/', methods=['POST'])
+def apiGetUserExercises():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	key = request.form.get('key')
+	params = [userid, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		response = getUserExercises(userid)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
+@app.route('/api/fitness/getprevious/', methods=["POST"])
+def apiGetPrevious():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	exid = request.form.get('exid')
+	key = request.form.get('key')
+	params = [userid, exid, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		response = getPreviousResults(userid, exid)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
 
 #api messages
 def failure(msg):
