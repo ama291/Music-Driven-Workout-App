@@ -8,6 +8,18 @@ dbURL = "http://138.197.49.155:5000/api/database/"
 key = "SoftCon2018"
 dbCategories = ["Cardio", "Olympic Weightlifting", "Plyometrics", "Powerlifting", "Strength", "Stretching", "Strongman"]
 
+def getResponseDict(values, table):
+    query = "PRAGMA table_info(%s)" % table
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    cols = list(map(lambda x:x[1], r.json()["Result"]))
+    assert len(cols) == len(values)
+    res = dict(zip(cols, values))
+    return res
+
+def getResponseDictList(valuesList, table): 
+    return list(map(lambda x: getResponseDict(x, table), valuesList))
+
 def countExercises(category):
     """
     return (integer): count exercises of a given category
@@ -35,12 +47,11 @@ def getExerciseFromID(ID):
     ID
     """
     query = "SELECT * FROM exercises WHERE id = %d" % ID
-    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    r = requests.post(dbURL, data = {'query': query, 'key': key})
     assert r.status_code == requests.codes.ok
     ex = r.json()["Result"][0]
-    return ex
-
-
+    return getResponseDict(ex, "exercises")
+    
 def getExercisesGeneric(userID, query):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
@@ -64,14 +75,11 @@ def getUserExercises(userID):
     return exercises
 
 ## Add route
-## TODO!!!: THIS SHOULD BE BY CATEGORIES
-## TODO!!!: WE NEED TO only return each exercise once
-## TODO!!!: ensure tracked bit is 1
-## TODO!!!: write another function where the tracked bit may not be 1
+## TODO!!!: consider muscle groups and equipment
 def getTrackedExercises(userID, categories=dbCategories):
     query = "SELECT DISTINCT * FROM userexercises WHERE userID = %d AND tracked = 1" % userID
     exs = getExercisesGeneric(userID, query)
-    tracked = list(filter(lambda x: x[2] in categories, exs))
+    tracked = list(filter(lambda x: x["type"] in categories, exs))
     return tracked
 
 def getUntrackedIDs(categories, numUntracked, trackedIDs):
@@ -111,7 +119,7 @@ def getFitnessTest(categories, numExercises, trackedIDs):
     assert len(trackedIDs) <= numExercises
     for category in categories:
         assert category in dbCategories
-    numUntracked = numExercises - len(trackedIDs)    
+    numUntracked = numExercises - len(trackedIDs)
     untrackedIDs = getUntrackedIDs(categories, numUntracked, trackedIDs)
     exerciseIDs = trackedIDs + untrackedIDs
     assert len(exerciseIDs) == numExercises
@@ -122,9 +130,8 @@ def getFitnessTest(categories, numExercises, trackedIDs):
         assert r.status_code == requests.codes.ok and len(r.json()["Result"]) == 1
         exercises.append(r.json()["Result"][0])
     assert len(exercises) == numExercises
-    return exercises
+    return getResponseDictList(exercises, "exercises")
 
-getFitnessTest
 
 ## Add route
 def getPreviousResults(userID, exID):
@@ -136,7 +143,7 @@ def getPreviousResults(userID, exID):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok and "Result" in r.json()
     trials = r.json()["Result"]
-    return trials
+    return getResponseDictList(trials, "userexercises")
 
 
 ## Add route
@@ -147,11 +154,10 @@ def isTracked(userID, exID):
     exs = getPreviousResults(userID, exID)
     if exs == []:
         return False
-    elif exs[0][5] == 1: ##tracked bit
+    elif exs[0]["tracked"] == 1:
         return True
     return False
     
-
 def addExercise(userID, exID, timestamp, rate):
     """
     return (boolean): True upon success
@@ -187,7 +193,7 @@ def toggleTracked(userID, exID, clear=False):
     return (list): the userID, exID, and tracked bit
     """
     exs = getUserExercises(userID)
-    exIDs = list(map(lambda x:x[0], exs))
+    exIDs = list(map(lambda x:x["id"], exs))
     assert exID in exIDs
     if clear:
         trackBit = 0
@@ -197,5 +203,4 @@ def toggleTracked(userID, exID, clear=False):
     query = "UPDATE userexercises SET tracked = %d WHERE userID = '%s' AND exID = '%s'" % (trackBit, userID, exID)
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
-    return [userID, exID, trackBit]
-
+    return trackBit

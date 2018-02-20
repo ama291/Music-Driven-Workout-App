@@ -18,7 +18,7 @@ def showPrevious(userID, exID):
     click.echo("Your previous results are")
     prev = getPreviousResults(userID, exID)
     for p in prev:
-        click.echo("%s: %f" % (p[3], p[4]))
+        click.echo("%s: %f" % (p["timestamp"], p["rate"]))
 
 
 def trackOrUntrack(userID, exID, exName):
@@ -28,7 +28,7 @@ def trackOrUntrack(userID, exID, exName):
     else:
         prompt = "Do you want to add this exercise to your tracked exercises?"
     if click.confirm(prompt):
-        if exID in list(map(lambda x:x[0], getUserExercises(userID))):
+        if exID in list(map(lambda x:x["id"], getUserExercises(userID))):
             toggleTracked(userID, exID)
         else:
             click.echo("You don't have trials of this exercise")
@@ -37,7 +37,7 @@ def trackOrUntrack(userID, exID, exName):
 
 def testEx(userID, exID):
     ex = getExerciseFromID(exID)
-    name = ex[1]
+    name = ex["name"]
     click.echo(name)
     click.echo("Do this exercise for 30 seconds as fast as you can")
     if not click.confirm("Begin?"):
@@ -58,8 +58,8 @@ def testExercise():
     testEx(userID, exID)
 
 
-def exAndIDStr(exArray):
-    string = "%d -- %s\n" % (exArray[0], exArray[1])
+def exAndIDStr(exercise):
+    string = "%d -- %s\n" % (exercise["id"], exercise["name"])
     return string
 
 def getChoseTrackedString(userID, numExercises, categories):
@@ -92,12 +92,12 @@ def fitnessTest():
     test = getFitnessTest(categories, numEx, tracked)
     click.echo("Your fitness test has the following exercises:")
     for t in test:
-        click.echo("\t%s" % t[1])
+        click.echo("\t%s" % t["name"])
     if not click.confirm("Begin workout?"):
         ## TODO, we may want to add more options here
         return
     for t in test:
-        testEx(userID, t[0])
+        testEx(userID, t["id"])
     click.echo("Done with fitness test")
 
 

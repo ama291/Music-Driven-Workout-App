@@ -13,6 +13,7 @@ from sys import argv
 
 # apiIP = argv[1]
 apiIP = "http://138.197.49.155:8000"
+# apiIP = "http://127.0.0.1:5000"
 key = "SoftCon2018"
 
 def getURL(rootURL, route):
@@ -27,8 +28,9 @@ def makeRequest(route, data):
     return res["Result"]
 
 def toBool(string):
+    print(string)
     assert string in ["true", "false"]
-    if string == "True":
+    if string == "true":
         return True
     return False
 
@@ -116,13 +118,20 @@ def getPreviousResults(userID, exID):
 
 if __name__ == '__main__':
     workout = getWorkout(0, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
-    print("\nGet Workouts\n", workout)
-    print("\nStart Workout\n", startWorkout(0, workout))
-    print("\nPause Workout\n", pauseWorkout(0, 0, False))
-    print("\nQuit Workout\n", quitWorkout(0, 0))
-    print("\nSave Workout\n", saveWorkout(0, 0))
-    print("\nUnsave Workout\n", unsaveWorkout(0, 0))
-    print("\nStart Saved Workout\n", startSavedWorkout(0, 0))
+    print("\nGet Workouts")
+    print(workout)
+    print("\nStart Workout")
+    print(startWorkout(0, workout))
+    print("\nPause Workout")
+    print(pauseWorkout(0, 0, False))
+    print("\nQuit Workout")
+    print(quitWorkout(0, 0))
+    print("\nSave Workout")
+    print(saveWorkout(0, 0))
+    print("\nUnsave Workout")
+    print(unsaveWorkout(0, 0))
+    print("\nStart Saved Workout")
+    print(startSavedWorkout(0, 0))
 
     ## TODO: The following things may not be working
     # Start saved workout breaks on workouts that haven't been saved
@@ -130,12 +139,20 @@ if __name__ == '__main__':
     # print("\nWorkouts Saved\n", workoutsSaved(0))
     # print("\nWorkouts In Progress\n", workoutsInProgress(0))
     
-    print("\nIs Tracked\n", isTracked(1,12))
-    print("\nIs Tracked\n", isTracked(1,123))
+    print("\nIs Tracked")
+    print(isTracked(1,12))
+    print("\nIs Tracked")
+    print(isTracked(1,123))
     cats = ["Strength", "Cardio"]
-    print("\nget ftiness test\n", getFitnessTest(cats, 4, [12, 144]))
-    print("\nToggle tracked\n", toggleTracked(1,12))
-    print("\nGet tracked exercises\n", getTrackedExercises(1, cats))
-    print("\nGet Exercise from ID\n", getExerciseFromID(12))
-    print("\nGet User Exercises", getUserExercises(1))
-    print("\nGet Previous Results\n", getPreviousResults(1,12))
+    print("\nget ftiness test")
+    print(getFitnessTest(cats, 4, [12, 144]))
+    print("\nToggle tracked")
+    print(toggleTracked(1,12))
+    print("\nGet tracked exercises")
+    print(getTrackedExercises(1, cats))
+    print("\nGet Exercise from ID")
+    print(getExerciseFromID(12))
+    print("\nGet User Exercises")
+    print(getUserExercises(1))
+    print("\nGet Previous Results")
+    print(getPreviousResults(1,12))
