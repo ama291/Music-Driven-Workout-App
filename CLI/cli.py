@@ -59,7 +59,7 @@ def testExercise():
 
 
 def exAndIDStr(exercise):
-    string = "%d -- %s\n" % (exArray["id"], exArray["name"])
+    string = "%d -- %s\n" % (exercise["id"], exercise["name"])
     return string
 
 def getChoseTrackedString(userID, numExercises, categories):
