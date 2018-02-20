@@ -28,7 +28,6 @@ def makeRequest(route, data):
     return res["Result"]
 
 def toBool(string):
-    print(string)
     assert string in ["true", "false"]
     if string == "true":
         return True
