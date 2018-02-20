@@ -28,8 +28,9 @@ def makeRequest(route, data):
     return res["Result"]
 
 def toBool(string):
+    print(string)
     assert string in ["true", "false"]
-    if string == "True":
+    if string == "true":
         return True
     return False
 
@@ -145,12 +146,12 @@ if __name__ == '__main__':
     cats = ["Strength", "Cardio"]
     print("\nget ftiness test")
     print(getFitnessTest(cats, 4, [12, 144]))
-    print("\nToggle tracked\n", toggleTracked(1,12))
-    print("\nGet tracked exercises\n", getTrackedExercises(1, cats))
+    print("\nToggle tracked")
+    print(toggleTracked(1,12))
+    print("\nGet tracked exercises")
+    print(getTrackedExercises(1, cats))
     print("\nGet Exercise from ID")
-    res = getExerciseFromID(12)
-    for r in res:
-        print(r, res[r])
+    print(getExerciseFromID(12))
     print("\nGet User Exercises")
     print(getUserExercises(1))
     print("\nGet Previous Results")

@@ -62,7 +62,7 @@ def getExercisesGeneric(userID, query):
     for ex in exercises:
         if ex not in unique:
             unique.append(ex)
-    return getResponseDictList(unique, "exercises")
+    return unique
 
 def getUserExercises(userID):
     """
@@ -79,7 +79,7 @@ def getUserExercises(userID):
 def getTrackedExercises(userID, categories=dbCategories):
     query = "SELECT DISTINCT * FROM userexercises WHERE userID = %d AND tracked = 1" % userID
     exs = getExercisesGeneric(userID, query)
-    tracked = list(filter(lambda x: x["category"] in categories, exs))
+    tracked = list(filter(lambda x: x["type"] in categories, exs))
     return tracked
 
 def getUntrackedIDs(categories, numUntracked, trackedIDs):
@@ -204,5 +204,3 @@ def toggleTracked(userID, exID, clear=False):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     return trackBit
-
-# print(toggleTracked(1,12))

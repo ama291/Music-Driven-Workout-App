@@ -28,9 +28,9 @@ class TestFitnessTest(unittest.TestCase):
 
         ## Test toggle exercise
         self.assertRaises(AssertionError, ft.toggleTracked, 1, 1065)
-        self.assertEqual(ft.toggleTracked(ID,12), [ID,12,1])
+        self.assertEqual(ft.toggleTracked(ID,12), 1)
         self.assertTrue(ft.isTracked(ID,12))
-        self.assertEqual(ft.toggleTracked(ID,12), [ID,12,0])
+        self.assertEqual(ft.toggleTracked(ID,12), 0)
         self.assertFalse(ft.isTracked(ID,12))
 
         ## Test getting tracked exercises
@@ -40,7 +40,7 @@ class TestFitnessTest(unittest.TestCase):
             ft.addExercise(ID2, exID, time, 64.0)
             ft.toggleTracked(ID2, exID)
         exs = ft.getTrackedExercises(ID2)
-        resIDs = list(map(lambda x: x[0], exs))
+        resIDs = list(map(lambda x: x["id"], exs))
         self.assertEqual(exIDs, resIDs)
         for exID in resIDs:
             self.assertTrue(ft.isTracked(ID2, exID))
@@ -66,11 +66,11 @@ class TestFitnessTest(unittest.TestCase):
         self.assertRaises(AssertionError, ft.getFitnessTest, cats, 1, exIDs)
         tests = ft.getFitnessTest(cats, 5, exIDs)
         self.assertEqual(len(tests), 5)
-        IDs = list(map(lambda x: x[0], tests))
+        IDs = list(map(lambda x: x["id"], tests))
         self.assertTrue(412 in IDs)
         self.assertTrue(421 in IDs)
         for t in tests:
-            self.assertTrue(t[2] in cats)
+            self.assertTrue(t["type"] in cats)
 
         ## Test add motion data
         with open('Logs/log1.json', 'r') as fd:
@@ -83,7 +83,8 @@ class TestFitnessTest(unittest.TestCase):
         #TODO: Add check that this is in the database
 
         ## test getting previous results
-        expected = [[139, 1, 144, '2012-12-12 12:12:12', 30.5, 0], [140, 1, 144, '2012-12-12 12:18:12', 30.5, 0]]
+        expected = [{"id":139, "userID":1, "exID":144, "timestamp":'2012-12-12 12:12:12', "rate":30.5, "tracked":0}, \
+         {"id":140, "userID":1, "exID":144, "timestamp":'2012-12-12 12:18:12', "rate":30.5, "tracked":0}]
         self.assertEqual(ft.getPreviousResults(1, 144), expected)
         self.assertEqual(ft.getPreviousResults(1, 1065), [])
 
