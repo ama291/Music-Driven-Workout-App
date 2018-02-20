@@ -69,7 +69,7 @@ def updateAllWorkouts(user):
         return DB_FAILURE
 
 
-def getWorkout(uid, equipment, duration, difficulty, categories = None, muscleGroups = None, themes = None):
+def getWorkout(uid, themes, categories, muscleGroups, equipment, duration, difficulty):
     """
     :param uid: Int
     :param equipment: List[String]
@@ -211,8 +211,7 @@ def workoutsInProgress(uid):
     if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
         return '{}'
     else:
-        dbEntry = r.json()['Result'][0]
-        return dbEntry[7]
+        return r.json()['Result'][0][0]
 
 
 def workoutsSaved(uid):
@@ -220,13 +219,12 @@ def workoutsSaved(uid):
     :param uid: user ID
     :return: json string of saved workouts
     """
-    query = 'SELECT inProgressWorkouts FROM users where id = %s' % str(uid)
+    query = 'SELECT savedWorkouts FROM users where id = %s' % str(uid)
     r = requests.post('http://138.197.49.155:5000/api/database/', data={'query': query, 'key': 'SoftCon2018'})
     if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
         return '{}'
     else:
-        dbEntry = r.json()['Result'][0]
-        return dbEntry[8]
+        return r.json()['Result'][0][0]
 
 
 def addGoal(uid, goal):
@@ -349,3 +347,5 @@ def removeCompetition(uid, competition):
             return DB_FAILURE
     else:
         return FAILURE
+
+print(workoutsSaved(0))
