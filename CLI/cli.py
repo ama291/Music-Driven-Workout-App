@@ -18,7 +18,7 @@ def showPrevious(userID, exID):
     click.echo("Your previous results are")
     prev = getPreviousResults(userID, exID)
     for p in prev:
-        click.echo("%s: %f" % (p[3], p[4]))
+        click.echo("%s: %f" % (p["timestamp"], p["rate"]))
 
 
 def trackOrUntrack(userID, exID, exName):
@@ -37,7 +37,7 @@ def trackOrUntrack(userID, exID, exName):
 
 def testEx(userID, exID):
     ex = getExerciseFromID(exID)
-    name = ex[1]
+    name = ex["name"]
     click.echo(name)
     click.echo("Do this exercise for 30 seconds as fast as you can")
     if not click.confirm("Begin?"):

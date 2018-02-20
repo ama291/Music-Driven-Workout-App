@@ -194,12 +194,6 @@ def toggleTracked(userID, exID, clear=False):
     """
     exs = getUserExercises(userID)
     exIDs = list(map(lambda x:x["id"], exs))
-    print(exs)
-    for e in exs:
-        print(e["id"])
-        
-    print(exIDs)
-    print(exID)
     assert exID in exIDs
     if clear:
         trackBit = 0
@@ -211,4 +205,4 @@ def toggleTracked(userID, exID, clear=False):
     assert r.status_code == requests.codes.ok
     return trackBit
 
-print(toggleTracked(1,12))
+# print(toggleTracked(1,12))
