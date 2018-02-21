@@ -12,8 +12,8 @@ from sys import argv
 ################################################################
 
 # apiIP = argv[1]
-apiIP = "http://138.197.49.155:8000"
-# apiIP = "http://127.0.0.1:5000"
+# apiIP = "http://138.197.49.155:8000"
+apiIP = "http://127.0.0.1:5000"
 key = "SoftCon2018"
 
 def getURL(rootURL, route):
@@ -146,6 +146,7 @@ if __name__ == '__main__':
     print("\nget ftiness test")
     print(getFitnessTest(cats, 4, [12, 144]))
     print("\nToggle tracked")
+    print(toggleTracked(1,12))
     print(toggleTracked(1,12))
     print("\nGet tracked exercises")
     print(getTrackedExercises(1, cats))
