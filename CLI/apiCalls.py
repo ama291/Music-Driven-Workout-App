@@ -20,7 +20,7 @@ def getURL(rootURL, route):
     return "%s%s" % (rootURL, route)
 
 def makeRequest(route, data):
-    url = getURL(apiIP, roustartworkoute)
+    url = getURL(apiIP, route)
     r = requests.post(url, data=data)
     assert r.status_code == requests.codes.ok
     res = r.json()
