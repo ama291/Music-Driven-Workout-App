@@ -115,6 +115,7 @@ def startWorkout(uid, workout):
         return FAILURE
 
 
+
 def startSavedWorkout(uid, wid):
     """
     :param uid: user ID
@@ -354,3 +355,5 @@ def removeCompetition(uid, competition):
 
 if __name__ == '__main__':
     print(getUser(1))
+    workout = getWorkout(1, [], [], [], [], 60, "Beginner")
+    print(startWorkout(1, workout))
