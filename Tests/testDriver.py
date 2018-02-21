@@ -10,40 +10,45 @@ from Scripts.driver import getUser, addGoal, removeGoal, addTheme, removeTheme, 
 For testing driver.py
 """
 
+# dbURL = 'http://138.197.49.155:5000/api/database/'
+dbURL = 'http://138.197.49.155:5000/api/testdb/'
+
+key = 'SoftCon2018'
+
 class TestDriver(unittest.TestCase):
 
     def test(self):
         ##test getUser
-        r = requests.post('http://138.197.49.155:5000/api/database/', data = {'query': "UPDATE users SET goals='[]',themes='[]',competition='[]' where id=2", 'key': 'SoftCon2018'})
+        r = requests.post(dbURL, data = {'query': "UPDATE users SET goals='[]',themes='[]',competition='[]' where id=1", 'key': key})
         #print(r.json()) #clear goals,themes,competitions for testUser for consistent testing
 
-        testUser = getUser(2)
-        self.assertEqual(testUser.ID,2)
-        self.assertEqual(testUser.name,"TestUser1")
-        self.assertEqual(testUser.tracked,{})
-        self.assertEqual(testUser.untracked,{})
+        testUser = getUser(1)
+        self.assertEqual(testUser.ID,1)
+        self.assertEqual(testUser.spotifyUsername,"Alex")
         self.assertEqual(testUser.goals,[])
         self.assertEqual(testUser.themes,[])
         self.assertEqual(testUser.competitions,[]) #confirm that the values are cleared
+        self.assertEqual(testUser.inProgressWorkouts, [])
+        self.assertEqual(testUser.savedWorkouts, [])
 
         ##test addGoal
         goal1 = Goal("goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True)
-        self.assertEqual(addGoal(2,goal1),0) #addGoal should be successful
-        self.assertTrue(goal1 in getUser(2).goals)
+        self.assertEqual(addGoal(1,goal1),0) #addGoal should be successful
+        self.assertTrue(goal1 in getUser(1).goals)
 
         ##test removeGoal
-        self.assertEqual(removeGoal(2,goal1),0) #remove goal should be successful
-        self.assertEqual(getUser(2).goals,[]) #now user should have no goals left
-        self.assertEqual(removeGoal(2,goal1),2) #FAILURE because user has no goals
+        self.assertEqual(removeGoal(1,goal1),0) #remove goal should be successful
+        self.assertEqual(getUser(1).goals,[]) #now user should have no goals left
+        self.assertEqual(removeGoal(1,goal1),2) #FAILURE because user has no goals
 
         ##test addTheme
         theme1 = Theme("beyonce theme","beyonce",5)
-        self.assertEqual(addTheme(2,theme1),0) #add theme should be successful
-        self.assertTrue(theme1 in getUser(2).themes) #now new theme is in user's themes
+        self.assertEqual(addTheme(1,theme1),0) #add theme should be successful
+        self.assertTrue(theme1 in getUser(1).themes) #now new theme is in user's themes
 
         ##test removeTheme
-        self.assertEqual(removeTheme(2,theme1),0) # success - should be able to remove recently added theme
-        self.assertEqual(removeTheme(2,theme1),2) #FAILURE because user has no themes
+        self.assertEqual(removeTheme(1,theme1),0) # success - should be able to remove recently added theme
+        self.assertEqual(removeTheme(1,theme1),2) #FAILURE because user has no themes
 
         ##test addCompetition
         # to be implemented in iteration 2

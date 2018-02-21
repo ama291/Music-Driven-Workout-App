@@ -3,8 +3,6 @@ from Scripts.workout import Workout
 from Scripts.exercise import Exercise
 from Scripts.user import User
 
-
-
 '''
 All excercises in the workout must have a different name (using equaliy testing will pass the same excercise with a different duration). 
 The list of excercises must be non empty and the sum of their durations should not be more than the user specified duration. 
@@ -14,7 +12,7 @@ reasonable durations determined by us and this range is entered by us into the d
 
 class TestWorkout(unittest.TestCase):
   def test(self):
-    usr1 = User(1, "Alex", [], [], [], [], [], {}, {})
+    usr1 = User(1, "Alex", 167, 150, 1996, [], [], [], {}, {})
 
     #category condition
     themes = None

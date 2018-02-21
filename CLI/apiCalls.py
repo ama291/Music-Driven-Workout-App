@@ -20,7 +20,7 @@ def getURL(rootURL, route):
     return "%s%s" % (rootURL, route)
 
 def makeRequest(route, data):
-    url = getURL(apiIP, route)
+    url = getURL(apiIP, roustartworkoute)
     r = requests.post(url, data=data)
     assert r.status_code == requests.codes.ok
     res = r.json()
@@ -116,21 +116,21 @@ def getPreviousResults(userID, exID):
 
 
 if __name__ == '__main__':
-    workout = getWorkout(0, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
+    workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
     print("\nGet Workouts")
     print(workout)
     print("\nStart Workout")
-    print(startWorkout(0, workout))
+    # print(startWorkout(1, workout))
     print("\nPause Workout")
-    print(pauseWorkout(0, 0, False))
+    print(pauseWorkout(1, 0, False))
     print("\nQuit Workout")
-    print(quitWorkout(0, 0))
+    print(quitWorkout(1, 0))
     print("\nSave Workout")
-    print(saveWorkout(0, 0))
+    print(saveWorkout(1, 0))
     print("\nUnsave Workout")
-    print(unsaveWorkout(0, 0))
+    print(unsaveWorkout(1, 0))
     print("\nStart Saved Workout")
-    print(startSavedWorkout(0, 0))
+    print(startSavedWorkout(1, 0))
 
     ## TODO: The following things may not be working
     # Start saved workout breaks on workouts that haven't been saved

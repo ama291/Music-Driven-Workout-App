@@ -3,9 +3,10 @@ from random import randint
 import json
 from datetime import datetime
 from Scripts.log import Log
-from Scripts.dbfunctions import key, dbCategories, getColumnNames, getResponseDictList, getResponseDict
+from Scripts.dbfunctions import key, dbCategories, getColumnNames, \
+  getResponseDictList, getResponseDict, testDB, realDB
 
-dbURL = "http://138.197.49.155:5000/api/database/"
+dbURL = testDB
 
 def countExercises(category):
     """

@@ -6,29 +6,25 @@ dbURL = "http://138.197.49.155:5000/api/database/"
 key = "SoftCon2018"
 
 class User(object):
-    def __init__(self, ID, name, tracked, untracked, goals,
+    def __init__(self, ID, spotifyUsername, height, weight, birthyear, goals,
          themes, competitions, inProgressWorkouts, savedWorkouts):
         self.ID = ID
-        self.name = name
-        self.tracked = tracked
-        self.untracked = untracked
+        self.spotifyUsername = spotifyUsername
+        self.height = height
+        self.weight = weight
+        self.birthyear = birthyear
         self.goals = goals
         self.themes = themes
         self.competitions = competitions
-
         # stores current and incomplete workouts
         self.inProgressWorkouts = inProgressWorkouts # key: workoutID, value: workout class instance
         # stores saved workouts, if a user wants to do the workout again
         self.savedWorkouts = savedWorkouts # key: workoutID, value: workout class instance
 
     def __repr__(self):
-        string = "User: %s\n***\nTracked:" % self.name
-        for ex in self.tracked:
-            string += "\n%s" % str(ex)
-        string += "\n***\nUntracked:"
-        for ex in self.untracked:
-            string += "\n%s" % str(ex)
-        string += "\n***"
+        string = "USER:\n"
+        for attr in self.__dict__:
+            string += "\t%s: %s\n" % (attr, str(self.__dict__[attr]))
         return string
 
     def getFitnessTest(self, categories, numExercises, tracked):
@@ -227,3 +223,7 @@ class User(object):
             self.competitions.remove(competition)
             return True
         return False
+
+if __name__ == '__main__':
+    user = User(1, "lucio", 167, 150, 1996, [], [], [], [], [])
+    print(user)
