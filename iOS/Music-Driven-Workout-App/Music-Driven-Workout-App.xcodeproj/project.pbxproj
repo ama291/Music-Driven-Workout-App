@@ -15,8 +15,9 @@
 		11AF5E3E202D42D2004EB40B /* Music_Driven_Workout_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E3D202D42D2004EB40B /* Music_Driven_Workout_AppTests.swift */; };
 		11AF5E49202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E48202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift */; };
 		11F9ABEB2033E593007F217C /* AccelerometerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F9ABEA2033E593007F217C /* AccelerometerTest.swift */; };
-		D87D00DD203CD27900A97449 /* Amatic-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D87D00DC203CD27900A97449 /* Amatic-Bold.ttf */; };
-		D87D00E0203CE0A200A97449 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D87D00DF203CE0A200A97449 /* background.jpg */; };
+		D87D00EE203CEDB000A97449 /* AmaticSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D87D00EB203CEDB000A97449 /* AmaticSC-Regular.ttf */; };
+		D87D00F2203CEEA500A97449 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D87D00F1203CEEA500A97449 /* background.jpg */; };
+		D87D00F4203CEF2200A97449 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11AF5E34202D42D2004EB40B /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,9 +52,9 @@
 		11AF5E48202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music_Driven_Workout_AppUITests.swift; sourceTree = "<group>"; };
 		11AF5E4A202D42D2004EB40B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11F9ABEA2033E593007F217C /* AccelerometerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerTest.swift; sourceTree = "<group>"; };
-		D87D00DB203CD24100A97449 /* AmaticSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "AmaticSC-Regular.ttf"; path = "../../../../../../../Downloads/amatic/AmaticSC-Regular.ttf"; sourceTree = "<group>"; };
-		D87D00DC203CD27900A97449 /* Amatic-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Amatic-Bold.ttf"; path = "../../../../../../../Downloads/amatic/Amatic-Bold.ttf"; sourceTree = "<group>"; };
-		D87D00DF203CE0A200A97449 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background.jpg; path = ../../../../../../background.jpg; sourceTree = "<group>"; };
+		D87D00EB203CEDB000A97449 /* AmaticSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Regular.ttf"; sourceTree = "<group>"; };
+		D87D00F1203CEEA500A97449 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		D87D00F3203CEEF900A97449 /* AmaticSC-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,8 +139,8 @@
 		D87D00D9203CD22D00A97449 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
-				D87D00DC203CD27900A97449 /* Amatic-Bold.ttf */,
-				D87D00DB203CD24100A97449 /* AmaticSC-Regular.ttf */,
+				D87D00EB203CEDB000A97449 /* AmaticSC-Regular.ttf */,
+				D87D00F3203CEEF900A97449 /* AmaticSC-Bold.ttf */,
 			);
 			path = fonts;
 			sourceTree = "<group>";
@@ -147,7 +148,7 @@
 		D87D00DE203CE09600A97449 /* img */ = {
 			isa = PBXGroup;
 			children = (
-				D87D00DF203CE0A200A97449 /* background.jpg */,
+				D87D00F1203CEEA500A97449 /* background.jpg */,
 			);
 			path = img;
 			sourceTree = "<group>";
@@ -259,9 +260,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D87D00EE203CEDB000A97449 /* AmaticSC-Regular.ttf in Resources */,
 				11AF5E33202D42D2004EB40B /* LaunchScreen.storyboard in Resources */,
-				D87D00DD203CD27900A97449 /* Amatic-Bold.ttf in Resources */,
-				D87D00E0203CE0A200A97449 /* background.jpg in Resources */,
+				D87D00F4203CEF2200A97449 /* Info.plist in Resources */,
+				D87D00F2203CEEA500A97449 /* background.jpg in Resources */,
 				11AF5E30202D42D2004EB40B /* Assets.xcassets in Resources */,
 				11AF5E2E202D42D2004EB40B /* Main.storyboard in Resources */,
 			);

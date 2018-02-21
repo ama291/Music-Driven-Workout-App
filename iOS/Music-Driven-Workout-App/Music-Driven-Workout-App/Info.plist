@@ -43,8 +43,8 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string>AmacticSC-Regular.ttf</string>
-		<string>Amatic-Bold.ttf</string>
+		<string>AmaticSC-Regular.ttf</string>
+		<string>AmaticSC-Bold.ttf</string>
 	</array>
 </dict>
 </plist>
