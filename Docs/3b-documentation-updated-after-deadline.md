@@ -23,7 +23,7 @@ We now have a console app that can be used to test the fitness test and work out
 4.  From the other terminal, from the root directory of our project, run the command `python3 -m CLI.cli --help`
 5. If there are dependencies you are missing, such as the python Click module which allows for an interactive console app, then you will need to install them on your computer with `pip3 install _`
 6. Repaeat seps 4-5 until 4 is successful
-7. When 4 is successful, you will be given a list of commands that you can test. This should include `fitnesstest`, `testexercise`, and `workout`. 
+7. When 4 is successful, you will be given a list of commands that you can test. This should include `fitnesstest`, `testexercise`, and `workout`. The app should guide you through what information you will need to input.
     * `fitnesstest` accepts user information for what kind of fitness test they want, creates the fitness test, and then guides them through each exercise, allowing them to add or remove tracked exercises after the test.
     * `testexercise` is the fitness test for a single exercise with a given exercise ID (A number between 1 and around 1000).
     * `workout` allows a user to start a workout and then pause, save, or quit, in any order.
@@ -40,6 +40,10 @@ The server, API, and testing infrastructure is described above.
 Our main focus in this iteration was the development of the API routes. Our biggest changes can be found in server.py and our documentation for what functions our API works with and how to call those functions through the API can be found in our API/templates/index.html file. This is hosted on our server at http://138.197.49.155:8000/. We also did some more database infrastructure work. The database is hosted at http://138.197.49.155:5000/. Additionally, we helped the other groups get set up using the database and API.
 
 Additionally, we began creating a basic iOS app interface, though this was not our main focus for this iteration. We expect to have this much more fully developed in the next iteration as more back-end work has completed been developed.
+
+Implementing the API routes in server.py was handled by Alex. Documentation was handled by Chris. Test inputs for the API acceptance tests were provided by individuals from each of the other departments.
+
+#### Who Did What
 
 Implementing the API routes in server.py was handled by Alex. Documentation was handled by Chris. Test inputs for the API acceptance tests were provided by individuals from each of the other departments.
 
