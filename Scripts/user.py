@@ -225,5 +225,4 @@ class User(object):
         return False
 
 if __name__ == '__main__':
-    user = User(1, "lucio", 167, 150, 1996, [], [], [], [], [])
-    print(user)
+    user = User(1, "Alex", 167, 150, 1996, [], [], [], [], [])
