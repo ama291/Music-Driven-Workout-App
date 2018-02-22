@@ -35,7 +35,7 @@ def getUser(uid):
     birthyear = res['birthyear']
     goals = jsonpickle.decode(res['goals'])
     themes = jsonpickle.decode(res['themes'])
-    competitions = []
+    competitions = jsonpickle.decode(res['competition'])
     inProgressWorkouts = jsonpickle.decode(res['inProgressWorkouts'])
     savedWorkouts = jsonpickle.decode(res['savedWorkouts'])
     user = User(ID, spotifyUsername, height, weight, birthyear, goals, themes, competitions, inProgressWorkouts, savedWorkouts)
@@ -231,7 +231,6 @@ def workoutsSaved(uid):
     else:
         return r.json()['Result'][0][0]
 
-
 def addGoal(uid, goal):
     """
     :param uid: user ID
@@ -266,12 +265,36 @@ def removeGoal(uid, goal):
         sql = "UPDATE users SET goals = %s WHERE id = %s""" % (goalString, uid)
         r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
         if r.json()['Status'] == 'Success':
-    
+
             return SUCCESS
         else:
             return DB_FAILURE
     else:
         return FAILURE
+
+def goalsSaved(uid):
+    """
+    :param uid: user ID
+    :return: json string of saved goals
+    """
+    query = 'SELECT goals FROM users where id = %s' % str(uid)
+    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
+    if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
+        return '{}'
+    else:
+        return r.json()['Result'][0][0]
+
+def themesSaved(uid):
+    """
+    :param uid: user ID
+    :return: json string of saved themes
+    """
+    query = 'SELECT themes FROM users where id = %s' % str(uid)
+    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
+    if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
+        return '{}'
+    else:
+        return r.json()['Result'][0][0]
 
 def addTheme(uid, theme):
     """
@@ -288,7 +311,7 @@ def addTheme(uid, theme):
     sql = "UPDATE users SET themes = %s WHERE id = %s" % (themeString, uid)
     r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
     if r.json()['Status'] == 'Success':
-    
+
         return SUCCESS
     else:
         return DB_FAILURE
@@ -305,7 +328,7 @@ def removeTheme(uid, theme):
         sql = "UPDATE users SET themes = %s WHERE id = %s" % (themeString, uid)
         r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
         if r.json()['Status'] == 'Success':
-    
+
             return SUCCESS
         else:
             return DB_FAILURE
@@ -314,8 +337,6 @@ def removeTheme(uid, theme):
 
 def addCompetition(uid, competition):
     """
-    to be used in iteration2
-    
     :param uid: user ID
     :param competition: competition to add
     """
@@ -324,29 +345,30 @@ def addCompetition(uid, competition):
         return DB_FAILURE
 
     user.addCompetition(competition)
+    print(user.competitions)
+    print("^ user competitions")
     compString = "\'" + jsonpickle.encode(user.competitions) + "\'"
-    sql = "UPDATE users SET competition = %s WHERE id = %s" % (compString, uid)
+    sql = "UPDATE users SET competitions = %s WHERE id = %s" % (compString, uid)
+    print(dbURL)
+    print(sql)
     r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
+    print(r.json())
     if r.json()['Status'] == 'Success':
-   
         return SUCCESS
     else:
         return DB_FAILURE
 
 def removeCompetition(uid, competition):
     """
-    to be used in iteration2
-    
     :param uid: user ID
     :param competition: competition to remove
     """
     user = getUser(uid)
     if(user.removeCompetition(competition)):
         compString = "\'" + jsonpickle.encode(user.competitions) + "\'"
-        sql = "UPDATE users SET competition = %s WHERE id = %s" % (compString, uid)
+        sql = "UPDATE users SET competitions = %s WHERE id = %s" % (compString, uid)
         r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
         if r.json()['Status'] == 'Success':
-
             return SUCCESS
         else:
             return DB_FAILURE
