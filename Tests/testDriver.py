@@ -10,8 +10,8 @@ from Scripts.driver import getUser, addGoal, removeGoal, goalsSaved, themesSaved
 For testing driver.py
 """
 
-# dbURL = 'http://138.197.49.155:5000/api/database/'
-dbURL = 'http://138.197.49.155:5000/api/testdb/'
+dbURL = 'http://138.197.49.155:5000/api/database/'
+# dbURL = 'http://138.197.49.155:5000/api/testdb/'
 
 key = 'SoftCon2018'
 
@@ -19,15 +19,15 @@ class TestDriver(unittest.TestCase):
 
     def test(self):
         ##test getUser
-        r = requests.post(dbURL, data = {'query': "UPDATE users SET goals='[]',themes='[]',competitions='[]' where id=1", 'key': key})
-        #print(r.json()) #clear goals,themes,competitions for testUser for consistent testing
+        r = requests.post(dbURL, data = {'query': "UPDATE users SET goals='[]',themes='[]', where id=1", 'key': key})
+        #clear goals,themes,competitions for testUser for consistent testing
 
         testUser = getUser(1)
         self.assertEqual(testUser.ID,1)
         self.assertEqual(testUser.spotifyUsername,"Alex")
         self.assertEqual(testUser.goals,[])
         self.assertEqual(testUser.themes,[])
-        self.assertEqual(testUser.competitions,[]) #confirm that the values are cleared
+        #self.assertEqual(testUser.competitions,[]) #confirm that the values are cleared
         # self.assertEqual(testUser.inProgressWorkouts, [])
         # self.assertEqual(testUser.savedWorkouts, [])
 
@@ -42,10 +42,10 @@ class TestDriver(unittest.TestCase):
         self.assertEqual(removeGoal(1,goal1),2) #FAILURE because user has no goals
 
         ##test goalsSaved
-        print(goalsSaved(1))
+        self.assertEqual(goalsSaved(1),'[]')
 
         ##test themesSaved
-        print(themesSaved(1))
+        self.assertEqual(themesSaved(1),'[]')
 
         ##test addTheme
         theme1 = Theme("beyonce theme","beyonce",5)
@@ -57,14 +57,15 @@ class TestDriver(unittest.TestCase):
         self.assertEqual(removeTheme(1,theme1),2) #FAILURE because user has no themes
 
         ##test addCompetition
-        print(getUser(1))
-        competition1 = Competition("Race", "Who will get 1st", "02-05-18")
-        self.assertEqual(addCompetition(1,competition1),0)
-        self.assertTrue(competition1 in getUser(1).competitions)
-
-        ##test removeCompetition
-        self.assertEqual(removeCompetition(1,competition1),0)
-        self.assertEqual(removeCompetition(1,competition1),2) #FAILURE because user has no competitions
+        # To be implemented if extra time
+        # print(getUser(1))
+        # competition1 = Competition("Race", "Who will get 1st", "02-05-18")
+        # self.assertEqual(addCompetition(1,competition1),0)
+        # self.assertTrue(competition1 in getUser(1).competitions)
+        #
+        # ##test removeCompetition
+        # self.assertEqual(removeCompetition(1,competition1),0)
+        # self.assertEqual(removeCompetition(1,competition1),2) #FAILURE because user has no competitions
 
 if __name__ == '__main__':
     unittest.main()

@@ -207,7 +207,7 @@ class User(object):
             return False
         else:
             self.themes.append(theme)
-            return True 
+            return True
 
     def removeTheme(self, theme):
         if theme in self.themes:

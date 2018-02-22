@@ -35,10 +35,12 @@ def getUser(uid):
     birthyear = res['birthyear']
     goals = jsonpickle.decode(res['goals'])
     themes = jsonpickle.decode(res['themes'])
-    competitions = jsonpickle.decode(res['competition'])
+    competitions = []
+    #competitions = jsonpickle.decode(res['competitions'])
     inProgressWorkouts = jsonpickle.decode(res['inProgressWorkouts'])
     savedWorkouts = jsonpickle.decode(res['savedWorkouts'])
     user = User(ID, spotifyUsername, height, weight, birthyear, goals, themes, competitions, inProgressWorkouts, savedWorkouts)
+
     return user
 
 
