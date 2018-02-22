@@ -115,24 +115,24 @@ def getPreviousResults(userID, exID):
     data = {"userid": userID, "exid": exID, "key": key}
     return json.loads(makeRequest(route, data))
 
-def addGoal(uid, goal):
+def addGoal(uid, goalName, goalDescription, goalNum, categories, muscleGroups, duration, daysPerWeek, notify):
     route = "/api/goals/addgoal/"
-    data = {"userid": uid, "goals": goal, "key": key}
+    data = {"userid": uid, "goalname": goalName, "goaldescription": goalDescription, "goalnum": goalNum, "categories": categories, "musclegroups": muscleGroups, "duration": duration, "daysperweek": daysPerWeek, "notify": notify, "key": key}
     return jsonpickle.decode(makeRequest(route, data))
 
-def removeGoal(uid, goal):
+def removeGoal(uid, goalName, goalDescription, goalNum, categories, muscleGroups, duration, daysPerWeek, notify):
     route = "/api/goals/removegoal/"
-    data = {"userid": uid, "goals": goal, "key": key}
+    data = {"userid": uid, "goalname": goalName, "goaldescription": goalDescription, "goalnum": goalNum, "categories": categories, "musclegroups": muscleGroups, "duration": duration, "daysperweek": daysPerWeek, "notify": notify, "key": key}
     return jsonpickle.decode(makeRequest(route, data))
 
-def addTheme(uid, themes):
+def addTheme(uid, themeName, theme, numWorkouts):
     route = "/api/themes/addtheme/"
-    data = {"userid": uid, "themes": themes, "key": key}
+    data = {"userid": uid, "themename": themeName, "theme": theme, "numworkouts": numWorkouts, "key": key}
     return jsonpickle.decode(makeRequest(route, data))
 
-def removeTheme(uid, themes):
-    route = "/api/themes/removegoal/"
-    data = {"userid": uid, "themes": theme, "key": key}
+def removeTheme(uid, themeName, theme, numWorkouts):
+    route = "/api/themes/removetheme/"
+    data = {"userid": uid, "themename": themeName, "theme": theme, "numworkouts": numWorkouts, "key": key}
     return jsonpickle.decode(makeRequest(route, data))
 
 if __name__ == '__main__':
