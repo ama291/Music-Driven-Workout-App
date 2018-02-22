@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from Scripts.user import User
+from Scripts.goal import Goal
 from Scripts.dbfunctions import getResponseDict, getResponseDictList, testDB, realDB
 import requests
 import jsonpickle
@@ -233,12 +234,16 @@ def workoutsSaved(uid):
     else:
         return r.json()['Result'][0][0]
 
-def addGoal(uid, goal):
+def addGoal(uid, name, description, goalNum, categories, muscleGroups,\
+     duration, daysPerWeek, notify):
+    
     """
     :param uid: user ID
     :param goal: goal to add
     :return: 0 - success, 1 - failure to add to goals in db
     """
+    goal = Goal(name, description, goalNum, categories, \
+        muscleGroups, duration, daysPerWeek, notify)
     user = getUser(uid)
     if user is None:
         return DB_FAILURE
@@ -376,3 +381,6 @@ def removeCompetition(uid, competition):
             return DB_FAILURE
     else:
         return FAILURE
+
+if __name__ == '__main__':
+    print(getUser(1))

@@ -19,6 +19,7 @@ def makeRequest(route, data):
     return res["Result"]
 
 def toBool(string):
+    string = string.lower()
     assert string in ["true", "false"]
     if string == "true":
         return True
@@ -106,9 +107,19 @@ def getPreviousResults(userID, exID):
     data = {"userid": userID, "exid": exID, "key": key}
     return json.loads(makeRequest(route, data))
 
-def addGoal(uid, goal):
+def addGoal(uid, name, description, goalNum, categories, \
+     muscleGroups, duration, daysPerWeek, notify):
     route = "/api/goals/addgoal/"
-    data = {"userid": uid, "goals": goal, "key": key}
+    data = {"userid": uid, 
+        "name": name,
+        "description": description,
+        "goalnum": goalNum,
+        "categories": categories,
+        "musclegroups": muscleGroups,
+        "duration": duration,
+        "daysperweek": daysPerWeek,
+        "notify": notify,
+        "key": key}
     return jsonpickle.decode(makeRequest(route, data))
 
 def removeGoal(uid, goal):
@@ -127,46 +138,49 @@ def removeTheme(uid, themes):
     return jsonpickle.decode(makeRequest(route, data))
 
 if __name__ == '__main__':
-    workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
-    print("\nGet Workouts")
-    print(workout)
-    print("\nStart Workout")
-    print(startWorkout(1, workout))
-    print("\nPause Workout")
-    print(pauseWorkout(1, 0))
-    print("\nQuit Workout")
-    print(quitWorkout(1, 0))
-    print("\nSave Workout")
-    print(saveWorkout(1, 0))
-    print("\nUnsave Workout")
-    print(unsaveWorkout(1, 0))
-    print("\nStart Saved Workout")
-    print(startSavedWorkout(1, 0))
+    print("\nAdd goal")
+    print(addGoal(1, "goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True))
 
-    ## TODO: The following things may not be working
-    # Start saved workout breaks on workouts that haven't been saved
-    # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
-    print("\nWorkouts Saved")
-    saved = workoutsSaved(0)
-    print(saved)
-    print(type(saved))
-    # print("\nWorkouts In Progress\n", workoutsInProgress(0))
+    # workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
+    # print("\nGet Workouts")
+    # print(workout)
+    # print("\nStart Workout")
+    # print(startWorkout(1, workout))
+    # print("\nPause Workout")
+    # print(pauseWorkout(1, 0))
+    # print("\nQuit Workout")
+    # print(quitWorkout(1, 0))
+    # print("\nSave Workout")
+    # print(saveWorkout(1, 0))
+    # print("\nUnsave Workout")
+    # print(unsaveWorkout(1, 0))
+    # print("\nStart Saved Workout")
+    # print(startSavedWorkout(1, 0))
 
-    print("\nIs Tracked")
-    print(isTracked(1,12))
-    print("\nIs Tracked")
-    print(isTracked(1,123))
-    cats = ["Strength", "Cardio"]
-    print("\nget ftiness test")
-    print(getFitnessTest(cats, 4, [12, 144]))
-    print("\nToggle tracked")
-    print(toggleTracked(1,12))
-    print(toggleTracked(1,12))
-    print("\nGet tracked exercises")
-    print(getTrackedExercises(1, cats))
-    print("\nGet Exercise from ID")
-    print(getExerciseFromID(12))
-    print("\nGet User Exercises")
-    print(getUserExercises(1))
-    print("\nGet Previous Results")
-    print(getPreviousResults(1,12))
+    # ## TODO: The following things may not be working
+    # # Start saved workout breaks on workouts that haven't been saved
+    # # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
+    # print("\nWorkouts Saved")
+    # saved = workoutsSaved(0)
+    # print(saved)
+    # print(type(saved))
+    # # print("\nWorkouts In Progress\n", workoutsInProgress(0))
+
+    # print("\nIs Tracked")
+    # print(isTracked(1,12))
+    # print("\nIs Tracked")
+    # print(isTracked(1,123))
+    # cats = ["Strength", "Cardio"]
+    # print("\nget ftiness test")
+    # print(getFitnessTest(cats, 4, [12, 144]))
+    # print("\nToggle tracked")
+    # print(toggleTracked(1,12))
+    # print(toggleTracked(1,12))
+    # print("\nGet tracked exercises")
+    # print(getTrackedExercises(1, cats))
+    # print("\nGet Exercise from ID")
+    # print(getExerciseFromID(12))
+    # print("\nGet User Exercises")
+    # print(getUserExercises(1))
+    # print("\nGet Previous Results")
+    # print(getPreviousResults(1,12))
