@@ -4,7 +4,7 @@ import requests
 from Scripts.exercise import Exercise
 from Scripts.dbfunctions import testDB, realDB
 
-dbURL = testDB
+dbURL = realDB
 #from Scripts.userexercise import UserExercise
 class Workout(object):
     def __init__(self, uid, themes, categories, muscleGroups, equipment, duration, difficulty):

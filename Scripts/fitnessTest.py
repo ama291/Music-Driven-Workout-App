@@ -6,7 +6,7 @@ from Scripts.log import Log
 from Scripts.dbfunctions import key, dbCategories, getColumnNames, \
   getResponseDictList, getResponseDict, testDB, realDB
 
-dbURL = testDB
+dbURL = realDB
 
 def countExercises(category):
     """
