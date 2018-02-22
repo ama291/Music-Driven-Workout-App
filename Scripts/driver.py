@@ -347,5 +347,3 @@ def removeCompetition(uid, competition):
             return DB_FAILURE
     else:
         return FAILURE
-
-print(workoutsSaved(0))
