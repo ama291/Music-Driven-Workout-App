@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from Scripts.user import User
+from Scripts.dbfunctions import getResponseDict, getResponseDictList, testDB, realDB
 import requests
 import jsonpickle
 import sqlite3
@@ -9,6 +10,7 @@ SUCCESS = 0
 DB_FAILURE = 1
 FAILURE = 2
 
+dbURL = testDB
 """
 Collection of functions that help Users interact with the database
 """
@@ -19,22 +21,24 @@ def getUser(uid):
     :return: User instance, None if error or user does not exist
     """
     query = 'SELECT * FROM users where id = %s' % str(uid)
-    r = requests.post('http://138.197.49.155:5000/api/database/', data = {'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data = {'query': query, 'key': 'SoftCon2018'})
 
     if r.json()['Status'] != 'Success' or len(r.json()['Result']) == 0:
         return None
 
     dbEntry = r.json()['Result'][0]
-    ID = dbEntry[0]
-    name = dbEntry[1]
-    tracked = jsonpickle.decode(dbEntry[2])
-    untracked = jsonpickle.decode(dbEntry[3])
-    goals = jsonpickle.decode(dbEntry[4])
-    themes = jsonpickle.decode(dbEntry[5])
-    competitions = jsonpickle.decode(dbEntry[6])
-    inProgressWorkouts = jsonpickle.decode(dbEntry[7])
-    savedWorkouts = jsonpickle.decode(dbEntry[8])
-    user = User(ID, name, tracked, untracked, goals, themes, competitions, inProgressWorkouts, savedWorkouts)
+    res = getResponseDict(dbURL, dbEntry, "users")
+    ID = res['id']
+    spotifyUsername = res['spotifyUsername']
+    height = res['height']
+    weight = res['weight']
+    birthyear = res['birthyear']
+    goals = jsonpickle.decode(res['goals'])
+    themes = jsonpickle.decode(res['themes'])
+    competitions = []
+    inProgressWorkouts = jsonpickle.decode(res['inProgressWorkouts'])
+    savedWorkouts = jsonpickle.decode(res['savedWorkouts'])
+    user = User(ID, spotifyUsername, height, weight, birthyear, goals, themes, competitions, inProgressWorkouts, savedWorkouts)
     return user
 
 
@@ -46,7 +50,7 @@ def updateInProgressWorkouts(user):
     inProgress = "\'" + jsonpickle.encode(user.inProgressWorkouts) + "\'"
     query = 'UPDATE users SET inProgressWorkouts = %s where id = %s' % (inProgress, str(user.ID))
 
-    r = requests.post('http://138.197.49.155:5000/api/database/', data={'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
     if r.json()['Status'] == 'Success':
         return SUCCESS
     else:
@@ -62,7 +66,7 @@ def updateAllWorkouts(user):
     saved = "\'" + jsonpickle.encode(user.savedWorkouts) + "\'"
     query = 'UPDATE users SET inProgressWorkouts = %s, savedWorkouts = %s where id = %s' % (inProgress, saved, str(user.ID))
 
-    r = requests.post('http://138.197.49.155:5000/api/database/', data={'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
     if r.json()['Status'] == 'Success':
         return SUCCESS
     else:
@@ -109,6 +113,7 @@ def startWorkout(uid, workout):
         return updateInProgressWorkouts(user)
     else:
         return FAILURE
+
 
 
 def startSavedWorkout(uid, wid):
@@ -207,7 +212,7 @@ def workoutsInProgress(uid):
     :return: json string of in progress workouts
     """
     query = 'SELECT inProgressWorkouts FROM users where id = %s' % str(uid)
-    r = requests.post('http://138.197.49.155:5000/api/database/', data={'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
     if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
         return '{}'
     else:
@@ -220,7 +225,7 @@ def workoutsSaved(uid):
     :return: json string of saved workouts
     """
     query = 'SELECT savedWorkouts FROM users where id = %s' % str(uid)
-    r = requests.post('http://138.197.49.155:5000/api/database/', data={'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
     if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
         return '{}'
     else:
@@ -242,7 +247,7 @@ def addGoal(uid, goal):
     goalString = jsonpickle.encode(user.goals)
     goalString = "\'" + goalString + "\'"
     sql = "UPDATE users SET goals = %s WHERE id = %d" % (goalString, uid)
-    r = requests.post('http://138.197.49.155:5000/api/database/', data = {'query': sql, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
     if r.json()['Status'] == 'Success':
 
         return SUCCESS
@@ -259,7 +264,7 @@ def removeGoal(uid, goal):
     if(user.removeGoal(goal)):
         goalString = "\'" + jsonpickle.encode(user.goals) + "\'"
         sql = "UPDATE users SET goals = %s WHERE id = %s""" % (goalString, uid)
-        r = requests.post('http://138.197.49.155:5000/api/database/', data = {'query': sql, 'key': 'SoftCon2018'})
+        r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
         if r.json()['Status'] == 'Success':
     
             return SUCCESS
@@ -281,7 +286,7 @@ def addTheme(uid, theme):
     user.addTheme(theme)
     themeString = "\'" + jsonpickle.encode(user.themes) + "\'"
     sql = "UPDATE users SET themes = %s WHERE id = %s" % (themeString, uid)
-    r = requests.post('http://138.197.49.155:5000/api/database/', data = {'query': sql, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
     if r.json()['Status'] == 'Success':
     
         return SUCCESS
@@ -298,7 +303,7 @@ def removeTheme(uid, theme):
     if(user.removeTheme(theme)):
         themeString = "\'" + jsonpickle.encode(user.themes) + "\'"
         sql = "UPDATE users SET themes = %s WHERE id = %s" % (themeString, uid)
-        r = requests.post('http://138.197.49.155:5000/api/database/', data = {'query': sql, 'key': 'SoftCon2018'})
+        r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
         if r.json()['Status'] == 'Success':
     
             return SUCCESS
@@ -321,7 +326,7 @@ def addCompetition(uid, competition):
     user.addCompetition(competition)
     compString = "\'" + jsonpickle.encode(user.competitions) + "\'"
     sql = "UPDATE users SET competition = %s WHERE id = %s" % (compString, uid)
-    r = requests.post('http://138.197.49.155:5000/api/database/', data = {'query': sql, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
     if r.json()['Status'] == 'Success':
    
         return SUCCESS
@@ -339,7 +344,7 @@ def removeCompetition(uid, competition):
     if(user.removeCompetition(competition)):
         compString = "\'" + jsonpickle.encode(user.competitions) + "\'"
         sql = "UPDATE users SET competition = %s WHERE id = %s" % (compString, uid)
-        r = requests.post('http://138.197.49.155:5000/api/database/', data = {'query': sql, 'key': 'SoftCon2018'})
+        r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
         if r.json()['Status'] == 'Success':
 
             return SUCCESS
