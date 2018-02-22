@@ -74,21 +74,21 @@ Database Changes
 
 We have made the following changes to the `users` table in our database, and we have made the consequent changes to the User class, tests, and `getUser` function in `driver.py`
 
-|Column             |Type        |Change              |
-|-----------------------------------------------------|
-|id                 |INTEGER     |INTEGER PRIMARY KEY |
-|name               |VCHAR(50)   |\[remove\]          |
-|spotifyUsername    |VCHAR(50)   |\[add\]             |
-|height             |INT         |\[add\]             |
-|weight             |INT         |\[add\]             |
-|birthyear          |YEAR        |\[add\]             |
-|tracked            |VCHAR(9999) |\[remove\]          |
-|untracked          |VCHAR(9999) |\[remove\]          |
-|goals              |VCHAR(9999) |                    |
-|themes             |VCHAR(9999) |                    |
-|competition        |VCHAR(9999) |INT FOREIGN KEY REF |
-|inProgressWorkouts |VCHAR(9999) |                    |
-|savedWorkouts      |VCHAR(9999) |                    |
+| Column             | Type        | Change              |
+| ------------------ |------------ | --------------------|
+| id                 | INTEGER     | INTEGER PRIMARY KEY |
+| name               | VCHAR(50)   | \[remove\]          |
+| spotifyUsername    | VCHAR(50)   | \[add\]             |
+| height             | INT         | \[add\]             |
+| weight             | INT         | \[add\]             |
+| birthyear          | YEAR        | \[add\]             |
+| tracked            | VCHAR(9999) | \[remove\]          |
+| untracked          | VCHAR(9999) | \[remove\]          |
+| goals              | VCHAR(9999) |                     |
+| themes             | VCHAR(9999) |                     |
+| competition        | VCHAR(9999) | INT FOREIGN KEY REF |
+| inProgressWorkouts | VCHAR(9999) |                     |
+| savedWorkouts      | VCHAR(9999) |                     |
 
 UserExercises table
 -------------------
@@ -100,14 +100,14 @@ Competitions table
 
 If the goals/themes/competitions group has time to implement competitions, they will make a new table with the following rows. This is a lower priority, however, and this group will focus first on helping out with getting the Spotify SDK set up, and doing themes and goals.
 
-|Column              |Type                 |
-|------------------------------------------|
-|id                  |INT PRIMARY KEY      |
-|name                |VCHAR(50)            |
-|description         |VCHAR(50)            |
-|members             |INT FOREIGN KEY REFS |
-|admins              |INT FOREIGN KEY REFS |
-|startDate           |DATE                 |
-|endDate             |DATE                 |
-|exercises           |INT FOREIGN KEY REFS |
-|Winner (maybe)      |INT FOREIGN KEY REF  |
+| Column              | Type                 |
+| ------------------- | -------------------- |
+| id                  | INT PRIMARY KEY      |
+| name                | VCHAR(50)            |
+| description         | VCHAR(50)            |
+| members             | INT FOREIGN KEY REFS |
+| admins              | INT FOREIGN KEY REFS |
+| startDate           | DATE                 |
+| endDate             | DATE                 |
+| exercises           | INT FOREIGN KEY REFS |
+| Winner (maybe)      | INT FOREIGN KEY REF  |
