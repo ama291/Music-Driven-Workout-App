@@ -78,7 +78,7 @@ class TestFitnessTest(unittest.TestCase):
         data = ft.processMotionData(ID, 12, time, data)
         tolerance = 0.1
         actual_rate = (17.0 / 30.0)
-        diff = abs(actual_rate - data)
+        diff = abs(actual_rate - data["rate"])
         self.assertTrue(diff < tolerance)
         #TODO: Add check that this is in the database
 
@@ -87,6 +87,20 @@ class TestFitnessTest(unittest.TestCase):
          {"id":140, "userID":1, "exID":144, "timestamp":'2012-12-12 12:18:12', "rate":30.5, "tracked":0}]
         self.assertEqual(ft.getPreviousResults(1, 144), expected)
         self.assertEqual(ft.getPreviousResults(1, 1065), [])
+
+        lvl, up = ft.getLevel(0, 5)
+        self.assertFalse(up)
+        self.assertEqual(lvl, 0)
+        lvl, up = ft.getLevel(1, 5)
+        self.assertEqual(lvl, 1)
+        self.assertTrue(up)
+        lvl, up = ft.getLevel(7, 5)
+        self.assertEqual(lvl, 2)
+        self.assertFalse(up)
+        self.assertEqual(ft.countUserExercises(1), 9)
+        lvl, up = ft.getLevelFromUser(1, 4)
+        self.assertEqual(lvl, 3)
+        self.assertTrue(up)
 
 if __name__ == '__main__':
     unittest.main()

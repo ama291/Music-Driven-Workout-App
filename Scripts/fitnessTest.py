@@ -2,6 +2,7 @@ import requests
 from random import randint
 import json
 from datetime import datetime
+from math import ceil
 from Scripts.log import Log
 from Scripts.dbfunctions import key, dbCategories, getColumnNames, \
   getResponseDictList, getResponseDict, testDB, realDB
@@ -173,7 +174,8 @@ def processMotionData(userID, exID, timestamp, rawdata):
     log = Log(rawdata, data=True)
     rate = log.getFrequency()
     addExercise(userID, exID, timestamp, rate)
-    return rate
+    level, leveledUp = getLevel(userID, 5)
+    return {"rate":rate , "level":level, "leveledUp":leveledUp}
 
 
 ## Add route
@@ -193,3 +195,23 @@ def toggleTracked(userID, exID, clear=False):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     return trackBit
+
+def countUserExercises(userID):
+    query = "SELECT count(*) FROM userexercises WHERE userID = %d" % userID
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    count = r.json()["Result"][0][0]
+    return count
+
+def getLevel(count, levelGap):
+    level = int(ceil(float(count) / levelGap))
+    if count % levelGap == 1:
+        leveledUp = True
+    else:
+        leveledUp = False
+    return level, leveledUp
+
+
+def getLevelFromUser(userID, levelGap):
+    count = countUserExercises(userID)
+    return getLevel(count, levelGap)
