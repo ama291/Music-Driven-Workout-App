@@ -83,8 +83,8 @@ class TestFitnessTest(unittest.TestCase):
         #TODO: Add check that this is in the database
 
         ## test getting previous results
-        expected = [{"id":139, "userID":1, "exID":144, "timestamp":'2012-12-12 12:12:12', "rate":30.5, "tracked":0}, \
-         {"id":140, "userID":1, "exID":144, "timestamp":'2012-12-12 12:18:12', "rate":30.5, "tracked":0}]
+        expected = [{"id":139, "userID":1, "exID":144, "timestamp":'2012-12-12 12:12:12', "rate":30.5, "tracked":0, "exact": None}, \
+         {"id":140, "userID":1, "exID":144, "timestamp":'2012-12-12 12:18:12', "rate":30.5, "tracked":0, "exact": None}]
         self.assertEqual(ft.getPreviousResults(1, 144), expected)
         self.assertEqual(ft.getPreviousResults(1, 1065), [])
 
