@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     var player: SPTAudioStreamingController?
     var loginUrl: URL?
     
+    @IBOutlet weak var loginButton: UIButton!
+    
     func setup() {
         SPTAuth.defaultInstance().clientID = "8f81031574b54170a24a3a1afab27578"
         SPTAuth.defaultInstance().redirectURL = URL(string: "https://example.com/callback/")
@@ -34,14 +36,14 @@ class ViewController: UIViewController {
             
             
             self.player = SPTAudioStreamingController.sharedInstance()
-            self.player!.playbackDelegate = self
-            self.player!.delegate = self
+            self.player!.playbackDelegate = self as! SPTAudioStreamingPlaybackDelegate
+            self.player!.delegate = self as! SPTAudioStreamingDelegate
             try! player?.start(withClientId: auth.clientID)
             self.player!.login(withAccessToken: authSession.accessToken)
         }
     }
     
-    func updateAfterFirstLogin () {
+    @objc func updateAfterFirstLogin () {
         
         loginButton.isHidden = true
         let userDefaults = UserDefaults.standard
@@ -77,7 +79,7 @@ class ViewController: UIViewController {
         performSegue(withIdentifier: "exerciseSegue", sender: self)
     }
     
-    @IBAction func loginBtnPressed(_ sender: Any) {
+    @IBAction func loginButtonPressed(_ sender: Any) {
         if UIApplication.shared.openURL(loginUrl!) {
             if auth.canHandle(auth.redirectURL) {
     // To do - build in error handling
