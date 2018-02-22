@@ -5,7 +5,7 @@ from regex import split
 # from Scripts.fitnessTest import ...
 # from Scripts.driver import ...
 from CLI.apiCalls import isTracked, toggleTracked, getFitnessTest, getTrackedExercises,\
- getExerciseFromID, getUserExercises, getPreviousResults
+ getExerciseFromID, getUserExercises, getPreviousResults, getWorkout
 
 dbURL = "http://138.197.49.155:5000/api/database/"
 key = "SoftCon2018"
@@ -101,8 +101,30 @@ def fitnessTest():
     click.echo("Done with fitness test")
 
 
+def promptNext(options):
+    string = "What do you want to do next?\n"
+    i = 1
+    for opt in options:
+        string += "\t%d -- %s\n" % (i, opt)
+    click.prompt(string)
+
+def CLIgetWorkout():
+    userID = click.prompt("Enter userID", type=int)
+    equipment = ["Body Only", "Kettlebells"]
+    duration = 60
+    difficulty = "Beginner"
+    categories = ["Cardio","Stretching"]
+    workout = getWorkout(userID, equipment, duration, difficulty, categories=categories)
+    promptNext(["pause"])
+
+
+@click.command()
+def workout():
+    CLIgetWorkout()
+
 cli.add_command(testExercise)
 cli.add_command(fitnessTest)
+cli.add_command(workout)
 
 def main():
     cli()

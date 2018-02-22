@@ -122,6 +122,14 @@ def addUser(dbURL, spotifyUsername, height, weight, birthyear, goals, themes, \
     print(r.json())
     return True
 
+def modifyRow(dbURL, table, colName, newVal, ID):
+    query = "UPDATE %s SET %s = '%s' WHERE id = %d" % (table, colName, newVal, ID)
+    print(query)
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    print(r.json())
+    return r.json()
+
 def getUserBySpotifyUsername(dbURL, spotifyUsername):
     query = "SELECT * FROM users WHERE spotifyUsername = '%s'" % spotifyUsername
     r = requests.post(dbURL, data = {'query':query, 'key':key})
@@ -150,6 +158,8 @@ if __name__ == '__main__':
     # dropTable(testDB, "users")
     # createUsersTable()
     # addUser(testDB, "Alex", 167, 150, 1996, [], [], [], [], [])
+    # modifyRow(testDB, "users", "inProgressWorkouts", "{}", 1)
+    # modifyRow(testDB, "users", "savedWorkouts", "{}", 1)
     print(getUserBySpotifyUsername(testDB, "Alex"))
     getRowIDsFromSpotifyUsernames(testDB)
     removeDuplicates(testDB, "exercises", "name")
