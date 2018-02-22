@@ -354,6 +354,6 @@ def removeCompetition(uid, competition):
         return FAILURE
 
 if __name__ == '__main__':
-    print(getUser(1))
-    workout = getWorkout(1, [], [], [], [], 60, "Beginner")
-    # print(startWorkout(1, workout))
+    user = getUser(1)
+    print(user)
+    print(getResponseDict(realDB, user, "users"))
