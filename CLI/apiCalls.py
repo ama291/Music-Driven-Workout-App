@@ -3,17 +3,8 @@ import json
 import jsonpickle
 from sys import argv
 
-################################################################
-#
-#  usage:
-#    local: python -m CLI.apiCalls "http://127.0.0.1:5000"
-#    remote: python -m CLI.apiCalls "http://138.197.49.155:8000"
-#
-################################################################
-
-# apiIP = argv[1]
-apiIP = "http://138.197.49.155:8000"
-# apiIP = "http://127.0.0.1:5000"
+# apiIP = "http://138.197.49.155:8000"
+apiIP = "http://127.0.0.1:5000"
 key = "SoftCon2018"
 
 def getURL(rootURL, route):
@@ -28,7 +19,6 @@ def makeRequest(route, data):
     return res["Result"]
 
 def toBool(string):
-    print(string)
     assert string in ["true", "false"]
     if string == "true":
         return True
@@ -38,14 +28,15 @@ def toBool(string):
 def getWorkout(uid, equipment, duration, difficulty, categories=None, muscleGroups=None, themes=None):
     route = "/api/workouts/getworkout/"
     data = {"userid": uid, "equipment": equipment, "duration": duration, "difficulty": difficulty, "categories": categories, "musclegroups": muscleGroups, "themes": themes, "key": key}
-    return jsonpickle.decode(makeRequest(route, data))
+    workout = json.loads(jsonpickle.decode(makeRequest(route, data)))
+    return workout
 
 def startWorkout(uid, workout):
     route = "/api/workouts/startworkout/"
-    data = {"userid": uid, "workout": workout, "key": key}
+    data = {"userid": uid, "workout": json.dumps(workout), "key": key}
     return int(makeRequest(route, data))
 
-def pauseWorkout(uid, wid, pausedOn):
+def pauseWorkout(uid, wid):
     route = "/api/workouts/pauseworkout/"
     data = {"userid": uid, "workoutid": wid, "key": key}
     return int(makeRequest(route, data))
@@ -73,12 +64,12 @@ def startSavedWorkout(uid, wid):
 def workoutsSaved(uid):
     route = "/api/workouts/workoutssaved/"
     data = {"userid": uid, "key": key}
-    return jsonpickle.decode(makeRequest(route, data))
+    return json.loads(jsonpickle.decode(makeRequest(route, data)))
 
 def workoutsInProgress(uid):
     route = "/api/workouts/workoutsinprogress/"
     data = {"userid": uid, "key": key}
-    return jsonpickle.decode(makeRequest(route, data))
+    return json.loads(jsonpickle.decode(makeRequest(route, data)))
 
 def isTracked(userID, exID):
     route = "/api/fitness/istracked/"
@@ -151,13 +142,13 @@ if __name__ == '__main__':
     print(unsaveWorkout(0, 0))
     print("\nStart Saved Workout")
     print(startSavedWorkout(0, 0))
-
     ## TODO: The following things may not be working
     # Start saved workout breaks on workouts that haven't been saved
     # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
-    # print("\nWorkouts Saved\n", workoutsSaved(0))
-    # print("\nWorkouts In Progress\n", workoutsInProgress(0))
-
+    print("\nWorkouts Saved")
+    saved = workoutsSaved(0)
+    print(saved)
+    print(type(saved))
     print("\nIs Tracked")
     print(isTracked(1,12))
     print("\nIs Tracked")
@@ -166,6 +157,7 @@ if __name__ == '__main__':
     print("\nget ftiness test")
     print(getFitnessTest(cats, 4, [12, 144]))
     print("\nToggle tracked")
+    print(toggleTracked(1,12))
     print(toggleTracked(1,12))
     print("\nGet tracked exercises")
     print(getTrackedExercises(1, cats))

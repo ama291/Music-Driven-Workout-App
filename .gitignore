@@ -9,8 +9,6 @@ ehthumbs.db
 Thumbs.db
 __pycache__
 *.pyc
-
-#VENV#
-######
 env/
-API/__pycache__
+*.db
+click

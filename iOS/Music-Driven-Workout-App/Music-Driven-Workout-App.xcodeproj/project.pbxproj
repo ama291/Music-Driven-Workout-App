@@ -1,0 +1,624 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		11AF5E29202D42D2004EB40B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E28202D42D2004EB40B /* AppDelegate.swift */; };
+		11AF5E2B202D42D2004EB40B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E2A202D42D2004EB40B /* ViewController.swift */; };
+		11AF5E2E202D42D2004EB40B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11AF5E2C202D42D2004EB40B /* Main.storyboard */; };
+		11AF5E30202D42D2004EB40B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11AF5E2F202D42D2004EB40B /* Assets.xcassets */; };
+		11AF5E33202D42D2004EB40B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11AF5E31202D42D2004EB40B /* LaunchScreen.storyboard */; };
+		11AF5E3E202D42D2004EB40B /* Music_Driven_Workout_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E3D202D42D2004EB40B /* Music_Driven_Workout_AppTests.swift */; };
+		11AF5E49202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E48202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift */; };
+		11F9ABEB2033E593007F217C /* AccelerometerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F9ABEA2033E593007F217C /* AccelerometerTest.swift */; };
+		4C860B97203DF86D00176A96 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C860B94203DF86D00176A96 /* SpotifyAuthentication.framework */; };
+		4C860B98203DF86D00176A96 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C860B95203DF86D00176A96 /* SpotifyAudioPlayback.framework */; };
+		4C860B99203DF86D00176A96 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C860B96203DF86D00176A96 /* SpotifyMetadata.framework */; };
+		D87D00EE203CEDB000A97449 /* AmaticSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D87D00EB203CEDB000A97449 /* AmaticSC-Regular.ttf */; };
+		D87D00F2203CEEA500A97449 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D87D00F1203CEEA500A97449 /* background.jpg */; };
+		D87D00F4203CEF2200A97449 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11AF5E34202D42D2004EB40B /* Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		11AF5E3A202D42D2004EB40B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 11AF5E1D202D42D2004EB40B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11AF5E24202D42D2004EB40B;
+			remoteInfo = "Music-Driven-Workout-App";
+		};
+		11AF5E45202D42D2004EB40B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 11AF5E1D202D42D2004EB40B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 11AF5E24202D42D2004EB40B;
+			remoteInfo = "Music-Driven-Workout-App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		11AF5E25202D42D2004EB40B /* Music-Driven-Workout-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music-Driven-Workout-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11AF5E28202D42D2004EB40B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		11AF5E2A202D42D2004EB40B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		11AF5E2D202D42D2004EB40B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		11AF5E2F202D42D2004EB40B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		11AF5E32202D42D2004EB40B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		11AF5E34202D42D2004EB40B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11AF5E39202D42D2004EB40B /* Music-Driven-Workout-AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Music-Driven-Workout-AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11AF5E3D202D42D2004EB40B /* Music_Driven_Workout_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music_Driven_Workout_AppTests.swift; sourceTree = "<group>"; };
+		11AF5E3F202D42D2004EB40B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11AF5E44202D42D2004EB40B /* Music-Driven-Workout-AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Music-Driven-Workout-AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11AF5E48202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music_Driven_Workout_AppUITests.swift; sourceTree = "<group>"; };
+		11AF5E4A202D42D2004EB40B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11F9ABEA2033E593007F217C /* AccelerometerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerTest.swift; sourceTree = "<group>"; };
+		4C860B94203DF86D00176A96 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyAuthentication.framework; path = "../../../../Downloads/ios-sdk-master/SpotifyAuthentication.framework"; sourceTree = "<group>"; };
+		4C860B95203DF86D00176A96 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyAudioPlayback.framework; path = "../../../../Downloads/ios-sdk-master/SpotifyAudioPlayback.framework"; sourceTree = "<group>"; };
+		4C860B96203DF86D00176A96 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyMetadata.framework; path = "../../../../Downloads/ios-sdk-master/SpotifyMetadata.framework"; sourceTree = "<group>"; };
+		4C860B9A203DF8D200176A96 /* Music-Driven-Workout-App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Music-Driven-Workout-App-Bridging-Header.h"; sourceTree = "<group>"; };
+		D87D00EB203CEDB000A97449 /* AmaticSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Regular.ttf"; sourceTree = "<group>"; };
+		D87D00F1203CEEA500A97449 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		D87D00F3203CEEF900A97449 /* AmaticSC-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Bold.ttf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		11AF5E22202D42D2004EB40B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C860B97203DF86D00176A96 /* SpotifyAuthentication.framework in Frameworks */,
+				4C860B98203DF86D00176A96 /* SpotifyAudioPlayback.framework in Frameworks */,
+				4C860B99203DF86D00176A96 /* SpotifyMetadata.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11AF5E36202D42D2004EB40B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11AF5E41202D42D2004EB40B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		11AF5E1C202D42D2004EB40B = {
+			isa = PBXGroup;
+			children = (
+				11AF5E27202D42D2004EB40B /* Music-Driven-Workout-App */,
+				11AF5E3C202D42D2004EB40B /* Music-Driven-Workout-AppTests */,
+				11AF5E47202D42D2004EB40B /* Music-Driven-Workout-AppUITests */,
+				11AF5E26202D42D2004EB40B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		11AF5E26202D42D2004EB40B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				11AF5E25202D42D2004EB40B /* Music-Driven-Workout-App.app */,
+				11AF5E39202D42D2004EB40B /* Music-Driven-Workout-AppTests.xctest */,
+				11AF5E44202D42D2004EB40B /* Music-Driven-Workout-AppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		11AF5E27202D42D2004EB40B /* Music-Driven-Workout-App */ = {
+			isa = PBXGroup;
+			children = (
+				4C860B9A203DF8D200176A96 /* Music-Driven-Workout-App-Bridging-Header.h */,
+				4C860B93203DF86D00176A96 /* Frameworks */,
+				D87D00DE203CE09600A97449 /* img */,
+				D87D00D9203CD22D00A97449 /* fonts */,
+				11AF5E28202D42D2004EB40B /* AppDelegate.swift */,
+				11AF5E2A202D42D2004EB40B /* ViewController.swift */,
+				11AF5E2C202D42D2004EB40B /* Main.storyboard */,
+				11AF5E2F202D42D2004EB40B /* Assets.xcassets */,
+				11AF5E31202D42D2004EB40B /* LaunchScreen.storyboard */,
+				11AF5E34202D42D2004EB40B /* Info.plist */,
+				11F9ABEA2033E593007F217C /* AccelerometerTest.swift */,
+			);
+			path = "Music-Driven-Workout-App";
+			sourceTree = "<group>";
+		};
+		11AF5E3C202D42D2004EB40B /* Music-Driven-Workout-AppTests */ = {
+			isa = PBXGroup;
+			children = (
+				11AF5E3D202D42D2004EB40B /* Music_Driven_Workout_AppTests.swift */,
+				11AF5E3F202D42D2004EB40B /* Info.plist */,
+			);
+			path = "Music-Driven-Workout-AppTests";
+			sourceTree = "<group>";
+		};
+		11AF5E47202D42D2004EB40B /* Music-Driven-Workout-AppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				11AF5E48202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift */,
+				11AF5E4A202D42D2004EB40B /* Info.plist */,
+			);
+			path = "Music-Driven-Workout-AppUITests";
+			sourceTree = "<group>";
+		};
+		4C860B93203DF86D00176A96 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C860B95203DF86D00176A96 /* SpotifyAudioPlayback.framework */,
+				4C860B94203DF86D00176A96 /* SpotifyAuthentication.framework */,
+				4C860B96203DF86D00176A96 /* SpotifyMetadata.framework */,
+			);
+			name = Frameworks;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		D87D00D9203CD22D00A97449 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D87D00EB203CEDB000A97449 /* AmaticSC-Regular.ttf */,
+				D87D00F3203CEEF900A97449 /* AmaticSC-Bold.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		D87D00DE203CE09600A97449 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				D87D00F1203CEEA500A97449 /* background.jpg */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		11AF5E24202D42D2004EB40B /* Music-Driven-Workout-App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11AF5E4D202D42D2004EB40B /* Build configuration list for PBXNativeTarget "Music-Driven-Workout-App" */;
+			buildPhases = (
+				11AF5E21202D42D2004EB40B /* Sources */,
+				11AF5E22202D42D2004EB40B /* Frameworks */,
+				11AF5E23202D42D2004EB40B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Music-Driven-Workout-App";
+			productName = "Music-Driven-Workout-App";
+			productReference = 11AF5E25202D42D2004EB40B /* Music-Driven-Workout-App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		11AF5E38202D42D2004EB40B /* Music-Driven-Workout-AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11AF5E50202D42D2004EB40B /* Build configuration list for PBXNativeTarget "Music-Driven-Workout-AppTests" */;
+			buildPhases = (
+				11AF5E35202D42D2004EB40B /* Sources */,
+				11AF5E36202D42D2004EB40B /* Frameworks */,
+				11AF5E37202D42D2004EB40B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				11AF5E3B202D42D2004EB40B /* PBXTargetDependency */,
+			);
+			name = "Music-Driven-Workout-AppTests";
+			productName = "Music-Driven-Workout-AppTests";
+			productReference = 11AF5E39202D42D2004EB40B /* Music-Driven-Workout-AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		11AF5E43202D42D2004EB40B /* Music-Driven-Workout-AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11AF5E53202D42D2004EB40B /* Build configuration list for PBXNativeTarget "Music-Driven-Workout-AppUITests" */;
+			buildPhases = (
+				11AF5E40202D42D2004EB40B /* Sources */,
+				11AF5E41202D42D2004EB40B /* Frameworks */,
+				11AF5E42202D42D2004EB40B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				11AF5E46202D42D2004EB40B /* PBXTargetDependency */,
+			);
+			name = "Music-Driven-Workout-AppUITests";
+			productName = "Music-Driven-Workout-AppUITests";
+			productReference = 11AF5E44202D42D2004EB40B /* Music-Driven-Workout-AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		11AF5E1D202D42D2004EB40B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "UChicago SoftCon";
+				TargetAttributes = {
+					11AF5E24202D42D2004EB40B = {
+						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
+						ProvisioningStyle = Automatic;
+					};
+					11AF5E38202D42D2004EB40B = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 11AF5E24202D42D2004EB40B;
+					};
+					11AF5E43202D42D2004EB40B = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 11AF5E24202D42D2004EB40B;
+					};
+				};
+			};
+			buildConfigurationList = 11AF5E20202D42D2004EB40B /* Build configuration list for PBXProject "Music-Driven-Workout-App" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 11AF5E1C202D42D2004EB40B;
+			productRefGroup = 11AF5E26202D42D2004EB40B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				11AF5E24202D42D2004EB40B /* Music-Driven-Workout-App */,
+				11AF5E38202D42D2004EB40B /* Music-Driven-Workout-AppTests */,
+				11AF5E43202D42D2004EB40B /* Music-Driven-Workout-AppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		11AF5E23202D42D2004EB40B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D87D00EE203CEDB000A97449 /* AmaticSC-Regular.ttf in Resources */,
+				11AF5E33202D42D2004EB40B /* LaunchScreen.storyboard in Resources */,
+				D87D00F4203CEF2200A97449 /* Info.plist in Resources */,
+				D87D00F2203CEEA500A97449 /* background.jpg in Resources */,
+				11AF5E30202D42D2004EB40B /* Assets.xcassets in Resources */,
+				11AF5E2E202D42D2004EB40B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11AF5E37202D42D2004EB40B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11AF5E42202D42D2004EB40B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		11AF5E21202D42D2004EB40B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11AF5E2B202D42D2004EB40B /* ViewController.swift in Sources */,
+				11F9ABEB2033E593007F217C /* AccelerometerTest.swift in Sources */,
+				11AF5E29202D42D2004EB40B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11AF5E35202D42D2004EB40B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11AF5E3E202D42D2004EB40B /* Music_Driven_Workout_AppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		11AF5E40202D42D2004EB40B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11AF5E49202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		11AF5E3B202D42D2004EB40B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11AF5E24202D42D2004EB40B /* Music-Driven-Workout-App */;
+			targetProxy = 11AF5E3A202D42D2004EB40B /* PBXContainerItemProxy */;
+		};
+		11AF5E46202D42D2004EB40B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 11AF5E24202D42D2004EB40B /* Music-Driven-Workout-App */;
+			targetProxy = 11AF5E45202D42D2004EB40B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		11AF5E2C202D42D2004EB40B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				11AF5E2D202D42D2004EB40B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		11AF5E31202D42D2004EB40B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				11AF5E32202D42D2004EB40B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		11AF5E4B202D42D2004EB40B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		11AF5E4C202D42D2004EB40B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		11AF5E4E202D42D2004EB40B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CVZ9L9KY25;
+				INFOPLIST_FILE = "Music-Driven-Workout-App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Music-Driven-Workout-App-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		11AF5E4F202D42D2004EB40B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CVZ9L9KY25;
+				INFOPLIST_FILE = "Music-Driven-Workout-App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Music-Driven-Workout-App-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		11AF5E51202D42D2004EB40B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CVZ9L9KY25;
+				INFOPLIST_FILE = "Music-Driven-Workout-AppTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Music-Driven-Workout-App.app/Music-Driven-Workout-App";
+			};
+			name = Debug;
+		};
+		11AF5E52202D42D2004EB40B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CVZ9L9KY25;
+				INFOPLIST_FILE = "Music-Driven-Workout-AppTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Music-Driven-Workout-App.app/Music-Driven-Workout-App";
+			};
+			name = Release;
+		};
+		11AF5E54202D42D2004EB40B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CVZ9L9KY25;
+				INFOPLIST_FILE = "Music-Driven-Workout-AppUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Music-Driven-Workout-App";
+			};
+			name = Debug;
+		};
+		11AF5E55202D42D2004EB40B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CVZ9L9KY25;
+				INFOPLIST_FILE = "Music-Driven-Workout-AppUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Music-Driven-Workout-App";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		11AF5E20202D42D2004EB40B /* Build configuration list for PBXProject "Music-Driven-Workout-App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11AF5E4B202D42D2004EB40B /* Debug */,
+				11AF5E4C202D42D2004EB40B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		11AF5E4D202D42D2004EB40B /* Build configuration list for PBXNativeTarget "Music-Driven-Workout-App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11AF5E4E202D42D2004EB40B /* Debug */,
+				11AF5E4F202D42D2004EB40B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		11AF5E50202D42D2004EB40B /* Build configuration list for PBXNativeTarget "Music-Driven-Workout-AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11AF5E51202D42D2004EB40B /* Debug */,
+				11AF5E52202D42D2004EB40B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		11AF5E53202D42D2004EB40B /* Build configuration list for PBXNativeTarget "Music-Driven-Workout-AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				11AF5E54202D42D2004EB40B /* Debug */,
+				11AF5E55202D42D2004EB40B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 11AF5E1D202D42D2004EB40B /* Project object */;
+}

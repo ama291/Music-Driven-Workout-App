@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #from Scripts.user import User
 
-class Competition:
+class Competition(object):
     def __init__(self, name, description, date):
         self.name = name
         self.description = description
@@ -12,7 +12,7 @@ class Competition:
         self.winners = [] #multiple winners in case of ties
 
     def __repr__(self):
-        string = "Competition: %s: %s - %r with participants %s" % (self.name, self.description, self.date, self.completed, self.participants)
+        string = "Competition: %s: %s - %r %r with participants %s" % (self.name, self.description, self.date, self.completed, self.participants)
         return string
 
     def __eq__(self, other):

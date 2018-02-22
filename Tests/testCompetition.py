@@ -1,4 +1,3 @@
-#testing example
 import unittest
 from Scripts.competition import Competition
 from Scripts.user import User
