@@ -18,7 +18,6 @@
 		4C860B97203DF86D00176A96 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C860B94203DF86D00176A96 /* SpotifyAuthentication.framework */; };
 		4C860B98203DF86D00176A96 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C860B95203DF86D00176A96 /* SpotifyAudioPlayback.framework */; };
 		4C860B99203DF86D00176A96 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C860B96203DF86D00176A96 /* SpotifyMetadata.framework */; };
-		4C860B9D203DF8D300176A96 /* BridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C860B9C203DF8D300176A96 /* BridgeViewController.m */; };
 		D87D00EE203CEDB000A97449 /* AmaticSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D87D00EB203CEDB000A97449 /* AmaticSC-Regular.ttf */; };
 		D87D00F2203CEEA500A97449 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D87D00F1203CEEA500A97449 /* background.jpg */; };
 		D87D00F4203CEF2200A97449 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11AF5E34202D42D2004EB40B /* Info.plist */; };
@@ -60,8 +59,6 @@
 		4C860B95203DF86D00176A96 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyAudioPlayback.framework; path = "../../../../Downloads/ios-sdk-master/SpotifyAudioPlayback.framework"; sourceTree = "<group>"; };
 		4C860B96203DF86D00176A96 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyMetadata.framework; path = "../../../../Downloads/ios-sdk-master/SpotifyMetadata.framework"; sourceTree = "<group>"; };
 		4C860B9A203DF8D200176A96 /* Music-Driven-Workout-App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Music-Driven-Workout-App-Bridging-Header.h"; sourceTree = "<group>"; };
-		4C860B9B203DF8D300176A96 /* BridgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeViewController.h; sourceTree = "<group>"; };
-		4C860B9C203DF8D300176A96 /* BridgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BridgeViewController.m; sourceTree = "<group>"; };
 		D87D00EB203CEDB000A97449 /* AmaticSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Regular.ttf"; sourceTree = "<group>"; };
 		D87D00F1203CEEA500A97449 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 		D87D00F3203CEEF900A97449 /* AmaticSC-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Bold.ttf"; sourceTree = "<group>"; };
@@ -98,14 +95,10 @@
 		11AF5E1C202D42D2004EB40B = {
 			isa = PBXGroup;
 			children = (
-				4C860B9B203DF8D300176A96 /* BridgeViewController.h */,
-				4C860B9C203DF8D300176A96 /* BridgeViewController.m */,
 				11AF5E27202D42D2004EB40B /* Music-Driven-Workout-App */,
 				11AF5E3C202D42D2004EB40B /* Music-Driven-Workout-AppTests */,
 				11AF5E47202D42D2004EB40B /* Music-Driven-Workout-AppUITests */,
 				11AF5E26202D42D2004EB40B /* Products */,
-				4C860B93203DF86D00176A96 /* Frameworks */,
-				4C860B9A203DF8D200176A96 /* Music-Driven-Workout-App-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,6 +115,8 @@
 		11AF5E27202D42D2004EB40B /* Music-Driven-Workout-App */ = {
 			isa = PBXGroup;
 			children = (
+				4C860B9A203DF8D200176A96 /* Music-Driven-Workout-App-Bridging-Header.h */,
+				4C860B93203DF86D00176A96 /* Frameworks */,
 				D87D00DE203CE09600A97449 /* img */,
 				D87D00D9203CD22D00A97449 /* fonts */,
 				11AF5E28202D42D2004EB40B /* AppDelegate.swift */,
@@ -161,6 +156,7 @@
 				4C860B96203DF86D00176A96 /* SpotifyMetadata.framework */,
 			);
 			name = Frameworks;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		D87D00D9203CD22D00A97449 /* fonts */ = {
@@ -319,7 +315,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				11AF5E2B202D42D2004EB40B /* ViewController.swift in Sources */,
-				4C860B9D203DF8D300176A96 /* BridgeViewController.m in Sources */,
 				11F9ABEB2033E593007F217C /* AccelerometerTest.swift in Sources */,
 				11AF5E29202D42D2004EB40B /* AppDelegate.swift in Sources */,
 			);
