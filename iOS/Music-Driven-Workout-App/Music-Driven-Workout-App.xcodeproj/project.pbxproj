@@ -56,7 +56,7 @@
 		11AF5E48202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music_Driven_Workout_AppUITests.swift; sourceTree = "<group>"; };
 		11AF5E4A202D42D2004EB40B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11F9ABEA2033E593007F217C /* AccelerometerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerTest.swift; sourceTree = "<group>"; };
-		4C860B9A203DF8D200176A96 /* Music-Driven-Workout-App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Music-Driven-Workout-App-Bridging-Header.h"; sourceTree = "<group>"; };
+		4C860B9A203DF8D200176A96 /* spotifysdk-demo-bridging-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "spotifysdk-demo-bridging-header.h"; sourceTree = "<group>"; };
 		4CE2AA97203F717B00A55F29 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyAudioPlayback.framework; path = "../../../../../Downloads/ios-sdk-master/SpotifyAudioPlayback.framework"; sourceTree = "<group>"; };
 		4CE2AA98203F717B00A55F29 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyAuthentication.framework; path = "../../../../../Downloads/ios-sdk-master/SpotifyAuthentication.framework"; sourceTree = "<group>"; };
 		4CE2AA99203F717B00A55F29 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpotifyMetadata.framework; path = "../../../../../Downloads/ios-sdk-master/SpotifyMetadata.framework"; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 				4CE2AA98203F717B00A55F29 /* SpotifyAuthentication.framework */,
 				4CE2AA99203F717B00A55F29 /* SpotifyMetadata.framework */,
 				4C860B93203DF86D00176A96 /* Frameworks */,
-				4C860B9A203DF8D200176A96 /* Music-Driven-Workout-App-Bridging-Header.h */,
+				4C860B9A203DF8D200176A96 /* spotifysdk-demo-bridging-header.h */,
 				D87D00DE203CE09600A97449 /* img */,
 				D87D00D9203CD22D00A97449 /* fonts */,
 				11AF5E28202D42D2004EB40B /* AppDelegate.swift */,
@@ -493,7 +493,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Music-Driven-Workout-App/Music-Driven-Workout-App/Music-Driven-Workout-App-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = BridgeViewController.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -511,7 +511,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Music-Driven-Workout-App/Music-Driven-Workout-App/Music-Driven-Workout-App-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = BridgeViewController.h;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
