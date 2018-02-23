@@ -1,6 +1,13 @@
 Iteration 2 Front End Design
 ============================
 
+The UI design has been reached by each of the back end groups working collaboratively with the front end group.
+
+Overall UI Design
+-----------------
+
+A working sketch of our user interface flow can be found [here](https://docs.google.com/drawings/d/1D-Ky7AeJO76EZFbQIF8An-GPB5pjLO9zqRpSkIncV6Q/edit?usp=sharing)
+
 Workouts
 --------
 
