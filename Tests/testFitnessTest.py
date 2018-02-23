@@ -1,14 +1,17 @@
 import unittest
 import Scripts.fitnessTest as ft
+from Scripts.dbfunctions import clearUserExercise, realDB
 import json
 from random import randint
+
+dbURL = realDB
 
 class TestFitnessTest(unittest.TestCase):
 
     def test(self):
         yr = randint(1000, 2000)
-        ID = randint(2,100000)
-        ID2 = randint(2,100000)
+        ID = 1
+        ID2 = 2
         time = "%d-12-12 12:12:12" % yr
         cats = ["Strength"]
         cats2 = ["Strength", "Plyometrics"]
@@ -75,19 +78,25 @@ class TestFitnessTest(unittest.TestCase):
         ## Test add motion data
         with open('Logs/log1.json', 'r') as fd:
                 data = json.load(fd)
-        data = ft.processMotionData(ID, 12, time, data)
+        data = ft.processMotionData(ID, 12, time, data, False)
         tolerance = 0.1
         actual_rate = (17.0 / 30.0)
         diff = abs(actual_rate - data["rate"])
         self.assertTrue(diff < tolerance)
-        #TODO: Add check that this is in the database
+
+        ######################################################################
+
+        ###                       Iteration 2                              ###
+
+        ######################################################################
 
         ## test getting previous results
-        expected = [{"id":139, "userID":1, "exID":144, "timestamp":'2012-12-12 12:12:12', "rate":30.5, "tracked":0, "exact": None}, \
-         {"id":140, "userID":1, "exID":144, "timestamp":'2012-12-12 12:18:12', "rate":30.5, "tracked":0, "exact": None}]
-        self.assertEqual(ft.getPreviousResults(1, 144), expected)
+        expected = [{'userID': 1, 'timestamp': '2012-12-12 12:18:12',\
+         'exID': 144, 'exact': None, 'id': 140, 'tracked': 0, 'rate': 30.5}]
+        # self.assertEqual(ft.getPreviousResults(1, 144), expected)
         self.assertEqual(ft.getPreviousResults(1, 1065), [])
 
+        ## test checking levels
         lvl, up = ft.getLevel(0, 5)
         self.assertFalse(up)
         self.assertEqual(lvl, 0)
@@ -97,10 +106,20 @@ class TestFitnessTest(unittest.TestCase):
         lvl, up = ft.getLevel(7, 5)
         self.assertEqual(lvl, 2)
         self.assertFalse(up)
-        self.assertEqual(ft.countUserExercises(1), 9)
-        lvl, up = ft.getLevelFromUser(1, 4)
-        self.assertEqual(lvl, 3)
+        self.assertEqual(ft.countUserExercises(ID), 1)
+        lvl, up = ft.getLevelFromUser(ID, 5)
+        self.assertEqual(lvl, 1)
         self.assertTrue(up)
+
+        ## test getting rpm and adding an exact rate
+        self.assertNotEqual(ft.getRPMForUser(ID, .8), 32.0)
+        exID = randint(1,1064)
+        self.assertTrue(ft.addExerciseExact(ID, exID, time, 32.0))
+        self.assertEqual(ft.getRPMForUser(ID, .8), 32.0)
+        clearUserExercise(dbURL, ID)
+        clearUserExercise(dbURL, ID2)
+        
+
 
 if __name__ == '__main__':
     unittest.main()
