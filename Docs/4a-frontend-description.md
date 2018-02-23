@@ -49,7 +49,7 @@ This has already been implemented in the first iteration.
 1.  Button to “Begin” collecting data
 2.  Partly for the purpose of testing (2) and (3) quickly, add “Skip exercise” button that will not run the 30-second script/timer
 3.  Run my Swift script to collect JSON log
-4.  Display a timer to the user for 30 seconds (can be skipped for now)
+4.  Display a timer to the user for 30 seconds
 5.  Call processMotionData, (Scripts.fitnessTest, Scripts.log, Tests.testLog) passing a timestamp and the raw motion data
 6.  Display result (API call returns string for the rate)
 
@@ -97,16 +97,3 @@ Goals/themes/competitions
 1.  On the list of current themes, clicking one gives option to remove
 2.  Calls driver.removeTheme passing the theme clicked
 3.  Themes should not appear on themes list
-
-### Join a competition (this can be implemented later in iteration 2)
-
-1.  Have a “Join Competition” button
-2.  Maybe have three built in competitions 1, 2, and 3
-3.  Click one and calls driver.addCompetition passing in the clicked competition
-4.  Competition’s name should now show up under a section called “Current Competitions” (See the Overleaf doc for our UI Design)
-
-### Remove a competition (this can be implemented later in iteration 2)
-
-1.  Under “Current Competitions”, click one listed. Option to remove appears
-2.  Calls driver.removeCompetition passing selected competition
-3.  Competition should be removed from “Current Competitions”
