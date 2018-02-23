@@ -23,7 +23,7 @@ Workouts
 ### Working out
 
 1.  The Exercise page displays similar information to the cells in the Workout Summary page, though it also displays a timer counting down the remaining time of the exercise, playback information for the song currently being played, as well as "Pause/Resume", "Quit", and "Skip" (skip an exercise) buttons. During the exercise, music will be playing at an appropriate bpm (beats per minute) given the rpm (reps per minute) of the exercise.
-2.  At the end of a workout, the user has the option to either save the workout or quit the workout.
+2.  At the end of a workout, the user is brought back to the Workout Summary page where they can review the workout and decide to either save or quit the workout.
 
 ### View in progress and saved workouts
 

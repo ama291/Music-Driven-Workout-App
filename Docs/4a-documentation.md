@@ -27,6 +27,9 @@ The relevant new tests are:
 	To [get recommendations from the Spotify API](https://developer.spotify.com/web-api/get-recommendations/) we need
 	between 1 and 5 themes, spread across genres, artists, and songs. We also need to have enough music at that bpm to play
 	throughout the entire duration of the exercise.
+	* We also made some additions to the tests for startWorkout in testUser.py. Now, when a user starts a workout,
+	they will make progress on any goals that share the a category or muscle group with the started workout.
+	Once the goal is completed, it is removed from the user's goals. 
 * Fitness Test
 	* [TODO]
 * Goals, Themes, and Competitions
