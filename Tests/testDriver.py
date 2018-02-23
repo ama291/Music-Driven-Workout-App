@@ -52,7 +52,6 @@ class TestDriver(unittest.TestCase):
         difficulty = "Intermediate"
         accessToken = "example-access-token"
         workout = getWorkout(uid, themes, categories, muscleGroups, equipment, duration, difficulty, accessToken)
-        print(workout)
         wid = (jsonpickle.decode(workout)).ID
 
         # test startWorkout
