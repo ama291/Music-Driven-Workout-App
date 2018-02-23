@@ -9,19 +9,20 @@ def randrange(start, stop, step):
 
 class Exercise(object):
 
-    def __init__(self, id, name, difficulty, category, muscleGroup, equipment, images, range, increment, rpm):
-        self.id = id   
+    def __init__(self, id, name, difficulty, category, muscleGroup, equipment, images, range, increment, rpm, bpm):
+        self.id = id
         self.name = name
         self.difficulty = difficulty
         self.category = category
         self.muscleGroup = muscleGroup
         self.equipment = equipment
-        self.images = images # list of urls
+        self.images = images # single url
         self.range_start = range[0]
         self.range_end = range[1]
         self.increment = increment # valid duration increment
         self.duration = randrange(self.range_start, self.range_end, self.increment)
         self.rpm = rpm # either from exercise database or user's fitness test info
+        self.bpm = bpm
 
     def __repr__(self):
         string = "Exercise: %s for %d seconds" % (self.name, self.duration)
@@ -29,4 +30,3 @@ class Exercise(object):
 
     def __eq__(self, other):
         return self.id == other.id
-        

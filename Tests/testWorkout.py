@@ -4,15 +4,16 @@ from Scripts.exercise import Exercise
 from Scripts.user import User
 
 '''
-All excercises in the workout must have a different name (using equaliy testing will pass the same excercise with a different duration). 
-The list of excercises must be non empty and the sum of their durations should not be more than the user specified duration. 
-We will create this list in a greedy manner until the duration is filled up. Each excercise's duration is pulled randomly from a range of 
+All excercises in the workout must have a different name (using equaliy testing will pass the same excercise with a different duration).
+The list of excercises must be non empty and the sum of their durations should not be more than the user specified duration.
+We will create this list in a greedy manner until the duration is filled up. Each excercise's duration is pulled randomly from a range of
 reasonable durations determined by us and this range is entered by us into the database and saved as an excercise class variable.
 '''
 
 class TestWorkout(unittest.TestCase):
   def test(self):
     usr1 = User(1, "Alex", 167, 150, 1996, [], [], [], {}, {})
+    accessToken = "example-access-token"
 
     #category condition
     themes = None
@@ -21,7 +22,7 @@ class TestWorkout(unittest.TestCase):
     equipment = ["Body Only"]
     duration = 50
     difficulty = "Intermediate"
-    workout1 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty)
+    workout1 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty, accessToken)
 
     # test workout properties match input parameters and has exercises
     self.assertEqual(workout1.uid, usr1.ID)
@@ -31,21 +32,21 @@ class TestWorkout(unittest.TestCase):
     self.assertEqual(workout1.muscleGroups, None)
     self.assertEqual(workout1.currExercise, 0)
     self.assertTrue(len(workout1.Exercises) > 0)
-    
+
     #test exercises in workout are unique
     for i in range(len(workout1.Exercises)):
       for j in range(len(workout1.Exercises)):
         if i != j:
           self.assertFalse(workout1.Exercises[i].name == workout1.Exercises[j].name)
-    
+
     #test duration is within required range
     for i in range(len(workout1.Exercises)):
       self.assertTrue(workout1.Exercises[i].range_start <= workout1.Exercises[i].duration <= workout1.Exercises[i].range_end)
-    
+
     #test if each exercise is from the correct category
     for i in range(len(workout1.Exercises)):
       self.assertTrue(workout1.Exercises[i].category in categories)
-      
+
     #test if each exercise has correct equipment requirement
     for i in range(len(workout1.Exercises)):
       self.assertTrue(workout1.Exercises[i].equipment in equipment)
@@ -61,7 +62,7 @@ class TestWorkout(unittest.TestCase):
     equipment = ["Kettlebells", "Machine"]
     duration = 30
     difficulty = "Beginner"
-    workout2 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty)
+    workout2 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty, accessToken)
 
     # test workout properties match input parameters and has exercises
     self.assertEqual(workout2.uid, usr1.ID)
@@ -74,7 +75,7 @@ class TestWorkout(unittest.TestCase):
 
     #test array of exercises non empty
     self.assertTrue(len(workout2.Exercises) != 0)
-    
+
     #test exercises in workout are unique
     for i in range(len(workout2.Exercises)):
       for j in range(len(workout2.Exercises)):
@@ -88,11 +89,11 @@ class TestWorkout(unittest.TestCase):
     #test if each exercise is from the correct muscle group
     for i in range(len(workout2.Exercises)):
       self.assertTrue(workout2.Exercises[i].muscleGroup in muscleGroups)
-      
+
     #test if each exercise has correct equipment requirement
     for i in range(len(workout2.Exercises)):
       self.assertTrue(workout2.Exercises[i].equipment in equipment)
-      
+
     #test if each exercise has correct difficulty level
     for i in range(len(workout2.Exercises)):
       self.assertEqual(workout2.Exercises[i].difficulty,difficulty)
