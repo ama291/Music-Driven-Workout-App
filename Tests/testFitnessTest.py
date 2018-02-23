@@ -9,10 +9,9 @@ dbURL = realDB
 class TestFitnessTest(unittest.TestCase):
 
     def test(self):
-        clearUserExercise(dbURL, 1)
         yr = randint(1000, 2000)
-        ID = randint(2,100000)
-        ID2 = randint(2,100000)
+        ID = 1
+        ID2 = 2
         time = "%d-12-12 12:12:12" % yr
         cats = ["Strength"]
         cats2 = ["Strength", "Plyometrics"]
