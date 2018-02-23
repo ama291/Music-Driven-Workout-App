@@ -33,10 +33,10 @@ The relevant new tests are:
 * Fitness Test
 	* Additional fitness test tests have been added to the bottom of `testFitnessTest.py` file, and marked as Iteration 2 tests.
 * Goals, Themes, and Competitions
-	* Tests for all goals, themes, and competitions related driver.py functions have been added to testDriver.py. The competitions tests are commented out, however, since the competitions feature is lower priority than the others. 		Functions for the easy representation of goals and themes (goalsSaved, themesSaved) have been added and tested as well.
-	* As previously planned for iteration 2, the competitions class and relevant unit tests and integration with the user class have been added and tested (competition.py, testCompetition.py, testUser.py, user.py)
+	* Tests for adding and removing goals and themes related are in `testDriver.py`. Functions for the easy representation of goals and themes (goalsSaved, themesSaved) have been added and tested as well.
+	* We do not have unit tests for competitions, since this is lower priority. If we decide to implement this feature, then we will write unit tests next week.
 * Heart Rate Tests
-	* Music-Driven-Workout-App/iOS/Music-Driven-Workout-App/Music-Driven-Workout-App/ViewController.swift
+	* The relevant tests can be found in `Music-Driven-Workout-App/iOS/Music-Driven-Workout-App/Music-Driven-Workout-App/ViewController.swift`.
 
 Higher priority implementation
 ------------------------------
