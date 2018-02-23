@@ -12,6 +12,8 @@ class TestFitnessTest(unittest.TestCase):
         yr = randint(1000, 2000)
         ID = 1
         ID2 = 2
+        clearUserExercise(dbURL, ID)
+        clearUserExercise(dbURL, ID2)
         time = "%d-12-12 12:12:12" % yr
         cats = ["Strength"]
         cats2 = ["Strength", "Plyometrics"]
