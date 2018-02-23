@@ -165,15 +165,30 @@ def addExercise(userID, exID, timestamp, rate):
     assert r.status_code == requests.codes.ok
     return True
 
+## add route
+def addExerciseExact(userID, exID, timestamp, rate):
+    """
+    return (boolean): True upon success
+    """
+    exact = 1
+    query = "INSERT INTO userexercises \
+     (userID, exID, timestamp, rate, exact) \
+     VALUES (%d,%d,'%s',%f,%d)" % \
+     (userID, exID, timestamp, rate, exact)
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    return True
+
 
 ## Add route
-def processMotionData(userID, exID, timestamp, rawdata):
+def processMotionData(userID, exID, timestamp, rawdata, exact):
     """
     return (float): the rate of the exercise added
     """
     log = Log(rawdata, data=True)
     rate = log.getFrequency()
-    addExercise(userID, exID, timestamp, rate)
+    if not exact:
+        addExercise(userID, exID, timestamp, rate)
     level, leveledUp = getLevel(userID, 5)
     return {"rate":rate , "level":level, "leveledUp":leveledUp}
 
@@ -211,7 +226,24 @@ def getLevel(count, levelGap):
         leveledUp = False
     return level, leveledUp
 
-
 def getLevelFromUser(userID, levelGap):
     count = countUserExercises(userID)
     return getLevel(count, levelGap)
+
+def getRPMForUser(userID, scale):
+    query = "SELECT AVG(rate) FROM userexercises WHERE userID = %d AND exact = 1" % userID
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    res = r.json()
+    print(res)
+    assert "Result" in res
+    if res["Result"] != [[None]]:
+        return res["Result"][0][0]
+    query = "SELECT AVG(rate) FROM userexercises WHERE userID = %d" % userID
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    res = r.json()
+    print(res)
+    assert "Result" in res
+    return scale * res["Result"][0][0] 
+

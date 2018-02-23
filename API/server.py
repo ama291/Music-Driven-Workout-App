@@ -242,6 +242,7 @@ def apiWorkoutsInProgress():
 	except Exception as e:
 		return failure(str(e))
 
+
 @app.route('/api/fitness/accel/', methods=['POST'])
 def accel():
 	data = request.form.get('data')
@@ -256,6 +257,31 @@ def accel():
 		return standardRes(log1.getFrequency())
 	except Exception as e:
 		return failure(str(e))
+
+@app.route('/api/fitness/addexact/', methods=['POST'])
+def apiAddExerciseExact():
+	userID = request.form.get('userid')
+	if userID != None:
+		userID = int(userID)
+	exID = request.form.get('exid')
+	if exID != None:
+		exID = int(exID)
+	timestamp = request.form.get('timestamp')
+	rate = request.form.get('rate')
+	if rate != None:
+		rate = float(rate)
+	key = request.form.get('key')
+	params = [userID, exID, timestamp, rate, key]
+	if None in params:
+		return failure("Invalid parameters")
+	if key != masterKey:
+		return failure("Invalid authentication")
+	try:
+		response = addExerciseExact(userID, exID, timestamp, rate)
+		return standardRes(str(response))
+	except Exception as e:
+		return failure(str(e))
+
 
 @app.route('/api/fitness/tracked/', methods=['POST'])
 def apiGetTracked():
