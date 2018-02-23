@@ -112,12 +112,12 @@ class TestDriver(unittest.TestCase):
 
         ##test addTheme
         theme1 = Theme("beyonce theme","beyonce",5)
-        self.assertEqual(addTheme(uid,theme1),0) #add theme should be successful
+        self.assertEqual(addTheme(uid,"beyonce theme","beyonce",5),0) #add theme should be successful
         self.assertTrue(theme1 in getUser(uid).themes) #now new theme is in user's themes
 
         ##test removeTheme
-        self.assertEqual(removeTheme(uid,theme1),0) # success - should be able to remove recently added theme
-        self.assertEqual(removeTheme(uid,theme1),2) #FAILURE because user has no themes
+        self.assertEqual(removeTheme(uid,theme1.name),0) # success - should be able to remove recently added theme
+        self.assertEqual(removeTheme(uid,theme1.name),2) #FAILURE because user has no themes
 
         # remove user so can rerun this test script
         query = 'DELETE from users where id = %d' % uid

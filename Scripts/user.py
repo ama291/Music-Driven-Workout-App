@@ -237,6 +237,9 @@ class User(object):
             return True
         return False
 
+    def getThemeNames(self):
+        return list(map(lambda x: x.name, self.themes))
+
     def addTheme(self, theme):
         if(theme in self.themes):
             return False
@@ -244,9 +247,11 @@ class User(object):
             self.themes.append(theme)
             return True
 
-    def removeTheme(self, theme):
-        if theme in self.themes:
-            self.themes.remove(theme)
+    def removeTheme(self, name):
+        themeNames = self.getThemeNames()
+        if name in themeNames:
+            idx = themeNames.index(name)
+            del self.themes[idx]
             return True
         return False
 

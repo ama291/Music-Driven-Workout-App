@@ -175,8 +175,8 @@ class TestUser(unittest.TestCase):
 
         # test remove theme
         theme2 = Theme("Taylor Swift theme", "Taylor Swift", 5)
-        self.assertFalse(usr1.removeTheme(theme2))
-        self.assertTrue(usr1.removeTheme(theme1))
+        self.assertFalse(usr1.removeTheme(theme2.name))
+        self.assertTrue(usr1.removeTheme(theme1.name))
         self.assertFalse(theme1 in usr1.themes)
 
         # test add competition

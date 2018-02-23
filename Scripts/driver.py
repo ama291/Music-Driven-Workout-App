@@ -376,15 +376,14 @@ def addTheme(uid, themeName, theme, numWorkouts):
     else:
         return DB_FAILURE
 
-def removeTheme(uid, themeName, theme, numWorkouts):
+def removeTheme(uid, themeName):
     """
     :param uid: user ID
     :param theme: theme to remove
     :return: 0 - success, 1 - failure to update users table, 2 - theme not previously in user's themes
     """
-    theme = Theme(themeName, theme, numWorkouts)
     user = getUser(uid)
-    if(user.removeTheme(theme)):
+    if(user.removeTheme(themeName)):
         themeString = "\'" + jsonpickle.encode(user.themes) + "\'"
         sql = "UPDATE users SET themes = %s WHERE id = %d" % (themeString, uid)
         r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})

@@ -501,18 +501,14 @@ def apiRemoveTheme():
 	if (userid != None):
 		userid = int(userid)
 	themeName = request.form.get('themename')
-	theme = request.form.get('theme')
-	numWorkouts = request.form.get('numworkouts')
-	if numWorkouts != None:
-		numWorkouts = int(numWorkouts)
 	key = request.form.get('key')
-	params = [userid, themeName, theme, numWorkouts, key]
+	params = [userid, themeName, key]
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		response = removeTheme(userid, themeName, theme, numWorkouts)
+		response = removeTheme(userid, themeName)
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
