@@ -97,6 +97,27 @@ class TestWorkout(unittest.TestCase):
     #test if each exercise has correct difficulty level
     for i in range(len(workout2.Exercises)):
       self.assertEqual(workout2.Exercises[i].difficulty,difficulty)
+    '''
+    Added Tests for music recommendation
+    '''
+    #test that duration of music is greater than equal to duration of workout
+    for i in range(len(workout1.Exercises)):
+      result = workout1.getRecommendations(workout1.spotID, workout1.themes, workout1.accessToken, workout1.Exercises[i].tempo, workout1.Exercises[i].duration)
+      duration = 0
+      for j in range(len(result)):
+        duration += result['duration']
+      self.assertTrue(duration >= workout1.Exercises[i].duration)
+      
+
+
+    #test that if theme is selected, it is used for getSeeds
+    seeds = workout1.getSeeds(workout1.spotID, workout1.themes, workout1.accessToken)
+    if workout1.themes:
+      string = str(workout1.themes['type'])
+      self.assertTrue(workout1.themes['name'] in seeds[string])
+
+    #test getSeeds - 1 <= no. of artists+genres+tracks <=5
+    self.assertTrue(1 <= len(seeds['artists']) + len(seeds['genres']) + len(seeds['tracks']) <= 5)  
 
 
 if __name__ == '__main__':
