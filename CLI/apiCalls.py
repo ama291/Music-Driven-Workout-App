@@ -3,8 +3,7 @@ import json
 import jsonpickle
 from sys import argv
 
-# apiIP = argv[1]
-# apiIP = "http://138.197.49.155:8000"
+
 apiIP = "http://127.0.0.1:5000"
 key = "SoftCon2018"
 
@@ -76,7 +75,7 @@ def isTracked(userID, exID):
     route = "/api/fitness/istracked/"
     data = {"userid": userID, "exid": exID, "key": key}
     return toBool(makeRequest(route, data))
-    
+
 def getTrackedExercises(userID, categories):
     route = "/api/fitness/tracked/"
     data = {"userid": userID, "categories": categories, "key": key}
@@ -107,6 +106,25 @@ def getPreviousResults(userID, exID):
     data = {"userid": userID, "exid": exID, "key": key}
     return json.loads(makeRequest(route, data))
 
+def addGoal(uid, goal):
+    route = "/api/goals/addgoal/"
+    data = {"userid": uid, "goals": goal, "key": key}
+    return jsonpickle.decode(makeRequest(route, data))
+
+def removeGoal(uid, goal):
+    route = "/api/goals/removegoal/"
+    data = {"userid": uid, "goals": goal, "key": key}
+    return jsonpickle.decode(makeRequest(route, data))
+
+def addTheme(uid, themes):
+    route = "/api/themes/addtheme/"
+    data = {"userid": uid, "themes": themes, "key": key}
+    return jsonpickle.decode(makeRequest(route, data))
+
+def removeTheme(uid, themes):
+    route = "/api/themes/removegoal/"
+    data = {"userid": uid, "themes": theme, "key": key}
+    return jsonpickle.decode(makeRequest(route, data))
 
 if __name__ == '__main__':
     workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
@@ -133,7 +151,7 @@ if __name__ == '__main__':
     print(saved)
     print(type(saved))
     # print("\nWorkouts In Progress\n", workoutsInProgress(0))
-    
+
     print("\nIs Tracked")
     print(isTracked(1,12))
     print("\nIs Tracked")
