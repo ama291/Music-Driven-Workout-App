@@ -313,17 +313,14 @@ def addGoal(uid, name, description, goalNum, categories, muscleGroups,\
     else:
         return DB_FAILURE
 
-def removeGoal(uid, name, description, goalNum, categories, muscleGroups,\
-     duration, daysPerWeek, notify):
+def removeGoal(uid, name):
     """
     :param uid: user ID
     :param goal: goal to remove
     :return: 0 - success, 1 - failure to remove goals from db, 2 - goal never added (failed on the user's side)
     """
-    goal = Goal(name, description, goalNum, categories, \
-        muscleGroups, duration, daysPerWeek, notify)
     user = getUser(uid)
-    if(user.removeGoal(goal)):
+    if(user.removeGoal(name)):
         goalString = "\'" + jsonpickle.encode(user.goals) + "\'"
         sql = "UPDATE users SET goals = %s WHERE id = %d" % (goalString, uid)
         r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})

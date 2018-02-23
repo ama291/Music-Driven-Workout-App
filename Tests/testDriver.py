@@ -1,5 +1,6 @@
 import unittest
 import requests
+from Scripts.dbfunctions import clearUser
 from Scripts.goal import Goal
 from Scripts.user import User
 from Scripts.theme import Theme
@@ -23,6 +24,9 @@ class TestDriver(unittest.TestCase):
         # test getUserId
         username = "test-spotify-user"
         uid = getUserId(username)
+        ## in case the previous test was not successful
+        clearUser(dbURL, uid)
+
         # self.assertTrue(uid is None)
 
         # test onboarding
@@ -96,9 +100,9 @@ class TestDriver(unittest.TestCase):
         self.assertTrue(goal1 in getUser(uid).goals)
 
         ##test removeGoal
-        self.assertEqual(removeGoal(uid,goal1),0) #remove goal should be successful
+        self.assertEqual(removeGoal(uid,goal1.name),0) #remove goal should be successful
         self.assertEqual(getUser(uid).goals,[]) #now user should have no goals left
-        self.assertEqual(removeGoal(uid,goal1),2) #FAILURE because user has no goals
+        self.assertEqual(removeGoal(uid,goal1.name),2) #FAILURE because user has no goals
 
         ##test goalsSaved
         self.assertEqual(goalsSaved(uid),'[]')

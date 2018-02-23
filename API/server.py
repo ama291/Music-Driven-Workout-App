@@ -461,35 +461,14 @@ def apiRemoveGoal():
 	if (userid != None):
 		userid = int(userid)
 	name = request.form.get('name')
-	description = request.form.get('description')
-	goalNum = request.form.get('goalnum')
-	if goalNum != None:
-		goalNum = int(goalNum)
-	categories = request.form.get('categories')
-	if categories != None:
-		categories = categories.split(",")
-	muscleGroups = request.form.get('musclegroups')
-	if muscleGroups != None:
-		muscleGroups = muscleGroups.split(",")
-	duration = request.form.get('duration')
-	if duration != None:
-		duration = int(duration)
-	daysPerWeek = request.form.get('daysperweek')
-	if daysPerWeek != None:
-		daysPerWeek = int(daysPerWeek)
-	notify = request.form.get('notify')
-	if notify != None:
-		notify = toBool(notify)
 	key = request.form.get('key')
-	params = [userid, name, description, goalNum, categories, \
-	 muscleGroups, duration, daysPerWeek, notify, key]
+	params = [userid, name, key]
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		response = removeGoal(userid, name, description, goalNum, \
-		 categories, muscleGroups, duration, daysPerWeek, notify)
+		response = removeGoal(userid, name)
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
