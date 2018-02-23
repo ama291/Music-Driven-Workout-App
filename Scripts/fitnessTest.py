@@ -235,7 +235,6 @@ def getRPMForUser(userID, scale):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     res = r.json()
-    print(res)
     assert "Result" in res
     if res["Result"] != [[None]]:
         return res["Result"][0][0]
@@ -243,7 +242,6 @@ def getRPMForUser(userID, scale):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     res = r.json()
-    print(res)
     assert "Result" in res
     return scale * res["Result"][0][0] 
 

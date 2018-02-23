@@ -115,19 +115,21 @@ def addUser(dbURL, spotifyUsername, height, weight, birthyear, goals, themes, \
     valueString = "('%s', %d, %d, %d, '%s', '%s', '%s', '%s')" % (spotifyUsername, \
         height, weight, birthyear, goals, themes, inProgressWorkouts,\
         savedWorkouts)
-    print(valueString)
     query = "INSERT INTO users %s VALUES %s;" % (colsString, valueString)
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
-    print(r.json())
     return True
 
 def modifyRow(dbURL, table, colName, newVal, ID):
     query = "UPDATE %s SET %s = '%s' WHERE id = %d" % (table, colName, newVal, ID)
-    print(query)
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
-    print(r.json())
+    return r.json()
+
+def clearUserExercise(dbURL, userID):
+    query = "DELETE FROM userexercises WHERE userID = '%s'" % userID
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
     return r.json()
 
 def getUserBySpotifyUsername(dbURL, spotifyUsername):
