@@ -124,6 +124,13 @@ class TestWorkout(unittest.TestCase):
     #test getSeeds - 1 <= no. of artists+genres+tracks <=5
     self.assertTrue(1 <= len(seeds['artists']) + len(seeds['genres']) + len(seeds['tracks']) <= 5)
 
-
+    #test getBPM which gets bpm from rpm
+    for i in range(len(workout1.Exercises)):
+      rpm = workout1.Exercises[i].rpm
+      bpm = workout1.getBPM(rpm,min_beats,max_beats)
+      self.assertTrue(min_beats <= bpm <= max_beats )  #bpm is within required range
+      self.assertTrue((bpm % rpm) == 0)   #bpm is multiple of rpm
+      
+      
 if __name__ == '__main__':
   unittest.main()
