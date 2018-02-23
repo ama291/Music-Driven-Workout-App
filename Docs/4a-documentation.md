@@ -33,7 +33,8 @@ The relevant new tests are:
 * Fitness Test
 	* [TODO]
 * Goals, Themes, and Competitions
-	* [TODO]
+	* Tests for all goals, themes, and competitions related driver.py functions have been added to testDriver.py. The 	  competitions tests are commented out, however, since the competitions feature is lower priority than the others. 		Functions for the easy representation of goals and themes (goalsSaved, themesSaved) have been added and tested as 	  well.
+	* As previously planned for iteration 2, the competitions class and relevant unit tests and integration with the user 	      class have been added and tested (competition.py, testCompetition.py, testUser.py, user.py)
 
 
 Higher priority implementation
@@ -71,7 +72,7 @@ Higher priority implementation
 ### Goals, Themes, Competitions
 
 *   Spotify SDK
-*   Collecting information on which of their top Spotify songs/artists/genres they want to work out to for suggesting themes
+*   Collecting information on which of the user's top Spotify songs/artists/genres they want to work out to for suggesting themes
 *   Integrating goals and themes with workouts
 
 Lower priority
