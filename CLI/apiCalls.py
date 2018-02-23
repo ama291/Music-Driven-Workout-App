@@ -13,12 +13,12 @@ def getURL(rootURL, route):
 def makeRequest(route, data):
     url = getURL(apiIP, route)
     r = requests.post(url, data=data)
-    print("r.status_code - %s", r.status_code)
-    print("requests.codes.ok - %s", requests.codes.ok)
+    # print("r.status_code - %s", r.status_code)
+    # print("requests.codes.ok - %s", requests.codes.ok)
     assert r.status_code == requests.codes.ok
     res = r.json()
-    print("res - ")
-    print(res)
+    #print("res - ")
+    #print(res)
     assert "Result" in res
     return res["Result"]
 
@@ -162,15 +162,24 @@ def removeTheme(uid, themeName, theme, numWorkouts):
 if __name__ == '__main__':
     print("\nAdd goal")
     print(addGoal(1, "goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True))
+    print(addGoal(1, "goal1", "", 1, ['cardio'], ['abs'], 5, 5, True))
+    print(addGoal(2, "goal3", "", 1, ['cardio'], ['abs'], 5, 5, True))
+    # throws assertion error:
+    # print(addGoal(1, "goal3", "", 1, [''], [''], None, 0, True))
+    # print(addGoal(1, "goal3", "", 1, ['cardio'], ['abs'], 5, 5, None))
 
     print("\nRemove goal")
     print(removeGoal(1, "goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True))
+    print(removeGoal(1, "goal2", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True))
+    print(removeGoal(1, "goal1", "", 1, ['cardio'], ['abs'], 5, 5, True))
 
     print("\nAdd Theme")
     print(addTheme(1, "theme1", "Artist", 3))
+    print(addTheme(2, "theme3", "Song", 3))
 
     print("\nRemove Theme")
     print(removeTheme(1, "theme1", "Artist", 3))
+    print(removeTheme(1, "theme2", "Artist", 3))
 
     # workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
     # print("\nGet Workouts")

@@ -256,7 +256,6 @@ def addGoal(uid, name, description, goalNum, categories, muscleGroups,\
     sql = "UPDATE users SET goals = %s WHERE id = %d" % (goalString, uid)
     r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
     if r.json()['Status'] == 'Success':
-
         return SUCCESS
     else:
         return DB_FAILURE
@@ -340,7 +339,6 @@ def removeTheme(uid, themeName, theme, numWorkouts):
         sql = "UPDATE users SET themes = %s WHERE id = %s" % (themeString, uid)
         r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
         if r.json()['Status'] == 'Success':
-
             return SUCCESS
         else:
             return DB_FAILURE
