@@ -11,7 +11,7 @@ Basic Goals
 Tests
 -----
 
-Our Python tests are in the Tests folder of our repository. Our Swift tests are [TODO].
+Our Python tests are in the `Tests` folder of our repository. Our Swift tests are in the `iOS` folder.
 
 The relevant new tests are:
 
@@ -31,13 +31,12 @@ The relevant new tests are:
 	they will make progress on any goals that share the a category or muscle group with the started workout.
 	Once the goal is completed, it is removed from the user's goals. 
 * Fitness Test
-	* [TODO]
+	* Additional fitness test tests have been added to the bottom of `testFitnessTest.py` file, and marked as Iteration 2 tests.
 * Goals, Themes, and Competitions
-	* [TODO]
+	* Tests for all goals, themes, and competitions related driver.py functions have been added to testDriver.py. The competitions tests are commented out, however, since the competitions feature is lower priority than the others. 		Functions for the easy representation of goals and themes (goalsSaved, themesSaved) have been added and tested as well.
+	* As previously planned for iteration 2, the competitions class and relevant unit tests and integration with the user class have been added and tested (competition.py, testCompetition.py, testUser.py, user.py)
 * Heart Rate Tests
 	* Music-Driven-Workout-App/iOS/Music-Driven-Workout-App/Music-Driven-Workout-App/ViewController.swift
-* Tests for all goals, themes, and competitions related driver.py functions have been added to testDriver.py. The 	  competitions tests are commented out, however, since the competitions feature is lower priority than the others. 		Functions for the easy representation of goals and themes (goalsSaved, themesSaved) have been added and tested as 	  well.
-* As previously planned for iteration 2, the competitions class and relevant unit tests and integration with the user 	      class have been added and tested (competition.py, testCompetition.py, testUser.py, user.py)
 
 Higher priority implementation
 ------------------------------
@@ -65,13 +64,13 @@ Higher priority implementation
 ### Fitness Test
 
 *   Improve motion data processing algorithm to get more accurate frequency (Gregory)
+*	Adjust fitness test route to account for options and saving to database (Gregory)
 *   Route for previous trials (Lucy - Milestone 4a)
 *   “Add exercise” option -- variation of the fitness test where they add the exercise at the exact pace they want to do it at (Lucy)
-*   Accept muscle groups and equipment for choosing the fitness test (Lucy)
-*   Getting desired tempo for a song (Lucy)
-*   Setting level by number of fitness tests completed (Lucy)
+*   Getting desired rpm for an exercise (Lucy)
+*   Getting level by number of fitness tests completed (Lucy)
 
-### Goals, Themes, Competitions
+### Goals, Themes, Competitions (Jessica and Julia)
 
 *   Spotify SDK
 *   Collecting information on which of the user's top Spotify songs/artists/genres they want to work out to for suggesting themes
@@ -82,6 +81,7 @@ Lower priority
 
 *   Making a separate database for competitions
 *   Integrating competitions with the user experience
+*   Accept muscle groups and equipment for choosing the fitness test (Lucy)
 
 Database Changes
 ----------------
@@ -106,13 +106,11 @@ We have made the following changes to the `users` table in our database, and we 
 | inProgressWorkouts | VCHAR(9999) |                     |
 | savedWorkouts      | VCHAR(9999) |                     |
 
-UserExercises table
--------------------
+### UserExercises table
 
 We have added a column for whether a `userexercise` is intended to be interpreted as the exact time a user wants to work out at (from the new Add Exercise feature) or as a fitness test, which is done more quickly than the user may want to work out at.
 
-Competitions table
-------------------
+### Competitions table
 
 If the goals/themes/competitions group has time to implement competitions, they will make a new table with the following rows. This is a lower priority, however, and this group will focus first on helping out with getting the Spotify SDK set up, and doing themes and goals.
 
