@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SafariServices
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -17,11 +19,16 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var loginButton: UIButton!
     
-    func setup() {
-        SPTAuth.defaultInstance().clientID = "8f81031574b54170a24a3a1afab27578"
-        SPTAuth.defaultInstance().redirectURL = URL(string: "https://example.com/callback/")
-        SPTAuth.defaultInstance().requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope]
-        loginUrl = SPTAuth.defaultInstance().spotifyWebAuthenticationURL()
+
+    func setup () {
+        // insert redirect your url and client ID below
+        let redirectURL = "" // put your redirect URL here
+        let clientID = "8f81031574b54170a24a3a1afab27578" // put your client ID here
+        auth.redirectURL     = URL(string: redirectURL)
+        auth.clientID        = "8f81031574b54170a24a3a1afab27578"
+        auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope]
+        loginUrl = auth.spotifyWebAuthenticationURL()
+        
     }
     
     override func viewDidLoad() {
@@ -33,8 +40,6 @@ class ViewController: UIViewController {
     
     func initializaPlayer(authSession:SPTSession){
         if self.player == nil {
-            
-            
             self.player = SPTAudioStreamingController.sharedInstance()
             self.player!.playbackDelegate = self as! SPTAudioStreamingPlaybackDelegate
             self.player!.delegate = self as! SPTAudioStreamingDelegate
@@ -78,7 +83,7 @@ class ViewController: UIViewController {
     @IBAction func exerciseTestClicked(_ sender: Any) {
         performSegue(withIdentifier: "exerciseSegue", sender: self)
     }
-    
+
     @IBAction func loginButtonPressed(_ sender: Any) {
         if UIApplication.shared.openURL(loginUrl!) {
             if auth.canHandle(auth.redirectURL) {
