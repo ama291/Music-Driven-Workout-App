@@ -6,29 +6,25 @@ dbURL = "http://138.197.49.155:5000/api/database/"
 key = "SoftCon2018"
 
 class User(object):
-    def __init__(self, ID, name, tracked, untracked, goals,
+    def __init__(self, ID, spotifyUsername, height, weight, birthyear, goals,
          themes, competitions, inProgressWorkouts, savedWorkouts):
         self.ID = ID
-        self.name = name
-        self.tracked = tracked
-        self.untracked = untracked
+        self.spotifyUsername = spotifyUsername
+        self.height = height
+        self.weight = weight
+        self.birthyear = birthyear
         self.goals = goals
         self.themes = themes
         self.competitions = competitions
-
         # stores current and incomplete workouts
         self.inProgressWorkouts = inProgressWorkouts # key: workoutID, value: workout class instance
         # stores saved workouts, if a user wants to do the workout again
         self.savedWorkouts = savedWorkouts # key: workoutID, value: workout class instance
 
     def __repr__(self):
-        string = "User: %s\n***\nTracked:" % self.name
-        for ex in self.tracked:
-            string += "\n%s" % str(ex)
-        string += "\n***\nUntracked:"
-        for ex in self.untracked:
-            string += "\n%s" % str(ex)
-        string += "\n***"
+        string = "USER:\n"
+        for attr in self.__dict__:
+            string += "\t%s: %s\n" % (attr, str(self.__dict__[attr]))
         return string
 
     def getFitnessTest(self, categories, numExercises, tracked):
@@ -88,7 +84,7 @@ class User(object):
         del self.tracked[idx]
         self.untracked.append(uex)
 
-    def getWorkout(self, themes, categories, muscleGroups, equipment, duration, difficulty):
+    def getWorkout(self, themes, categories, muscleGroups, equipment, duration, difficulty, accessToken):
         """
         User either inputs a list of categories or a list of muscle groups
         Returns a workout based in the user's inputs
@@ -105,18 +101,8 @@ class User(object):
         (select 1)
         """
 
-        # TODO (next iteration): handle themes
-        """
-        for theme in themes:
-            t = self.themes[theme.ID]
-            t.timesUsed += 1
-            if t.timesUsed == t.numWorkouts:
-                del self.themes[theme.ID]
-            else:
-                self.themes[theme.ID] = t
-        """
-        new = Workout(self.ID, themes, categories, muscleGroups,
-                      equipment, duration, difficulty)
+        new = Workout(self.ID, self.spotifyUsername, themes, categories, muscleGroups,
+                      equipment, duration, difficulty, accessToken)
         hasGenerated = new.generateWorkout() # true if no request failures
         return new if hasGenerated else None
 
@@ -125,6 +111,25 @@ class User(object):
 
         if id not in self.inProgressWorkouts:
             self.inProgressWorkouts[id] = workout
+
+            # search through goals, see if made progress, remove if complete
+            for goal in self.goals:
+                progress = False
+                if workout.categories is not None:
+                    for c in workout.categories:
+                        if c in goal.categories:
+                            progress = True
+                            break
+                else:
+                    for m in workout.muscleGroups:
+                        if m in goal.muscleGroups:
+                            progress = True
+                            break
+                if progress:
+                    goal.makeProgress()
+                if goal.completed:
+                    self.removeGoal(goal)
+
             return True
 
         return False
@@ -133,6 +138,25 @@ class User(object):
         if id in self.savedWorkouts and id not in self.inProgressWorkouts:
             workout = self.savedWorkouts[id]
             self.inProgressWorkouts[id] = workout
+
+            # search through goals, see if made progress, remove if complete
+            for goal in self.goals:
+                progress = False
+                if workout.categories is not None:
+                    for c in workout.categories:
+                        if c in goal.categories:
+                            progress = True
+                            break
+                else:
+                    for m in workout.muscleGroups:
+                        if m in goal.muscleGroups:
+                            progress = True
+                            break
+                if progress:
+                    goal.makeProgress()
+                if goal.completed:
+                    self.removeGoal(goal)
+
             return True
 
         return False
@@ -211,7 +235,7 @@ class User(object):
             return False
         else:
             self.themes.append(theme)
-            return True 
+            return True
 
     def removeTheme(self, theme):
         if theme in self.themes:
@@ -227,3 +251,6 @@ class User(object):
             self.competitions.remove(competition)
             return True
         return False
+
+if __name__ == '__main__':
+    user = User(1, "Alex", 167, 150, 1996, [], [], [], [], [])
