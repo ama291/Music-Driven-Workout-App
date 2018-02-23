@@ -4,8 +4,8 @@ Iteration 2 Plan
 Basic Goals
 -----------
 
-*   The most important goal for this iteration is to clean up and integrate what we already have, and create a front end for it
-*   A few new features are being added as well, but integrating existing features will be prioritized
+*   The most important goal for this iteration is to clean up and integrate what we already have, and create a front end for it.
+*   A few new features are being added as well, but integrating existing features will be prioritized.
 
 
 Tests
@@ -16,7 +16,17 @@ Our Python tests are in the Tests folder of our repository. Our Swift tests are 
 The relevant new tests are:
 
 * Work Out
-	* [TODO]
+	* Tests for all workout-related driver.py functions have been added to testDriver.py. This test file
+	has been adjusted to add a new user to the users table at the beginning and delete the user at the
+	end, so it does not depend on any specific database state. As noted at the top of that file, the return
+	value 0 means success, return value 1 means there was an error in accessing or updating the database,
+	and return value 2 means an invalid action by the user.
+	* Tests related to music recommendations have been added to testWorkout.py. A list of song recommendations
+	will be retrieved for each exercise, given the bpm (beats per minute) of the exercise and the themes chosen
+	by the user (if any), or themes we have extracted from the user's Spotify data and/or Spotify's workout playlists.
+	To [get recommendations from the Spotify API](https://developer.spotify.com/web-api/get-recommendations/) we need
+	between 1 and 5 themes, spread across genres, artists, and songs. We also need to have enough music at that bpm to play
+	throughout the entire duration of the exercise.
 * Fitness Test
 	* [TODO]
 * Goals, Themes, and Competitions
@@ -41,6 +51,9 @@ Higher priority implementation
 
 
 ### Work Out
+* Create a function to map rpm of an exercise to bpm of a song.
+* Use the exercise bpm and the user's input themes (if any), or themes extracted from the user's Spotify data
+ and/or Spotify's workout playlists to...
 
 *   Basic matching of workout with tempo data
 	*   Assume that the Fitness Test group will supply you with a rate at which the user can do an exercise
