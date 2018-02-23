@@ -19,6 +19,45 @@ def index():
 def getApi():
 	return standardRes("Welcome to the API")
 
+@app.route('/api/workouts/getuserid/', methods=['POST'])
+def apiGetUserId():
+	username = request.form.get('username')
+	key = request.form.get('key')
+	params = [username, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		response = getUserId(username)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
+@app.route('/api/workouts/onboarding/', methods=['POST'])
+def apiOnboarding():
+	username = request.form.get('username')
+	height = request.form.get('height')
+	if (height != None):
+		height = int(height)
+	weight = request.form.get('weight')
+	if (weight != None):
+		weight = int(weight)
+	year = request.form.get('year')
+	if (year != None):
+		year = int(year)
+	key = request.form.get('key')
+	params = [username, height, weight, year, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		response = onboarding(username, height, weight, year)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
 @app.route('/api/workouts/getworkout/', methods=['POST'])
 def apiGetWorkout():
 	userid = request.form.get('userid')
@@ -29,8 +68,11 @@ def apiGetWorkout():
 		equipment = equipment.split(",")
 	else:
 		equipment = []
-	duration = int(request.form.get('duration'))
+	duration = request.form.get('duration')
+	if (duration != None):
+		duration = int(duration)
 	difficulty = request.form.get('difficulty')
+	accessToken = request.form.get('token')
 	cats = request.form.get('categories')
 	if (cats != None):
 		cats = cats.split(",")
@@ -41,13 +83,13 @@ def apiGetWorkout():
 	if (themes != None):
 		themes = equipment.split(",")
 	key = request.form.get('key')
-	params = [userid, duration, difficulty, key]
+	params = [userid, duration, difficulty, accessToken, key]
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		response = getWorkout(userid, themes, cats, groups, equipment, duration, difficulty)
+		response = getWorkout(userid, themes, cats, groups, equipment, duration, difficulty, accessToken)
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
@@ -76,14 +118,17 @@ def apiPauseWorkout():
 	if (userid != None):
 		userid = int(userid)
 	workoutid = request.form.get('workoutid')
+	pausedOn = request.form.get('paused')
+	if (pausedOn != None):
+		pausedOn = int(pausedOn)
 	key = request.form.get('key')
-	params = [userid, workoutid, key]
+	params = [userid, workoutid, pausedOn, key]
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		response = pauseWorkout(userid, workoutid, 0)
+		response = pauseWorkout(userid, workoutid, pausedOn)
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))

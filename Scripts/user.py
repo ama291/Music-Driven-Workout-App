@@ -84,7 +84,7 @@ class User(object):
         del self.tracked[idx]
         self.untracked.append(uex)
 
-    def getWorkout(self, themes, categories, muscleGroups, equipment, duration, difficulty):
+    def getWorkout(self, themes, categories, muscleGroups, equipment, duration, difficulty, accessToken):
         """
         User either inputs a list of categories or a list of muscle groups
         Returns a workout based in the user's inputs
@@ -101,18 +101,8 @@ class User(object):
         (select 1)
         """
 
-        # TODO (next iteration): handle themes
-        """
-        for theme in themes:
-            t = self.themes[theme.ID]
-            t.timesUsed += 1
-            if t.timesUsed == t.numWorkouts:
-                del self.themes[theme.ID]
-            else:
-                self.themes[theme.ID] = t
-        """
-        new = Workout(self.ID, themes, categories, muscleGroups,
-                      equipment, duration, difficulty)
+        new = Workout(self.ID, self.spotifyUsername, themes, categories, muscleGroups,
+                      equipment, duration, difficulty, accessToken)
         hasGenerated = new.generateWorkout() # true if no request failures
         return new if hasGenerated else None
 
@@ -121,6 +111,25 @@ class User(object):
 
         if id not in self.inProgressWorkouts:
             self.inProgressWorkouts[id] = workout
+
+            # search through goals, see if made progress, remove if complete
+            for goal in self.goals:
+                progress = False
+                if workout.categories is not None:
+                    for c in workout.categories:
+                        if c in goal.categories:
+                            progress = True
+                            break
+                else:
+                    for m in workout.muscleGroups:
+                        if m in goal.muscleGroups:
+                            progress = True
+                            break
+                if progress:
+                    goal.makeProgress()
+                if goal.completed:
+                    self.removeGoal(goal)
+
             return True
 
         return False
@@ -129,6 +138,25 @@ class User(object):
         if id in self.savedWorkouts and id not in self.inProgressWorkouts:
             workout = self.savedWorkouts[id]
             self.inProgressWorkouts[id] = workout
+
+            # search through goals, see if made progress, remove if complete
+            for goal in self.goals:
+                progress = False
+                if workout.categories is not None:
+                    for c in workout.categories:
+                        if c in goal.categories:
+                            progress = True
+                            break
+                else:
+                    for m in workout.muscleGroups:
+                        if m in goal.muscleGroups:
+                            progress = True
+                            break
+                if progress:
+                    goal.makeProgress()
+                if goal.completed:
+                    self.removeGoal(goal)
+
             return True
 
         return False
