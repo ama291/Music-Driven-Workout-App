@@ -160,3 +160,8 @@ class Workout(object):
     def getSeeds(self, spotID, themes, accessToken):
         # return {tracks: , artists:, genres: } dict
         return []
+    
+    # TODO - implement this
+    def getBPM(self,rpm,min_beats,max_beats):
+        #return bpm int
+        return[]

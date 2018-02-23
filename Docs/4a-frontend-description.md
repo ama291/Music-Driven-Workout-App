@@ -6,47 +6,31 @@ Workouts
 
 ### Get a workout
 
-1.  Navigate to Workout page from home page where user makes selections in following drop-down menus (NOTE: user can select either category or muscle groups, not both):
-	1.  Category (for now, options from “Exercise Type” in [bodybuilding.com](https://www.google.com/url?q=https://www.bodybuilding.com/exercises/finder&sa=D&ust=1519356779402000&usg=AFQjCNFU0iGztuI6R80T4ehi1VNNKri7gg)) \- can select any number
-	2.  or Muscle Groups (for now, options from “Muscles” in [bodybuilding.com](https://www.google.com/url?q=https://www.bodybuilding.com/exercises/finder&sa=D&ust=1519356779403000&usg=AFQjCNGFzIzNrR80eq9XMqGZ8BHJIyJiPg)) \- can select any number
-	3.  Equipment (options from “Equipment” in [bodybuilding.com](https://www.google.com/url?q=https://www.bodybuilding.com/exercises/finder&sa=D&ust=1519356779403000&usg=AFQjCNGFzIzNrR80eq9XMqGZ8BHJIyJiPg)) \- can select any number
-	4.  Difficulty (options “Beginner” or “Intermediate”) - select one
-	5.  Duration (options 10min to 60min, in steps of 5) - select one
-	6.  Themes (for now, leave empty and do not use)
-2.  User presses “Get Workout” button on bottom of the page (NOTE: make sure all fields have been set, with either categories or muscle groups, otherwise display alert)
-	1.  Calls driver.getWorkout with the chosen options (see driver.py for description, requires json parsing)
-		1.  Returns empty json if error, otherwise a workout json (using jsonpickle.encode on Workout instance)
-		2.  If error, display [alert](https://www.google.com/url?q=https://learnappmaking.com/uialertcontroller-alerts-swift-how-to/&sa=D&ust=1519356779404000&usg=AFQjCNHevhW02skm5oFpgY_1ZYSsdK4YRA) “Unable to get workout. Please try again.”
-		3.  If no error, app moves to workout summary page
+1.  The user navigates to the Get Workout page from main menu where they make selections in the following drop-down menus (NOTE - user can select either category or muscle groups, not both):
+	1.  Category - can select any number, at least one
+	2.  or Muscle Groups - can select any number, at least one
+	3.  Equipment - can select any number
+	4.  Difficulty - select one
+	5.  Duration - select one
+	6.  Themes - select up to 5
+2.  After making selections, the user presses “Get Workout” and they are brought to the Workout Summary page.
 
 ### Workout summary
 
-1.  Parsing the json received from step 1,
-2.  Display the workout in a [tableview](https://www.google.com/url?q=https://developer.apple.com/library/content/referencelibrary/GettingStarted/DevelopiOSAppsSwift/CreateATableView.html&sa=D&ust=1519356779405000&usg=AFQjCNFkhOGSB1cgc0d4BaoY29WMQl8CEg), where each cell has information for a single exercise (for now name, rpm, and duration is sufficient)
-3.  User can either press back button (use a Navigation controller) or “Start Workout” button on the bottom of the page
-	1.  If press “Start Workout”, call driver.startWorkout with user ID and workout json
-	2.  Check return value
-		1.  0 = success, bring to next page
-		2.  1 = database failure, display alert “Unable to start workout. Please try again.”
-		3.  2 = already in progress, display alert “Workout already in progress.”
+1.  This page displays a summary of the workout, with a cell for each exercise containing information such as exercise name, songs to be played during the exercise, equipment required, rpm, and duration.
+2.  The user can scroll through these exercises, and if they decide they like the workout they press the "Start Workout" button.  They are then walked through the workout in a series of Exercise pages.
 
 ### Working out
 
-1.  3 buttons - “Pause”, “Quit”, and “Start”
-	1.  Pause - call driver.pauseWorkout with user ID, workout ID (should have gotten from workout json in step 2, note this is indeed a string), and 0
-	2.  Quit -  call driver.quitWorkout with user ID and workout ID
-	3.  Save -  call driver.saveWorkout with user ID and workout ID
-	4.  In all cases, check return value
-		1.  0 = success, bring back to home page
-		2.  1 = database failure, display alert “Encountered an error, please try again.”
-		3.  2 = failure, display alert “Action is invalid.”
+1.  The Exercise page displays similar information to the cells in the Workout Summary page, though it also displays a timer counting down the remaining time of the exercise, playback information for the song currently being played, as well as "Pause/Resume", "Quit", and "Skip" (skip an exercise) buttons. During the exercise, music will be playing at an appropriate bpm (beats per minute) given the rpm (reps per minute) of the exercise.
+2.  At the end of a workout, the user is brought back to the Workout Summary page where they can review the workout and decide to either save or quit the workout.
 
 ### View in progress and saved workouts
 
-1.  Navigate to View Workouts page from home page
-	1.  Call driver.workoutsSaved with user ID and driver.workoutsInProgress with user ID to get the jsons
-2.  Use a grouped table view, one section “In Progress” and another section “Saved”
-3.  Each cell contains information about a single workout (for now, maybe ID, difficulty, and duration)
+1.  The user navigates to the View Workouts page from main menu.
+2.  This page has an "In Progress" and "Saved" section for in progress workouts and saved workouts, respectively. The cells in each section contain information about a single workout.
+3.  Clicking on the cell in the "In Progress" section brings the user to the Exercise page corresponding to the exercise that they paused on, and from there they can do the workout.
+4.  Clicking on the cell in the "Saved" section brings the user to the Exercise page corresponding to the first exercise in the workout (or produces an alert if they already have a version of this workout in progress), and from there they can do the workout. The user can also swipe the cell to unsave the workout, which also removes any in progress versions of that workout.
 
 Fitness test
 ------------
@@ -70,7 +54,7 @@ This has already been implemented in the first iteration.
 4.  Ask the user to select which exercises they want to test on of results from the above query  
 5.  Call getFitnessTest (Scripts.fitnessTest, Tests.testUser) to return a list of IDs of exercises to be tested  
 6.  Display the results of their test and the previous results, as well as their level and whether they have leveled up. (These will all be returned by the API function.)
-7.  Iterate through this list testing each exercise (step 1 above) 
+7.  Iterate through this list testing each exercise (step 1 above)
 
 ### Tracking and untracking exercises
 
