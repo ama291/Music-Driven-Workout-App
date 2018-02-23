@@ -3,11 +3,14 @@
 import click
 from regex import split
 # from Scripts.fitnessTest import ...
-# from Scripts.driver import ...
-from CLI.apiCalls import isTracked, toggleTracked, getFitnessTest, getTrackedExercises,\
- getExerciseFromID, getUserExercises, getPreviousResults
+# from Scripts.driver import quitWorkout
+from Scripts.dbfunctions import testDB, realDB
+from CLI.apiCalls import isTracked, toggleTracked, getFitnessTest, \
+ getTrackedExercises, getExerciseFromID, getUserExercises, getPreviousResults,\
+ getWorkout, startWorkout, pauseWorkout, quitWorkout, saveWorkout, workoutsSaved, \
+ startSavedWorkout, unsaveWorkout
 
-dbURL = "http://138.197.49.155:5000/api/database/"
+dbURL = testDB
 key = "SoftCon2018"
 
 @click.group()
@@ -100,9 +103,108 @@ def fitnessTest():
         testEx(userID, t["id"])
     click.echo("Done with fitness test")
 
+def showRes(res):
+    if res == 0:
+        click.echo("Success")
+    elif res == 1:
+        click.echo("Database failure")
+    elif res == 2:
+        click.echo("Failure")
+
+def CLIstartWorkout(userID, workout):
+    click.echo("Starting workout")
+    res = startWorkout(userID, workout)
+    showRes(res)
+    return res
+
+def chooseSavedWorkout(userID):
+    click.echo("You have the following saveud workouts")
+    saved = list(workoutsSaved(userID))
+    i = 1
+    for w in saved:
+        click.echo("\t%d -- %s" % (i, str(w)))
+        i += 1
+    choice = click.prompt("Please select a saved workout", type=int)
+    click.echo(type(saved))
+    click.echo(choice-1)
+    return saved[choice-1]
+
+def CLIstartSavedWorkout(userID):
+    saved = chooseSavedWorkout(userID)
+    click.echo("Starting saved workout")
+    res = startSavedWorkout(userID, saved)
+    return res
+
+def CLIunsaveSavedWorkout(userID):
+    saved = chooseSavedWorkout(userID)
+    click.echo("Unsaving workout")
+    res = unsaveWorkout(userID, saved)
+    return saved
+
+
+def CLIsaveWorkout(userID, workout):
+    click.echo("Saving workout")
+    res = saveWorkout(userID, workout)
+    showRes(res)
+    return res
+
+def CLIpauseWorkout(userID, workout):
+    click.echo("Pausing workout")
+    res = pauseWorkout(userID, workout)
+    showRes(res)
+    return res
+
+def CLIquitWorkout(userID, workout):
+    click.echo("Quitting workout")
+    res = quitWorkout(userID, workout)
+    showRes(res)
+    return res
+
+
+def promptNext(options):
+    string = "What do you want to do next?\n"
+    i = 1
+    for opt in options:
+        string += "\t%d -- %s\n" % (i, opt)
+        i += 1
+    string += "\t0 -- exit\n"
+    command = click.prompt(string, type=int)
+    return command
+
+def CLIgetWorkout():
+    userID = click.prompt("Enter userID", type=int)
+    equipment = ["Body Only", "Kettlebells"]
+    duration = 60
+    difficulty = "Beginner"
+    categories = ["Cardio","Stretching"]
+    workout = getWorkout(userID, equipment, duration, difficulty, categories=categories)
+    wid = workout["ID"]
+    while True:
+        command = promptNext(["Start Workout", "Start Saved Workout", "Save Workout", "Pause Workout", "Quit Workout", "Unsave Workout"])
+        click.echo("command: %d" % command)
+        if command == 0:
+            break
+        if command == 1:
+            CLIstartWorkout(userID, workout)
+        if command == 2:
+            CLIstartSavedWorkout(userID)
+        if command == 3:
+            CLIsaveWorkout(userID, wid)
+        if command == 4:
+            CLIpauseWorkout(userID, wid)
+        if command == 5:
+            CLIquitWorkout(userID, wid)
+        if command == 6:
+            CLIunsaveSavedWorkout(userID)
+
+
+@click.command()
+def workout():
+    CLIgetWorkout()
 
 cli.add_command(testExercise)
 cli.add_command(fitnessTest)
+cli.add_command(workout)
 
 def main():
     cli()

@@ -2,7 +2,9 @@
 import uuid
 import requests
 from Scripts.exercise import Exercise
-import jsonpickle
+from Scripts.dbfunctions import testDB, realDB
+
+dbURL = realDB
 
 class Workout(object):
     def __init__(self, uid, spotID, themes, categories, muscleGroups, equipment, duration, difficulty, accessToken):
@@ -29,7 +31,7 @@ class Workout(object):
         results = [[]] * trials
         # TODO - need to add bpm column to exercise table
         attributes = ['id', 'name', 'type', 'muscle', 'level', 'equipment',
-                        'range_start', 'range_end', 'increment', 'rpm', 'bpm', 'images']
+                        'range_start', 'range_end', 'increment', 'rpm', 'images'] # add 'bpm'
         equipment = ', '.join("\'" + e + "\'" for e in self.equipment)
 
         duration = self.duration
@@ -44,7 +46,7 @@ class Workout(object):
             # get random subset of exercises from query for each trial
             for i in range(trials):
 
-                r = requests.post('http://138.197.49.155:5000/api/database/',
+                r = requests.post(dbURL,
                     data={'query': query, 'key': 'SoftCon2018'})
 
                 if r.json()['Status'] != 'Success':
@@ -60,8 +62,8 @@ class Workout(object):
 
             # get random subset of exercises from query for each trial
             for i in range(trials):
-                
-                r = requests.post('http://138.197.49.155:5000/api/database/',
+
+                r = requests.post(dbURL,
                     data={'query': query, 'key': 'SoftCon2018'})
 
                 if r.json()['Status'] != 'Success':
@@ -86,16 +88,15 @@ class Workout(object):
         self.Exercises = finalExercises
 
         for ex in self.Exercises:
-
             # update rpm/bpm if user has tested on the exercise
             # TODO - will also need to remap bpm
             query = 'select rate from userexercises where exID = %d and timestamp \
              = (select max(timestamp) from userexercises where exID = %d) limit 1' % (ex.id, ex.id)
-            r = requests.post('http://138.197.49.155:5000/api/database/',
+            r = requests.post(dbURL,
                               data={'query': query, 'key': 'SoftCon2018'})
             if r.json()["Status"] == "Success" and len(r.json()["Result"]) > 0:
                 scale = 0.9 if self.difficulty == "Intermediate" else 0.7
-                ex.rpm = scale * int(r.json()["Result"][0][0])
+                ex.rpm = scale * r.json()["Result"][0][0]
 
             # get recommendations based on bpm, with duration >= to exercise duration
             ex.tracks = self.getRecommendations(self.spotID, self.themes, self.accessToken, ex.bpm, ex.duration)
@@ -134,10 +135,10 @@ class Workout(object):
                     increment = dbExercises[i][j]
                 elif ordering[j] == "rpm":
                     rpm = dbExercises[i][j]
-                else: # bpm
-                    bpm = dbExercises[i][j]
+                # else: # bpm
+                    # bpm = dbExercises[i][j]
 
-            new = Exercise(id,name, difficulty, category, muscleGroup, equipment, images, exRange, increment, rpm, bpm)
+            new = Exercise(id, name, difficulty, category, muscleGroup, equipment, images, exRange, increment, rpm, 120)
 
             if new.duration + total_duration <= self.duration:
                 exercises.append(new)
@@ -146,7 +147,6 @@ class Workout(object):
                     break
 
         return total_duration, exercises
-
 
     # TODO - implement this
     def getRecommendations(self, spotID, themes, accessToken, tempo, duration):
@@ -158,5 +158,5 @@ class Workout(object):
 
     # TODO - implement this
     def getSeeds(self, spotID, themes, accessToken):
-        # return {tracks: , artists: , genres: } dict
+        # return {tracks: , artists:, genres: } dict
         return []

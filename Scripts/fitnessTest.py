@@ -1,24 +1,13 @@
 import requests
 from random import randint
-from Scripts.log import Log
 import json
 from datetime import datetime
+from math import ceil
+from Scripts.log import Log
+from Scripts.dbfunctions import key, dbCategories, getColumnNames, \
+  getResponseDictList, getResponseDict, testDB, realDB
 
-dbURL = "http://138.197.49.155:5000/api/database/"
-key = "SoftCon2018"
-dbCategories = ["Cardio", "Olympic Weightlifting", "Plyometrics", "Powerlifting", "Strength", "Stretching", "Strongman"]
-
-def getResponseDict(values, table):
-    query = "PRAGMA table_info(%s)" % table
-    r = requests.post(dbURL, data = {'query':query, 'key':key})
-    assert r.status_code == requests.codes.ok
-    cols = list(map(lambda x:x[1], r.json()["Result"]))
-    assert len(cols) == len(values)
-    res = dict(zip(cols, values))
-    return res
-
-def getResponseDictList(valuesList, table): 
-    return list(map(lambda x: getResponseDict(x, table), valuesList))
+dbURL = realDB
 
 def countExercises(category):
     """
@@ -50,7 +39,7 @@ def getExerciseFromID(ID):
     r = requests.post(dbURL, data = {'query': query, 'key': key})
     assert r.status_code == requests.codes.ok
     ex = r.json()["Result"][0]
-    return getResponseDict(ex, "exercises")
+    return getResponseDict(dbURL, ex, "exercises")
     
 def getExercisesGeneric(userID, query):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
@@ -130,7 +119,7 @@ def getFitnessTest(categories, numExercises, trackedIDs):
         assert r.status_code == requests.codes.ok and len(r.json()["Result"]) == 1
         exercises.append(r.json()["Result"][0])
     assert len(exercises) == numExercises
-    return getResponseDictList(exercises, "exercises")
+    return getResponseDictList(dbURL, exercises, "exercises")
 
 
 ## Add route
@@ -143,7 +132,7 @@ def getPreviousResults(userID, exID):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok and "Result" in r.json()
     trials = r.json()["Result"]
-    return getResponseDictList(trials, "userexercises")
+    return getResponseDictList(dbURL, trials, "userexercises")
 
 
 ## Add route
@@ -157,6 +146,7 @@ def isTracked(userID, exID):
     elif exs[0]["tracked"] == 1:
         return True
     return False
+
     
 def addExercise(userID, exID, timestamp, rate):
     """
@@ -184,7 +174,8 @@ def processMotionData(userID, exID, timestamp, rawdata):
     log = Log(rawdata, data=True)
     rate = log.getFrequency()
     addExercise(userID, exID, timestamp, rate)
-    return rate
+    level, leveledUp = getLevel(userID, 5)
+    return {"rate":rate , "level":level, "leveledUp":leveledUp}
 
 
 ## Add route
@@ -204,3 +195,23 @@ def toggleTracked(userID, exID, clear=False):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     return trackBit
+
+def countUserExercises(userID):
+    query = "SELECT count(*) FROM userexercises WHERE userID = %d" % userID
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    count = r.json()["Result"][0][0]
+    return count
+
+def getLevel(count, levelGap):
+    level = int(ceil(float(count) / levelGap))
+    if count % levelGap == 1:
+        leveledUp = True
+    else:
+        leveledUp = False
+    return level, leveledUp
+
+
+def getLevelFromUser(userID, levelGap):
+    count = countUserExercises(userID)
+    return getLevel(count, levelGap)

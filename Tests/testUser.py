@@ -13,12 +13,16 @@ class TestUser(unittest.TestCase):
         ## test constructor (ID, name tracked,
         ## untracked, goals, themes, competition,
         ## inProgressWorkouts, savedWorkouts)
-        usr1 = User(1, "Alex", [], [], [], [], [], {}, {})
-        self.assertEqual(usr1.name, "Alex")
-        self.assertTrue(usr1.tracked == [])
-        self.assertTrue(usr1.untracked == [])
-        self.assertTrue(usr1.inProgressWorkouts == {})
-        self.assertTrue(usr1.savedWorkouts == {})
+        usr1 = User(1, "Alex", 167, 150, 1996, [], [], [], {}, {})
+        self.assertEqual(usr1.spotifyUsername, "Alex")
+        self.assertEqual(usr1.ID, 1)
+        self.assertEqual(usr1.height, 167)
+        self.assertEqual(usr1.weight, 150)
+        self.assertEqual(usr1.birthyear, 1996)
+        self.assertEqual(usr1.goals, [])
+        self.assertEqual(usr1.themes, [])
+        self.assertEqual(usr1.inProgressWorkouts, {})
+        self.assertEqual(usr1.savedWorkouts, {})
 
         """
         Workout flow - User keeps getting workouts until they find one they like,
@@ -36,6 +40,7 @@ class TestUser(unittest.TestCase):
         """
 
         # test getWorkout
+        accessToken = "example-access-token"
         # category option
         themes = None
         categories = ["Cardio", "Stretching"]
@@ -43,7 +48,7 @@ class TestUser(unittest.TestCase):
         equipment = ["Body Only"]
         duration = 50
         difficulty = "Intermediate"
-        workout1 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty)
+        workout1 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty, accessToken)
         self.assertTrue(workout1 is not None) # None in case of request failure
         w1_ID = workout1.ID
         # muscle group option
@@ -53,7 +58,7 @@ class TestUser(unittest.TestCase):
         equipment = ["Kettlebells", "Machine"]
         duration = 30
         difficulty = "Beginner"
-        workout2 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty)
+        workout2 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty, accessToken)
         self.assertTrue(workout2 is not None)  # None in case of request failure
         w2_ID = workout2.ID
 
@@ -65,10 +70,17 @@ class TestUser(unittest.TestCase):
         self.assertFalse(w2_ID in usr1.workoutsSaved())
 
         # test startWorkout
-        self.assertTrue(usr1.startWorkout(workout1))
+        # also test making progress in a workout based on category/muscle group
+        goal0 = Goal("goal0", "Complete a cardio and upper body workout", 2, \
+                     ["Cardio"], ["Biceps", "Shoulders"], 14, 3, True)
+        usr1.addGoal(goal0)
+        self.assertTrue(goal0 in usr1.goals)
+        self.assertTrue(usr1.startWorkout(workout1)) # cardio category
+        self.assertTrue(goal0 in usr1.goals) # goal not yet completed
         self.assertTrue(w1_ID in usr1.workoutsInProgress())
         self.assertFalse(w1_ID in usr1.workoutsSaved())
-        self.assertTrue(usr1.startWorkout(workout2))
+        self.assertTrue(usr1.startWorkout(workout2)) # shoulders and biceps muscle groups
+        self.assertFalse(goal0 in usr1.goals)  # goal now completed
         self.assertTrue(w2_ID in usr1.workoutsInProgress())
         self.assertFalse(w2_ID in usr1.workoutsSaved())
         self.assertFalse(usr1.startWorkout(workout2)) # already in progress
@@ -91,7 +103,7 @@ class TestUser(unittest.TestCase):
         equipment = ["Dumbbell", "Cable"]
         duration = 40
         difficulty = "Beginner"
-        workout3 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty)
+        workout3 = usr1.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty, accessToken)
         self.assertTrue(workout3 is not None)  # None in case of request failure
         w3_ID = workout3.ID
         self.assertFalse(usr1.pauseWorkout(w3_ID, 2))
