@@ -20,17 +20,13 @@ class Goal(object):
         notifications: boolean
         """
         if(name == "" or name == None):
-            print("name can't be empty string")
-            raise ValueError
+            raise ValueError("name can't be empty string")
         if(goalNum < 0 or goalNum == None):
-            print("goalNum can't be less than 0")
-            raise ValueError
+            raise ValueError("goalNum can't be less than 0")
         if(duration < 0 or duration == None):
-            print("duration can't be less than 0")
-            raise ValueError
+            raise ValueError("duration can't be less than 0")
         if(daysPerWeek < 0 or daysPerWeek == None):
-            print("daysPerWeek can't be less than 0")
-            raise ValueError
+            raise ValueError("daysPerWeek can't be less than 0")
         self.name = name
         self.description = description
         self.progress = 0

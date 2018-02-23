@@ -23,7 +23,7 @@ class TestDriver(unittest.TestCase):
         # test getUserId
         username = "test-spotify-user"
         uid = getUserId(username)
-        self.assertTrue(uid is None)
+        # self.assertTrue(uid is None)
 
         # test onboarding
         uid = onboarding(username, 70, 160, 1995)
@@ -92,7 +92,7 @@ class TestDriver(unittest.TestCase):
 
         ##test addGoal
         goal1 = Goal("goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True)
-        self.assertEqual(addGoal(uid,goal1),0) #addGoal should be successful
+        self.assertEqual(addGoal(uid,"goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True),0) #addGoal should be successful
         self.assertTrue(goal1 in getUser(uid).goals)
 
         ##test removeGoal

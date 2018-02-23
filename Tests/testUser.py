@@ -159,12 +159,12 @@ class TestUser(unittest.TestCase):
         self.assertTrue(goal1 in usr1.goals)
 
         # test remove goal
-        self.assertTrue(usr1.removeGoal(goal1))
+        self.assertTrue(usr1.removeGoal(goal1.name))
         self.assertFalse(goal1 in usr1.goals)
         goal2 = Goal("goal2", "Complete 5 workouts", 5,\
          ["arms"], ["bicepts"], 14, 3, True)
         usr1.addGoal(goal1)
-        self.assertFalse(usr1.removeGoal(goal2))
+        self.assertFalse(usr1.removeGoal(goal2.name))
 
         # test add theme
         theme1 = Theme("Beyonce theme", "Beyonce", 5)

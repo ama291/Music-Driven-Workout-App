@@ -5,6 +5,15 @@ from Scripts.user import User
 class TestGoal(unittest.TestCase):
 
     def test(self):
+        self.assertRaises(ValueError, Goal, None, "Complete 5 workouts", 5, ["arms"], ["bicepts"], 14, 3, True)
+        self.assertRaises(ValueError, Goal, "", "Complete 5 workouts", 5, ["arms"], ["bicepts"], 14, 3, True)
+        self.assertRaises(ValueError, Goal, "goal1", "Complete 5 workouts", None, ["arms"], ["bicepts"], 14, 3, True)
+        self.assertRaises(ValueError, Goal, "goal1", "Complete 5 workouts", -1, ["arms"], ["bicepts"], 14, 3, True)
+        self.assertRaises(ValueError, Goal, "goal1", "Complete 5 workouts", 5, ["arms"], ["bicepts"], None, 3, True)
+        self.assertRaises(ValueError, Goal, "goal1", "Complete 5 workouts", 5, ["arms"], ["bicepts"], -1, 3, True)
+        self.assertRaises(ValueError, Goal, "goal1", "Complete 5 workouts", 5, ["arms"], ["bicepts"], 14, None, True)
+        self.assertRaises(ValueError, Goal, "goal1", "Complete 5 workouts", 5, ["arms"], ["bicepts"], 14, -1, True)
+        
         goal1 = Goal("goal1", "Complete 5 workouts", 5, ["arms"], ["bicepts"], 14, 3, True)
         #goal2 = Goal("","",-1,[],[],-1,-1,True) <-- correctly causes ValueError
         #goal3 = Goal(None, None, 5, [],[],None, None, True) <-- correctly causes ValueError

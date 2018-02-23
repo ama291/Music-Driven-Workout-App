@@ -132,6 +132,13 @@ def clearUserExercise(dbURL, userID):
     assert r.status_code == requests.codes.ok
     return r.json()
 
+def clearUser(dbURL, userID):
+    query = "UPDATE users SET goals='[]', themes='[]', inProgressWorkouts='{}', savedWorkouts='{}' WHERE id=%d" % userID
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    return r.json()
+
+
 def getUserBySpotifyUsername(dbURL, spotifyUsername):
     query = "SELECT * FROM users WHERE spotifyUsername = '%s'" % spotifyUsername
     r = requests.post(dbURL, data = {'query':query, 'key':key})
@@ -157,15 +164,4 @@ def removeDuplicates(dbURL, table, uniqueCol):
 
 
 if __name__ == '__main__':
-    # dropTable(testDB, "users")
-    # createUsersTable()
-    # addUser(testDB, "Alex", 167, 150, 1996, [], [], [], [], [])
-    # modifyRow(testDB, "users", "inProgressWorkouts", "{}", 1)
-    # modifyRow(testDB, "users", "savedWorkouts", "{}", 1)
-    # print(getUserBySpotifyUsername(testDB, "Alex"))
-    getRowIDsFromSpotifyUsernames(testDB)
-    print(removeDuplicates(realDB, "userexercises", "timestamp"))
-    info = getColumnInfo(realDB, "userexercises")
-    for item in info:
-        print(item)
-
+    print(clearUser(realDB, 1))

@@ -2,7 +2,9 @@ import requests
 import json
 import jsonpickle
 from sys import argv
+from Scripts.dbfunctions import clearUser, realDB
 
+dbURL = realDB
 
 apiIP = "http://127.0.0.1:5000"
 key = "SoftCon2018"
@@ -167,70 +169,76 @@ def removeTheme(uid, themeName, theme, numWorkouts):
     return jsonpickle.decode(makeRequest(route, data))
 
 if __name__ == '__main__':
-    # print("\nAdd goal")
-    # print(addGoal(1, "goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True))
-    # print(addGoal(1, "goal1", "", 1, ['cardio'], ['abs'], 5, 5, True))
-    # print(addGoal(2, "goal3", "", 1, ['cardio'], ['abs'], 5, 5, True))
-    # # throws assertion error:
-    # # print(addGoal(1, "goal3", "", 1, [''], [''], None, 0, True))
-    # # print(addGoal(1, "goal3", "", 1, ['cardio'], ['abs'], 5, 5, None))
+    if len(argv) != 2:
+        pass
+    elif argv[1] == "goals":
+        print("\nAdd goal")
+        print(addGoal(1, "goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True))
+        print(addGoal(1, "goal2", "", 1, ['cardio'], ['abs'], 5, 5, True))
+        print(addGoal(2, "goal3", "", 1, ['cardio'], ['abs'], 5, 5, True))
+        # throws assertion error:
+        # print(addGoal(1, "goal4", "", 1, [''], [''], None, 0, True))
+        # print(addGoal(1, "goal5", "", 1, ['cardio'], ['abs'], 5, 5, None))
 
-    # print("\nRemove goal")
-    # print(removeGoal(1, "goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True))
-    # print(removeGoal(1, "goal2", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True))
-    # print(removeGoal(1, "goal1", "", 1, ['cardio'], ['abs'], 5, 5, True))
+        print("\nRemove goal")
+        print(removeGoal(1, "goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True))
+        print(removeGoal(1, "goal2", "wrong description", 1, ['cardio'], ['abs'], 5, 5, True))
+        print(removeGoal(1, "goal2", "", 1, ['cardio'], ['abs'], 5, 5, True))
 
-    # print("\nAdd Theme")
-    # print(addTheme(1, "theme1", "Artist", 3))
-    # print(addTheme(2, "theme3", "Song", 3))
+        print("\nAdd Theme")
+        print(addTheme(1, "theme1", "Artist", 3))
+        print(addTheme(2, "theme3", "Song", 3))
 
-    # print("\nRemove Theme")
-    # print(removeTheme(1, "theme1", "Artist", 3))
-    # print(removeTheme(1, "theme2", "Artist", 3))
+        print("\nRemove Theme")
+        print(removeTheme(1, "theme1", "Artist", 3))
+        print(removeTheme(1, "theme2", "Artist", 3))
+        clearUser(dbURL, 1)
+        clearUser(dbURL, 2)
+    elif argv[1] == "workout":
+        workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
+        print("\nGet Workouts")
+        print(workout)
+        print("\nStart Workout")
+        print(startWorkout(1, workout))
+        print("\nPause Workout")
+        print(pauseWorkout(1, 0))
+        print("\nQuit Workout")
+        print(quitWorkout(1, 0))
+        print("\nSave Workout")
+        print(saveWorkout(1, 0))
+        print("\nUnsave Workout")
+        print(unsaveWorkout(1, 0))
+        print("\nStart Saved Workout")
+        print(startSavedWorkout(1, 0))
 
-    # workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
-    # print("\nGet Workouts")
-    # print(workout)
-    # print("\nStart Workout")
-    # print(startWorkout(1, workout))
-    # print("\nPause Workout")
-    # print(pauseWorkout(1, 0))
-    # print("\nQuit Workout")
-    # print(quitWorkout(1, 0))
-    # print("\nSave Workout")
-    # print(saveWorkout(1, 0))
-    # print("\nUnsave Workout")
-    # print(unsaveWorkout(1, 0))
-    # print("\nStart Saved Workout")
-    # print(startSavedWorkout(1, 0))
+        ## TODO: The following things may not be working
+        # Start saved workout breaks on workouts that haven't been saved
+        # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
+        print("\nWorkouts Saved")
+        saved = workoutsSaved(0)
+        print(saved)
+        print(type(saved))
 
-    # ## TODO: The following things may not be working
-    # # Start saved workout breaks on workouts that haven't been saved
-    # # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
-    # print("\nWorkouts Saved")
-    # saved = workoutsSaved(0)
-    # print(saved)
-    # print(type(saved))
-
-    # print("\nWorkouts In Progress\n", workoutsInProgress(0))
-    print("\nAdd exercise exact")
-    time = "2012-12-12 12:12:12"
-    print(addExerciseExact(1, 24, time, 25.6))
-    print("\nIs Tracked")
-    print(isTracked(1,12))
-    print("\nIs Tracked")
-    print(isTracked(1,123))
-    cats = ["Strength", "Cardio"]
-    print("\nget ftiness test")
-    print(getFitnessTest(cats, 4, [12, 144]))
-    print("\nToggle tracked")
-    print(toggleTracked(1,12))
-    print(toggleTracked(1,12))
-    print("\nGet tracked exercises")
-    print(getTrackedExercises(1, cats))
-    print("\nGet Exercise from ID")
-    print(getExerciseFromID(12))
-    print("\nGet User Exercises")
-    print(getUserExercises(1))
-    print("\nGet Previous Results")
-    print(getPreviousResults(1,12))
+    elif argv[1] == "fitness":
+        # print("\nWorkouts In Progress\n", workoutsInProgress(0))
+        print("\nAdd exercise exact")
+        time = "2012-12-12 12:12:12"
+        print(addExerciseExact(1, 24, time, 25.6))
+        print("\nIs Tracked")
+        print(isTracked(1,12))
+        print("\nIs Tracked")
+        print(isTracked(1,123))
+        cats = ["Strength", "Cardio"]
+        print("\nget ftiness test")
+        print(getFitnessTest(cats, 4, [12, 144]))
+        print("\nToggle tracked")
+        print(toggleTracked(1,12))
+        print(toggleTracked(1,12))
+        print("\nGet tracked exercises")
+        print(getTrackedExercises(1, cats))
+        print("\nGet Exercise from ID")
+        print(getExerciseFromID(12))
+        print("\nGet User Exercises")
+        print(getUserExercises(1))
+        print("\nGet Previous Results")
+        print(getPreviousResults(1,12))
