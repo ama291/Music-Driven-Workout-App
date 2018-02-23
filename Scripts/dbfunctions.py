@@ -162,9 +162,8 @@ if __name__ == '__main__':
     # modifyRow(testDB, "users", "savedWorkouts", "{}", 1)
     # print(getUserBySpotifyUsername(testDB, "Alex"))
     getRowIDsFromSpotifyUsernames(testDB)
-    # removeDuplicates(testDB, "exercises", "name")
-    addCol(testDB, "userexercises", "exact", "BIT")
-    info = getColumnInfo(testDB, "userexercises")
+    print(removeDuplicates(realDB, "userexercises", "timestamp"))
+    info = getColumnInfo(realDB, "userexercises")
     for item in info:
         print(item)
 

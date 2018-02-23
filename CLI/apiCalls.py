@@ -15,10 +15,12 @@ def makeRequest(route, data):
     r = requests.post(url, data=data)
     assert r.status_code == requests.codes.ok
     res = r.json()
+    print(res)
     assert "Result" in res
     return res["Result"]
 
 def toBool(string):
+    string = string.lower()
     assert string in ["true", "false"]
     if string == "true":
         return True
@@ -86,6 +88,15 @@ def getFitnessTest(categories, numExercises, trackedIDs):
     data = {"categories": categories, "numexercises": numExercises, "exerciseids": trackedIDs, "key": key}
     return json.loads(makeRequest(route, data))
 
+def addExerciseExact(userID, exID, timestamp, rate):
+    route = "/api/fitness/addexact/"
+    data = {"userid": userID,
+        "exid": exID,
+        "timestamp": timestamp,
+        "rate": rate,
+        "key": key}
+    return toBool(makeRequest(route, data))
+
 def toggleTracked(userID, exID):
     route = "/api/fitness/toggletracked/"
     data = {"userid": userID, "exid": exID, "key": key}
@@ -127,31 +138,33 @@ def removeTheme(uid, themes):
     return jsonpickle.decode(makeRequest(route, data))
 
 if __name__ == '__main__':
-    workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
-    print("\nGet Workouts")
-    print(workout)
-    print("\nStart Workout")
-    print(startWorkout(1, workout))
-    print("\nPause Workout")
-    print(pauseWorkout(1, 0))
-    print("\nQuit Workout")
-    print(quitWorkout(1, 0))
-    print("\nSave Workout")
-    print(saveWorkout(1, 0))
-    print("\nUnsave Workout")
-    print(unsaveWorkout(1, 0))
-    print("\nStart Saved Workout")
-    print(startSavedWorkout(1, 0))
+    # workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
+    # print("\nGet Workouts")
+    # print(workout)
+    # print("\nStart Workout")
+    # print(startWorkout(1, workout))
+    # print("\nPause Workout")
+    # print(pauseWorkout(1, 0))
+    # print("\nQuit Workout")
+    # print(quitWorkout(1, 0))
+    # print("\nSave Workout")
+    # print(saveWorkout(1, 0))
+    # print("\nUnsave Workout")
+    # print(unsaveWorkout(1, 0))
+    # print("\nStart Saved Workout")
+    # print(startSavedWorkout(1, 0))
 
-    ## TODO: The following things may not be working
-    # Start saved workout breaks on workouts that haven't been saved
-    # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
-    print("\nWorkouts Saved")
-    saved = workoutsSaved(0)
-    print(saved)
-    print(type(saved))
+    # ## TODO: The following things may not be working
+    # # Start saved workout breaks on workouts that haven't been saved
+    # # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
+    # print("\nWorkouts Saved")
+    # saved = workoutsSaved(0)
+    # print(saved)
+    # print(type(saved))
     # print("\nWorkouts In Progress\n", workoutsInProgress(0))
-
+    print("\nAdd exercise exact")
+    time = "2012-12-12 12:12:12"
+    print(addExerciseExact(1, 24, time, 25.6))
     print("\nIs Tracked")
     print(isTracked(1,12))
     print("\nIs Tracked")
