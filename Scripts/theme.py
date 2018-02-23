@@ -9,14 +9,11 @@ class Theme(object):
     """
     def __init__(self, name, theme, numWorkouts):
         if(name == "" or name == None):
-            print("name can't be empty string")
-            raise ValueError
+            raise ValueError("name can't be empty string")
         if(numWorkouts < 0 or numWorkouts == None):
-            print("numWorkouts can't be less than 0")
-            raise ValueError
+            raise ValueError("numWorkouts can't be less than 0")
         if(theme == "" or theme == None):
-            print("theme can't be empty")
-            raise ValueError
+            raise ValueError("theme can't be empty")
         self.name = name
         self.theme = theme
         self.numWorkouts = numWorkouts

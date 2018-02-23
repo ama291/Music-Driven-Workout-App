@@ -1,5 +1,6 @@
 import unittest
 import requests
+from Scripts.dbfunctions import clearUser
 from Scripts.goal import Goal
 from Scripts.user import User
 from Scripts.theme import Theme
@@ -23,7 +24,10 @@ class TestDriver(unittest.TestCase):
         # test getUserId
         username = "test-spotify-user"
         uid = getUserId(username)
-        self.assertTrue(uid is None)
+        ## in case the previous test was not successful
+        clearUser(dbURL, uid)
+
+        # self.assertTrue(uid is None)
 
         # test onboarding
         uid = onboarding(username, 70, 160, 1995)
@@ -92,13 +96,13 @@ class TestDriver(unittest.TestCase):
 
         ##test addGoal
         goal1 = Goal("goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True)
-        self.assertEqual(addGoal(uid,goal1),0) #addGoal should be successful
+        self.assertEqual(addGoal(uid,"goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True),0) #addGoal should be successful
         self.assertTrue(goal1 in getUser(uid).goals)
 
         ##test removeGoal
-        self.assertEqual(removeGoal(uid,goal1),0) #remove goal should be successful
+        self.assertEqual(removeGoal(uid,goal1.name),0) #remove goal should be successful
         self.assertEqual(getUser(uid).goals,[]) #now user should have no goals left
-        self.assertEqual(removeGoal(uid,goal1),2) #FAILURE because user has no goals
+        self.assertEqual(removeGoal(uid,goal1.name),2) #FAILURE because user has no goals
 
         ##test goalsSaved
         self.assertEqual(goalsSaved(uid),'[]')
@@ -108,12 +112,12 @@ class TestDriver(unittest.TestCase):
 
         ##test addTheme
         theme1 = Theme("beyonce theme","beyonce",5)
-        self.assertEqual(addTheme(uid,theme1),0) #add theme should be successful
+        self.assertEqual(addTheme(uid,"beyonce theme","beyonce",5),0) #add theme should be successful
         self.assertTrue(theme1 in getUser(uid).themes) #now new theme is in user's themes
 
         ##test removeTheme
-        self.assertEqual(removeTheme(uid,theme1),0) # success - should be able to remove recently added theme
-        self.assertEqual(removeTheme(uid,theme1),2) #FAILURE because user has no themes
+        self.assertEqual(removeTheme(uid,theme1.name),0) # success - should be able to remove recently added theme
+        self.assertEqual(removeTheme(uid,theme1.name),2) #FAILURE because user has no themes
 
         # remove user so can rerun this test script
         query = 'DELETE from users where id = %d' % uid
