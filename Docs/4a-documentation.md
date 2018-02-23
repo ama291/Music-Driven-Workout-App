@@ -79,9 +79,8 @@ Higher priority implementation
 Lower priority
 --------------
 
-*   Making a separate database for competitions
-*   Integrating competitions with the user experience
-*   Accept muscle groups and equipment for choosing the fitness test (Lucy)
+*	Secure login (Alex, Chris)
+*   Competitions (Jessica, Julia; and Alex, Chris for front end)
 
 Database Changes
 ----------------
