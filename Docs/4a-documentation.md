@@ -5,52 +5,56 @@ Basic Goals
 -----------
 
 *   The most important goal for this iteration is to clean up and integrate what we already have, and create a front end for it
-*   A few new features are being added as well, but integrating existing features should be prioritized
-*   We can still make changes on this. However, since a lot of these features are interconnected now, we should let the group chat know first!
+*   A few new features are being added as well, but integrating existing features will be prioritized
+
+
+Tests
+-----
+
+Our Python tests are in the Tests folder of our repository. Our Swift tests are [TODO].
+
+The relevant new tests are:
+
+* Work Out
+	* [TODO]
+* Fitness Test
+	* [TODO]
+* Goals, Themes, and Competitions
+	* [TODO]
+
 
 Higher priority implementation
 ------------------------------
 
 ### Infrastructure
 
-*   Mock database (Gregory -- Milestone 4a)
-
-*   Ask TA/Professor
-
 *   Redoing User database and class (Lucy -- Milestone 4a)
-*   Returning dictionaries from database queries -- everyone
-*   Getting Spotify access token (Jessica and Julia -- can begin in Milestone 4a)
-
-*   Having premium
-*   Storing (?) refresh token
-
-*   [https://developer.spotify.com/web-api/authorization-guide/](https://www.google.com/url?q=https://developer.spotify.com/web-api/authorization-guide/&sa=D&ust=1519334535014000&usg=AFQjCNGqFfJiDSSWEdY0BWoMqHAZHrztxQ)
-
-*   Add competitions database (Jessica and Julia -- can begin in Milestone 4a)
+*   Returning dictionaries from database queries -- (Lucy -- Milestone 4a)
+*   Getting [Spotify access token](https://www.google.com/url?q=https://developer.spotify.com/web-api/authorization-guide/&sa=D&ust=1519334535014000&usg=AFQjCNGqFfJiDSSWEdY0BWoMqHAZHrztxQ) (Jessica and Julia -- can begin in Milestone 4a)
+*   Add competitions database (Jessica and Julia -- only if we finish everything else)
 
 ### Front End
 
-*   iOS front end for all use cases, beginning with those fully implemented in Iteration 1 (begin in Milestone 4a)
-*   Restricting access by level
+*   iOS front end for all use cases, beginning with those fully implemented in Iteration 1 (Chris and Alex -- begin in Milestone 4a)
+*   Restricting access by level (Chris and Alex)
+*   Collecting heart rate data and determining if they’re within their target heart rate range for cardio workouts (Gregory)
+
 
 ### Work Out
 
 *   Basic matching of workout with tempo data
+	*   Assume that the Fitness Test group will supply you with a rate at which the user can do an exercise
+	*   You can multiply it by a factor or multiple of the time signature (for 4/4 time, song tempo can be 2, 4, 8, times the exercise tempo for  3/4 time, 3 or 6 times)
+	*   Consider themes
+	*   Considering a list of songs/artists/genres they want to work out to, based on recommendations from the goals/themes/competitions group
 
-*   Assume that the Fitness Test group will supply you with a rate at which the user can do an exercise
-*   You can multiply it by a factor or multiple of the time signature (for 4/4 time, song tempo can be 2, 4, 8, times the exercise tempo for  3/4 time, 3 or 6 times)
-
-*   Consider themes
-*   Considering a list of songs/artists/genres they want to work out to, based on recommendations from the goals/themes/competitions group
-
-### Fitness Test, etc.
+### Fitness Test
 
 *   Improve motion data processing algorithm to get more accurate frequency (Gregory)
-*   Route for previous trials (Lucy - Milestone 4a probably)
+*   Route for previous trials (Lucy - Milestone 4a)
 *   “Add exercise” option -- variation of the fitness test where they add the exercise at the exact pace they want to do it at (Lucy)
 *   Accept muscle groups and equipment for choosing the fitness test (Lucy)
 *   Getting desired tempo for a song (Lucy)
-*   Collecting heart rate data and determining if they’re within their target heart rate range for cardio workouts (Gregory)
 *   Setting level by number of fitness tests completed (Lucy)
 
 ### Goals, Themes, Competitions
