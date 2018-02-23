@@ -16,6 +16,30 @@ def index():
 
 #sample route for how api routing works
 @app.route('/api')
+<<<<<<< HEAD
+def api():
+    return Response(json.dumps({"Status": "Welcome to the API."}), mimetype='application/json')
+
+@app.route('/api/goals/addgoal/', methods=["POST"])
+def apiAddGoal():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	goalName = request.form.get('goalname')
+	goalDescription = request.form.get('goaldescription')
+	goalNum = int(request.form.get('goalnum'))
+	categories = request.form.get('categories')
+	if (categories != None):
+		categories = categories.split(",")
+	muscleGroups = request.form.get('musclegroups')
+	if (muscleGroups != None):
+		muscleGroups = muscleGroups.split(",")
+	duration = int(request.form.get('duration'))
+	daysPerWeek = int(request.form.get('daysperweek'))
+	key = request.form.get('key')
+
+	params = [userid, goalName, key]
+=======
 def getApi():
 	return standardRes("Welcome to the API")
 
@@ -132,16 +156,42 @@ def apiUnSaveWorkout():
 	workoutid = request.form.get('workoutid')
 	key = request.form.get('key')
 	params = [userid, workoutid, key]
+>>>>>>> 9ce5bd834014aedeafa4480425d0c93c1156377c
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
+<<<<<<< HEAD
+		response = addGoal(userid, goalDescription, goalNum, categories, muscleGroups, duration, daysPerWeek, notify)
+=======
 		response = unsaveWorkout(userid, workoutid)
+>>>>>>> 9ce5bd834014aedeafa4480425d0c93c1156377c
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
 
+<<<<<<< HEAD
+@app.route('/api/goals/removegoal/', methods=["POST"])
+def apiRemoveGoal():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	goalName = request.form.get('goalname')
+	goalDescription = request.form.get('goaldescription')
+	goalNum = int(request.form.get('goalnum'))
+	categories = request.form.get('categories')
+	if (categories != None):
+		categories = categories.split(",")
+	muscleGroups = request.form.get('musclegroups')
+	if (muscleGroups != None):
+		muscleGroups = muscleGroups.split(",")
+	duration = int(request.form.get('duration'))
+	daysPerWeek = int(request.form.get('daysperweek'))
+	key = request.form.get('key')
+
+	params = [userid, goalName, key]
+=======
 @app.route('/api/workouts/startsavedworkout/', methods=['POST'])
 def apiStartSavedWorkout():
 	userid = request.form.get('userid')
@@ -244,16 +294,34 @@ def apiGetFitness():
 		exerciseids = list(map(int, temp))
 	key = request.form.get('key')
 	params = [categories, numexercises, key]
+>>>>>>> 9ce5bd834014aedeafa4480425d0c93c1156377c
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
+<<<<<<< HEAD
+		response = removeGoal(userid, goalDescription, goalNum, categories, muscleGroups, duration, daysPerWeek, notify)
+=======
 		response = getFitnessTest(categories, numexercises, exerciseids)
+>>>>>>> 9ce5bd834014aedeafa4480425d0c93c1156377c
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
 
+<<<<<<< HEAD
+@app.route('/api/themes/addtheme/', methods=["POST"])
+def apiAddTheme():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	themeName = request.form.get('themename')
+	theme = request.form.get('theme')
+	numWorkouts = int(request.form.get('numworkouts'))
+	key = request.form.get('key')
+
+	params = [userid, key]
+=======
 @app.route('/api/fitness/istracked/', methods=['POST'])
 def apiIsTracked():
 	userid = request.form.get('userid')
@@ -262,16 +330,33 @@ def apiIsTracked():
 	exid = request.form.get('exid')
 	key = request.form.get('key')
 	params = [userid, exid, key]
+>>>>>>> 9ce5bd834014aedeafa4480425d0c93c1156377c
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
+<<<<<<< HEAD
+		response = addTheme(userid, themeName, theme, numWorkouts)
+=======
 		response = isTracked(userid, exid)
+>>>>>>> 9ce5bd834014aedeafa4480425d0c93c1156377c
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
 
+<<<<<<< HEAD
+@app.route('/api/themes/removetheme/', methods=["POST"])
+def apiRemoveTheme():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	themeName = request.form.get('themename')
+	theme = request.form.get('theme')
+	numWorkouts = int(request.form.get('numworkouts'))
+	key = request.form.get('key')
+
+=======
 #TODO
 @app.route('/api/fitness/toggletracked/', methods=['POST'])
 def apiToggleTracked():
@@ -314,12 +399,19 @@ def apiGetUserExercises():
 	if (userid != None):
 		userid = int(userid)
 	key = request.form.get('key')
+>>>>>>> 9ce5bd834014aedeafa4480425d0c93c1156377c
 	params = [userid, key]
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
+<<<<<<< HEAD
+		response = removeTheme(userid, themeName, theme, numWorkouts)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+=======
 		response = getUserExercises(userid)
 		return standardRes(json.dumps(response))
 	except Exception as e:
@@ -349,3 +441,4 @@ def failure(msg):
 	return Response(json.dumps({"Status": "Failure - " + msg}), mimetype='application/json')
 def standardRes(data):
 	return Response(json.dumps({"Result": data, "Status": "Success"}), mimetype='application/json')
+>>>>>>> 9ce5bd834014aedeafa4480425d0c93c1156377c

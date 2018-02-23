@@ -3,7 +3,7 @@ import json
 import jsonpickle
 from sys import argv
 
-
+# apiIP = "http://138.197.49.155:8000"
 apiIP = "http://127.0.0.1:5000"
 key = "SoftCon2018"
 
@@ -106,43 +106,42 @@ def getPreviousResults(userID, exID):
     data = {"userid": userID, "exid": exID, "key": key}
     return json.loads(makeRequest(route, data))
 
-def addGoal(uid, goal):
+def addGoal(uid, goalName, goalDescription, goalNum, categories, muscleGroups, duration, daysPerWeek, notify):
     route = "/api/goals/addgoal/"
-    data = {"userid": uid, "goals": goal, "key": key}
+    data = {"userid": uid, "goalname": goalName, "goaldescription": goalDescription, "goalnum": goalNum, "categories": categories, "musclegroups": muscleGroups, "duration": duration, "daysperweek": daysPerWeek, "notify": notify, "key": key}
     return jsonpickle.decode(makeRequest(route, data))
 
-def removeGoal(uid, goal):
+def removeGoal(uid, goalName, goalDescription, goalNum, categories, muscleGroups, duration, daysPerWeek, notify):
     route = "/api/goals/removegoal/"
-    data = {"userid": uid, "goals": goal, "key": key}
+    data = {"userid": uid, "goalname": goalName, "goaldescription": goalDescription, "goalnum": goalNum, "categories": categories, "musclegroups": muscleGroups, "duration": duration, "daysperweek": daysPerWeek, "notify": notify, "key": key}
     return jsonpickle.decode(makeRequest(route, data))
 
-def addTheme(uid, themes):
+def addTheme(uid, themeName, theme, numWorkouts):
     route = "/api/themes/addtheme/"
-    data = {"userid": uid, "themes": themes, "key": key}
+    data = {"userid": uid, "themename": themeName, "theme": theme, "numworkouts": numWorkouts, "key": key}
     return jsonpickle.decode(makeRequest(route, data))
 
-def removeTheme(uid, themes):
-    route = "/api/themes/removegoal/"
-    data = {"userid": uid, "themes": theme, "key": key}
+def removeTheme(uid, themeName, theme, numWorkouts):
+    route = "/api/themes/removetheme/"
+    data = {"userid": uid, "themename": themeName, "theme": theme, "numworkouts": numWorkouts, "key": key}
     return jsonpickle.decode(makeRequest(route, data))
 
 if __name__ == '__main__':
-    workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
+    workout = getWorkout(0, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
     print("\nGet Workouts")
     print(workout)
     print("\nStart Workout")
-    print(startWorkout(1, workout))
+    print(startWorkout(0, workout))
     print("\nPause Workout")
-    print(pauseWorkout(1, 0))
+    print(pauseWorkout(0, 0, False))
     print("\nQuit Workout")
-    print(quitWorkout(1, 0))
+    print(quitWorkout(0, 0))
     print("\nSave Workout")
-    print(saveWorkout(1, 0))
+    print(saveWorkout(0, 0))
     print("\nUnsave Workout")
-    print(unsaveWorkout(1, 0))
+    print(unsaveWorkout(0, 0))
     print("\nStart Saved Workout")
-    print(startSavedWorkout(1, 0))
-
+    print(startSavedWorkout(0, 0))
     ## TODO: The following things may not be working
     # Start saved workout breaks on workouts that haven't been saved
     # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
@@ -150,8 +149,6 @@ if __name__ == '__main__':
     saved = workoutsSaved(0)
     print(saved)
     print(type(saved))
-    # print("\nWorkouts In Progress\n", workoutsInProgress(0))
-
     print("\nIs Tracked")
     print(isTracked(1,12))
     print("\nIs Tracked")
