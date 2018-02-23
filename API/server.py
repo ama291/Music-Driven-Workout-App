@@ -423,6 +423,50 @@ def apiRemoveGoal():
 	except Exception as e:
 		return failure(str(e))
 
+@app.route('/api/themes/addtheme/', methods=["POST"])
+def apiAddTheme():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	themeName = request.form.get('themename')
+	theme = request.form.get('theme')
+	numWorkouts = request.form.get('numworkouts')
+	if numWorkouts != None:
+		numWorkouts = int(numWorkouts)
+	key = request.form.get('key')
+	params = [userid, themeName, theme, numWorkouts, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		response = addTheme(userid, themeName, theme, numWorkouts)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
+@app.route('/api/themes/removetheme/', methods=["POST"])
+def apiRemoveTheme():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	themeName = request.form.get('themename')
+	theme = request.form.get('theme')
+	numWorkouts = request.form.get('numworkouts')
+	if numWorkouts != None:
+		numWorkouts = int(numWorkouts)
+	key = request.form.get('key')
+	params = [userid, themeName, theme, numWorkouts, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		response = removeTheme(userid, themeName, theme, numWorkouts)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
 #api messages
 def failure(msg):
 	return Response(json.dumps({"Status": "Failure - " + msg}), mimetype='application/json')
