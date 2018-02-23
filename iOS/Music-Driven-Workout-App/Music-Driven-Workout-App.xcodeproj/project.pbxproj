@@ -493,7 +493,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = BridgeViewController.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/gregoryhowlett-gomez/Desktop/cs/cs221/Music-Driven-Workout-App/iOS/Music-Driven-Workout-App/Music-Driven-Workout-App/spotifysdk-demo-bridging-header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -511,7 +511,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = BridgeViewController.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/gregoryhowlett-gomez/Desktop/cs/cs221/Music-Driven-Workout-App/iOS/Music-Driven-Workout-App/Music-Driven-Workout-App/spotifysdk-demo-bridging-header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
