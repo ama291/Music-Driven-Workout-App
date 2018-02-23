@@ -87,7 +87,7 @@ Database Changes
 
 ### Users table
 
-We have made the following changes to the `users` table in our database, and we have made the consequent changes to the User class, tests, and `getUser` function in `driver.py`
+We have made the following changes to the `users` table in our database, and we have made the consequent changes to the User class, tests, and `getUser` function in `driver.py`.
 
 | Column             | Type        | Change              |
 | ------------------ |------------ | --------------------|
@@ -123,4 +123,4 @@ If the goals/themes/competitions group has time to implement competitions, they 
 | startDate           | DATE                 |
 | endDate             | DATE                 |
 | exercises           | INT FOREIGN KEY REFS |
-| Winner (maybe)      | INT FOREIGN KEY REF  |
+| winner (maybe)      | INT FOREIGN KEY REF  |
