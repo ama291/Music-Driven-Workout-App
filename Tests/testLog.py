@@ -12,7 +12,7 @@ class TestLog(unittest.TestCase):
         freq4 = Log('Logs/log4.json').getFrequency()
         freq5 = Log('Logs/log5.json').getFrequency()
 
-        tolerance = .1
+        tolerance = .5
 
         actual_val1 = (17.0 / 30.0)
         actual_val2 = (38.0 / 30.0)

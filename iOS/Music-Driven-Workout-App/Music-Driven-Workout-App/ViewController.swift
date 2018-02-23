@@ -69,7 +69,26 @@ class ViewController: UIViewController {
             }
         })
     }
+
+    func withinTargetHeartRate(heartRate: Double, birthyear: Int) -> Bool{
+        let age = 2018 - birthyear
+        let heart_base = 220 - age
+        let min_heart_rate = Double(heart_base) * 0.50
+        let max_heart_rate = Double(heart_base) * 0.85
+        if (heartRate >= min_heart_rate && heartRate <= max_heart_rate) {
+            return true
+        } else {
+            return false
+        }
+    }
     
+    func test_targetheartrate() {
+        assert(withinTargetHeartRate(heartRate: 120.5, birthyear: 1977))
+        assert(!withinTargetHeartRate(heartRate: 50, birthyear: 1980))
+        assert(withinTargetHeartRate(heartRate: 85, birthyear: 1967))
+        assert(withinTargetHeartRate(heartRate: 153, birthyear: 1977))
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

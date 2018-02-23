@@ -21,7 +21,8 @@ The relevant new tests are:
 	* [TODO]
 * Goals, Themes, and Competitions
 	* [TODO]
-
+* Heart Rate Tests
+	* Music-Driven-Workout-App/iOS/Music-Driven-Workout-App/Music-Driven-Workout-App/ViewController.swift
 
 Higher priority implementation
 ------------------------------

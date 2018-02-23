@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 from Scripts.user import User
+from Scripts.goal import Goal
+from Scripts.theme import Theme
 from Scripts.dbfunctions import getResponseDict, getResponseDictList, testDB, realDB, addUser
 import requests
 import jsonpickle
@@ -286,12 +288,16 @@ def workoutsSaved(uid):
     else:
         return r.json()['Result'][0][0]
 
-def addGoal(uid, goal):
+def addGoal(uid, name, description, goalNum, categories, muscleGroups,\
+     duration, daysPerWeek, notify):
+
     """
     :param uid: user ID
     :param goal: goal to add
     :return: 0 - success, 1 - failure to add to goals in db
     """
+    goal = Goal(name, description, goalNum, categories, \
+        muscleGroups, duration, daysPerWeek, notify)
     user = getUser(uid)
     if user is None:
         return DB_FAILURE
@@ -303,24 +309,25 @@ def addGoal(uid, goal):
     sql = "UPDATE users SET goals = %s WHERE id = %d" % (goalString, uid)
     r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
     if r.json()['Status'] == 'Success':
-
         return SUCCESS
     else:
         return DB_FAILURE
 
-def removeGoal(uid, goal):
+def removeGoal(uid, name, description, goalNum, categories, muscleGroups,\
+     duration, daysPerWeek, notify):
     """
     :param uid: user ID
     :param goal: goal to remove
     :return: 0 - success, 1 - failure to remove goals from db, 2 - goal never added (failed on the user's side)
     """
+    goal = Goal(name, description, goalNum, categories, \
+        muscleGroups, duration, daysPerWeek, notify)
     user = getUser(uid)
     if(user.removeGoal(goal)):
         goalString = "\'" + jsonpickle.encode(user.goals) + "\'"
         sql = "UPDATE users SET goals = %s WHERE id = %d" % (goalString, uid)
         r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
         if r.json()['Status'] == 'Success':
-
             return SUCCESS
         else:
             return DB_FAILURE
@@ -351,12 +358,13 @@ def themesSaved(uid):
     else:
         return r.json()['Result'][0][0]
 
-def addTheme(uid, theme):
+def addTheme(uid, themeName, theme, numWorkouts):
     """
     :param uid: user ID
     :param theme: theme to add
     :return: 0 - success, 1 - failure to update users table
     """
+    theme = Theme(themeName, theme, numWorkouts)
     user = getUser(uid)
     if user is None:
         return DB_FAILURE
@@ -371,19 +379,19 @@ def addTheme(uid, theme):
     else:
         return DB_FAILURE
 
-def removeTheme(uid, theme):
+def removeTheme(uid, themeName, theme, numWorkouts):
     """
     :param uid: user ID
     :param theme: theme to remove
     :return: 0 - success, 1 - failure to update users table, 2 - theme not previously in user's themes
     """
+    theme = Theme(themeName, theme, numWorkouts)
     user = getUser(uid)
     if(user.removeTheme(theme)):
         themeString = "\'" + jsonpickle.encode(user.themes) + "\'"
         sql = "UPDATE users SET themes = %s WHERE id = %d" % (themeString, uid)
         r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
         if r.json()['Status'] == 'Success':
-
             return SUCCESS
         else:
             return DB_FAILURE
@@ -424,3 +432,6 @@ def removeCompetition(uid, competition):
             return DB_FAILURE
     else:
         return FAILURE
+
+if __name__ == '__main__':
+    print(getUser(1))
