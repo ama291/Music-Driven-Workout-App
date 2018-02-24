@@ -5,9 +5,13 @@ from Scripts.user import User
 class TestTheme(unittest.TestCase):
 
     def test(self):
+        self.assertRaises(ValueError, Theme, None, "Beyonce", 5)
+        self.assertRaises(ValueError, Theme, "", "Beyonce", 5)
+        self.assertRaises(ValueError, Theme, "Beyonce theme", "Beyonce", None)
+        self.assertRaises(ValueError, Theme, "Beyonce theme", "Beyonce", -1)
+        self.assertRaises(ValueError, Theme, "Beyonce theme", None, 5)
+        self.assertRaises(ValueError, Theme, "Beyonce theme", "", 5)
         theme1 = Theme("Beyonce theme", "Beyonce", 5)
-        #theme2 = Theme("","",-1) --> correctly raises ValueError
-        #theme3 = Theme(None,None,None) --> correctly raises ValueError
         
         ## test constructor
         self.assertEqual(theme1.name, "Beyonce theme")

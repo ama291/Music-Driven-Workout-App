@@ -98,6 +98,5 @@ class TestWorkout(unittest.TestCase):
     for i in range(len(workout2.Exercises)):
       self.assertEqual(workout2.Exercises[i].difficulty,difficulty)
 
-
 if __name__ == '__main__':
   unittest.main()

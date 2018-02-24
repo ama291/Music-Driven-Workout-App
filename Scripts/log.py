@@ -27,8 +27,6 @@ class Log(object):
 
     #removes the data where frequency is 0
     def bestFrequency(self, ffts, freqs):
-        nffts = ffts[1:]
-        mfreq = freqs[1:]
         sarr = sorted(zip(ffts, freqs), key=lambda x: x[0])
         for i in range(1, len(sarr)):
             if sarr[-i][1] != 0:

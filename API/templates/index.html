@@ -20,12 +20,26 @@ $ curl --data "[param]=[value]&[param2]=[value2]" localhost:5000/[API ROUTE]/  #
 $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[API ROUTE]/  # run tests through server API </pre>
 
         <!-- Workout Functions -->
+				<h2>Get User Id:</h2>
+		<p><b>Route:</b> /api/workouts/getuserid/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> username, key</p>
+        <p><b>Returns:</b> user id if user has logged in before, else None </p>
+        <p><b>Description:</b> Attempts to retrieve an id for the user based on their spotify username upon login. If no id returned, the new user will be brought through the necessary onboarding. </p>
+
+				<h2>Onboarding:</h2>
+		<p><b>Route:</b> /api/workouts/onboarding/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> username, height, weight, year, key</p>
+        <p><b>Returns:</b> user id for newly registered user </p>
+        <p><b>Description:</b> Completes a new user's onboarding by inserting their information into the database and retrieving their assigned user id. Note username is the spotify username the user uses to log in. </p>
+
         <h2>Get Workout:</h2>
 		<p><b>Route:</b> /api/workouts/getworkout/</p>
 		<p><b>Methods:</b> POST</p>
-		<p><b>Required parameters:</b> userid, equipment, duration, difficulty, categories, musclegroups, themes, key</p>
-        <p><b>Returns:</b> empty json (i.e. ‘{}’) or workout json (see inProgressWorkouts of user 0 in users table for example)</p>
-        <p><b>Description:</b> Pass in the above parameters and get a json string containing a workout matching those filters</p>
+		<p><b>Required parameters:</b> userid, themes, categories, musclegroups, equipment, duration, difficulty, token, key</p>
+        <p><b>Returns:</b> json string (empty if error) </p>
+        <p><b>Description:</b> Pass in the above parameters and get a json string containing a workout matching those filters. Requires a spotify access token to make authorized requests to the spotify API for music recommendations. </p>
         <!--<p>
             <b>Sample Test: </b>
             <code>
@@ -54,9 +68,9 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <h2>Pause Workout:</h2>
 		<p><b>Route:</b> /api/workouts/pauseworkout/</p>
 		<p><b>Methods:</b> POST</p>
-		<p><b>Required parameters:</b> userid, workoutid, key</p>
+		<p><b>Required parameters:</b> userid, workoutid, paused, key</p>
         <p><b>Returns:</b> 0 - success, 1 - failure to update users table, 2 - workout not in progress</p>
-        <p><b>Description:</b> Attempts to pause the workout in progress. Fails if user table cannot be updated or workout not in progress.</p>
+        <p><b>Description:</b> Attempts to pause the workout in progress at the exercise specified by the pause parameter. Fails if user table cannot be updated or workout not in progress.</p>
         <!--<p>
             <b>Sample Test: </b>
             <code>
@@ -114,13 +128,13 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p><b>Methods:</b> POST</p>
         <p><b>Required parameters:</b> userid, workoutid, key</p>
         <p><b>Returns:</b> 0 - success, 1 - failure to update users table, 2 - workout already started</p>
-        <p><b>Description:</b> Attempts to start sabed workout for user. Fails if user table cannot be updated or workout already started.</p>
+        <p><b>Description:</b> Attempts to start saved workout for user. Fails if user table cannot be updated or workout already started.</p>
 
         <h2>Get Saved Workouts:</h2>
 		<p><b>Route:</b> /api/workouts/workoutssaved/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
-        <p><b>Returns:</b> json string (see inProgressWorkouts of user 0 in users table for example)</p>
+        <p><b>Returns:</b> json string (empty if error)</p>
         <p><b>Description:</b> Submit userid and database access key to get a json string of all the user's saved workouts.</p>
         <!--<p>
             <b>Sample Test: </b>
@@ -137,7 +151,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/workouts/workoutsinprogress/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
-        <p><b>Returns:</b> json string (see inProgressWorkouts of user 0 in users table for example)</p>
+        <p><b>Returns:</b> json string (empty if error)</p>
         <p><b>Description:</b> Submit userid and database access key to get a json string of all the user's in-progress workouts.</p>
         <!--<p>
             <b>Sample Test: </b>
