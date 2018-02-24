@@ -7,15 +7,25 @@ class Theme(object):
     Themes can be based around an artist or genre.
     Users can choose how many workouts the theme is used for.
     """
-    def __init__(self, name, theme, numWorkouts):
+    def __init__(self, name, theme, spotifyId, numWorkouts):
+        """
+        name = name of track, artist, genre
+        theme = 'track','artist','genre'
+        spotifyId = spotify id if it's track or artist, name of genre if it's genre
+        """
         if(name == "" or name == None):
-            raise ValueError("name can't be empty string")
-        if(numWorkouts < 0 or numWorkouts == None):
-            raise ValueError("numWorkouts can't be less than 0")
-        if(theme == "" or theme == None):
+            raise ValueError("name can't be empty or invalid string")
+        if(numWorkouts is None):
+            raise ValueError("numWorkouts can't be None")
+        if(numWorkouts < 0):
+            raise ValueError("numWorkouts can't less than 0")
+        if(theme == "" or theme == None or theme not in ["track","artist","genre"]):
             raise ValueError("theme can't be empty")
+        if((theme == "artist" or theme == "genre") and type(spotifyId)!= int):
+            raise ValueError("artist/genre needs spotify id number")
         self.name = name
         self.theme = theme
+        self.spotifyId = spotifyId
         self.numWorkouts = numWorkouts
 
     def __eq__(self, other):
