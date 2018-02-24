@@ -128,7 +128,7 @@ class User(object):
                 if progress:
                     goal.makeProgress()
                 if goal.completed:
-                    self.removeGoal(goal)
+                    self.removeGoal(goal.name)
 
             return True
 
@@ -220,26 +220,38 @@ class User(object):
         """
         return self.savedWorkouts
 
-    def addGoal(self, goal):
-        self.goals.append(goal)
+    def getGoalNames(self):
+        return list(map(lambda x: x.name, self.goals))
 
-    def removeGoal(self, goal):
-        if goal in self.goals:
-            self.goals.remove(goal)
+    def addGoal(self, goal):
+        if goal not in self.goals:
+            self.goals.append(goal)
             return True
         return False
 
+    def removeGoal(self, name):
+        goalNames = self.getGoalNames()
+        if name in goalNames:
+            idx = goalNames.index(name)
+            del self.goals[idx]
+            return True
+        return False
+
+    def getThemeNames(self):
+        return list(map(lambda x: x.name, self.themes))
+
     def addTheme(self, theme):
         if(theme in self.themes):
-            print("duplicate theme!")
             return False
         else:
             self.themes.append(theme)
             return True
 
-    def removeTheme(self, theme):
-        if theme in self.themes:
-            self.themes.remove(theme)
+    def removeTheme(self, name):
+        themeNames = self.getThemeNames()
+        if name in themeNames:
+            idx = themeNames.index(name)
+            del self.themes[idx]
             return True
         return False
 
