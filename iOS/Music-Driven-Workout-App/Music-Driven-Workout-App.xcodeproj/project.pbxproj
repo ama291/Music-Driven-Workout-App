@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		114626272040E93F00B2ACEB /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114626262040E93F00B2ACEB /* MenuViewController.swift */; };
+		114626292040E99A00B2ACEB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114626282040E99A00B2ACEB /* LoginViewController.swift */; };
 		11AF5E29202D42D2004EB40B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E28202D42D2004EB40B /* AppDelegate.swift */; };
 		11AF5E2B202D42D2004EB40B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E2A202D42D2004EB40B /* ViewController.swift */; };
 		11AF5E2E202D42D2004EB40B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11AF5E2C202D42D2004EB40B /* Main.storyboard */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		114626262040E93F00B2ACEB /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		114626282040E99A00B2ACEB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		11AF5E25202D42D2004EB40B /* Music-Driven-Workout-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Music-Driven-Workout-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11AF5E28202D42D2004EB40B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11AF5E2A202D42D2004EB40B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 				11AF5E34202D42D2004EB40B /* Info.plist */,
 				11F9ABEA2033E593007F217C /* AccelerometerTest.swift */,
 				4CE2AAA6203F787C00A55F29 /* SpotifySDKDemo-Bridging-Header.h */,
+				114626262040E93F00B2ACEB /* MenuViewController.swift */,
+				114626282040E99A00B2ACEB /* LoginViewController.swift */,
 			);
 			path = "Music-Driven-Workout-App";
 			sourceTree = "<group>";
@@ -314,8 +320,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				114626272040E93F00B2ACEB /* MenuViewController.swift in Sources */,
 				11AF5E2B202D42D2004EB40B /* ViewController.swift in Sources */,
 				11F9ABEB2033E593007F217C /* AccelerometerTest.swift in Sources */,
+				114626292040E99A00B2ACEB /* LoginViewController.swift in Sources */,
 				11AF5E29202D42D2004EB40B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
