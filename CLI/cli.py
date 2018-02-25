@@ -81,6 +81,11 @@ def getCategoriesPrompt():
         string += "\t%s\n" % cat
     return string
 
+@click.command
+def addExercise():
+    categories = getCategoriesList()
+    category = click.prompt()
+
 @click.command()
 def fitnessTest():
     userID = click.prompt("Enter userID", type=int)
