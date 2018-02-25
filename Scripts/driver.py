@@ -357,18 +357,18 @@ def themesSaved(uid):
     else:
         return r.json()['Result'][0][0]
 
-def addTheme(uid, themeName, theme, numWorkouts):
+def addTheme(uid, themeName, theme, spotifyId, numWorkouts):
     """
     :param uid: user ID
     :param theme: theme to add
     :return: 0 - success, 1 - failure to update users table
     """
-    theme = Theme(themeName, theme, numWorkouts)
+    fullTheme = Theme(themeName, theme, spotifyId, numWorkouts)
     user = getUser(uid)
     if user is None:
         return DB_FAILURE
 
-    user.addTheme(theme)
+    user.addTheme(fullTheme)
     themeString = "\'" + jsonpickle.encode(user.themes) + "\'"
     sql = "UPDATE users SET themes = %s WHERE id = %d" % (themeString, uid)
     r = requests.post(dbURL, data = {'query': sql, 'key': key})
