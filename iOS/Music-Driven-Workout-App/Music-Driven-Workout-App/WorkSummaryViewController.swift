@@ -1,14 +1,14 @@
 //
-//  WorkoutMenuViewController.swift
+//  WorkSummaryViewController.swift
 //  Music-Driven-Workout-App
 //
-//  Created by Christopher Choy on 2/24/18.
+//  Created by Christopher Choy on 2/25/18.
 //  Copyright © 2018 UChicago SoftCon. All rights reserved.
 //
 
 import UIKit
 
-class WorkoutMenuViewController: UIViewController {
+class WorkSummaryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

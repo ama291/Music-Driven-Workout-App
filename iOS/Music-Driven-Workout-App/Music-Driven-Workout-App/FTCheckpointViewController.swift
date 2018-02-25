@@ -1,5 +1,5 @@
 //
-//  FitnessTestMenuViewController.swift
+//  FTCheckpointViewController.swift
 //  Music-Driven-Workout-App
 //
 //  Created by Christopher Choy on 2/25/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FitnessTestMenuViewController: UIViewController {
+class FTCheckpointViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

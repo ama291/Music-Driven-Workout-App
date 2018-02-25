@@ -9,7 +9,7 @@
 import UIKit
 import CoreMotion
 
-class ExerciseViewController: UIViewController {
+class AccelerometerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,7 @@ class ExerciseViewController: UIViewController {
     func getMotionData() {
         self.statusLabel.text = "collecting data..."
         // saving acceleration every 0.1 seconds
-        timer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(ExerciseViewController.displayResult), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 30, target: self, selector: #selector(AccelerometerViewController.displayResult), userInfo: nil, repeats: false)
         
         var dispTime = -0.1;
         motionManager.accelerometerUpdateInterval = 0.1
