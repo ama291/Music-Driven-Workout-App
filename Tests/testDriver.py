@@ -22,12 +22,9 @@ class TestDriver(unittest.TestCase):
     def test(self):
 
         # test getUserId
-        username = "test-spotify-user"
+        username = 'test-spotify-user'
         uid = getUserId(username)
-        ## in case the previous test was not successful
-        clearUser(dbURL, uid)
-
-        # self.assertTrue(uid is None)
+        self.assertTrue(uid is None)
 
         # test onboarding
         uid = onboarding(username, 70, 160, 1995)

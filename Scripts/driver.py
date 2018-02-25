@@ -167,7 +167,7 @@ def startWorkout(uid, workout):
     hasStarted = user.startWorkout(decoded)
 
     if hasStarted:
-        return updateInProgressAndGoals(user)
+        return updateInProgressWorkouts(user)
     else:
         return FAILURE
 
@@ -186,7 +186,7 @@ def startSavedWorkout(uid, wid):
     hasStarted = user.startSavedWorkout(wid)
 
     if hasStarted:
-        return updateInProgressAndGoals(user)
+        return updateInProgressWorkouts(user)
     else:
         return FAILURE
 

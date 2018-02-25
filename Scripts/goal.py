@@ -19,13 +19,19 @@ class Goal(object):
         days per week: int (<=7)
         notifications: boolean
         """
-        if(name == "" or name == None):
+        if(name is None or name == ""):
             raise ValueError("name can't be empty string")
-        if(goalNum < 0 or goalNum == None):
+        if(goalNum is None):
+            raise ValueError("goalNum can't be None")
+        if(goalNum < 0):
             raise ValueError("goalNum can't be less than 0")
-        if(duration < 0 or duration == None):
+        if(duration is None):
+            raise ValueError("duration can't be None")
+        if(duration < 0):
             raise ValueError("duration can't be less than 0")
-        if(daysPerWeek < 0 or daysPerWeek == None):
+        if(daysPerWeek is None):
+            raise ValueError("daysPerWeek can't be None")
+        if(daysPerWeek < 0):
             raise ValueError("daysPerWeek can't be less than 0")
         self.name = name
         self.description = description

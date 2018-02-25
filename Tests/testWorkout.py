@@ -98,5 +98,45 @@ class TestWorkout(unittest.TestCase):
     for i in range(len(workout2.Exercises)):
       self.assertEqual(workout2.Exercises[i].difficulty,difficulty)
 
+
+    '''
+    Added Tests for music recommendation
+    '''
+    # NOTE - can't do these this because don't have valid accessToken
+    # #test that duration of music is greater than equal to duration of workout
+    # for i in range(len(workout1.Exercises)):
+    #   result = workout1.getRecommendations(workout1.spotID, workout1.themes, workout1.accessToken, workout1.Exercises[i].bpm, workout1.Exercises[i].duration)
+    #   duration = 0
+    #   for j in range(len(result)):
+    #     duration += result[j]['duration']
+    #   self.assertTrue(duration >= workout1.Exercises[i].duration)
+
+    # NOTE - can do this test because won't use the invalid accessToken
+    # TODO - update this test to use real themes
+    # test that if selected, themes are used for getSeeds
+    seeds = workout1.getSeeds(workout1.spotID, workout1.themes, workout1.accessToken)
+    if workout1.themes:
+        for theme in workout1.themes:
+            themeUsed = False
+            for key in seeds:
+                if theme.spotifyId in seeds[key]:
+                    themeUsed = True
+                    break
+            self.assertTrue(themeUsed)
+    #test getSeeds - no. of artists+genres+tracks <=5
+    artist_len = 0 if seeds['artists'] is None else len(seeds['artists'])
+    genres_len = 0 if seeds['genres'] is None else len(seeds['genres'])
+    tracks_len = 0 if seeds['tracks'] is None else len(seeds['tracks'])
+    self.assertTrue(artist_len + genres_len + tracks_len <= 5)
+
+    # NOTE - can't include this test yet
+    # #test getBPM which gets bpm from rpm
+    # for i in range(len(workout1.Exercises)):
+    #   rpm = workout1.Exercises[i].rpm
+    #   bpm = workout1.getBPM(rpm,min_beats,max_beats)
+    #   self.assertTrue(min_beats <= bpm <= max_beats )  #bpm is within required range
+    #   self.assertTrue((bpm % rpm) == 0)   #bpm is multiple of rpm
+
+
 if __name__ == '__main__':
   unittest.main()

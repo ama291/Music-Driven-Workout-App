@@ -8,11 +8,11 @@ class Theme(object):
     Users can choose how many workouts the theme is used for.
     """
     def __init__(self, name, theme, numWorkouts):
-        if(name == "" or name == None):
+        if(name is None or name == ""):
             raise ValueError("name can't be empty string")
-        if(numWorkouts < 0 or numWorkouts == None):
+        if(numWorkouts is None or numWorkouts < 0):
             raise ValueError("numWorkouts can't be less than 0")
-        if(theme == "" or theme == None):
+        if(theme is None or theme == ""):
             raise ValueError("theme can't be empty")
         self.name = name
         self.theme = theme
