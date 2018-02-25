@@ -57,7 +57,6 @@ class TestDriver(unittest.TestCase):
         difficulty = "Intermediate"
         accessToken = "example-access-token"
         workout = getWorkout(uid, themes, categories, muscleGroups, equipment, duration, difficulty, accessToken)
-        print(workout)
         wid = (jsonpickle.decode(workout)).ID
 
         # test startWorkout
@@ -83,7 +82,6 @@ class TestDriver(unittest.TestCase):
         duration = 30
         difficulty = "Beginner"
         workout = getWorkout(uid, themes, categories, muscleGroups, equipment, duration, difficulty, accessToken)
-        print(workout)
         wid = (jsonpickle.decode(workout)).ID
         self.assertEqual(startWorkout(uid, workout), 0)
         self.assertEqual(saveWorkout(uid, wid), 0)
