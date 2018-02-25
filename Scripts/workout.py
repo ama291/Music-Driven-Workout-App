@@ -191,16 +191,15 @@ class Workout(object):
         seed_tracks = []
         seed_genres = []
 
-        # TODO - check the format of themes, change in getWorkout of server.py
         # if themes chosen, use those
         if themes is not None:
             for theme in themes:
-                if theme['theme'] == 'artist':
-                    seed_artists.append(theme['spotifyId'])
-                elif theme['theme'] == 'track':
-                    seed_tracks.append(theme['spotifyId'])
+                if theme.theme == 'artist':
+                    seed_artists.append(theme.spotifyId)
+                elif theme.theme == 'track':
+                    seed_tracks.append(theme.spotifyId)
                 else:
-                    seed_genres.append(theme['spotifyId'])
+                    seed_genres.append(theme.spotifyId)
         else:
             # first check if user has workout playlists
             playlists = self.getUserWorkoutPlaylists(spotID, accessToken)

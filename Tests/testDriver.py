@@ -45,7 +45,11 @@ class TestDriver(unittest.TestCase):
         self.assertEqual(testUser.savedWorkouts, {})
 
         # test getWorkout
-        themes = None
+        # get new workout, themes set
+        theme1 = Theme("The Killers", "artist", "0C0XlULifJtAgn6ZNCW2eu", 1)
+        theme2 = Theme("Otra Vez (feat. J Balvin)", "track", "7pk3EpFtmsOdj8iUhjmeCM", 2)
+        theme3 = Theme("Disciples", "track", "2gNfxysfBRfl9Lvi9T3v6R", 3)
+        themes = [theme1, theme2, theme3]
         categories = ["Cardio", "Stretching"]
         muscleGroups = None
         equipment = ["Body Only"]
@@ -70,6 +74,7 @@ class TestDriver(unittest.TestCase):
         self.assertEqual(saveWorkout(uid, wid), 2) # can't save workout that has already been quit
 
         # test saveWorkout
+        # get new workout, no themes set
         themes = None
         categories = None
         muscleGroups = ["Biceps"]

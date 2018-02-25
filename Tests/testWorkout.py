@@ -16,7 +16,12 @@ class TestWorkout(unittest.TestCase):
     accessToken = "example-access-token"
 
     #category condition
-    themes = None
+    theme1 = Theme("The Killers", "artist", "0C0XlULifJtAgn6ZNCW2eu", 1)
+    theme2 = Theme("Zion & Lennox", "artist", "21451j1KhjAiaYKflxBjr1", 2)
+    theme3 = Theme("Otra Vez (feat. J Balvin)", "track", "7pk3EpFtmsOdj8iUhjmeCM", 3)
+    theme4 = Theme("Disciples", "track", "2gNfxysfBRfl9Lvi9T3v6R", 4)
+    theme5 = Theme("Hip Hop", "genre", "hip_hop", 5)
+    themes = [theme1, theme2, theme3, theme4, theme5]
     categories = ["Cardio", "Stretching"]
     muscleGroups = None
     equipment = ["Body Only"]
@@ -112,7 +117,6 @@ class TestWorkout(unittest.TestCase):
     #   self.assertTrue(duration >= workout1.Exercises[i].duration)
 
     # NOTE - can do this test because won't use the invalid accessToken
-    # TODO - update this test to use real themes
     # test that if selected, themes are used for getSeeds
     seeds = workout1.getSeeds(workout1.spotID, workout1.themes, workout1.accessToken)
     if workout1.themes:

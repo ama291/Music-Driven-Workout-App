@@ -20,10 +20,8 @@ class Theme(object):
             raise ValueError("numWorkouts can't less than 0")
         if(theme is None or theme == "" or theme not in ["track","artist","genre"]):
             raise ValueError("invalid theme")
-        if((theme == "artist" or theme == "track") and type(spotifyId)!= int):
-            raise ValueError("artist/track needs spotify id number")
-		  if((theme == "genre") and type(spotifyId != str)):
-				raise ValueError("genre needs string as id")
+        if(type(spotifyId)!= str):
+            raise ValueError("spotify id needs to be string")
         self.name = name
         self.theme = theme
         self.spotifyId = spotifyId
