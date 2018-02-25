@@ -13,9 +13,9 @@ class TestUser(unittest.TestCase):
         ## test constructor (ID, name tracked,
         ## untracked, goals, themes, competition,
         ## inProgressWorkouts, savedWorkouts)
-        usr1 = User(1, "Alex", 167, 150, 1996, [], [], [], {}, {})
+        usr1 = User(0, "Alex", 167, 150, 1996, [], [], [], {}, {})
         self.assertEqual(usr1.spotifyUsername, "Alex")
-        self.assertEqual(usr1.ID, 1)
+        self.assertEqual(usr1.ID, 0)
         self.assertEqual(usr1.height, 167)
         self.assertEqual(usr1.weight, 150)
         self.assertEqual(usr1.birthyear, 1996)
@@ -23,6 +23,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(usr1.themes, [])
         self.assertEqual(usr1.inProgressWorkouts, {})
         self.assertEqual(usr1.savedWorkouts, {})
+        self.assertEqual(usr1.level, 0)
 
         """
         Workout flow - User keeps getting workouts until they find one they like,
@@ -167,14 +168,14 @@ class TestUser(unittest.TestCase):
         self.assertFalse(usr1.removeGoal(goal2.name))
 
         # test add theme
-        theme1 = Theme("Beyonce theme", "artist",88, 5)
+        theme1 = Theme("Beyonce theme", "artist", "88", 5)
         self.assertTrue(usr1.addTheme(theme1))
         self.assertTrue(theme1 in usr1.themes)
-        theme2 = Theme("Beyonce theme", "artist", 88, 5)
+        theme2 = Theme("Beyonce theme", "artist", "88", 5)
         self.assertFalse(usr1.addTheme(theme2))
 
         # test remove theme
-        theme2 = Theme("Taylor Swift theme", "artist", 99, 5)
+        theme2 = Theme("Taylor Swift theme", "artist", "99", 5)
         self.assertFalse(usr1.removeTheme(theme2.name))
         self.assertTrue(usr1.removeTheme(theme1.name))
         self.assertFalse(theme1 in usr1.themes)

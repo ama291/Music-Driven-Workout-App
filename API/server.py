@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Response, request
 import json
+import jsonpickle
 import sqlite3
 from Scripts.log import Log
 from Scripts.driver import *
@@ -98,6 +99,8 @@ def apiGetWorkout():
 	if (groups != None):
 		groups = groups.split(",")
 	themes = request.form.get('themes')
+	if(theme != None):
+		themes = jsonpickle.decode(themes) # turn into List[Theme]
 	if (themes != None):
 		themes = equipment.split(",")
 	key = request.form.get('key')
@@ -432,6 +435,23 @@ def apiGetPrevious():
 	except Exception as e:
 		return failure(str(e))
 
+@app.route('/api/fitness/getexsbytype/', methods=["POST"])
+def apiGetExercisesByType():
+	category = request.form.get('category')
+	muscleGroup = request.form.get('muscle')
+	equipment = request.form.get('equipment')
+	key = request.form.get('key')
+	params = [category, muscleGroup, equipment, key]
+	if None in params:
+		return failure("Invalid parameters")
+	if key != masterKey:
+		return failure("Invalid authentication")
+	try:
+		response = getExercisesbyType(category, muscleGroup, equipment)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
 
 @app.route('/api/goals/addgoal/', methods=["POST"])
 def apiAddGoal():
@@ -495,19 +515,20 @@ def apiAddTheme():
 	userid = request.form.get('userid')
 	if (userid != None):
 		userid = int(userid)
-	themeName = request.form.get('themename')
+	name = request.form.get('name')
 	theme = request.form.get('theme')
+	spotifyId = request.form.get('spotifyId')
 	numWorkouts = request.form.get('numworkouts')
 	if numWorkouts != None:
 		numWorkouts = int(numWorkouts)
 	key = request.form.get('key')
-	params = [userid, themeName, theme, numWorkouts, key]
+	params = [userid, name, theme, spotifyId, numWorkouts, key]
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):
 		return failure("Invalid authentication")
 	try:
-		response = addTheme(userid, themeName, theme, numWorkouts)
+		response = addTheme(userid, name, theme, spotifyId, numWorkouts)
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))

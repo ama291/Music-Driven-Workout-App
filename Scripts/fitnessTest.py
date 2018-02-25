@@ -32,7 +32,7 @@ def getExQuery(categories):
 
 def getExerciseFromID(ID):
     """
-    return (exercise entry from database): the exercise corresponding to that 
+    return (exercise entry from database): the exercise corresponding to that
     ID
     """
     query = "SELECT * FROM exercises WHERE id = %d" % ID
@@ -40,7 +40,7 @@ def getExerciseFromID(ID):
     assert r.status_code == requests.codes.ok
     ex = r.json()["Result"][0]
     return getResponseDict(dbURL, ex, "exercises")
-    
+
 def getExercisesGeneric(userID, query):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
@@ -136,7 +136,7 @@ def getPreviousResults(userID, exID):
 
 
 ## Add route
-def isTracked(userID, exID): 
+def isTracked(userID, exID):
     """
     return (boolean): whether the exercises is tracked
     """
@@ -147,7 +147,7 @@ def isTracked(userID, exID):
         return True
     return False
 
-    
+
 def addExercise(userID, exID, timestamp, rate):
     """
     return (boolean): True upon success
@@ -186,7 +186,7 @@ def processMotionData(userID, exID, timestamp, rawdata, exact):
     return (float): the rate of the exercise added
     """
     log = Log(rawdata, data=True)
-    rate = log.getFrequency()
+    rate = log.getFrequency() * 60
     if not exact:
         addExercise(userID, exID, timestamp, rate)
     level, leveledUp = getLevel(userID, 5)
@@ -230,18 +230,75 @@ def getLevelFromUser(userID, levelGap):
     count = countUserExercises(userID)
     return getLevel(count, levelGap)
 
-def getRPMForUser(userID, scale):
-    query = "SELECT AVG(rate) FROM userexercises WHERE userID = %d AND exact = 1" % userID
+def getExactRpm(userID, exID):
+    query = "SELECT AVG(rate) FROM userexercises WHERE userID = %d AND exID = %d AND exact = 1" % (userID, exID)
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     res = r.json()
     assert "Result" in res
-    if res["Result"] != [[None]]:
-        return res["Result"][0][0]
-    query = "SELECT AVG(rate) FROM userexercises WHERE userID = %d" % userID
-    r = requests.post(dbURL, data = {'query':query, 'key':key})
-    assert r.status_code == requests.codes.ok
-    res = r.json()
-    assert "Result" in res
-    return scale * res["Result"][0][0] 
+    return res["Result"][0][0]
 
+def getFitnessTestRpm(userID, exID, scale):
+    query = "SELECT AVG(rate) FROM userexercises WHERE userID = %d AND exID = %d" % (userID, exID)
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    res = r.json()
+    assert "Result" in res
+    if res["Result"][0][0] != None:
+        return scale * res["Result"][0][0]
+    return None
+
+def _getAverageRpmHelper(exID, exact):
+    if exact:
+        rel = "="
+    else:
+        rel = "!="
+    query = "SELECT AVG(rate), COUNT(*) FROM userexercises WHERE exID = %d AND exact %s 1" % (exID, rel)
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    res = r.json()
+    assert "Result" in res
+    avg = res["Result"][0][0]
+    count = res["Result"][0][1]
+    return avg, count
+
+def getAverageRpmExact(exID):
+    return _getAverageRpmHelper(exID, True)
+
+def getAverageRpmFitnessTest(exID, scale):
+    avg, count = _getAverageRpmHelper(exID, False)
+    if avg is not None:
+        return avg * scale, count
+    return None, count
+
+def getAverageRpm(exID, scale):
+    avgExact, countExact = getAverageRpmExact(exID)
+    avgFT, countFT = getAverageRpmFitnessTest(exID, scale)
+    if avgExact is None:
+        return avgFT
+    if avgFT is None:
+        return avgExact
+    totalCount = float(countExact + countFT)
+    return (avgExact * countExact + avgFT * countFT) / totalCount
+
+def getDefaultRpm(exID):
+    query = "SELECT rpm FROM exercises WHERE id = %d" % exID
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    res = r.json()
+    assert "Result" in res
+    return res["Result"][0][0]
+
+
+def getRpmForUser(userID, exID, scale, default=None):
+    rpm = getExactRpm(userID, exID)
+    if rpm is not None:
+        return rpm
+    rpm = getFitnessTestRpm(userID, exID, scale)
+    if rpm is not None:
+        return rpm
+    rpm = getAverageRpm(exID, scale)
+    if rpm is not None:
+        return rpm
+    rpm = default if default is not None else getDefaultRpm(exID)
+    return rpm

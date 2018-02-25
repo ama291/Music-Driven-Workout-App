@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 from Scripts.workout import Workout
+from Scripts.fitnessTest import getLevelFromUser
 import requests
 
 dbURL = "http://138.197.49.155:5000/api/database/"
 key = "SoftCon2018"
+
+levelGap = 3
 
 class User(object):
     def __init__(self, ID, spotifyUsername, height, weight, birthyear, goals,
@@ -20,6 +23,11 @@ class User(object):
         self.inProgressWorkouts = inProgressWorkouts # key: workoutID, value: workout class instance
         # stores saved workouts, if a user wants to do the workout again
         self.savedWorkouts = savedWorkouts # key: workoutID, value: workout class instance
+
+    @property
+    def level(self):
+        level, leveledUp = getLevelFromUser(self.ID, levelGap)
+        return level
 
     def __repr__(self):
         string = "USER:\n"
@@ -265,4 +273,5 @@ class User(object):
         return False
 
 if __name__ == '__main__':
-    user = User(1, "Alex", 167, 150, 1996, [], [], [], [], [])
+    user = User(0, "Alex", 167, 150, 1996, [], [], [], [], [])
+    print(user)

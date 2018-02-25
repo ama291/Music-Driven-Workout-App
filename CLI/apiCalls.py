@@ -120,6 +120,14 @@ def getPreviousResults(userID, exID):
     data = {"userid": userID, "exid": exID, "key": key}
     return json.loads(makeRequest(route, data))
 
+def getExercisesByType(category, muscleGroup, equipment):
+    route = "/api/fitness/getexsbytype/"
+    data = {"category": category,
+        "muscle": muscleGroup,
+        "equipment": equipment,
+        "key": key}
+    return json.loads(makeRequest(route, data))
+
 def addGoal(uid, name, description, goalNum, categories, \
      muscleGroups, duration, daysPerWeek, notify):
     route = "/api/goals/addgoal/"
@@ -229,3 +237,5 @@ if __name__ == '__main__':
         print(getUserExercises(1))
         print("\nGet Previous Results")
         print(getPreviousResults(1,12))
+        print("\nGet Exercises By Type")
+        print(getExercisesByType("Strength", "Shoulders", "Body Only"))

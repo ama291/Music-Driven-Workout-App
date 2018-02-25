@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-#from Scripts.user import User
 
 class Theme(object):
     """
@@ -13,16 +12,16 @@ class Theme(object):
         theme = 'track','artist','genre'
         spotifyId = spotify id if it's track or artist, name of genre if it's genre
         """
-        if(name == "" or name == None):
+        if(name is None or name == ""):
             raise ValueError("name can't be empty or invalid string")
         if(numWorkouts is None):
             raise ValueError("numWorkouts can't be None")
         if(numWorkouts < 0):
             raise ValueError("numWorkouts can't less than 0")
-        if(theme == "" or theme == None or theme not in ["track","artist","genre"]):
-            raise ValueError("theme can't be empty")
-        if((theme == "artist" or theme == "genre") and type(spotifyId)!= int):
-            raise ValueError("artist/genre needs spotify id number")
+        if(theme is None or theme == "" or theme not in ["track","artist","genre"]):
+            raise ValueError("invalid theme")
+        if(type(spotifyId)!= str):
+            raise ValueError("spotify id needs to be string")
         self.name = name
         self.theme = theme
         self.spotifyId = spotifyId

@@ -120,20 +120,31 @@ def addUser(dbURL, spotifyUsername, height, weight, birthyear, goals, themes, \
     assert r.status_code == requests.codes.ok
     return True
 
+def modifyAll(dbURL, table, colName, newVal):
+    query = "UPDATE %s SET %s = %s" % (table, colName, newVal)
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    return r.json()
+
+
 def modifyRow(dbURL, table, colName, newVal, ID):
-    query = "UPDATE %s SET %s = '%s' WHERE id = %d" % (table, colName, newVal, ID)
+    query = "UPDATE %s SET %s = %s WHERE id = %d" % (table, colName, newVal, ID)
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     return r.json()
 
-def clearUserExercise(dbURL, userID):
-    query = "DELETE FROM userexercises WHERE userID = '%s'" % userID
+def clearUserExercise(dbURL, ID, isEx=False):
+    if isEx:
+        query = "DELETE FROM userexercises WHERE exID = %s" % ID
+    else:
+        query = "DELETE FROM userexercises WHERE userID = %s" % ID
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     return r.json()
 
-def clearUser(dbURL, userID):
-    query = "UPDATE users SET goals='[]', themes='[]', inProgressWorkouts='{}', savedWorkouts='{}' WHERE id=%d" % userID
+
+def clearUser(dbURL, spotifyUsername):
+    query = "DELETE FROM users WHERE spotifyUsername = '%s'" % spotifyUsername
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     return r.json()
@@ -162,6 +173,25 @@ def removeDuplicates(dbURL, table, uniqueCol):
     print(res)
     return res
 
+def getAllRows(dbURL, table):
+    query = "SELECT * FROM %s" % table
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    res = r.json()
+    assert "Result" in res
+    rows = []
+    for row in res["Result"]:
+        d = getResponseDict(dbURL, row, table)
+        rows.append(d)
+    return rows
+
+def getAllFromColumn(dbURL, table, column):
+    query = "SELECT DISTINCT %s FROM %s" % (column, table)
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    res = r.json()
+    assert "Result" in res
+    return list(map(lambda x:x[0], res["Result"]))
 
 if __name__ == '__main__':
-    print(clearUser(realDB, 1))
+    print(getAllRows(realDB,"userexercises"))

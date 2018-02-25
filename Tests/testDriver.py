@@ -23,11 +23,9 @@ class TestDriver(unittest.TestCase):
 
         # test getUserId
         username = "test-spotify-user"
+        clearUser(dbURL, username)
         uid = getUserId(username)
-        ## in case the previous test was not successful
-        clearUser(dbURL, uid)
-
-        # self.assertTrue(uid is None)
+        self.assertTrue(uid is None)
 
         # test onboarding
         uid = onboarding(username, 70, 160, 1995)
@@ -48,7 +46,11 @@ class TestDriver(unittest.TestCase):
         self.assertEqual(testUser.savedWorkouts, {})
 
         # test getWorkout
-        themes = None
+        # get new workout, themes set
+        theme1 = Theme("The Killers", "artist", "0C0XlULifJtAgn6ZNCW2eu", 1)
+        theme2 = Theme("Otra Vez (feat. J Balvin)", "track", "7pk3EpFtmsOdj8iUhjmeCM", 2)
+        theme3 = Theme("Disciples", "track", "2gNfxysfBRfl9Lvi9T3v6R", 3)
+        themes = [theme1, theme2, theme3]
         categories = ["Cardio", "Stretching"]
         muscleGroups = None
         equipment = ["Body Only"]
@@ -73,6 +75,7 @@ class TestDriver(unittest.TestCase):
         self.assertEqual(saveWorkout(uid, wid), 2) # can't save workout that has already been quit
 
         # test saveWorkout
+        # get new workout, no themes set
         themes = None
         categories = None
         muscleGroups = ["Biceps"]
@@ -111,8 +114,8 @@ class TestDriver(unittest.TestCase):
         self.assertEqual(themesSaved(uid),'[]')
 
         ##test addTheme
-        theme1 = Theme("beyonce theme","artist", 88, 5)
-        self.assertEqual(addTheme(uid,"beyonce theme","artist", 88, 5),0) #add theme should be successful
+        theme1 = Theme("beyonce theme","artist", "88", 5)
+        self.assertEqual(addTheme(uid,"beyonce theme","artist", "88", 5),0) #add theme should be successful
         self.assertTrue(theme1 in getUser(uid).themes) #now new theme is in user's themes
 
         ##test removeTheme
@@ -124,6 +127,25 @@ class TestDriver(unittest.TestCase):
         r = requests.post(dbURL, data = {'query': query, 'key': key})
         self.assertTrue(r.json()['Status'] == "Success")
 
+        # test get exercises by type
+        cat = "Strength"
+        musc = "Any"
+        equip = "Body Only"
+        inStr = getInStr("muscle", ["m1", "m2", "m3"])
+        expected = "muscle IN ('m1','m2','m3')"
+        self.assertEqual(inStr, expected)
+
+        query = getExercisesReqStr(cat, musc, equip)
+        expected = "SELECT * FROM exercises WHERE type = 'Strength' AND muscle IN ('Neck','Traps','Shoulders','Chest','Biceps','Forearms','Abdominals','Quadriceps','Calves','Triceps','Lats','Middle Back','Lower Back','Glutes','Hamstrings') AND equipment = 'Body Only'"
+        self.assertEqual(query, expected)
+
+        exs = getExercisesbyType(cat, musc, equip)
+        self.assertGreater(len(exs), 0)
+        allMuscs = getAllFromColumn(dbURL, "exercises", "muscle")
+        for ex in exs:
+            self.assertEqual(ex["type"], cat)
+            self.assertEqual(ex["equipment"], "Body Only")
+            self.assertTrue(ex["muscle"] in allMuscs)
 
 if __name__ == '__main__':
     unittest.main()
