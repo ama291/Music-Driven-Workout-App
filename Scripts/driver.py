@@ -2,7 +2,7 @@
 from Scripts.user import User
 from Scripts.goal import Goal
 from Scripts.theme import Theme
-from Scripts.dbfunctions import getResponseDict, getResponseDictList, testDB, realDB, addUser
+from Scripts.dbfunctions import getResponseDict, getResponseDictList, testDB, realDB, addUser, getAllFromColumn
 import requests
 import jsonpickle
 import sqlite3
@@ -428,6 +428,20 @@ def removeCompetition(uid, competition):
             return DB_FAILURE
     else:
         return FAILURE
+
+# def getInString(lst):
+#     string = ""
+#     for i in lst:
+#         string += "'%s',", % i 
+#     return "(%s)" % string[:-1]
+
+# def getExercisesByType(category, muscleGroup, equipment):
+#     allCats = getAllFromColumn(dbURL, "exercises", "type")
+#     allMuscles = getAllFromColumn(dbURL, "exercises", "muscle")
+#     allEquips = getAllFromColumn(dbURL, "exercises", "equipment")
+#     if category == "Any":
+
+
 
 if __name__ == '__main__':
     print(getUser(1))
