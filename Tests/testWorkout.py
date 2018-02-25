@@ -2,6 +2,7 @@ import unittest
 from Scripts.workout import Workout
 from Scripts.exercise import Exercise
 from Scripts.user import User
+from Scripts.theme import Theme
 
 '''
 All excercises in the workout must have a different name (using equaliy testing will pass the same excercise with a different duration).

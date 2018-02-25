@@ -113,8 +113,8 @@ class TestDriver(unittest.TestCase):
         self.assertEqual(themesSaved(uid),'[]')
 
         ##test addTheme
-        theme1 = Theme("beyonce theme","artist", 88, 5)
-        self.assertEqual(addTheme(uid,"beyonce theme","artist", 88, 5),0) #add theme should be successful
+        theme1 = Theme("beyonce theme","artist", "88", 5)
+        self.assertEqual(addTheme(uid,"beyonce theme","artist", "88", 5),0) #add theme should be successful
         self.assertTrue(theme1 in getUser(uid).themes) #now new theme is in user's themes
 
         ##test removeTheme
