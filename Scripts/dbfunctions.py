@@ -194,4 +194,4 @@ def getAllFromColumn(dbURL, table, column):
     return list(map(lambda x:x[0], res["Result"]))
 
 if __name__ == '__main__':
-    print(getAllFromColumns(realDB,"exercises","equipment"))
+    print(getAllRows(realDB,"userexercises"))

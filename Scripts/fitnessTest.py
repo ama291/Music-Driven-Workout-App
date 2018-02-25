@@ -243,7 +243,6 @@ def getFitnessTestRpm(userID, exID, scale):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     res = r.json()
-    print(res)
     assert "Result" in res
     if res["Result"][0][0] != None:
         return scale * res["Result"][0][0] 
@@ -258,7 +257,6 @@ def _getAverageRpmHelper(exID, exact):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     res = r.json()
-    print(res)
     assert "Result" in res
     avg = res["Result"][0][0]
     count = res["Result"][0][1]
@@ -288,7 +286,6 @@ def getDefaultRpm(exID):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     res = r.json()
-    print(res)
     assert "Result" in res
     return res["Result"][0][0]
 

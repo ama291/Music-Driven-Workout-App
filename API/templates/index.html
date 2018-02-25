@@ -19,22 +19,23 @@ $ sh server.sh      # Begin serving our API.server </pre>
 $ curl --data "[param]=[value]&[param2]=[value2]" localhost:5000/[API ROUTE]/  # run tests through local version of API from 'sh server.sh'
 $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[API ROUTE]/  # run tests through server API </pre>
 
-        <!-- Workout Functions -->
-				<h2>Get User Id:</h2>
+        <h2>Workout Routes </h2>
+		
+        <h3>Get User Id:</h3>
 		<p><b>Route:</b> /api/workouts/getuserid/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> username, key</p>
         <p><b>Returns:</b> user id if user has logged in before, else None </p>
         <p><b>Description:</b> Attempts to retrieve an id for the user based on their spotify username upon login. If no id returned, the new user will be brought through the necessary onboarding. </p>
 
-				<h2>Onboarding:</h2>
+		<h3>Onboarding:</h3>
 		<p><b>Route:</b> /api/workouts/onboarding/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> username, height, weight, year, key</p>
         <p><b>Returns:</b> user id for newly registered user </p>
         <p><b>Description:</b> Completes a new user's onboarding by inserting their information into the database and retrieving their assigned user id. Note username is the spotify username the user uses to log in. </p>
 
-        <h2>Get Workout:</h2>
+        <h3>Get Workout:</h3>
 		<p><b>Route:</b> /api/workouts/getworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, themes, categories, musclegroups, equipment, duration, difficulty, token, key</p>
@@ -50,7 +51,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 {"Result": "\"{\\\"py/object\\\": \\\"Scripts.workout.Workout\\\", \\\"Exercises\\\": [{\\\"py/object\\\": \\\"Scripts.exercise.Exercise\\\", \\\"category\\\": \\\"Cardio\\\", \\\"difficulty\\\": \\\"Intermediate\\\", \\\"duration\\\": 20.0, \\\"equipment\\\": \\\"Body Only\\\", \\\"images\\\": [], \\\"increment\\\": 5.0, \\\"muscleGroup\\\": \\\"Quadriceps\\\", \\\"name\\\": \\\"High Knee Jog\\\", \\\"range_end\\\": 34, \\\"range_start\\\": 15, \\\"rpm\\\": 40}, {\\\"py/object\\\": \\\"Scripts.exercise.Exercise\\\", \\\"category\\\": \\\"Cardio\\\", \\\"difficulty\\\": \\\"Intermediate\\\", \\\"duration\\\": 29.0, \\\"equipment\\\": \\\"Body Only\\\", \\\"images\\\": [], \\\"increment\\\": 5.0, \\\"muscleGroup\\\": \\\"Quadriceps\\\", \\\"name\\\": \\\"Burpee\\\", \\\"range_end\\\": 34, \\\"range_start\\\": 14, \\\"rpm\\\": 40}, {\\\"py/object\\\": \\\"Scripts.exercise.Exercise\\\", \\\"category\\\": \\\"Stretching\\\", \\\"difficulty\\\": \\\"Intermediate\\\", \\\"duration\\\": 1.0, \\\"equipment\\\": \\\"Body Only\\\", \\\"images\\\": [], \\\"increment\\\": 0.5, \\\"muscleGroup\\\": \\\"Quadriceps\\\", \\\"name\\\": \\\"All Fours Quad Stretch\\\", \\\"range_end\\\": 3, \\\"range_start\\\": 1, \\\"rpm\\\": 2}], \\\"ID\\\": \\\"4ecda48d-65db-4e4c-9c92-05277fc95d1f\\\", \\\"categories\\\": [\\\"Cardio\\\", \\\"Stretching\\\"], \\\"currExercise\\\": 0, \\\"difficulty\\\": \\\"Intermediate\\\", \\\"duration\\\": 50.0, \\\"equipment\\\": [\\\"Body Only\\\", \\\"Kettleballs\\\", \\\"Body Only\\\"], \\\"muscleGroups\\\": null, \\\"themes\\\": null, \\\"uid\\\": 0}\"", "Status": "Success"} </code>
         </p>-->
 
-        <h2>Start Workout:</h2>
+        <h3>Start Workout:</h3>
 		<p><b>Route:</b> /api/workouts/startworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, workout, key</p>
@@ -65,7 +66,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             <p>A JSON workout string like the one for Get Workout</p>
         </p>-->
 
-        <h2>Pause Workout:</h2>
+        <h3>Pause Workout:</h3>
 		<p><b>Route:</b> /api/workouts/pauseworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, workoutid, paused, key</p>
@@ -82,7 +83,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             </code>
         </p>-->
 
-        <h2>Quit Workout:</h2>
+        <h3>Quit Workout:</h3>
 		<p><b>Route:</b> /api/workouts/quitworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, workoutid, key</p>
@@ -99,7 +100,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             </code>
         </p>-->
 
-        <h2>Save Workout:</h2>
+        <h3>Save Workout:</h3>
 		<p><b>Route:</b> /api/workouts/saveworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, workoutid, key</p>
@@ -116,21 +117,21 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             </code>
         </p>-->
 
-        <h2>Unsave Workout:</h2>
+        <h3>Unsave Workout:</h3>
         <p><b>Route:</b> /api/workouts/unsaveworkout/</p>
         <p><b>Methods:</b> POST</p>
         <p><b>Required parameters:</b> userid, workoutid, key</p>
         <p><b>Returns:</b> 0 - success, 1 - failure to update users table, 2 - workout not already saved</p>
         <p><b>Description:</b> Attempts to unsave workout for user. Fails if user table cannot be updated or workout not already saved.</p>
 
-        <h2>Start Saved Workout:</h2>
+        <h3>Start Saved Workout:</h3>
         <p><b>Route:</b> /api/workouts/startsavedworkout/</p>
         <p><b>Methods:</b> POST</p>
         <p><b>Required parameters:</b> userid, workoutid, key</p>
         <p><b>Returns:</b> 0 - success, 1 - failure to update users table, 2 - workout already started</p>
         <p><b>Description:</b> Attempts to start saved workout for user. Fails if user table cannot be updated or workout already started.</p>
 
-        <h2>Get Saved Workouts:</h2>
+        <h3>Get Saved Workouts:</h3>
 		<p><b>Route:</b> /api/workouts/workoutssaved/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
@@ -147,7 +148,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             </code>
         </p>-->
 
-        <h2>Get In-Progress Workouts:</h2>
+        <h3>Get In-Progress Workouts:</h3>
 		<p><b>Route:</b> /api/workouts/workoutsinprogress/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
@@ -165,8 +166,8 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         </p>-->
 
 
-        <!-- Fitness Functions -->
-        <h2>Accelerometer Frequency:</h2>
+        <h2> Fitness Test Routes </h2>
+        <h3>Accelerometer Frequency:</h3>
 		<p><b>Route:</b> /api/fitness/accel/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> data, key</p>
@@ -183,7 +184,17 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             </code>
         </p> -->
 
-		<h2>Get Tracked Exercises:</h2>
+        <h3>Add Exact Exercise Time</h3>
+        <p><b>Purpose:</b> For "Add Exercise" feature where the user wants to save their rate for an exercise exactly, rather than fitness test, where they are pushing themselves harder than a normal workout</p>
+        <p><b>Route:</b> /api/fitness/addexact/</p>
+        <p><b>Methods:</b> POST</p>
+        <p><b>Required Parameters:</b> userid, exid, timestamp, rate, key</p>
+        <p><b>Returns:</b> True on success</p>
+        <p><b>Description:</b> Saves time to userexercise database with 'exact' column set to true</p>
+
+
+
+		<h3>Get Tracked Exercises:</h3>
 		<p><b>Route:</b> /api/fitness/tracked/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
@@ -200,7 +211,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             </code>
         </p>-->
 
-		<h2>Get Fitness Test:</h2>
+		<h3>Get Fitness Test:</h3>
 		<p><b>Route:</b> /api/fitness/test/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b>categories, numexercises, exerciseids, key</p>
@@ -217,7 +228,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             </code>
         </p>-->
 
-		<h2>Check Exercise Tracked:</h2>
+		<h3>Check Exercise Tracked:</h3>
 		<p><b>Route:</b> /api/fitness/istracked/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, exid, key</p>
@@ -234,7 +245,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             </code>
         </p>-->
 
-        <h2>Toggle Exercise Tracking:</h2>
+        <h3>Toggle Exercise Tracking:</h3>
         <p><b>Route:</b> /api/fitness/toggletracked/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, exid, key</p>
@@ -251,9 +262,61 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             </code>
         </p>-->
 
+        <h3>Get Exercise By ID</h3>
+        <p><b>Route: </b>/api/fitness/getexercise/</p>
+        <p><b>Methods: </b>POST</p>
+        <p><b>Required parameters: </b>exid, key</p>
+        <p><b>Description: </b>submit exericise ID, get the corresponding database entry</p>
 
-        <!-- Database -->
-		<h2>Database</h2>
+        <h3>Get User Exercises</h3>
+        <p><b>Route: </b>/api/fitness/getuserexercises/</p>
+        <p><b>Methods: </b>POST</p>
+        <p><b>Required parameters: </b>userid, key</p>
+        <p><b>Description: </b>submit user ID, get list of unique exercises they have tested on or added</p>
+
+        <h3>Get Previous Test Results</h3>
+        <p><b>Route: </b>/api/fitness/getprevious/</p>
+        <p><b>Methods: </b>POST</p>
+        <p><b>Required parameters: </b>userid, exid, key</p>
+        <p><b>Description: </b>submit user ID and exercise ID, get list of previous attempts at this exercise</p>
+
+        <h3>Get Exercises By Type</h3>
+        <p><b>Route: </b>/api/fitness/getexsbytype/</p>
+        <p><b>Methods: </b>POST</p>
+        <p><b>Required parameters: </b>category, muscle, equipment, key</p>
+        <p><b>Description: </b>get list of exercises from exercises database for a given category, muscle group, and equipment, <b>OR</b> "Any"</p>
+
+
+        <h2>Goal Routes</h2>
+        <h3>Add Goal</h3>
+        <p><b>Route: </b>/api/goals/addgoal/</p>
+        <p><b>Methods: </b>POST</p>
+        <p><b>Required parameters: </b>userid, name, description, goalnum, categories, musclegroups, duration, dayssperweek, notify, key</p>
+        <p><b>Description: </b>Save a goal for a user with the given name, description, etc.; names must be unique</p>
+
+        <h3>Remove Goal</h3>
+        <p><b>Route: </b>/api/goals/removegoal/</p>
+        <p><b>Methods: </b>POST</p>
+        <p><b>Required parameters: </b>userid, name, key</p>
+        <p><b>Description: </b>Remove goal from the user's goals with the given name, if the user has a goal with that name</p>
+
+
+        <h2>Theme Routes</h2>
+        <h3>Add Theme</h3>
+        <p><b>Route: </b>/api/themes/addtheme/</p>
+        <p><b>Methods: </b>POST</p>
+        <p><b>Required parameters: </b>userid, themename, theme, numworkouts, key</p>
+        <p><b>Description: </b>Save a theme to the user with the given specifications. Names must be unique.</p>
+
+        <h3>Remove Theme</h3>
+        <p><b>Route: </b>/api/themes/removetheme/</p>
+        <p><b>Methods: </b>POST</p>
+        <p><b>Required parameters: </b>userid, themename, key</p>
+        <p><b>Description: </b>Remove a theme from the user with the given name, if such a theme exists.</p>
+
+
+        <h2>Database</h2>
+    	<h3>Database Route</h3>
 		<p><b>Route:</b> /api/database/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> query, key</p>

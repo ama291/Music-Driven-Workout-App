@@ -1,6 +1,6 @@
 import unittest
 import Scripts.fitnessTest as ft
-from Scripts.dbfunctions import clearUserExercise, realDB, printAll
+from Scripts.dbfunctions import clearUserExercise, realDB
 import json
 
 dbURL = realDB
@@ -128,6 +128,7 @@ class TestFitnessTest(unittest.TestCase):
         self.assertAlmostEqual(ft.getFitnessTestRpm(ID, exID, scale), 12.8)
         self.assertEqual(ft.getExactRpm(ID, exID), exactRPM)
         self.assertEqual(ft.getRpmForUser(ID, exID, scale), exactRPM)
+        
         clearUserExercise(dbURL, str(ID))
         clearUserExercise(dbURL, str(ID2))
 
