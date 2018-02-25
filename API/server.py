@@ -33,7 +33,7 @@ def apiGetUsername():
 		return failure("Invalid authentication")
 	try:
 		response = requests.post('http://138.197.49.155:5000/api/database/', data = {'query': 'SELECT spotifyUsername FROM users where id=' + str(userid), 'key': key})
-		return standardRes(response.json()['Result'])
+		return standardRes(response.json()['Result'][0][0])
 	except Exception as e:
 		return failure(str(e))
 
