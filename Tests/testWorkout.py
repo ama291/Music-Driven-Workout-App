@@ -128,7 +128,15 @@ class TestWorkout(unittest.TestCase):
                     themeUsed = True
                     break
             self.assertTrue(themeUsed)
+
     #test getSeeds - no. of artists+genres+tracks <=5
+    # with themes
+    artist_len = 0 if seeds['artists'] is None else len(seeds['artists'])
+    genres_len = 0 if seeds['genres'] is None else len(seeds['genres'])
+    tracks_len = 0 if seeds['tracks'] is None else len(seeds['tracks'])
+    self.assertTrue(artist_len + genres_len + tracks_len <= 5)
+    # without themes
+    seeds = workout2.getSeeds(workout2.spotID, workout2.themes, workout2.accessToken)
     artist_len = 0 if seeds['artists'] is None else len(seeds['artists'])
     genres_len = 0 if seeds['genres'] is None else len(seeds['genres'])
     tracks_len = 0 if seeds['tracks'] is None else len(seeds['tracks'])
