@@ -2,7 +2,8 @@
 from Scripts.user import User
 from Scripts.goal import Goal
 from Scripts.theme import Theme
-from Scripts.dbfunctions import getResponseDict, getResponseDictList, testDB, realDB, addUser
+import random
+from Scripts.dbfunctions import getResponseDict, getResponseDictList, testDB, realDB, addUser, getAllFromColumn
 import requests
 import jsonpickle
 import sqlite3
@@ -13,6 +14,7 @@ DB_FAILURE = 1
 FAILURE = 2
 
 dbURL = realDB
+key = "SoftCon2018"
 """
 Collection of functions that help Users interact with the database
 """
@@ -25,7 +27,7 @@ def getUserId(username):
 
     name = "\'" + username + "\'"
     query = 'SELECT id FROM users where spotifyUsername = %s' % name
-    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data={'query': query, 'key': key})
     if len(r.json()['Result']) != 0:
         return r.json()['Result'][0][0]
     else:
@@ -48,10 +50,10 @@ def onboarding(username, height, weight, year):
                 (%s, %d, %d, %d, %s, %s, %s, %s)' \
             % (name, height, weight, year,
             frozenList, frozenList, frozenDict, frozenDict)
-    r = requests.post(dbURL, data = {'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data = {'query': query, 'key': key})
     # now get assigned user id
     query = 'SELECT id FROM users where spotifyUsername = %s' % name
-    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data={'query': query, 'key': key})
     return r.json()['Result'][0][0]
 
 
@@ -61,7 +63,7 @@ def getUser(uid):
     :return: User instance, None if error or user does not exist
     """
     query = 'SELECT * FROM users where id = %d' % uid
-    r = requests.post(dbURL, data = {'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data = {'query': query, 'key': key})
 
     if r.json()['Status'] != 'Success' or len(r.json()['Result']) == 0:
         return None
@@ -91,7 +93,7 @@ def updateInProgressWorkouts(user):
     inProgress = "\'" + jsonpickle.encode(user.inProgressWorkouts) + "\'"
     query = 'UPDATE users SET inProgressWorkouts = %s where id = %d' % (inProgress, user.ID)
 
-    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data={'query': query, 'key': key})
     if r.json()['Status'] == 'Success':
         return SUCCESS
     else:
@@ -107,7 +109,7 @@ def updateAllWorkouts(user):
     saved = "\'" + jsonpickle.encode(user.savedWorkouts) + "\'"
     query = 'UPDATE users SET inProgressWorkouts = %s, savedWorkouts = %s where id = %d' % (inProgress, saved, user.ID)
 
-    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data={'query': query, 'key': key})
     if r.json()['Status'] == 'Success':
         return SUCCESS
     else:
@@ -122,7 +124,7 @@ def updateInProgressAndGoals(user):
     goals = "\'" + jsonpickle.encode(user.goals) + "\'"
     query = 'UPDATE users SET inProgressWorkouts = %s, goals = %s where id = %d' % (inProgress, goals, user.ID)
 
-    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data={'query': query, 'key': key})
     if r.json()['Status'] == 'Success':
         return SUCCESS
     else:
@@ -269,7 +271,7 @@ def workoutsInProgress(uid):
     :return: json string of in progress workouts
     """
     query = 'SELECT inProgressWorkouts FROM users where id = %d' % uid
-    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data={'query': query, 'key': key})
     if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
         return '{}'
     else:
@@ -282,7 +284,7 @@ def workoutsSaved(uid):
     :return: json string of saved workouts
     """
     query = 'SELECT savedWorkouts FROM users where id = %d' % uid
-    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data={'query': query, 'key': key})
     if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
         return '{}'
     else:
@@ -307,7 +309,7 @@ def addGoal(uid, name, description, goalNum, categories, muscleGroups,\
     goalString = jsonpickle.encode(user.goals)
     goalString = "\'" + goalString + "\'"
     sql = "UPDATE users SET goals = %s WHERE id = %d" % (goalString, uid)
-    r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data = {'query': sql, 'key': key})
     if r.json()['Status'] == 'Success':
         return SUCCESS
     else:
@@ -323,7 +325,7 @@ def removeGoal(uid, name):
     if(user.removeGoal(name)):
         goalString = "\'" + jsonpickle.encode(user.goals) + "\'"
         sql = "UPDATE users SET goals = %s WHERE id = %d" % (goalString, uid)
-        r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
+        r = requests.post(dbURL, data = {'query': sql, 'key': key})
         if r.json()['Status'] == 'Success':
             return SUCCESS
         else:
@@ -337,7 +339,7 @@ def goalsSaved(uid):
     :return: json string of saved goals
     """
     query = 'SELECT goals FROM users where id = %d' % uid
-    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data={'query': query, 'key': key})
     if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
         return '{}'
     else:
@@ -349,7 +351,7 @@ def themesSaved(uid):
     :return: json string of saved themes
     """
     query = 'SELECT themes FROM users where id = %d' % uid
-    r = requests.post(dbURL, data={'query': query, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data={'query': query, 'key': key})
     if r.json()['Status'] != "Success" or len(r.json()['Result']) == 0:
         return '{}'
     else:
@@ -369,7 +371,7 @@ def addTheme(uid, themeName, theme, spotifyId, numWorkouts):
     user.addTheme(fullTheme)
     themeString = "\'" + jsonpickle.encode(user.themes) + "\'"
     sql = "UPDATE users SET themes = %s WHERE id = %d" % (themeString, uid)
-    r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data = {'query': sql, 'key': key})
     if r.json()['Status'] == 'Success':
 
         return SUCCESS
@@ -386,7 +388,7 @@ def removeTheme(uid, themeName):
     if(user.removeTheme(themeName)):
         themeString = "\'" + jsonpickle.encode(user.themes) + "\'"
         sql = "UPDATE users SET themes = %s WHERE id = %d" % (themeString, uid)
-        r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
+        r = requests.post(dbURL, data = {'query': sql, 'key': key})
         if r.json()['Status'] == 'Success':
             return SUCCESS
         else:
@@ -406,7 +408,7 @@ def addCompetition(uid, competition):
     user.addCompetition(competition)
     compString = "\'" + jsonpickle.encode(user.competitions) + "\'"
     sql = "UPDATE users SET competitions = %s WHERE id = %d" % (compString, uid)
-    r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
+    r = requests.post(dbURL, data = {'query': sql, 'key': key})
     if r.json()['Status'] == 'Success':
         return SUCCESS
     else:
@@ -421,7 +423,7 @@ def removeCompetition(uid, competition):
     if(user.removeCompetition(competition)):
         compString = "\'" + jsonpickle.encode(user.competitions) + "\'"
         sql = "UPDATE users SET competitions = %s WHERE id = %d" % (compString, uid)
-        r = requests.post(dbURL, data = {'query': sql, 'key': 'SoftCon2018'})
+        r = requests.post(dbURL, data = {'query': sql, 'key': key})
         if r.json()['Status'] == 'Success':
             return SUCCESS
         else:
@@ -429,5 +431,44 @@ def removeCompetition(uid, competition):
     else:
         return FAILURE
 
+def getInStr(column, lst):
+    string = ""
+    for i in lst:
+        string += "'%s'," % i 
+    return "%s IN (%s)" % (column, string[:-1])
+
+def getExercisesReqStr(category, muscleGroup, equipment):
+    allCats = getAllFromColumn(dbURL, "exercises", "type")
+    allMuscles = getAllFromColumn(dbURL, "exercises", "muscle")
+    allEquips = getAllFromColumn(dbURL, "exercises", "equipment")
+    if category == "Any":
+        catStr = getInStr("type", allCats)
+    else:
+        assert category in allCats
+        catStr = "type = '%s'" % category
+    if muscleGroup == "Any":
+        muscStr = getInStr("muscle", allMuscles)
+    else:
+        assert muscleGroup in allMuscles
+        muscStr = "muscle = '%s'" % muscleGroup
+    if equipment == "Any":
+        equipStr = getInStr("equipment", allEquips)
+    else: 
+        assert equipment in allEquips
+        equipStr = "equipment = '%s'" % equipment
+    query = "SELECT * FROM exercises WHERE %s AND %s AND %s" % (catStr, \
+        muscStr, equipStr)
+    return query
+
+def getExercisesbyType(category, muscleGroup, equipment):
+    query = getExercisesReqStr(category, muscleGroup, equipment)
+    r = requests.post(dbURL, data = {'query':query, 'key':key})
+    assert r.status_code == requests.codes.ok
+    res = r.json()
+    assert "Result" in res
+    d = getResponseDictList(dbURL, res["Result"], "exercises")
+    return d 
+
 if __name__ == '__main__':
-    print(getUser(1))
+    res = getExercisesReqStr("Strength", "Any", "Body Only")
+    print(res)

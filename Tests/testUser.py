@@ -13,9 +13,9 @@ class TestUser(unittest.TestCase):
         ## test constructor (ID, name tracked,
         ## untracked, goals, themes, competition,
         ## inProgressWorkouts, savedWorkouts)
-        usr1 = User(1, "Alex", 167, 150, 1996, [], [], [], {}, {})
+        usr1 = User(0, "Alex", 167, 150, 1996, [], [], [], {}, {})
         self.assertEqual(usr1.spotifyUsername, "Alex")
-        self.assertEqual(usr1.ID, 1)
+        self.assertEqual(usr1.ID, 0)
         self.assertEqual(usr1.height, 167)
         self.assertEqual(usr1.weight, 150)
         self.assertEqual(usr1.birthyear, 1996)
@@ -23,6 +23,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(usr1.themes, [])
         self.assertEqual(usr1.inProgressWorkouts, {})
         self.assertEqual(usr1.savedWorkouts, {})
+        self.assertEqual(usr1.level, 0)
 
         """
         Workout flow - User keeps getting workouts until they find one they like,
