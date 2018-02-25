@@ -510,6 +510,23 @@ def apiRemoveGoal():
 	except Exception as e:
 		return failure(str(e))
 
+@app.route('/api/workouts/goalssaved/', methods=['POST'])
+def apiGoalsSaved():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	key = request.form.get('key')
+	params = [userid, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		response = goalsSaved(userid)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
 @app.route('/api/themes/addtheme/', methods=["POST"])
 def apiAddTheme():
 	userid = request.form.get('userid')
@@ -547,6 +564,23 @@ def apiRemoveTheme():
 		return failure("Invalid authentication")
 	try:
 		response = removeTheme(userid, themeName)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
+@app.route('/api/workouts/themessaved/', methods=['POST'])
+def apiThemesSaved():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	key = request.form.get('key')
+	params = [userid, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		response = themesSaved(userid)
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))

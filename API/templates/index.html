@@ -144,7 +144,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/workouts/workoutssaved/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
-        <p><b>Returns:</b> json string (empty if error)</p>
+        <p><b>Returns:</b> json string (empty if error or none saved)</p>
         <p><b>Description:</b> Submit userid and database access key to get a json string of all the user's saved workouts.</p>
         <!--<p>
             <b>Sample Test: </b>
@@ -161,7 +161,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/workouts/workoutsinprogress/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
-        <p><b>Returns:</b> json string (empty if error)</p>
+        <p><b>Returns:</b> json string (empty if error or none in progress)</p>
         <p><b>Description:</b> Submit userid and database access key to get a json string of all the user's in-progress workouts.</p>
         <!--<p>
             <b>Sample Test: </b>
@@ -309,6 +309,12 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p><b>Required parameters: </b>userid, name, key</p>
         <p><b>Description: </b>Remove goal from the user's goals with the given name, if the user has a goal with that name</p>
 
+				<h3>Get Goals:</h3>
+		<p><b>Route:</b> /api/workouts/goalssaved/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, key</p>
+        <p><b>Returns:</b> json string (empty if error or none saved)</p>
+        <p><b>Description:</b> Submit userid and database access key to get a json string of all the user's goals.</p>
 
         <h2>Theme Routes</h2>
         <h3>Add Theme</h3>
@@ -323,6 +329,12 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p><b>Required parameters: </b>userid, themename, key</p>
         <p><b>Description: </b>Remove a theme from the user with the given name, if such a theme exists.</p>
 
+				<h3>Get Themes:</h3>
+		<p><b>Route:</b> /api/workouts/themessaved/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, key</p>
+        <p><b>Returns:</b> json string (empty if error or none saved)</p>
+        <p><b>Description:</b> Submit userid and database access key to get a json string of all the user's themes.</p>
 
         <h2>Database</h2>
     	<h3>Database Route</h3>
@@ -331,9 +343,9 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Required parameters:</b> query, key</p>
 		<p><b>Description:</b> Run a query on the database.</p>
 		<p>The users table in the database was created with:</p>
-		<code>CREATE TABLE users (id integer, name varchar(50), tracked varchar(9999), untracked varchar(9999), goals varchar(9999), themes varchar(9999), competition varchar(9999), inProgressWorkouts varchar(9999), savedWorkouts varchar(9999));</code>
+		<code>CREATE TABLE users (id integer primary key, spotifyUsername varchar(50), height int, weight int, birthyear year, goals varchar(9999), themes varchar(9999), competition varchar(9999), inProgressWorkouts varchar(9999), savedWorkouts varchar(9999));</code>
         <p>The exercises table in the database was created with: </p>
-        <code>CREATE TABLE exercises (id integer, name varchar(512), type varchar(512), muscle varchar(512), equipment varchar(512), level varchar(512), images varchar(9999), guide varchar(9999));</code>
+        <code>CREATE TABLE exercises (id integer, name varchar(512), type varchar(512), muscle varchar(512), equipment varchar(512), level varchar(512), images varchar(9999), range_start float, range_end float, increment float, rpm float, bpm float);</code>
 
         <h3>Request Example:</h3>
 		<p>/Scripts/testrequest.py</p>
