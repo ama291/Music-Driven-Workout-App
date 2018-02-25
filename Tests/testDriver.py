@@ -23,9 +23,9 @@ class TestDriver(unittest.TestCase):
 
         # test getUserId
         username = "test-spotify-user"
+        clearUser(dbURL, username)
         uid = getUserId(username)
         ## in case the previous test was not successful
-        clearUser(dbURL, uid)
 
         # self.assertTrue(uid is None)
 
@@ -124,6 +124,25 @@ class TestDriver(unittest.TestCase):
         r = requests.post(dbURL, data = {'query': query, 'key': key})
         self.assertTrue(r.json()['Status'] == "Success")
 
+        # test get exercises by type
+        cat = "Strength"
+        musc = "Any"
+        equip = "Body Only"
+        inStr = getInStr("muscle", ["m1", "m2", "m3"])
+        expected = "muscle IN ('m1','m2','m3')"
+        self.assertEqual(inStr, expected)
+
+        query = getExercisesReqStr(cat, musc, equip)
+        expected = "SELECT * FROM exercises WHERE type = 'Strength' AND muscle IN ('Neck','Traps','Shoulders','Chest','Biceps','Forearms','Abdominals','Quadriceps','Calves','Triceps','Lats','Middle Back','Lower Back','Glutes','Hamstrings') AND equipment = 'Body Only'"
+        self.assertEqual(query, expected)
+
+        exs = getExercisesbyType(cat, musc, equip)
+        self.assertGreater(len(exs), 0)
+        allMuscs = getAllFromColumn(dbURL, "exercises", "muscle")
+        for ex in exs:
+            self.assertEqual(ex["type"], cat)
+            self.assertEqual(ex["equipment"], "Body Only")
+            self.assertTrue(ex["muscle"] in allMuscs)
 
 if __name__ == '__main__':
     unittest.main()

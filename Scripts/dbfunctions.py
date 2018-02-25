@@ -143,8 +143,8 @@ def clearUserExercise(dbURL, ID, isEx=False):
     return r.json()
 
 
-def clearUser(dbURL, userID):
-    query = "UPDATE users SET goals='[]', themes='[]', inProgressWorkouts='{}', savedWorkouts='{}' WHERE id=%d" % userID
+def clearUser(dbURL, spotifyUsername):
+    query = "DELETE FROM users WHERE spotifyUsername = '%s'" % spotifyUsername
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
     return r.json()
@@ -173,7 +173,7 @@ def removeDuplicates(dbURL, table, uniqueCol):
     print(res)
     return res
 
-def getAllRows(dbURL, table, userID=None, exID=None):
+def getAllRows(dbURL, table):
     query = "SELECT * FROM %s" % table
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
