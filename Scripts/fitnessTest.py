@@ -32,7 +32,7 @@ def getExQuery(categories):
 
 def getExerciseFromID(ID):
     """
-    return (exercise entry from database): the exercise corresponding to that 
+    return (exercise entry from database): the exercise corresponding to that
     ID
     """
     query = "SELECT * FROM exercises WHERE id = %d" % ID
@@ -40,7 +40,7 @@ def getExerciseFromID(ID):
     assert r.status_code == requests.codes.ok
     ex = r.json()["Result"][0]
     return getResponseDict(dbURL, ex, "exercises")
-    
+
 def getExercisesGeneric(userID, query):
     r = requests.post(dbURL, data = {'query':query, 'key':key})
     assert r.status_code == requests.codes.ok
@@ -136,7 +136,7 @@ def getPreviousResults(userID, exID):
 
 
 ## Add route
-def isTracked(userID, exID): 
+def isTracked(userID, exID):
     """
     return (boolean): whether the exercises is tracked
     """
@@ -147,7 +147,7 @@ def isTracked(userID, exID):
         return True
     return False
 
-    
+
 def addExercise(userID, exID, timestamp, rate):
     """
     return (boolean): True upon success
@@ -245,7 +245,7 @@ def getFitnessTestRpm(userID, exID, scale):
     res = r.json()
     assert "Result" in res
     if res["Result"][0][0] != None:
-        return scale * res["Result"][0][0] 
+        return scale * res["Result"][0][0]
     return None
 
 def _getAverageRpmHelper(exID, exact):
@@ -290,15 +290,15 @@ def getDefaultRpm(exID):
     return res["Result"][0][0]
 
 
-def getRpmForUser(userID, exID, scale):
+def getRpmForUser(userID, exID, scale, default=None):
     rpm = getExactRpm(userID, exID)
     if rpm is not None:
         return rpm
-    rpm = getFitnessTestRpm(userID, exIDs, scale)
+    rpm = getFitnessTestRpm(userID, exID, scale)
     if rpm is not None:
         return rpm
-    rpm = getAverageRpm(exID)
+    rpm = getAverageRpm(exID, scale)
     if rpm is not None:
         return rpm
-    rpm = getDefaultRpm(exID)
+    rpm = default if default is not None else getDefaultRpm(exID)
     return rpm

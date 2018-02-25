@@ -3,6 +3,7 @@ import uuid
 import requests
 import random
 from Scripts.exercise import Exercise
+from Scripts.fitnessTest import getRpmForUser
 from Scripts.dbfunctions import testDB, realDB
 import spotipy
 import spotipy.util as util
@@ -99,16 +100,12 @@ class Workout(object):
         self.Exercises = finalExercises
 
         for ex in self.Exercises:
+
             # update rpm/bpm if user has tested on the exercise
-            # TODO - will also need to remap bpm
-            query = 'select rate from userexercises where exID = %d and timestamp \
-             = (select max(timestamp) from userexercises where exID = %d) limit 1' % (ex.id, ex.id)
-            r = requests.post(dbURL,
-                              data={'query': query, 'key': 'SoftCon2018'})
-            if r.json()["Status"] == "Success" and len(r.json()["Result"]) > 0:
-                scale = 0.9 if self.difficulty == "Intermediate" else 0.7
-                ex.rpm = scale * r.json()["Result"][0][0]
-                # TODO - ex.bpm =
+            # otherwise, use default in database
+            scale = 0.9 if self.difficulty == "Intermediate" else 0.7
+            ex.rpm = getRpmForUser(self.uid, ex.id, scale, default=ex.rpm)
+            # TODO - ex.bpm =
 
             # get recommendations based on bpm, with duration >= to exercise duration
             ex.tracks = self.getRecommendations(self.spotID, self.themes, self.accessToken, ex.bpm, ex.duration)
