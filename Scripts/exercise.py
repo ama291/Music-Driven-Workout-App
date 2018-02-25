@@ -12,15 +12,15 @@ class Exercise(object):
     def __init__(self, id, name, difficulty, category, muscleGroup, equipment, images, range, increment, rpm, bpm):
         self.id = id
         self.name = name
-        self.difficulty = difficulty
+        # self.difficulty = difficulty
         self.category = category
         self.muscleGroup = muscleGroup
         self.equipment = equipment
         self.images = images # single url
-        self.range_start = range[0]
-        self.range_end = range[1]
-        self.increment = increment # valid duration increment
-        self.duration = randrange(self.range_start, self.range_end, self.increment)
+        # self.range_start = range[0]
+        # self.range_end = range[1]
+        # self.increment = increment # valid duration increment
+        self.duration = randrange(range[0], range[1], increment)
         self.rpm = rpm # either from exercise database or user's fitness test info
         self.bpm = bpm
 
