@@ -167,14 +167,14 @@ class TestUser(unittest.TestCase):
         self.assertFalse(usr1.removeGoal(goal2.name))
 
         # test add theme
-        theme1 = Theme("Beyonce theme", "Beyonce", 5)
+        theme1 = Theme("Beyonce theme", "artist",88, 5)
         self.assertTrue(usr1.addTheme(theme1))
         self.assertTrue(theme1 in usr1.themes)
-        theme2 = Theme("Beyonce theme", "Beyonce", 5)
+        theme2 = Theme("Beyonce theme", "artist", 88, 5)
         self.assertFalse(usr1.addTheme(theme2))
 
         # test remove theme
-        theme2 = Theme("Taylor Swift theme", "Taylor Swift", 5)
+        theme2 = Theme("Taylor Swift theme", "artist", 99, 5)
         self.assertFalse(usr1.removeTheme(theme2.name))
         self.assertTrue(usr1.removeTheme(theme1.name))
         self.assertFalse(theme1 in usr1.themes)

@@ -7,7 +7,7 @@ source env/bin/activate
 
 #install requirements
 while read line; do
-	pip3 install $line
+	pip install $line
 done <requirements.txt
 
 #start app

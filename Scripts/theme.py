@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-#from Scripts.user import User
 
 class Theme(object):
     """
@@ -7,15 +6,27 @@ class Theme(object):
     Themes can be based around an artist or genre.
     Users can choose how many workouts the theme is used for.
     """
-    def __init__(self, name, theme, numWorkouts):
+    def __init__(self, name, theme, spotifyId, numWorkouts):
+        """
+        name = name of track, artist, genre
+        theme = 'track','artist','genre'
+        spotifyId = spotify id if it's track or artist, name of genre if it's genre
+        """
         if(name is None or name == ""):
-            raise ValueError("name can't be empty string")
-        if(numWorkouts is None or numWorkouts < 0):
-            raise ValueError("numWorkouts can't be less than 0")
-        if(theme is None or theme == ""):
-            raise ValueError("theme can't be empty")
+            raise ValueError("name can't be empty or invalid string")
+        if(numWorkouts is None):
+            raise ValueError("numWorkouts can't be None")
+        if(numWorkouts < 0):
+            raise ValueError("numWorkouts can't less than 0")
+        if(theme is None or theme == "" or theme not in ["track","artist","genre"]):
+            raise ValueError("invalid theme")
+        if((theme == "artist" or theme == "track") and type(spotifyId)!= int):
+            raise ValueError("artist/track needs spotify id number")
+		  if((theme == "genre") and type(spotifyId != str)):
+				raise ValueError("genre needs string as id")
         self.name = name
         self.theme = theme
+        self.spotifyId = spotifyId
         self.numWorkouts = numWorkouts
 
     def __eq__(self, other):

@@ -20,6 +20,23 @@ def index():
 def getApi():
 	return standardRes("Welcome to the API")
 
+@app.route('/api/getusername/', methods=['POST'])
+def apiGetUsername():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	key = request.form.get('key')
+	params = [userid, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		response = requests.post('http://138.197.49.155:5000/api/database/', data = {'query': 'SELECT spotifyUsername FROM users where id=' + str(userid), 'key': key})
+		return standardRes(response.json()['Result'][0][0])
+	except Exception as e:
+		return failure(str(e))
+
 @app.route('/api/workouts/getuserid/', methods=['POST'])
 def apiGetUserId():
 	username = request.form.get('username')
