@@ -41,9 +41,8 @@ class Workout(object):
         limit = 30 # number of exercises for each trial, can be tuned
         trials = 10 # number of runs of algorithm, can be tuned
         results = [[]] * trials
-        # TODO - need to add bpm column to exercise table
         attributes = ['id', 'name', 'type', 'muscle', 'level', 'equipment',
-                        'range_start', 'range_end', 'increment', 'rpm', 'images'] # TODO - add 'bpm'
+                        'range_start', 'range_end', 'increment', 'rpm', 'images', 'bpm']
         equipment = ', '.join("\'" + e + "\'" for e in self.equipment)
 
         duration = self.duration
@@ -105,7 +104,7 @@ class Workout(object):
             # otherwise, use default in database
             scale = 0.9 if self.difficulty == "Intermediate" else 0.7
             ex.rpm = getRpmForUser(self.uid, ex.id, scale, default=ex.rpm)
-            # TODO - ex.bpm =
+            ex.bpm = self.getBPM(ex.rpm, ex.category)
 
             # get recommendations based on bpm, with duration >= to exercise duration
             ex.tracks = self.getRecommendations(self.spotID, self.themes, self.accessToken, ex.bpm, ex.duration)
@@ -144,11 +143,10 @@ class Workout(object):
                     increment = dbExercises[i][j]
                 elif ordering[j] == "rpm":
                     rpm = dbExercises[i][j]
-                # else: # bpm
-                    # bpm = dbExercises[i][j]
+                else: # bpm
+                    bpm = dbExercises[i][j]
 
-            # TODO - update with real bpm
-            new = Exercise(id, name, difficulty, category, muscleGroup, equipment, images, exRange, increment, rpm, 120 + 10*i)
+            new = Exercise(id, name, difficulty, category, muscleGroup, equipment, images, exRange, increment, rpm, bpm)
 
             if new.duration + total_duration <= self.duration:
                 exercises.append(new)
@@ -207,7 +205,7 @@ class Workout(object):
                 idx = random.randint(0, len(playlists) - 1)
                 p = playlists[idx]
             else: # get workout category playlists
-                playlists = self.getWorkoutCategoryPlaylists() # TODO - make this call once, add as param
+                playlists = self.getWorkoutCategoryPlaylists()
                 # pick a random playlist
                 idx = random.randint(0, len(playlists) - 1)
                 p = playlists[idx]
@@ -267,44 +265,29 @@ class Workout(object):
         return tracks
 
 
-
-    def getBPM(self,rpm,categories):
-        for i in range(len(categories)):
-            if self.categories[i] == "Cardio":
+    def getBPM(self, rpm, category):
+            if category == "Cardio":
                 max_beats = 170
-            if self.categories[i] == "Powerlifting":
+            if category == "Powerlifting":
                 max_beats =140
-            if self.categories[i] == "Strongman":
+            if category == "Strongman":
                 max_beats = 140
-            if self.categories[i] == "Olympic Weightlifting":
+            if category == "Olympic Weightlifting":
                 max_beats = 140
-            if self.categories[i] == "Strength":
+            if category == "Strength":
                 max_beats = 140
-            if self.categories[i] == "Plyometrics":
+            if category == "Plyometrics":
                 max_beats = 150
-            if self.categories[i] == "Stretching":
+            if category == "Stretching":
                 max_beats = 80
-        bpm = 0
-        n = 0
-        while bpm <= max_beats:
-            bpm = rpm*(2**n)
-            n = n+1
 
-        return bpm
+            bpm = rpm
+            n = 1
+            while bpm <= max_beats:
+                if rpm*(2*n) <= max_beats:
+                    bpm = rpm*(2*n)
+                    n = n+1
+                else:
+                    break
 
-    'ALTER TABLE Exercise ADD COLUMN bpm int'
-
-    def bpm_database(self):
-
-        query = 'SELECT id FROM exercises'
-        r = requests.post('http://138.197.49.155:5000/api/database/',
-                              data={'query': query, 'key': 'SoftCon2018'})
-        ids = r.json()["Result"][0]
-        for id in ids:
-            query = 'SELECT rpm,type FROM exercises where id = %d' %(id)
-            r = requests.post('http://138.197.49.155:5000/api/database/',
-                              data={'query': query, 'key': 'SoftCon2018'})
-            rpm = r.json()["Result"][0][0]
-            category = r.json()["Result"][0][1]
-            if r.json()["Status"] == "Success" and len(r.json()["Result"]) > 0:
-                'UPDATE Exercise SET bpm = %d where id = %d' %(self.getBPM(rpm,category),id)
+            return bpm
