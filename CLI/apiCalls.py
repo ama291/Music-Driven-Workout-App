@@ -128,6 +128,21 @@ def getExercisesByType(category, muscleGroup, equipment):
         "key": key}
     return json.loads(makeRequest(route, data))
 
+def getCategories():
+    route = "/api/fitness/getcategories/"
+    data = {"key": key}
+    return json.loads(makeRequest(route, data))
+
+def getMuscles():
+    route = "/api/fitness/getmuscles/"
+    data = {"key": key}
+    return json.loads(makeRequest(route, data))
+
+def getEquipments():
+    route = "/api/fitness/getequipments/"
+    data = {"key": key}
+    return json.loads(makeRequest(route, data))
+
 def addGoal(uid, name, description, goalNum, categories, \
      muscleGroups, duration, daysPerWeek, notify):
     route = "/api/goals/addgoal/"
@@ -239,3 +254,9 @@ if __name__ == '__main__':
         print(getPreviousResults(1,12))
         print("\nGet Exercises By Type")
         print(getExercisesByType("Strength", "Shoulders", "Body Only"))
+        print("\nGet categories")
+        print(getCategories())
+        print("\nGet muscle groups")
+        print(getMuscles())
+        print("\nGet equipment")
+        print(getEquipments())

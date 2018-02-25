@@ -5,6 +5,9 @@ from Scripts.log import Log
 from Scripts.driver import *
 from Scripts.fitnessTest import *
 from CLI.apiCalls import toBool
+from Scripts.dbfunctions import getAllFromColumn, realDB
+
+dbURL = realDB
 
 app = Flask(__name__)
 app.config['DEBUG'] = False
@@ -448,6 +451,43 @@ def apiGetExercisesByType():
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
+
+@app.route('/api/fitness/getcategories/', methods=["POST"])
+def apiGetCategories():
+	key = request.form.get('key')
+	if key != masterKey:
+		return failure("Invalid authentication")
+	try:
+		response = getAllFromColumn(dbURL, "exercises", "type")
+		return standardRes(json.dumps(response))
+	except:
+		return failure(str(e))
+
+
+@app.route('/api/fitness/getmuscles/', methods=["POST"])
+def apiGetMuscles():
+	key = request.form.get('key')
+	if key != masterKey:
+		return failure("Invalid authentication")
+	try:
+		response = getAllFromColumn(dbURL, "exercises", "muscle")
+		return standardRes(json.dumps(response))
+	except:
+		return failure(str(e))
+
+
+@app.route('/api/fitness/getequipments/', methods=["POST"])
+def apiGetEquipments():
+	key = request.form.get('key')
+	if key != masterKey:
+		return failure("Invalid authentication")
+	try:
+		response = getAllFromColumn(dbURL, "exercises", "equipment")
+		return standardRes(json.dumps(response))
+	except:
+		return failure(str(e))
+
+
 
 
 @app.route('/api/goals/addgoal/', methods=["POST"])
