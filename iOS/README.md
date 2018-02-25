@@ -1,5 +1,6 @@
 # Sending Data Through A Segue
-```override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+```
+override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.destination is MenuViewController
         {
@@ -11,4 +12,5 @@
     
     @IBAction func goButtonClick(_ sender: Any) {
         self.performSegue(withIdentifier: "loginSegue", sender: self)
-    }```
+    }
+```
