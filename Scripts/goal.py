@@ -19,7 +19,7 @@ class Goal(object):
         days per week: int (<=7)
         notifications: boolean
         """
-        if(name == "" or name is None):
+        if(name is None or name == ""):
             raise ValueError("name can't be empty string")
         if(goalNum is None):
             raise ValueError("goalNum can't be None")
