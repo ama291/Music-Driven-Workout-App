@@ -177,7 +177,8 @@ class Workout(object):
             dur = r['duration_ms'] / (1000 * 60) # duration of this song in minutes
 
             if total_duration < duration:
-                tracks.append(r['uri'])
+                name = r['name'].translate(str.maketrans({"'":  r""}))
+                tracks.append({'name': name, 'uri': r['uri']})
                 total_duration += dur
             if total_duration >= duration:
                 break
