@@ -268,7 +268,43 @@ class Workout(object):
 
 
 
-    # TODO - implement this
-    def getBPM(self,rpm,min_beats,max_beats):
-        #return bpm int
-        return[]
+    def getBPM(self,rpm,categories):
+        for i in range(len(categories)):
+            if self.categories[i] == "Cardio":
+                max_beats = 170
+            if self.categories[i] == "Powerlifting":
+                max_beats =140
+            if self.categories[i] == "Strongman":
+                max_beats = 140
+            if self.categories[i] == "Olympic Weightlifting":
+                max_beats = 140
+            if self.categories[i] == "Strength":
+                max_beats = 140
+            if self.categories[i] == "Plyometrics":
+                max_beats = 150
+            if self.categories[i] == "Stretching":
+                max_beats = 80
+        bpm = 0
+        n = 0
+        while bpm <= max_beats:
+            bpm = rpm*(2**n)
+            n = n+1
+
+        return bpm
+
+    'ALTER TABLE Exercise ADD COLUMN bpm int'
+
+    def bpm_database(self):
+
+        query = 'SELECT id FROM exercises'
+        r = requests.post('http://138.197.49.155:5000/api/database/',
+                              data={'query': query, 'key': 'SoftCon2018'})
+        ids = r.json()["Result"][0]
+        for id in ids:
+            query = 'SELECT rpm,type FROM exercises where id = %d' %(id)
+            r = requests.post('http://138.197.49.155:5000/api/database/',
+                              data={'query': query, 'key': 'SoftCon2018'})
+            rpm = r.json()["Result"][0][0]
+            category = r.json()["Result"][0][1]
+            if r.json()["Status"] == "Success" and len(r.json()["Result"]) > 0:
+                'UPDATE Exercise SET bpm = %d where id = %d' %(self.getBPM(rpm,category),id)
