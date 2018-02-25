@@ -432,6 +432,23 @@ def apiGetPrevious():
 	except Exception as e:
 		return failure(str(e))
 
+@app.route('/api/fitness/getexsbytype/', methods=["POST"])
+def apiGetExercisesByType():
+	category = request.form.get('category')
+	muscleGroup = request.form.get('muscle')
+	equipment = request.form.get('equipment')
+	key = request.form.get('key')
+	params = [category, muscleGroup, equipment, key]
+	if None in params:
+		return failure("Invalid parameters")
+	if key != masterKey:
+		return failure("Invalid authentication")
+	try:
+		response = getExercisesbyType(category, muscleGroup, equipment)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
 
 @app.route('/api/goals/addgoal/', methods=["POST"])
 def apiAddGoal():

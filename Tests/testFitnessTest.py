@@ -2,19 +2,19 @@ import unittest
 import Scripts.fitnessTest as ft
 from Scripts.dbfunctions import clearUserExercise, realDB
 import json
-from random import randint
 
 dbURL = realDB
 
 class TestFitnessTest(unittest.TestCase):
 
     def test(self):
-        yr = randint(1000, 2000)
         ID = 1
         ID2 = 2
-        clearUserExercise(dbURL, ID)
-        clearUserExercise(dbURL, ID2)
-        time = "%d-12-12 12:12:12" % yr
+        exID = 12
+        clearUserExercise(dbURL, str(ID))
+        clearUserExercise(dbURL, str(ID2))
+
+        time = "2012-12-12 12:12:12"
         cats = ["Strength"]
         cats2 = ["Strength", "Plyometrics"]
 
@@ -41,9 +41,9 @@ class TestFitnessTest(unittest.TestCase):
         ## Test getting tracked exercises
         self.assertEqual(ft.getTrackedExercises(2438983), [])
         exIDs = [12,24,36,48]
-        for exID in exIDs:
-            ft.addExercise(ID2, exID, time, 64.0)
-            ft.toggleTracked(ID2, exID)
+        for exid in exIDs:
+            ft.addExercise(ID2, exid, time, 64.0)
+            ft.toggleTracked(ID2, exid)
         exs = ft.getTrackedExercises(ID2)
         resIDs = list(map(lambda x: x["id"], exs))
         self.assertEqual(exIDs, resIDs)
@@ -81,8 +81,8 @@ class TestFitnessTest(unittest.TestCase):
         with open('Logs/log1.json', 'r') as fd:
                 data = json.load(fd)
         data = ft.processMotionData(ID, 12, time, data, False)
-        tolerance = 0.1
-        actual_rate = (17.0 / 30.0)
+        tolerance = 6
+        actual_rate = (17.0 / 30.0) * 60
         diff = abs(actual_rate - data["rate"])
         self.assertTrue(diff < tolerance)
 
@@ -113,14 +113,25 @@ class TestFitnessTest(unittest.TestCase):
         self.assertEqual(lvl, 1)
         self.assertTrue(up)
 
-        ## test getting rpm and adding an exact rate
-        self.assertNotEqual(ft.getRPMForUser(ID, .8), 32.0)
-        exID = randint(1,1064)
-        self.assertTrue(ft.addExerciseExact(ID, exID, time, 32.0))
-        self.assertEqual(ft.getRPMForUser(ID, .8), 32.0)
-        clearUserExercise(dbURL, ID)
-        clearUserExercise(dbURL, ID2)
+        ## test adding an exact rate
+        scale = .8
+        exactRPM = 16.0
+        self.assertTrue(ft.addExerciseExact(ID, exID, time, exactRPM))
+        self.assertEqual(ft.getAverageRpmExact(exID), (exactRPM, 1))
         
+        ## test getting RPM for a user
+        self.assertEqual(ft.getDefaultRpm(exID), 12)
+        ## The three tests below will be impossible when the database is populated
+        # self.assertEqual(ft.getAverageRpmExact(exID), (exactRPM, 1))
+        # self.assertEqual(ft.getAverageRpmFitnessTest(exID, scale), (None, 0))
+        # self.assertAlmostEqual(ft.getAverageRpm(exID, scale), exactRPM)
+        self.assertAlmostEqual(ft.getFitnessTestRpm(ID, exID, scale), 12.8)
+        self.assertEqual(ft.getExactRpm(ID, exID), exactRPM)
+        self.assertEqual(ft.getRpmForUser(ID, exID, scale), exactRPM)
+        
+        clearUserExercise(dbURL, str(ID))
+        clearUserExercise(dbURL, str(ID2))
+
 
 
 if __name__ == '__main__':
