@@ -10,6 +10,15 @@ import UIKit
 
 class WorkSummaryViewController: UIViewController {
 
+    var userid: String!
+    var themes: String!
+    var categories: String!
+    var musclegroup: String!
+    var equipment: String!
+    var duration: String!
+    var difficulty: String!
+    var token: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
