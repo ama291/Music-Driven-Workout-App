@@ -36,6 +36,9 @@
 		D8880C7120436E7200415877 /* WorkSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880C7020436E7200415877 /* WorkSummaryViewController.swift */; };
 		D8880C7320436E8300415877 /* WorkExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880C7220436E8300415877 /* WorkExerciseViewController.swift */; };
 		D8880C7520436E8F00415877 /* WorkCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880C7420436E8F00415877 /* WorkCompleteViewController.swift */; };
+		D8C5A975204382C7006D2A0A /* CESelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5A974204382C7006D2A0A /* CESelectionViewController.swift */; };
+		D8C5A9772043838B006D2A0A /* CEFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5A9762043838B006D2A0A /* CEFilterViewController.swift */; };
+		D8C5A979204384FF006D2A0A /* CECompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5A978204384FF006D2A0A /* CECompleteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +95,9 @@
 		D8880C7020436E7200415877 /* WorkSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkSummaryViewController.swift; sourceTree = "<group>"; };
 		D8880C7220436E8300415877 /* WorkExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkExerciseViewController.swift; sourceTree = "<group>"; };
 		D8880C7420436E8F00415877 /* WorkCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkCompleteViewController.swift; sourceTree = "<group>"; };
+		D8C5A974204382C7006D2A0A /* CESelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CESelectionViewController.swift; sourceTree = "<group>"; };
+		D8C5A9762043838B006D2A0A /* CEFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEFilterViewController.swift; sourceTree = "<group>"; };
+		D8C5A978204384FF006D2A0A /* CECompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CECompleteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +180,9 @@
 				D8880C7020436E7200415877 /* WorkSummaryViewController.swift */,
 				D8880C7220436E8300415877 /* WorkExerciseViewController.swift */,
 				D8880C7420436E8F00415877 /* WorkCompleteViewController.swift */,
+				D8C5A974204382C7006D2A0A /* CESelectionViewController.swift */,
+				D8C5A9762043838B006D2A0A /* CEFilterViewController.swift */,
+				D8C5A978204384FF006D2A0A /* CECompleteViewController.swift */,
 			);
 			path = "Music-Driven-Workout-App";
 			sourceTree = "<group>";
@@ -359,6 +368,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8C5A975204382C7006D2A0A /* CESelectionViewController.swift in Sources */,
 				D8880C5B2043606200415877 /* SavedWorkoutsViewController.swift in Sources */,
 				114626272040E93F00B2ACEB /* MenuViewController.swift in Sources */,
 				D8880C6720436BB900415877 /* FTCheckpointViewController.swift in Sources */,
@@ -370,9 +380,11 @@
 				D8880C6D20436D8200415877 /* FTSummaryViewController.swift in Sources */,
 				D8880C6F20436E6400415877 /* WorkSelectionViewController.swift in Sources */,
 				D8880C7320436E8300415877 /* WorkExerciseViewController.swift in Sources */,
+				D8C5A9772043838B006D2A0A /* CEFilterViewController.swift in Sources */,
 				D8880C652043676500415877 /* FTExerciseViewController.swift in Sources */,
 				D8880C7120436E7200415877 /* WorkSummaryViewController.swift in Sources */,
 				11F9ABEB2033E593007F217C /* AccelerometerTest.swift in Sources */,
+				D8C5A979204384FF006D2A0A /* CECompleteViewController.swift in Sources */,
 				114626292040E99A00B2ACEB /* LoginViewController.swift in Sources */,
 				11AF5E29202D42D2004EB40B /* AppDelegate.swift in Sources */,
 				D8880C63204366E200415877 /* FTExDescViewController.swift in Sources */,
