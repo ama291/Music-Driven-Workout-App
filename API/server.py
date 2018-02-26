@@ -6,6 +6,9 @@ from Scripts.log import Log
 from Scripts.driver import *
 from Scripts.fitnessTest import *
 from CLI.apiCalls import toBool
+from Scripts.dbfunctions import getAllFromColumn, realDB
+
+dbURL = realDB
 
 app = Flask(__name__)
 app.config['DEBUG'] = False
@@ -452,6 +455,67 @@ def apiGetExercisesByType():
 	except Exception as e:
 		return failure(str(e))
 
+@app.route('/api/fitness/getcategories/', methods=["POST"])
+def apiGetCategories():
+	key = request.form.get('key')
+	if key != masterKey:
+		return failure("Invalid authentication")
+	try:
+		response = getAllFromColumn(dbURL, "exercises", "type")
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
+
+@app.route('/api/fitness/getmuscles/', methods=["POST"])
+def apiGetMuscles():
+	key = request.form.get('key')
+	if key != masterKey:
+		return failure("Invalid authentication")
+	try:
+		response = getAllFromColumn(dbURL, "exercises", "muscle")
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
+
+@app.route('/api/fitness/getequipments/', methods=["POST"])
+def apiGetEquipments():
+	key = request.form.get('key')
+	if key != masterKey:
+		return failure("Invalid authentication")
+	try:
+		response = getAllFromColumn(dbURL, "exercises", "equipment")
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
+@app.route('/api/fitness/processmotion/', methods=["POST"])
+def apiProcessMotionData():
+	userID = request.form.get("userid")
+	if userID != None:
+		userID = int(userID)
+	exID = request.form.get("exid")
+	if exID != None:
+		exID = int(exID)
+	timestamp = request.form.get("timestamp")
+	rawdata = request.form.get("rawdata")
+	if rawdata != None:
+		rawdata = json.loads(rawdata)
+	exact = request.form.get("exact")
+	if exact != None:
+		exact = toBool(exact)
+	key = request.form.get("key")
+	params = [userID, exID, timestamp, rawdata, exact, key]
+	if None in params:
+		return failure("Invalid parameters")
+	if key != masterKey:
+		return failure("Invalid authentication")
+	try:
+		response = processMotionData(userID, exID, timestamp, rawdata, exact)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
 
 @app.route('/api/goals/addgoal/', methods=["POST"])
 def apiAddGoal():

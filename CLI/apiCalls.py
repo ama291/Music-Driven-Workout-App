@@ -128,6 +128,31 @@ def getExercisesByType(category, muscleGroup, equipment):
         "key": key}
     return json.loads(makeRequest(route, data))
 
+def getCategories():
+    route = "/api/fitness/getcategories/"
+    data = {"key": key}
+    return json.loads(makeRequest(route, data))
+
+def getMuscles():
+    route = "/api/fitness/getmuscles/"
+    data = {"key": key}
+    return json.loads(makeRequest(route, data))
+
+def getEquipments():
+    route = "/api/fitness/getequipments/"
+    data = {"key": key}
+    return json.loads(makeRequest(route, data))
+
+def processMotionData(userID, exID, timestamp, rawdata, exact):
+    route = "/api/fitness/processmotion/"
+    data = {"userid": userID,
+        "exid": exID,
+        "timestamp": timestamp,
+        "rawdata": rawdata,
+        "exact": exact,
+        "key": key}
+    return json.loads(makeRequest(route, data))
+
 def addGoal(uid, name, description, goalNum, categories, \
      muscleGroups, duration, daysPerWeek, notify):
     route = "/api/goals/addgoal/"
@@ -216,6 +241,11 @@ if __name__ == '__main__':
 
     elif argv[1] == "fitness":
         # print("\nWorkouts In Progress\n", workoutsInProgress(0))
+        print("Process motion data")
+        with open('Logs/log1.json', 'r') as fd:
+                data = fd.read()
+        data = processMotionData(1, 12, "2012-12-12 12:12:12", data, False)
+        print(data)
         print("\nAdd exercise exact")
         time = "2012-12-12 12:12:12"
         print(addExerciseExact(1, 24, time, 25.6))
@@ -239,3 +269,9 @@ if __name__ == '__main__':
         print(getPreviousResults(1,12))
         print("\nGet Exercises By Type")
         print(getExercisesByType("Strength", "Shoulders", "Body Only"))
+        print("\nGet categories")
+        print(getCategories())
+        print("\nGet muscle groups")
+        print(getMuscles())
+        print("\nGet equipment")
+        print(getEquipments())

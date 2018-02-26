@@ -166,8 +166,19 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         </p>-->
 
 
-        <h2> Fitness Test Routes </h2>
+        <h2> Process Motion Data </h2>
         <h3>Accelerometer Frequency:</h3>
+        <p><b>Note: </b> You should use this instead of Accel now</p>
+        <p><b>Route:</b> /api/fitness/processmotion/</p>
+        <p><b>Methods:</b> POST</p>
+        <p><b>Required parameters:</b> userID, exID, timestamp, rawdata, exact, key</p>
+        <p><b>Returns:</b> Frequency, level and whether they've leveled up, in a dictionary format</p>
+        <p><b>Description:</b> Process the motion data and save it to a the database if this is a fitness test. If exact is True, they will be asked later whether they want to save the exercise.
+
+
+
+        <h3>Accelerometer Frequency:</h3>
+        <p><b>Note: </b> We should use Process Motion Data instead of this now. See above.</p>
 		<p><b>Route:</b> /api/fitness/accel/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> data, key</p>
@@ -184,15 +195,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             </code>
         </p> -->
 
-        <h3>Add Exact Exercise Time</h3>
-        <p><b>Purpose:</b> For "Add Exercise" feature where the user wants to save their rate for an exercise exactly, rather than fitness test, where they are pushing themselves harder than a normal workout</p>
-        <p><b>Route:</b> /api/fitness/addexact/</p>
-        <p><b>Methods:</b> POST</p>
-        <p><b>Required Parameters:</b> userid, exid, timestamp, rate, key</p>
-        <p><b>Returns:</b> True on success</p>
-        <p><b>Description:</b> Saves time to userexercise database with 'exact' column set to true</p>
-
-
+        
 
 		<h3>Get Tracked Exercises:</h3>
 		<p><b>Route:</b> /api/fitness/tracked/</p>
@@ -285,6 +288,39 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p><b>Methods: </b>POST</p>
         <p><b>Required parameters: </b>category, muscle, equipment, key</p>
         <p><b>Description: </b>get list of exercises from exercises database for a given category, muscle group, and equipment, <b>OR</b> "Any"</p>
+
+
+        <h2>Add Exercise routes</h2>
+        <h3>Add Exact Exercise Time</h3>
+        <p><b>Purpose:</b> For "Add Exercise" feature where the user wants to save their rate for an exercise exactly, rather than fitness test, where they are pushing themselves harder than a normal workout</p>
+        <p><b>Route:</b> /api/fitness/addexact/</p>
+        <p><b>Methods:</b> POST</p>
+        <p><b>Required Parameters:</b> userid, exid, timestamp, rate, key</p>
+        <p><b>Returns:</b> True on success</p>
+        <p><b>Description:</b> Saves time to userexercise database with 'exact' column set to true</p>
+
+        <h3>Get all categories</h3>
+        <p><b>Route:</b> /api/fitness/getcategories/</p>
+        <p><b>Methods:</b> POST</p>
+        <p><b>Required Parameters:</b> key</p>
+        <p><b>Returns:</b> List of categories</p>
+        <p><b>Description:</b> Returns a list of exercise categories in the database</p>
+
+
+        <h3>Get all muscle groups</h3>
+        <p><b>Route:</b> /api/fitness/getmuscles/</p>
+        <p><b>Methods:</b> POST</p>
+        <p><b>Required Parameters:</b> key</p>
+        <p><b>Returns:</b> List of categories</p>
+        <p><b>Description:</b> Returns a list of muscle groups in the exercise table</p>
+
+
+        <h3>Get all types of equipment</h3>
+        <p><b>Route:</b> /api/fitness/getequipments/</p>
+        <p><b>Methods:</b> POST</p>
+        <p><b>Required Parameters:</b> key</p>
+        <p><b>Returns:</b> List of equipments</p>
+        <p><b>Description:</b> Returns a list of equipments in the exercise table</p>
 
 
         <h2>Goal Routes</h2>
