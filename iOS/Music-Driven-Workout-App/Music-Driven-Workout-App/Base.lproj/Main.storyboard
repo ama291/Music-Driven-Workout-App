@@ -96,7 +96,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="loginButtonPressed2:" destination="A61-lo-4Uw" eventType="touchUpInside" id="xTT-J6-30b"/>
+                                    <action selector="loginPressed:" destination="A61-lo-4Uw" eventType="touchUpInside" id="r1R-hS-Cv3"/>
                                     <action selector="print2:" destination="sBm-9g-UcC" eventType="touchUpInside" id="yFq-s2-C7q"/>
                                     <segue destination="BYZ-38-t0r" kind="show" id="U7g-Us-gxA"/>
                                 </connections>

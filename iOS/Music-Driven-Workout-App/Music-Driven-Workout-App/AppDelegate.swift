@@ -24,10 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
         // called when user signs into spotify. Session data saved into user defaults, then notification posted to call updateAfterFirstLogin in ViewController.swift. Modeled off recommneded auth flow suggested by Spotify documentation
+        print("app d 27")
         if auth.canHandle(auth.redirectURL) {
+           print("29")
             auth.handleAuthCallback(withTriggeredAuthURL: url, callback: { (error, session) in
-                
-                
                 if error != nil {
                     print("error!")
                 }
@@ -37,7 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 userDefaults.set(sessionData, forKey: "SpotifySession")
                 userDefaults.synchronize()
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "loginSuccessfull"), object: nil)
+                print("40")
             })
+            print("42")
             return true
         }
         return false
