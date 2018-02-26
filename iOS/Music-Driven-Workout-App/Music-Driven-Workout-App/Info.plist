@@ -25,7 +25,7 @@
 			<string>UC.Music-Driven-Workout-App</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>SpotifySDKDemo</string>
+				<string>Music-Driven-Workout-App</string>
 			</array>
 		</dict>
 	</array>

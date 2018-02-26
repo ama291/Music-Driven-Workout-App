@@ -7,10 +7,8 @@
 //
 
 import UIKit
-import SafariServices
-import AVFoundation
 
-class spotifyViewController: UIViewController {
+class spotifyViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
 
     @IBOutlet weak var loginButton: UIButton!
     
@@ -28,24 +26,13 @@ class spotifyViewController: UIViewController {
     
     func setup () {
         // insert redirect your url and client ID below
-        let redirectURL = "" // put your redirect URL here
-        let clientID = "8f81031574b54170a24a3a1afab27578" // put your client ID here
+        let redirectURL = "Music-Driven-Workout-App://returnAfterLogin" // put your redirect URL here
+        //_ = "8f81031574b54170a24a3a1afab27578" // put your client ID here
         auth.redirectURL     = URL(string: redirectURL)
         auth.clientID        = "8f81031574b54170a24a3a1afab27578"
         auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope]
         loginUrl = auth.spotifyWebAuthenticationURL()
         
-    }
-    
-    
-    func initializaPlayer(authSession:SPTSession){
-        if self.player == nil {
-            self.player = SPTAudioStreamingController.sharedInstance()
-            self.player!.playbackDelegate = self as! SPTAudioStreamingPlaybackDelegate
-            self.player!.delegate = self as! SPTAudioStreamingDelegate
-            try! player?.start(withClientId: auth.clientID)
-            self.player!.login(withAccessToken: authSession.accessToken)
-        }
     }
     
     @objc func updateAfterFirstLogin () {
@@ -65,11 +52,27 @@ class spotifyViewController: UIViewController {
         }
     }
     
+    @objc func initializaPlayer(authSession:SPTSession){
+        print("initialize player")
+        if self.player == nil {
+            print("player nil")
+            self.player = SPTAudioStreamingController.sharedInstance()
+            self.player!.playbackDelegate = self //as SPTAudioStreamingPlaybackDelegate
+            self.player!.delegate = self //as SPTAudioStreamingDelegate
+            try! player?.start(withClientId: auth.clientID)
+            self.player!.login(withAccessToken: authSession.accessToken)
+            print("player initialized")
+        }
+    }
+    
     func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
         // after a user authenticates a session, the SPTAudioStreamingController is then initialized and this method called
         print("logged in")
         self.player?.playSpotifyURI("spotify:track:58s6EuEYJdlb0kO7awm3Vp", startingWith: 0, startingWithPosition: 0, callback: { (error) in
             if (error != nil) {
+                print("not playing!")
+            }
+            else {
                 print("playing!")
             }
         })

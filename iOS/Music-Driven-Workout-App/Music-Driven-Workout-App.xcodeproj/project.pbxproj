@@ -15,6 +15,8 @@
 		11AF5E3E202D42D2004EB40B /* Music_Driven_Workout_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E3D202D42D2004EB40B /* Music_Driven_Workout_AppTests.swift */; };
 		11AF5E49202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E48202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift */; };
 		11F9ABEB2033E593007F217C /* AccelerometerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F9ABEA2033E593007F217C /* AccelerometerTest.swift */; };
+		4CA2625F20438A3700E32B4C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA2625E20438A3700E32B4C /* AVFoundation.framework */; };
+		4CA2626120438A4400E32B4C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA2626020438A4400E32B4C /* SystemConfiguration.framework */; };
 		4CE2AAAA203F7AA000A55F29 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2AAA7203F7A9F00A55F29 /* SpotifyMetadata.framework */; };
 		4CE2AAAB203F7AA000A55F29 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2AAA8203F7AA000A55F29 /* SpotifyAudioPlayback.framework */; };
 		4CE2AAAC203F7AA000A55F29 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2AAA9203F7AA000A55F29 /* SpotifyAuthentication.framework */; };
@@ -56,6 +58,8 @@
 		11AF5E48202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music_Driven_Workout_AppUITests.swift; sourceTree = "<group>"; };
 		11AF5E4A202D42D2004EB40B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11F9ABEA2033E593007F217C /* AccelerometerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerTest.swift; sourceTree = "<group>"; };
+		4CA2625E20438A3700E32B4C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4CA2626020438A4400E32B4C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4CE2AAA6203F787C00A55F29 /* SpotifySDKDemo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SpotifySDKDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		4CE2AAA7203F7A9F00A55F29 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
 		4CE2AAA8203F7AA000A55F29 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
@@ -71,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CA2626120438A4400E32B4C /* SystemConfiguration.framework in Frameworks */,
+				4CA2625F20438A3700E32B4C /* AVFoundation.framework in Frameworks */,
 				4CE2AAAA203F7AA000A55F29 /* SpotifyMetadata.framework in Frameworks */,
 				4CE2AAAC203F7AA000A55F29 /* SpotifyAuthentication.framework in Frameworks */,
 				4CE2AAAB203F7AA000A55F29 /* SpotifyAudioPlayback.framework in Frameworks */,
@@ -101,6 +107,7 @@
 				11AF5E3C202D42D2004EB40B /* Music-Driven-Workout-AppTests */,
 				11AF5E47202D42D2004EB40B /* Music-Driven-Workout-AppUITests */,
 				11AF5E26202D42D2004EB40B /* Products */,
+				4CA2625D20438A3600E32B4C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -160,6 +167,15 @@
 			);
 			name = Frameworks;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		4CA2625D20438A3600E32B4C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4CA2626020438A4400E32B4C /* SystemConfiguration.framework */,
+				4CA2625E20438A3700E32B4C /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D87D00D9203CD22D00A97449 /* fonts */ = {
@@ -495,6 +511,7 @@
 				);
 				INFOPLIST_FILE = "Music-Driven-Workout-App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Music-Driven-Workout-App/SpotifySDKDemo-Bridging-Header.h";
@@ -517,6 +534,7 @@
 				);
 				INFOPLIST_FILE = "Music-Driven-Workout-App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Music-Driven-Workout-App/SpotifySDKDemo-Bridging-Header.h";
