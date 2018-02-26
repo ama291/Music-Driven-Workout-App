@@ -43,11 +43,15 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passBox: UITextField!
     @IBOutlet weak var goButton: UIButton!
     
-    var userID = "";
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is MenuViewController {
+            let vc = segue.destination as? MenuViewController
+                //data to send
+                vc?.userid = userBox.text!
+        }
+    }
     
     @IBAction func goButtonClick(_ sender: Any) {
-        userID = userBox.text!
-        print(userID)
         self.performSegue(withIdentifier: "loginSegue", sender: self)
     }
 }
