@@ -184,15 +184,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
             </code>
         </p> -->
 
-        <h3>Add Exact Exercise Time</h3>
-        <p><b>Purpose:</b> For "Add Exercise" feature where the user wants to save their rate for an exercise exactly, rather than fitness test, where they are pushing themselves harder than a normal workout</p>
-        <p><b>Route:</b> /api/fitness/addexact/</p>
-        <p><b>Methods:</b> POST</p>
-        <p><b>Required Parameters:</b> userid, exid, timestamp, rate, key</p>
-        <p><b>Returns:</b> True on success</p>
-        <p><b>Description:</b> Saves time to userexercise database with 'exact' column set to true</p>
-
-
+        
 
 		<h3>Get Tracked Exercises:</h3>
 		<p><b>Route:</b> /api/fitness/tracked/</p>
@@ -285,6 +277,39 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p><b>Methods: </b>POST</p>
         <p><b>Required parameters: </b>category, muscle, equipment, key</p>
         <p><b>Description: </b>get list of exercises from exercises database for a given category, muscle group, and equipment, <b>OR</b> "Any"</p>
+
+
+        <h2>Add Exercise routes</h2>
+        <h3>Add Exact Exercise Time</h3>
+        <p><b>Purpose:</b> For "Add Exercise" feature where the user wants to save their rate for an exercise exactly, rather than fitness test, where they are pushing themselves harder than a normal workout</p>
+        <p><b>Route:</b> /api/fitness/addexact/</p>
+        <p><b>Methods:</b> POST</p>
+        <p><b>Required Parameters:</b> userid, exid, timestamp, rate, key</p>
+        <p><b>Returns:</b> True on success</p>
+        <p><b>Description:</b> Saves time to userexercise database with 'exact' column set to true</p>
+
+        <h3>Get all categories</h3>
+        <p><b>Route:</b> /api/fitness/getcategories/</p>
+        <p><b>Methods:</b> POST</p>
+        <p><b>Required Parameters:</b> key</p>
+        <p><b>Returns:</b> List of categories</p>
+        <p><b>Description:</b> Returns a list of exercise categories in the database</p>
+
+
+        <h3>Get all muscle groups</h3>
+        <p><b>Route:</b> /api/fitness/getmuscles/</p>
+        <p><b>Methods:</b> POST</p>
+        <p><b>Required Parameters:</b> key</p>
+        <p><b>Returns:</b> List of categories</p>
+        <p><b>Description:</b> Returns a list of muscle groups in the exercise table</p>
+
+
+        <h3>Get all types of equipment</h3>
+        <p><b>Route:</b> /api/fitness/getequipments/</p>
+        <p><b>Methods:</b> POST</p>
+        <p><b>Required Parameters:</b> key</p>
+        <p><b>Returns:</b> List of equipments</p>
+        <p><b>Description:</b> Returns a list of equipments in the exercise table</p>
 
 
         <h2>Goal Routes</h2>
