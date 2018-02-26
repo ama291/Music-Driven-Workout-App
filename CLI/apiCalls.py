@@ -15,10 +15,10 @@ def getURL(rootURL, route):
 def makeRequest(route, data):
     url = getURL(apiIP, route)
     r = requests.post(url, data=data)
-    print("r.status_code - %s" % r.status_code)
+    # print("r.status_code - %s" % r.status_code)
     assert r.status_code == requests.codes.ok
     res = r.json()
-    print(res)
+    # print(res)
     assert "Result" in res
     return res["Result"]
 

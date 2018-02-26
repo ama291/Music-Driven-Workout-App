@@ -8,7 +8,8 @@ from Scripts.dbfunctions import testDB, realDB
 from CLI.apiCalls import isTracked, toggleTracked, getFitnessTest, \
  getTrackedExercises, getExerciseFromID, getUserExercises, getPreviousResults,\
  getWorkout, startWorkout, pauseWorkout, quitWorkout, saveWorkout, workoutsSaved, \
- startSavedWorkout, unsaveWorkout
+ startSavedWorkout, unsaveWorkout, getCategories, getMuscles, getEquipments, \
+ getExercisesByType
 
 dbURL = testDB
 key = "SoftCon2018"
@@ -81,10 +82,63 @@ def getCategoriesPrompt():
         string += "\t%s\n" % cat
     return string
 
-@click.command
+def promptSelectFromList(name, lst, isVowel=False):
+    if isVowel:
+        article = "an"
+    else: 
+        article = "a"       
+    string = "Please select %s %s" % (article, name)
+    i = 1
+    for item in lst:
+        string += "\n\t%d -- %s" % (i, item)
+        i += 1
+    item = click.prompt(string, type=int)
+    return item
+
+
+def doAddExercise():
+    click.echo("Do this exercise at your own pace for 30 seconds")
+    click.echo("If this were an iPhone, we would display the time here")
+    click.echo("If this were an iphone we would have options to save, try again, and quit")
+    options = ["Save exercise", "Try again", "Quit"]
+    optChoice = promptSelectFromList("option", options, isVowel=True)
+    if optChoice == 1:
+        saveAddExercise()
+    elif optChoice == 2:
+        doAddExercise()
+    elif optChoice == 3:
+        quitAddExercise()
+
+def saveAddExercise():
+    click.echo("If this were an iPhone we would save this time.")
+    click.echo("Done.")
+
+
+def quitAddExercise():
+    click.echo("Done.")
+
+
+@click.command()
 def addExercise():
-    categories = getCategoriesList()
-    category = click.prompt()
+    categories = getCategories() + ["Any"]
+    catChoice = promptSelectFromList("category", categories)
+    cat = categories[catChoice - 1]
+
+    muscles = getMuscles() + ["Any"]
+    muscChoice = promptSelectFromList("muscle group", muscles)
+    musc = muscles[muscChoice - 1]
+
+    equipments = getEquipments() + ["Any"]
+    equipChoice = promptSelectFromList("equipment", equipments, isVowel=True)
+    equip = equipments[equipChoice - 1]
+
+    exercises = getExercisesByType(cat, musc, equip)
+    click.echo("You have chosen %s, %s, %s" % (cat, musc, equip))
+    ex = promptSelectFromList("exercise", exercises, isVowel=True)
+
+    doAddExercise()
+
+
 
 @click.command()
 def fitnessTest():
@@ -210,6 +264,7 @@ def workout():
 cli.add_command(testExercise)
 cli.add_command(fitnessTest)
 cli.add_command(workout)
+cli.add_command(addExercise)
 
 def main():
     cli()
