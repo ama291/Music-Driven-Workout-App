@@ -310,7 +310,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DLp-gR-doS">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                                         <subviews>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1x2-8J-Jzk">
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1x2-8J-Jzk">
                                                 <rect key="frame" x="163" y="23" width="49" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </switch>
@@ -328,15 +328,15 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label Based on Above Selection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfW-xQ-EwJ">
-                                                <rect key="frame" x="8" y="75" width="316" height="31"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;Label Based on Above Selection&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfW-xQ-EwJ">
+                                                <rect key="frame" x="8" y="75" width="332" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ihu-CM-UkB">
-                                                <rect key="frame" x="15" y="114" width="343" height="222"/>
+                                                <rect key="frame" x="14" y="114" width="343" height="222"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </tableView>
@@ -421,6 +421,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="xf5-eH-g7b"/>
                     <size key="freeformSize" width="375" height="1000"/>
+                    <connections>
+                        <outlet property="categorymuscle" destination="Ihu-CM-UkB" id="IB9-mb-ft1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Fz-HX-ytm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -721,6 +724,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="titletext" destination="sfA-mz-bph" id="Ezi-w1-cVs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -1748,13 +1754,14 @@
         <image name="background.jpg" width="914" height="523"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="fdy-ly-Nkp"/>
         <segue reference="Mvi-W9-izV"/>
-        <segue reference="3i3-ed-qR5"/>
+        <segue reference="Ag7-Wm-XwA"/>
         <segue reference="Q00-cD-EFx"/>
         <segue reference="7lo-xM-Mz7"/>
         <segue reference="BzK-Cx-Nz5"/>
-        <segue reference="qOT-la-cCf"/>
-        <segue reference="XFB-g2-fpX"/>
-        <segue reference="AsO-hT-grw"/>
+        <segue reference="mx3-AI-aFO"/>
+        <segue reference="826-vG-0iD"/>
+        <segue reference="EP1-4P-4VP"/>
     </inferredMetricsTieBreakers>
 </document>

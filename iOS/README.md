@@ -3,7 +3,7 @@
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is MenuViewController
         {
-            let vc = segue.destination as? MenuViewController\
+            let vc = segue.destination as? MenuViewController
             //data to send
             vc?.userid = userBox.text!
         }
