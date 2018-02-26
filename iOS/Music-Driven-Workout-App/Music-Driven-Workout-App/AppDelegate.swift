@@ -37,9 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 userDefaults.set(sessionData, forKey: "SpotifySession")
                 userDefaults.synchronize()
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "loginSuccessfull"), object: nil)
-                print("40")
+                print("user defaults:")
+                for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+                    print("\(key) = \(value) \n")
+                }
             })
-            print("42")
             return true
         }
         return false
