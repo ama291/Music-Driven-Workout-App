@@ -1,14 +1,14 @@
 //
-//  FitnessTestMenuViewController.swift
+//  ProfileViewController.swift
 //  Music-Driven-Workout-App
 //
-//  Created by Christopher Choy on 2/25/18.
+//  Created by Christopher Choy on 2/26/18.
 //  Copyright © 2018 UChicago SoftCon. All rights reserved.
 //
 
 import UIKit
 
-class FitnessTestMenuViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
