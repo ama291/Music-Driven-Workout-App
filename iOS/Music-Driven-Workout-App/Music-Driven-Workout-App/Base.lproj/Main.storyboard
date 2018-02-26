@@ -1748,7 +1748,6 @@
         <image name="background.jpg" width="914" height="523"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UZ9-iZ-Si1"/>
         <segue reference="Mvi-W9-izV"/>
         <segue reference="3i3-ed-qR5"/>
         <segue reference="Q00-cD-EFx"/>
