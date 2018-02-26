@@ -460,7 +460,7 @@ def apiGetCategories():
 	try:
 		response = getAllFromColumn(dbURL, "exercises", "type")
 		return standardRes(json.dumps(response))
-	except:
+	except Exception as e:
 		return failure(str(e))
 
 
@@ -472,7 +472,7 @@ def apiGetMuscles():
 	try:
 		response = getAllFromColumn(dbURL, "exercises", "muscle")
 		return standardRes(json.dumps(response))
-	except:
+	except Exception as e:
 		return failure(str(e))
 
 
@@ -484,11 +484,35 @@ def apiGetEquipments():
 	try:
 		response = getAllFromColumn(dbURL, "exercises", "equipment")
 		return standardRes(json.dumps(response))
-	except:
+	except Exception as e:
 		return failure(str(e))
 
-
-
+@app.route('/api/fitness/processmotion/', methods=["POST"])
+def apiProcessMotionData():
+	userID = request.form.get("userid")
+	if userID != None:
+		userID = int(userID)
+	exID = request.form.get("exid")
+	if exID != None:
+		exID = int(exID)
+	timestamp = request.form.get("timestamp")
+	rawdata = request.form.get("rawdata")
+	if rawdata != None:
+		rawdata = json.loads(rawdata)
+	exact = request.form.get("exact")
+	if exact != None:
+		exact = toBool(exact)
+	key = request.form.get("key")
+	params = [userID, exID, timestamp, rawdata, exact, key]
+	if None in params:
+		return failure("Invalid parameters")
+	if key != masterKey:
+		return failure("Invalid authentication")
+	try:
+		response = processMotionData(userID, exID, timestamp, rawdata, exact)
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
 
 @app.route('/api/goals/addgoal/', methods=["POST"])
 def apiAddGoal():

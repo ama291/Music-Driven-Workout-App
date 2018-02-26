@@ -15,10 +15,10 @@ def getURL(rootURL, route):
 def makeRequest(route, data):
     url = getURL(apiIP, route)
     r = requests.post(url, data=data)
-    # print("r.status_code - %s" % r.status_code)
+    print("r.status_code - %s" % r.status_code)
     assert r.status_code == requests.codes.ok
     res = r.json()
-    # print(res)
+    print(res)
     assert "Result" in res
     return res["Result"]
 
@@ -143,6 +143,16 @@ def getEquipments():
     data = {"key": key}
     return json.loads(makeRequest(route, data))
 
+def processMotionData(userID, exID, timestamp, rawdata, exact):
+    route = "/api/fitness/processmotion/"
+    data = {"userid": userID,
+        "exid": exID,
+        "timestamp": timestamp,
+        "rawdata": rawdata,
+        "exact": exact,
+        "key": key}
+    return json.loads(makeRequest(route, data))
+
 def addGoal(uid, name, description, goalNum, categories, \
      muscleGroups, duration, daysPerWeek, notify):
     route = "/api/goals/addgoal/"
@@ -231,6 +241,11 @@ if __name__ == '__main__':
 
     elif argv[1] == "fitness":
         # print("\nWorkouts In Progress\n", workoutsInProgress(0))
+        print("Process motion data")
+        with open('Logs/log1.json', 'r') as fd:
+                data = fd.read()
+        data = processMotionData(1, 12, "2012-12-12 12:12:12", data, False)
+        print(data)
         print("\nAdd exercise exact")
         time = "2012-12-12 12:12:12"
         print(addExerciseExact(1, 24, time, 25.6))
