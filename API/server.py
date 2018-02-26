@@ -102,10 +102,8 @@ def apiGetWorkout():
 	if (groups != None):
 		groups = groups.split(",")
 	themes = request.form.get('themes')
-	if(theme != None):
+	if(themes != None):
 		themes = jsonpickle.decode(themes) # turn into List[Theme]
-	if (themes != None):
-		themes = equipment.split(",")
 	key = request.form.get('key')
 	params = [userid, duration, difficulty, accessToken, key]
 	if (None in params):
