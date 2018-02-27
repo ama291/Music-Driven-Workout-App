@@ -19,8 +19,15 @@ $ sh server.sh      # Begin serving our API.server </pre>
 $ curl --data "[param]=[value]&[param2]=[value2]" localhost:5000/[API ROUTE]/  # run tests through local version of API from 'sh server.sh'
 $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[API ROUTE]/  # run tests through server API </pre>
 
-        <h2>Workout Routes </h2>
-		
+        <h2> User Routes </h2>
+
+				<h3>Get Username:</h3>
+		<p><b>Route:</b> /api/workouts/getuserid/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, key</p>
+        <p><b>Returns:</b> username for a given userid </p>
+        <p><b>Description:</b> Retrieve a user's spotify username based on their user id.  </p>
+
         <h3>Get User Id:</h3>
 		<p><b>Route:</b> /api/workouts/getuserid/</p>
 		<p><b>Methods:</b> POST</p>
@@ -35,12 +42,14 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p><b>Returns:</b> user id for newly registered user </p>
         <p><b>Description:</b> Completes a new user's onboarding by inserting their information into the database and retrieving their assigned user id. Note username is the spotify username the user uses to log in. </p>
 
+				<h2> Workout Routes </h2>
+
         <h3>Get Workout:</h3>
 		<p><b>Route:</b> /api/workouts/getworkout/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, themes, categories, musclegroups, equipment, duration, difficulty, token, key</p>
         <p><b>Returns:</b> json string (empty if error) </p>
-        <p><b>Description:</b> Pass in the above parameters and get a json string containing a workout matching those filters. Requires a spotify access token to make authorized requests to the spotify API for music recommendations. </p>
+        <p><b>Description:</b> Pass in the above parameters and get a json string containing a workout matching those filters. Requires a spotify access token to make authorized requests to the spotify API for music recommendations. Themes should be in the same format as what is returned by themessaved. </p>
         <!--<p>
             <b>Sample Test: </b>
             <code>
@@ -135,7 +144,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/workouts/workoutssaved/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
-        <p><b>Returns:</b> json string (empty if error)</p>
+        <p><b>Returns:</b> json string (empty if error or none saved)</p>
         <p><b>Description:</b> Submit userid and database access key to get a json string of all the user's saved workouts.</p>
         <!--<p>
             <b>Sample Test: </b>
@@ -152,7 +161,7 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Route:</b> /api/workouts/workoutsinprogress/</p>
 		<p><b>Methods:</b> POST</p>
 		<p><b>Required parameters:</b> userid, key</p>
-        <p><b>Returns:</b> json string (empty if error)</p>
+        <p><b>Returns:</b> json string (empty if error or none in progress)</p>
         <p><b>Description:</b> Submit userid and database access key to get a json string of all the user's in-progress workouts.</p>
         <!--<p>
             <b>Sample Test: </b>
@@ -336,13 +345,19 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p><b>Required parameters: </b>userid, name, key</p>
         <p><b>Description: </b>Remove goal from the user's goals with the given name, if the user has a goal with that name</p>
 
+				<h3>Get Goals:</h3>
+		<p><b>Route:</b> /api/workouts/goalssaved/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, key</p>
+        <p><b>Returns:</b> json string (empty if error or none saved)</p>
+        <p><b>Description:</b> Submit userid and database access key to get a json string of all the user's goals.</p>
 
         <h2>Theme Routes</h2>
         <h3>Add Theme</h3>
         <p><b>Route: </b>/api/themes/addtheme/</p>
         <p><b>Methods: </b>POST</p>
-        <p><b>Required parameters: </b>userid, themename, theme, numworkouts, key</p>
-        <p><b>Description: </b>Save a theme to the user with the given specifications. Names must be unique.</p>
+        <p><b>Required parameters: </b>userid, themename, spotifyId, theme, numworkouts, key</p>
+        <p><b>Description: </b>Save a theme to the user with the given specifications. theme is either "genre", "artist", "or track". spotifyId is spotify's string id associated with the genre/artist/track. themename is the name of the genre/artist/track. </p>
 
         <h3>Remove Theme</h3>
         <p><b>Route: </b>/api/themes/removetheme/</p>
@@ -350,6 +365,12 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
         <p><b>Required parameters: </b>userid, themename, key</p>
         <p><b>Description: </b>Remove a theme from the user with the given name, if such a theme exists.</p>
 
+				<h3>Get Themes:</h3>
+		<p><b>Route:</b> /api/workouts/themessaved/</p>
+		<p><b>Methods:</b> POST</p>
+		<p><b>Required parameters:</b> userid, key</p>
+        <p><b>Returns:</b> json string (empty if error or none saved)</p>
+        <p><b>Description:</b> Submit userid and database access key to get a json string of all the user's themes.</p>
 
         <h2>Database</h2>
     	<h3>Database Route</h3>
@@ -358,9 +379,9 @@ $ curl --data "[param]=[value]&[param2]=[value2]" http://138.197.49.155:8000/[AP
 		<p><b>Required parameters:</b> query, key</p>
 		<p><b>Description:</b> Run a query on the database.</p>
 		<p>The users table in the database was created with:</p>
-		<code>CREATE TABLE users (id integer, name varchar(50), tracked varchar(9999), untracked varchar(9999), goals varchar(9999), themes varchar(9999), competition varchar(9999), inProgressWorkouts varchar(9999), savedWorkouts varchar(9999));</code>
+		<code>CREATE TABLE users (id integer primary key, spotifyUsername varchar(50), height int, weight int, birthyear year, goals varchar(9999), themes varchar(9999), competition varchar(9999), inProgressWorkouts varchar(9999), savedWorkouts varchar(9999));</code>
         <p>The exercises table in the database was created with: </p>
-        <code>CREATE TABLE exercises (id integer, name varchar(512), type varchar(512), muscle varchar(512), equipment varchar(512), level varchar(512), images varchar(9999), guide varchar(9999));</code>
+        <code>CREATE TABLE exercises (id integer, name varchar(512), type varchar(512), muscle varchar(512), equipment varchar(512), level varchar(512), images varchar(9999), range_start float, range_end float, increment float, rpm float, bpm float);</code>
 
         <h3>Request Example:</h3>
 		<p>/Scripts/testrequest.py</p>
