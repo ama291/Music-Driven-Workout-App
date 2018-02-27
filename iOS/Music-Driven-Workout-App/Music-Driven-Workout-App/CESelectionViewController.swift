@@ -14,29 +14,11 @@ class CESelectionViewController: UIViewController {
     var muscleGroup: String = ""
     var equipment: String = ""
     
-    struct exercise: Codable {
-        var id: String
-        var name: String
-        var type: String
-        var muscle: String
-        var equipment: String
-        var level: String
-        var images: String
-        var guide: String!
-        var range_start: Int
-        var range_end: Int
-        var rpm: Int
-        var increment: Float
-        var numTests: Int
-        var bpm: Float
-    }
-    
     struct jsonResponse: Codable {
         var Result: String
         var Status: String
     }
     
-
   
     func submitPostLocal(route: String, qstring: String, completion: @escaping (Data?, URLResponse?,Error?) -> Void) -> URLSessionDataTask {
         var urlComponents = URLComponents()
@@ -73,43 +55,6 @@ class CESelectionViewController: UIViewController {
         
         
         
-        func parseJsonRespone() {
-            let str = "{\"Status\":\"OK\", \"Result\": \"[]\"}"
-            
-            let resStr = "\"[{\\\"id\\\": 1314, \\\"name\\\": \\\"Hip Stretch With Twist\\\", \\\"type\\\": \\\"Stretching\\\", \\\"muscle\\\": \\\"Hamstrings\\\", \\\"equipment\\\": \\\"Body Only\\\", \\\"level\\\": \\\"Beginner\\\", \\\"images\\\": \\\"https://www.bodybuilding.com/exercises/exerciseImages/sequences/4351/Male/m/4351_1.jpg\", \"guide\": null, \\\"range_start\\\": 2, \\\"range_end\\\": 3, \\\"rpm\\\": 3, \\\"increment\\\": 0.5, \\\"numTests\\\": 0, \\\"bpm\\\": 78.0}]\""
-            
-            var res: Dictionary<String, String>
-            if let data = str.data(using: String.Encoding.utf8) {
-                do {
-                    res = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String, String>
-                    let myDict = res
-                    print("name: ", myDict["Status"]!)
-                } catch let error as Error {
-                    print(error)
-                }
-            }
-            
-            var dict: [Dictionary<String, Any>]
-            
-            if let data = str.data(using: String.Encoding.utf8) {
-                do {
-                    dict = try JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
-                    let myDict = dict
-                    print("name: ", myDict[0]["name"]!)
-                } catch let error as Error {
-                    print(error)
-                }
-            }
-            
-        
-//            let jsonData = str.data(using: .utf8)
-//            let decoder = JSONDecoder()
-//            let arr = try! decoder.decode(exercise.self, from: jsonData!)
-//            print(arr)
-        }
-        
-        parseJsonRespone()
-        
         let qstr = "category=" + category + "&muscle=" + muscleGroup + "&equipment=" + equipment + "&key=SoftCon2018"
         
         self.submitPostLocal(route: "/api/fitness/getexsbytype/", qstring: qstr) { (data, response, error) -> Void in
@@ -117,11 +62,12 @@ class CESelectionViewController: UIViewController {
                 fatalError(error.localizedDescription)
             }
             guard let json = try? JSONDecoder().decode(jsonResponse.self, from: data!) else { return }
-            print(json)
+            print(json.Result)
+            
 //            let jsonData = json.Result.data(using: .utf8)
 //            let decoder = JSONDecoder()
-//            let arr = try! decoder.decode([exercise].self, from: jsonData!)
-//            print(arr[0])
+//            let arr = try! decoder.decode([String].self, from: jsonData!)
+//            print(arr)
             }.resume()
 
 
