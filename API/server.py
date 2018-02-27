@@ -455,7 +455,9 @@ def apiGetExercisesByType():
 
 @app.route('/api/fitness/getcategories/', methods=["POST"])
 def apiGetCategories():
+	print("hi")
 	key = request.form.get('key')
+	print("Key: ", key)
 	if key != masterKey:
 		return failure("Invalid authentication")
 	try:

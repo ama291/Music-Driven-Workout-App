@@ -1223,6 +1223,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="getExercises:" destination="mgG-hw-MjN" eventType="touchUpInside" id="ZNA-Xs-ZbT"/>
                                     <segue destination="Lkb-kC-dVm" kind="show" animates="NO" id="pwH-RU-fbm"/>
                                 </connections>
                             </button>
@@ -1272,6 +1273,11 @@
                         <color key="backgroundColor" red="0.83347629300000003" green="0.47019825970000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="xit-3W-gh7"/>
                     </view>
+                    <connections>
+                        <outlet property="catPicker" destination="RCe-WH-Rb7" id="aAj-1H-VSJ"/>
+                        <outlet property="equipPicker" destination="8xv-0S-jpz" id="frH-8R-U9w"/>
+                        <outlet property="musclePicker" destination="miF-Pd-hio" id="0K5-At-Cq8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z1y-xQ-g4h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2216,13 +2222,13 @@
         <image name="background.jpg" width="914" height="523"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UZ9-iZ-Si1"/>
+        <segue reference="pwH-RU-fbm"/>
         <segue reference="Mvi-W9-izV"/>
         <segue reference="Ag7-Wm-XwA"/>
-        <segue reference="Q00-cD-EFx"/>
+        <segue reference="AKb-yL-ZPG"/>
         <segue reference="7lo-xM-Mz7"/>
-        <segue reference="BzK-Cx-Nz5"/>
-        <segue reference="dTh-lh-O9c"/>
+        <segue reference="gjF-G2-Ozy"/>
+        <segue reference="BC7-9X-vos"/>
         <segue reference="XFB-g2-fpX"/>
         <segue reference="EP1-4P-4VP"/>
     </inferredMetricsTieBreakers>
