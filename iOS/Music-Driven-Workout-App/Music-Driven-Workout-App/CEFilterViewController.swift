@@ -14,39 +14,28 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var musclePicker: UIPickerView!
     @IBOutlet weak var equipPicker: UIPickerView!
    
-    struct jsonResponse: Codable {
-        var Result: String
-        var Status: String
-    }
-    var data: [String] = [String]()
+    var category: String = ""
+    var muscleGroup: String = ""
+    var equipment: String = ""
     
-    func submitPostLocal(route: String, qstring: String, completion: @escaping (Data?, URLResponse?,Error?) -> Void) -> URLSessionDataTask {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "http"
-        urlComponents.host = "127.0.0.1"
-        urlComponents.port = 5000
-        urlComponents.path = route
-        urlComponents.query = "key=SoftCon2018"
-        guard let url = urlComponents.url else {
-            fatalError("Could not create URL")
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is CESelectionViewController
+        {
+            let vc = segue.destination as? CESelectionViewController
+            //data to send
+            vc?.category = category
+            vc?.muscleGroup = muscleGroup
+            vc?.equipment = equipment
         }
-        print(url)
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        let postString = qstring
-        request.httpBody = postString.data(using: String.Encoding.utf8)
-        print("jsonData: ", String(data: request.httpBody!, encoding: .utf8) ?? "no body data")
-        
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        let task = session.dataTask(with: request) {(data, response, responseError) in
-            if let data = data {
-                completion(data, response, responseError)
-            }
-        }
-        return task
     }
+    
+    
+
+    var catList: [String] = [String]()
+    var muscleList: [String] = [String]()
+    var equipList: [String] = [String]()
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,22 +44,20 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         struct Post: Codable {
             let key: String
         }
-        
-
-        
-        submitPostLocal(route: "/api/fitness/getcategories/", qstring: "key=SoftCon2018"){ (data, response, error) -> Void in
-            if let error = error {
-                fatalError(error.localizedDescription)
-            }
-            guard let json = try? JSONDecoder().decode(jsonResponse.self, from: data!) else { return }
-            print(json.Result)
-        }.resume()
-
-        
         self.catPicker.delegate = self
         self.catPicker.dataSource = self
-        data = ["Strength", "Cardio"]
-        // Do any additional setup after loading the view.
+        catList = ["Any", "Strength", "Stretching", "Olympic Weightlifting", "Strongman", "Plyometrics", "Cardio", "Powerlifting"]
+        
+        self.musclePicker.delegate = self
+        self.musclePicker.dataSource = self
+        muscleList = ["Any", "Neck", "Traps", "Shoulders", "Chest", "Biceps", "Forearms", "Abdominals", "Quadriceps", "Calves", "Triceps", "Lats", "Middle Back", "Lower Back", "Glutes", "Hamstrings"]
+        
+        self.equipPicker.delegate = self
+        self.equipPicker.dataSource = self
+        equipList = ["Body Only", "Any", "Other", "None", "Machine", "Dumbbell", "Kettlebells", "Barbell", "Cable", "Bands", "Medicine Ball", "E-Z Curl Bar", "Exercise Ball", "Foam Roll"]
+
+
+         // Do any additional setup after loading the view.
     }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -78,19 +65,43 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return data.count
+        if pickerView == catPicker {
+            return catList.count
+        }
+        else if pickerView == musclePicker {
+            return muscleList.count
+        }
+        else if pickerView == equipPicker {
+            return equipList.count
+        }
+        return 0
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return data[row]
+        if pickerView == catPicker {
+            return catList[row]
+        }
+        else if pickerView == musclePicker {
+            return muscleList[row]
+        }
+        else if pickerView == equipPicker {
+            return equipList[row]
+        }
+        return ""
     }
-    
-//    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        updateLabel()
-//    }
+
     
     @IBAction func getExercises(_ sender: Any) {
+        category = catList[catPicker.selectedRow(inComponent: 0)]
+        muscleGroup = muscleList[musclePicker.selectedRow(inComponent: 0)]
+        equipment = equipList[equipPicker.selectedRow(inComponent: 0)]
+        
+
+        
+        
+        print(category, muscleGroup, equipment)
     }
+    
     
 
     override func didReceiveMemoryWarning() {

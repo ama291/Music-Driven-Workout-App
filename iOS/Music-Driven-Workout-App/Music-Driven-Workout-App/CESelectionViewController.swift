@@ -10,8 +10,120 @@ import UIKit
 
 class CESelectionViewController: UIViewController {
 
+    var category: String = ""
+    var muscleGroup: String = ""
+    var equipment: String = ""
+    
+    struct exercise: Codable {
+        var id: String
+        var name: String
+        var type: String
+        var muscle: String
+        var equipment: String
+        var level: String
+        var images: String
+        var guide: String!
+        var range_start: Int
+        var range_end: Int
+        var rpm: Int
+        var increment: Float
+        var numTests: Int
+        var bpm: Float
+    }
+    
+    struct jsonResponse: Codable {
+        var Result: String
+        var Status: String
+    }
+    
+
+  
+    func submitPostLocal(route: String, qstring: String, completion: @escaping (Data?, URLResponse?,Error?) -> Void) -> URLSessionDataTask {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "http"
+        urlComponents.host = "127.0.0.1"
+        urlComponents.port = 5000
+        urlComponents.path = route
+        urlComponents.query = qstring
+        guard let url = urlComponents.url else {
+            fatalError("Could not create URL")
+        }
+        print(url)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let postString = qstring
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        print("jsonData: ", String(data: request.httpBody!, encoding: .utf8) ?? "no body data")
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: request) {(data, response, responseError) in
+            if let data = data {
+                completion(data, response, responseError)
+            }
+        }
+        return task
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("New view:", category, muscleGroup, equipment)
+        
+        
+        
+        func parseJsonRespone() {
+            let str = "{\"Status\":\"OK\", \"Result\": \"[]\"}"
+            
+            let resStr = "\"[{\\\"id\\\": 1314, \\\"name\\\": \\\"Hip Stretch With Twist\\\", \\\"type\\\": \\\"Stretching\\\", \\\"muscle\\\": \\\"Hamstrings\\\", \\\"equipment\\\": \\\"Body Only\\\", \\\"level\\\": \\\"Beginner\\\", \\\"images\\\": \\\"https://www.bodybuilding.com/exercises/exerciseImages/sequences/4351/Male/m/4351_1.jpg\", \"guide\": null, \\\"range_start\\\": 2, \\\"range_end\\\": 3, \\\"rpm\\\": 3, \\\"increment\\\": 0.5, \\\"numTests\\\": 0, \\\"bpm\\\": 78.0}]\""
+            
+            var res: Dictionary<String, String>
+            if let data = str.data(using: String.Encoding.utf8) {
+                do {
+                    res = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String, String>
+                    let myDict = res
+                    print("name: ", myDict["Status"]!)
+                } catch let error as Error {
+                    print(error)
+                }
+            }
+            
+            var dict: [Dictionary<String, Any>]
+            
+            if let data = str.data(using: String.Encoding.utf8) {
+                do {
+                    dict = try JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
+                    let myDict = dict
+                    print("name: ", myDict[0]["name"]!)
+                } catch let error as Error {
+                    print(error)
+                }
+            }
+            
+        
+//            let jsonData = str.data(using: .utf8)
+//            let decoder = JSONDecoder()
+//            let arr = try! decoder.decode(exercise.self, from: jsonData!)
+//            print(arr)
+        }
+        
+        parseJsonRespone()
+        
+        let qstr = "category=" + category + "&muscle=" + muscleGroup + "&equipment=" + equipment + "&key=SoftCon2018"
+        
+        self.submitPostLocal(route: "/api/fitness/getexsbytype/", qstring: qstr) { (data, response, error) -> Void in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+            guard let json = try? JSONDecoder().decode(jsonResponse.self, from: data!) else { return }
+            print(json)
+//            let jsonData = json.Result.data(using: .utf8)
+//            let decoder = JSONDecoder()
+//            let arr = try! decoder.decode([exercise].self, from: jsonData!)
+//            print(arr[0])
+            }.resume()
+
 
         // Do any additional setup after loading the view.
     }

@@ -2222,7 +2222,6 @@
         <image name="background.jpg" width="914" height="523"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pwH-RU-fbm"/>
         <segue reference="Mvi-W9-izV"/>
         <segue reference="Ag7-Wm-XwA"/>
         <segue reference="AKb-yL-ZPG"/>
