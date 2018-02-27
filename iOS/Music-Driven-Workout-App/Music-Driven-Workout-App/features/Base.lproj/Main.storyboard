@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A61-lo-4Uw">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="AmaticSC-Regular.ttf">
+            <string>AmaticSC-Regular</string>
+        </array>
+        <array key="MarkerFeltThin.ttf">
+            <string>MarkerFelt-Thin</string>
+        </array>
+        <array key="TimesNewRoman.ttf">
+            <string>TimesNewRomanPSMT</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Login-->
+        <scene sceneID="5ZZ-Ya-7RK">
+            <objects>
+                <viewController title="Login" id="A61-lo-4Uw" customClass="LoginViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Y7T-Ac-Zia">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hKK-FB-oCQ">
+                                <rect key="frame" x="63" y="190" width="248" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v2F-VA-TjJ">
+                                <rect key="frame" x="63" y="249" width="248" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Music Driven Workout App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qj-Uz-Iud">
+                                <rect key="frame" x="0.0" y="40" width="375" height="40.5"/>
+                                <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="32"/>
+                                <color key="textColor" red="1" green="0.98957105763213526" blue="0.76703347885411477" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect with Spotify" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zve-bd-HUC">
+                                <rect key="frame" x="16" y="384" width="343" height="50.5"/>
+                                <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="40"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="©2018 Software Construction" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3Y-9l-VwU">
+                                <rect key="frame" x="190" y="631" width="169" height="16"/>
+                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="14"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkl-EB-MZj">
+                                <rect key="frame" x="152" y="314" width="71" height="30"/>
+                                <color key="backgroundColor" red="0.14364104500365094" green="0.72745304404145084" blue="0.18777915831935296" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Go">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goButtonClick:" destination="A61-lo-4Uw" eventType="touchUpInside" id="Gus-G7-zWt"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOGIN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nya-Ke-tLu">
+                                <rect key="frame" x="146" y="95.5" width="82" height="66"/>
+                                <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="52"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUP-vF-7jh">
+                                <rect key="frame" x="152" y="444.5" width="71" height="30"/>
+                                <color key="backgroundColor" red="0.15147725843620871" green="0.75097150259067358" blue="0.19562365966572087" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="QUP-vF-7jh" firstAttribute="leading" secondItem="xKz-ky-fNL" secondAttribute="leading" constant="152" id="4fH-bP-QvU"/>
+                            <constraint firstItem="xKz-ky-fNL" firstAttribute="trailing" secondItem="QUP-vF-7jh" secondAttribute="trailing" constant="152" id="62V-gW-Wnm"/>
+                            <constraint firstItem="5Qj-Uz-Iud" firstAttribute="leading" secondItem="xKz-ky-fNL" secondAttribute="leading" id="7aS-4T-Bij"/>
+                            <constraint firstItem="Nya-Ke-tLu" firstAttribute="leading" secondItem="xKz-ky-fNL" secondAttribute="leading" constant="146" id="8i8-AJ-ryS"/>
+                            <constraint firstItem="5Qj-Uz-Iud" firstAttribute="top" secondItem="xKz-ky-fNL" secondAttribute="top" constant="20" id="Gm4-Dt-l0B"/>
+                            <constraint firstItem="v2F-VA-TjJ" firstAttribute="top" secondItem="hKK-FB-oCQ" secondAttribute="bottom" constant="29" id="Kb2-Vt-PXq"/>
+                            <constraint firstItem="Zve-bd-HUC" firstAttribute="top" secondItem="kkl-EB-MZj" secondAttribute="bottom" constant="40" id="Kgx-K2-1wL"/>
+                            <constraint firstItem="xKz-ky-fNL" firstAttribute="trailing" secondItem="kkl-EB-MZj" secondAttribute="trailing" constant="152" id="Kox-d9-y0N"/>
+                            <constraint firstItem="xKz-ky-fNL" firstAttribute="trailing" secondItem="hKK-FB-oCQ" secondAttribute="trailing" constant="64" id="MCQ-e5-iFo"/>
+                            <constraint firstItem="xKz-ky-fNL" firstAttribute="trailing" secondItem="5Qj-Uz-Iud" secondAttribute="trailing" id="MWH-Zp-kbh"/>
+                            <constraint firstItem="xKz-ky-fNL" firstAttribute="trailing" secondItem="Nya-Ke-tLu" secondAttribute="trailing" constant="147" id="Nyr-Du-74I"/>
+                            <constraint firstItem="xKz-ky-fNL" firstAttribute="trailing" secondItem="v2F-VA-TjJ" secondAttribute="trailing" constant="64" id="PMW-D3-RQB"/>
+                            <constraint firstItem="hKK-FB-oCQ" firstAttribute="leading" secondItem="xKz-ky-fNL" secondAttribute="leading" constant="63" id="Tvq-6b-xKb"/>
+                            <constraint firstItem="Zve-bd-HUC" firstAttribute="leading" secondItem="xKz-ky-fNL" secondAttribute="leading" constant="16" id="UJt-Ab-1Vn"/>
+                            <constraint firstItem="Nya-Ke-tLu" firstAttribute="top" secondItem="5Qj-Uz-Iud" secondAttribute="bottom" constant="15" id="YNW-9v-i0e"/>
+                            <constraint firstItem="kkl-EB-MZj" firstAttribute="leading" secondItem="xKz-ky-fNL" secondAttribute="leading" constant="152" id="Yo9-9f-Meu"/>
+                            <constraint firstItem="xKz-ky-fNL" firstAttribute="trailing" secondItem="d3Y-9l-VwU" secondAttribute="trailing" constant="16" id="ZbW-9Q-ryh"/>
+                            <constraint firstItem="xKz-ky-fNL" firstAttribute="bottom" secondItem="d3Y-9l-VwU" secondAttribute="bottom" constant="20" id="iVC-fg-J2a"/>
+                            <constraint firstItem="kkl-EB-MZj" firstAttribute="top" secondItem="v2F-VA-TjJ" secondAttribute="bottom" constant="35" id="l0U-T2-aNq"/>
+                            <constraint firstItem="v2F-VA-TjJ" firstAttribute="leading" secondItem="xKz-ky-fNL" secondAttribute="leading" constant="63" id="nzh-Ze-7gx"/>
+                            <constraint firstItem="xKz-ky-fNL" firstAttribute="trailing" secondItem="Zve-bd-HUC" secondAttribute="trailing" constant="16" id="pgW-Vq-TiH"/>
+                            <constraint firstItem="QUP-vF-7jh" firstAttribute="top" secondItem="Zve-bd-HUC" secondAttribute="bottom" constant="10" id="vVG-cR-R4y"/>
+                            <constraint firstItem="hKK-FB-oCQ" firstAttribute="top" secondItem="Nya-Ke-tLu" secondAttribute="bottom" constant="28.5" id="wry-d2-qcY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xKz-ky-fNL"/>
+                    </view>
+                    <connections>
+                        <outlet property="goButton" destination="kkl-EB-MZj" id="egK-pZ-Pki"/>
+                        <outlet property="passBox" destination="v2F-VA-TjJ" id="qfy-l4-uB6"/>
+                        <outlet property="userBox" destination="hKK-FB-oCQ" id="xYQ-lW-lCx"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" animates="NO" id="9h8-Cm-IcJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bmv-rp-h0A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1370.4000000000001" y="-680.5097451274363"/>
+        </scene>
+        <!--Menu View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MenuViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Mb6-vx-wXj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nvh-PX-iBr">
+                                <rect key="frame" x="16" y="30" width="343" height="80"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vXc-yb-q6T">
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome back, &lt;USER&gt;!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfA-mz-bph">
+                                            <rect key="frame" x="0.0" y="11" width="343" height="58"/>
+                                            <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="45"/>
+                                            <nil key="highlightedColor"/>
+                                            <color key="shadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <size key="shadowOffset" width="1" height="-1"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="sfA-mz-bph" secondAttribute="trailing" id="HlA-O3-oLw"/>
+                                        <constraint firstItem="sfA-mz-bph" firstAttribute="top" secondItem="vXc-yb-q6T" secondAttribute="top" constant="11" id="TS9-Hy-757"/>
+                                        <constraint firstAttribute="bottom" secondItem="sfA-mz-bph" secondAttribute="bottom" constant="11" id="pNE-zp-BwE"/>
+                                        <constraint firstItem="sfA-mz-bph" firstAttribute="leading" secondItem="vXc-yb-q6T" secondAttribute="leading" id="ug2-tW-1Ux"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Np-j2-uMA">
+                                <rect key="frame" x="61" y="150" width="253" height="52"/>
+                                <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
+                                <state key="normal" title="Workout!">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b90-px-Prx">
+                                <rect key="frame" x="43" y="223" width="289" height="52"/>
+                                <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
+                                <state key="normal" title="Saved Workouts">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsK-4H-8bL">
+                                <rect key="frame" x="84" y="301" width="206" height="52"/>
+                                <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
+                                <state key="normal" title="Fitness Test">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXy-sv-hng">
+                                <rect key="frame" x="200" y="452" width="153" height="52"/>
+                                <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="153" id="BfA-pW-eYn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
+                                <state key="normal" title="Themes">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgT-8r-ecB">
+                                <rect key="frame" x="96" y="536" width="182" height="52"/>
+                                <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
+                                <state key="normal" title="My Profile">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEE-R6-Yeg">
+                                <rect key="frame" x="22" y="452" width="153" height="52"/>
+                                <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="153" id="4JL-rh-W55"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
+                                <state key="normal" title="Goals">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHE-RM-yih">
+                                <rect key="frame" x="50" y="377" width="274" height="52"/>
+                                <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
+                                <state key="normal" title="Calibrate Exercise">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Mb6-vx-wXj" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="0Vt-xq-dvs"/>
+                            <constraint firstItem="nvh-PX-iBr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="2Ss-gu-ihY"/>
+                            <constraint firstItem="zXy-sv-hng" firstAttribute="top" secondItem="VHE-RM-yih" secondAttribute="bottom" constant="23" id="2Vb-aS-Itp"/>
+                            <constraint firstItem="gsK-4H-8bL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="84" id="6ix-nP-HG6"/>
+                            <constraint firstItem="gsK-4H-8bL" firstAttribute="top" secondItem="b90-px-Prx" secondAttribute="bottom" constant="26" id="7LZ-sA-fae"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VHE-RM-yih" secondAttribute="trailing" constant="51" id="Buo-BZ-rsx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gsK-4H-8bL" secondAttribute="trailing" constant="85" id="CnC-GN-JKd"/>
+                            <constraint firstItem="vgT-8r-ecB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="96" id="Hqq-qq-ktC"/>
+                            <constraint firstItem="b90-px-Prx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="43" id="ISi-I0-yMj"/>
+                            <constraint firstItem="VHE-RM-yih" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="L2T-sk-yda"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="b90-px-Prx" secondAttribute="trailing" constant="43" id="NLU-wi-fUe"/>
+                            <constraint firstItem="b90-px-Prx" firstAttribute="top" secondItem="5Np-j2-uMA" secondAttribute="bottom" constant="21" id="Rwb-0Y-rYy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nvh-PX-iBr" secondAttribute="trailing" constant="16" id="Uo9-9S-NY7"/>
+                            <constraint firstItem="5Np-j2-uMA" firstAttribute="top" secondItem="nvh-PX-iBr" secondAttribute="bottom" constant="40" id="W3h-Kr-vFS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5Np-j2-uMA" secondAttribute="trailing" constant="61" id="YSe-PS-xoN"/>
+                            <constraint firstItem="Mb6-vx-wXj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Yh6-s2-Ovq"/>
+                            <constraint firstItem="Mb6-vx-wXj" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ZLh-1h-MWY"/>
+                            <constraint firstItem="wEE-R6-Yeg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="22" id="bvI-JN-kxl"/>
+                            <constraint firstItem="wEE-R6-Yeg" firstAttribute="top" secondItem="VHE-RM-yih" secondAttribute="bottom" constant="23" id="dL0-sb-DYh"/>
+                            <constraint firstItem="5Np-j2-uMA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="61" id="e5v-w4-V6l"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zXy-sv-hng" secondAttribute="trailing" constant="22" id="etK-1J-KNN"/>
+                            <constraint firstItem="nvh-PX-iBr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="iSt-hY-2zb"/>
+                            <constraint firstItem="vgT-8r-ecB" firstAttribute="top" secondItem="zXy-sv-hng" secondAttribute="bottom" constant="32" id="kft-v0-io2"/>
+                            <constraint firstItem="Mb6-vx-wXj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="vrB-Ee-YpC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vgT-8r-ecB" secondAttribute="trailing" constant="97" id="wCJ-Me-UAb"/>
+                            <constraint firstItem="VHE-RM-yih" firstAttribute="top" secondItem="gsK-4H-8bL" secondAttribute="bottom" constant="24" id="wDp-0d-E2k"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="titletext" destination="sfA-mz-bph" id="Ezi-w1-cVs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-514" y="-681"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background.jpg" width="914" height="523"/>
+    </resources>
+</document>
