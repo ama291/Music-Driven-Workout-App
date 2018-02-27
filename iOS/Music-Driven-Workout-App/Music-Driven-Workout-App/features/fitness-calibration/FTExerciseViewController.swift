@@ -9,7 +9,9 @@
 import UIKit
 
 class FTExerciseViewController: UIViewController {
-
+    
+    var userid: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

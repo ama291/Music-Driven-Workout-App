@@ -43,11 +43,6 @@ class WorkSelectionViewController: UIViewController {
     }
     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is MenuViewController {
-            let vc = segue.destination as? MenuViewController
-            //data to send
-            vc?.userid = userid!
-        }
         if segue.destination is WorkSummaryViewController {
             let vc = segue.destination as? WorkSummaryViewController
             //data to send

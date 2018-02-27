@@ -9,7 +9,9 @@
 import UIKit
 
 class FTSummaryViewController: UIViewController {
-
+    
+    var userid: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
