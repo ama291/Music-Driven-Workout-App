@@ -43,6 +43,9 @@
 		D8C5A975204382C7006D2A0A /* CESelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5A974204382C7006D2A0A /* CESelectionViewController.swift */; };
 		D8C5A9772043838B006D2A0A /* CEFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5A9762043838B006D2A0A /* CEFilterViewController.swift */; };
 		D8C5A979204384FF006D2A0A /* CECompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5A978204384FF006D2A0A /* CECompleteViewController.swift */; };
+		D8C701902044E1DF006FA4CE /* goals-themes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8C7018F2044E1DF006FA4CE /* goals-themes.storyboard */; };
+		D8C701922044E1EB006FA4CE /* workout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8C701912044E1EB006FA4CE /* workout.storyboard */; };
+		D8C701942044E1F5006FA4CE /* fitness-calibration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8C701932044E1F5006FA4CE /* fitness-calibration.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +109,9 @@
 		D8C5A974204382C7006D2A0A /* CESelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CESelectionViewController.swift; sourceTree = "<group>"; };
 		D8C5A9762043838B006D2A0A /* CEFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEFilterViewController.swift; sourceTree = "<group>"; };
 		D8C5A978204384FF006D2A0A /* CECompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CECompleteViewController.swift; sourceTree = "<group>"; };
+		D8C7018F2044E1DF006FA4CE /* goals-themes.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "goals-themes.storyboard"; sourceTree = "<group>"; };
+		D8C701912044E1EB006FA4CE /* workout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = workout.storyboard; sourceTree = "<group>"; };
+		D8C701932044E1F5006FA4CE /* fitness-calibration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "fitness-calibration.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +165,7 @@
 		11AF5E27202D42D2004EB40B /* Music-Driven-Workout-App */ = {
 			isa = PBXGroup;
 			children = (
+				D8C7018B2044E0FD006FA4CE /* features */,
 				4CE2AAA8203F7AA000A55F29 /* SpotifyAudioPlayback.framework */,
 				4CE2AAA9203F7AA000A55F29 /* SpotifyAuthentication.framework */,
 				4CE2AAA7203F7A9F00A55F29 /* SpotifyMetadata.framework */,
@@ -240,6 +247,40 @@
 				D87D00F1203CEEA500A97449 /* background.jpg */,
 			);
 			path = img;
+			sourceTree = "<group>";
+		};
+		D8C7018B2044E0FD006FA4CE /* features */ = {
+			isa = PBXGroup;
+			children = (
+				D8C7018E2044E1A9006FA4CE /* goals-themes */,
+				D8C7018D2044E19B006FA4CE /* workout */,
+				D8C7018C2044E10D006FA4CE /* fitness-calibration */,
+			);
+			path = features;
+			sourceTree = "<group>";
+		};
+		D8C7018C2044E10D006FA4CE /* fitness-calibration */ = {
+			isa = PBXGroup;
+			children = (
+				D8C701932044E1F5006FA4CE /* fitness-calibration.storyboard */,
+			);
+			path = "fitness-calibration";
+			sourceTree = "<group>";
+		};
+		D8C7018D2044E19B006FA4CE /* workout */ = {
+			isa = PBXGroup;
+			children = (
+				D8C701912044E1EB006FA4CE /* workout.storyboard */,
+			);
+			path = workout;
+			sourceTree = "<group>";
+		};
+		D8C7018E2044E1A9006FA4CE /* goals-themes */ = {
+			isa = PBXGroup;
+			children = (
+				D8C7018F2044E1DF006FA4CE /* goals-themes.storyboard */,
+			);
+			path = "goals-themes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,6 +395,9 @@
 				11AF5E33202D42D2004EB40B /* LaunchScreen.storyboard in Resources */,
 				D87D00F4203CEF2200A97449 /* Info.plist in Resources */,
 				D87D00F2203CEEA500A97449 /* background.jpg in Resources */,
+				D8C701922044E1EB006FA4CE /* workout.storyboard in Resources */,
+				D8C701902044E1DF006FA4CE /* goals-themes.storyboard in Resources */,
+				D8C701942044E1F5006FA4CE /* fitness-calibration.storyboard in Resources */,
 				11AF5E30202D42D2004EB40B /* Assets.xcassets in Resources */,
 				11AF5E2E202D42D2004EB40B /* Main.storyboard in Resources */,
 			);
