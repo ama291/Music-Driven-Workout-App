@@ -245,15 +245,15 @@
 			isa = PBXGroup;
 			children = (
 				D8C701932044E1F5006FA4CE /* fitness-calibration.storyboard */,
+				D8C5A9762043838B006D2A0A /* CEFilterViewController.swift */,
+				D8C5A974204382C7006D2A0A /* CESelectionViewController.swift */,
+				D8C5A978204384FF006D2A0A /* CECompleteViewController.swift */,
+				D8880C6820436C5200415877 /* FTSelectionViewController.swift */,
+				D8880C6C20436D8200415877 /* FTSummaryViewController.swift */,
 				D8880C62204366E200415877 /* FTExDescViewController.swift */,
 				D8880C642043676500415877 /* FTExerciseViewController.swift */,
 				D8880C6620436BB900415877 /* FTCheckpointViewController.swift */,
-				D8880C6820436C5200415877 /* FTSelectionViewController.swift */,
 				D8880C6A20436D4500415877 /* FTCompleteViewController.swift */,
-				D8880C6C20436D8200415877 /* FTSummaryViewController.swift */,
-				D8C5A974204382C7006D2A0A /* CESelectionViewController.swift */,
-				D8C5A9762043838B006D2A0A /* CEFilterViewController.swift */,
-				D8C5A978204384FF006D2A0A /* CECompleteViewController.swift */,
 			);
 			path = "fitness-calibration";
 			sourceTree = "<group>";
@@ -275,9 +275,9 @@
 			isa = PBXGroup;
 			children = (
 				D8C7018F2044E1DF006FA4CE /* goals-themes.storyboard */,
-				D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */,
 				D812999E2042B3E200ED6D57 /* ThemesMenuViewController.swift */,
 				D885DF512043AD250043B087 /* ThemesAddViewController.swift */,
+				D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */,
 				D885DF532043AD300043B087 /* GoalsAddViewController.swift */,
 			);
 			path = "goals-themes";

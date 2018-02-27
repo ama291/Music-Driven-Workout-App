@@ -60,6 +60,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="goToHome:" destination="aUf-da-02j" eventType="touchUpInside" id="wPs-0V-11R"/>
+                                </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oKS-l9-F4w">
                                 <rect key="frame" x="0.0" y="176" width="375" height="49"/>
@@ -181,6 +184,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="goToHome:" destination="VXz-Uo-jkF" eventType="touchUpInside" id="tLB-oB-bT6"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ch9-De-Vhs">
                                 <rect key="frame" x="61" y="595" width="253" height="52"/>
@@ -469,10 +475,10 @@
             </objects>
             <point key="canvasLocation" x="3504.8000000000002" y="928.78560719640188"/>
         </scene>
-        <!--View Controller-->
+        <!--Complete View Controller-->
         <scene sceneID="6Br-2J-5vX">
             <objects>
-                <viewController id="LqD-yX-sGw" sceneMemberID="viewController">
+                <viewController id="LqD-yX-sGw" customClass="CECompleteViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cf6-FF-TUV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -498,9 +504,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="aUf-da-02j" kind="show" animates="NO" id="zJv-Xr-f4g">
-                                        <nil key="action"/>
-                                    </segue>
+                                    <action selector="goToHome:" destination="LqD-yX-sGw" eventType="touchUpInside" id="UZP-9S-Lt0"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6dF-Ht-ovh">
@@ -588,7 +592,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="VXz-Uo-jkF" kind="show" animates="NO" id="oHu-uj-84g"/>
+                                    <action selector="goToHome:" destination="bcl-X6-rOM" eventType="touchUpInside" id="4ad-it-H7p"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pRI-Eh-4Yj">
@@ -607,8 +611,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="3mn-gp-Eld"/>
+        <segue reference="4FE-Jc-DuD"/>
         <segue reference="gwd-07-yI0"/>
-        <segue reference="oHu-uj-84g"/>
-        <segue reference="zJv-Xr-f4g"/>
     </inferredMetricsTieBreakers>
 </document>

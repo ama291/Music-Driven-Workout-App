@@ -129,10 +129,10 @@
             </objects>
             <point key="canvasLocation" x="-1370.4000000000001" y="-680.5097451274363"/>
         </scene>
-        <!--Menu View Controller-->
+        <!--mainmenuID-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MenuViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="homeID" title="mainmenuID" id="BYZ-38-t0r" customClass="MenuViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -215,7 +215,7 @@
                                 <rect key="frame" x="200" y="452" width="153" height="52"/>
                                 <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="153" id="BfA-pW-eYn"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="153" id="BfA-pW-eYn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
                                 <state key="normal" title="Themes">
@@ -250,7 +250,7 @@
                                 <rect key="frame" x="22" y="452" width="153" height="52"/>
                                 <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="153" id="4JL-rh-W55"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="153" id="4JL-rh-W55"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
                                 <state key="normal" title="Goals">

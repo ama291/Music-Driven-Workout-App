@@ -21,7 +21,7 @@
         <!--Goals Menu-->
         <scene sceneID="jkd-RG-vQn">
             <objects>
-                <viewController title="Goals Menu" id="3d6-DF-ivo" customClass="GoalsMenuViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="goalsID" title="Goals Menu" id="3d6-DF-ivo" customClass="GoalsMenuViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="05g-5R-YYg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -38,6 +38,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="goToHome:" destination="3d6-DF-ivo" eventType="touchUpInside" id="tHX-gA-81S"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bUT-Pr-s0V">
                                 <rect key="frame" x="16" y="121" width="343" height="450"/>
@@ -76,7 +79,7 @@
         <!--Themes Menu-->
         <scene sceneID="GIa-a3-4yg">
             <objects>
-                <viewController title="Themes Menu" id="e4u-ql-KLH" customClass="ThemesMenuViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="themesID" title="Themes Menu" id="e4u-ql-KLH" customClass="ThemesMenuViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JnI-dA-BK7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -93,6 +96,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="goToHome:" destination="e4u-ql-KLH" eventType="touchUpInside" id="lWn-QN-oj7"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fez-4g-Zfd">
                                 <rect key="frame" x="61" y="595" width="253" height="52"/>
@@ -353,6 +359,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="bem-On-I5B"/>
+        <segue reference="KsW-2D-yHF"/>
         <segue reference="c6j-01-N9k"/>
         <segue reference="YdA-GG-8UL"/>
     </inferredMetricsTieBreakers>

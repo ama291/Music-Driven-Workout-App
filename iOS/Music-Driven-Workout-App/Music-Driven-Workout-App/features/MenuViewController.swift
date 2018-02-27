@@ -45,29 +45,45 @@ class MenuViewController: UIViewController {
     /* Button->Storyboard Navigation */
     @IBAction func goToWorkout(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "workout", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "workoutSelectionID") as UIViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "workoutSelectionID") as! WorkSelectionViewController
+        vc.userid = userid!
         present(vc, animated: true, completion: nil)
     }
     @IBAction func goToSavedWorkouts(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "workout", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "savedWorkoutsID") as UIViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "savedWorkoutsID") as! SavedWorkoutsViewController
+        vc.userid = userid!
         present(vc, animated: true, completion: nil)
     }
     @IBAction func goToFitnessTest(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "fitness-calibration", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "fitnessSelectionID") as UIViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "fitnessSelectionID") as! FTSelectionViewController
+        vc.userid = userid!
         present(vc, animated: true, completion: nil)
     }
     @IBAction func goToCalibrateExercise(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "fitness-calibration", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "calibrateExerciseID") as UIViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "calibrateExerciseID") as! CEFilterViewController
+        vc.userid = userid!
         present(vc, animated: true, completion: nil)
     }
     @IBAction func goToGoals(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "goalsID") as! GoalsMenuViewController
+        vc.userid = userid!
+        present(vc, animated: true, completion: nil)
     }
     @IBAction func goToThemes(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "themesID") as! ThemesMenuViewController
+        vc.userid = userid!
+        present(vc, animated: true, completion: nil)
     }
     @IBAction func goToProfile(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "profile", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "profileID") as! ProfileViewController
+        vc.userid = userid!
+        present(vc, animated: true, completion: nil)
     }
     
     /* END Button->Storyboard Navigation */
