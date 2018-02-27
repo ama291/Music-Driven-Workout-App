@@ -17,8 +17,7 @@ class WorkSelectionViewController: UIViewController {
     var equipment = ""
     var duration = ""
     var difficulty = ""
-    //TODO: populate this example token
-    var token = "b82cb70f-0f2e-4591-a892-a0b5bef45b9a"
+    var token = "b82cb70f-0f2e-4591-a892-a0b5bef45b9a" //TODO: populate this example token
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,15 +32,7 @@ class WorkSelectionViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    /* Navigation */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is WorkSummaryViewController {
             let vc = segue.destination as? WorkSummaryViewController
@@ -63,10 +54,9 @@ class WorkSelectionViewController: UIViewController {
         present(vc, animated: true, completion: nil)
     }
     
+    /* Category switches & labels */
     @IBOutlet weak var categoryswitch: UISwitch!
-    @IBOutlet weak var category: UITableView!
     
-    //category switches & labels
     @IBOutlet weak var strengthswitch: UISwitch!
     @IBOutlet weak var stretchingswitch: UISwitch!
     @IBOutlet weak var weightliftingswitch: UISwitch!

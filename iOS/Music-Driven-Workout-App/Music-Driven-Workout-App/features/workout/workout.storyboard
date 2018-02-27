@@ -645,10 +645,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrn-o4-YkO">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrn-o4-YkO">
                                 <rect key="frame" x="307" y="20" width="52" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="XJH-LT-vfh"/>
+                                    <constraint firstAttribute="width" constant="52" id="hQd-ca-y4f"/>
+                                </constraints>
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <segue destination="fwQ-Kr-Rrb" kind="show" id="04j-kh-duF">
@@ -656,17 +659,19 @@
                                     </segue>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Workout Summary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjN-PC-1Np">
-                                <rect key="frame" x="16" y="20" width="285" height="61"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workout Summary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjN-PC-1Np">
+                                <rect key="frame" x="16" y="20" width="285" height="37.5"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="32"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bia-uE-6cQ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bia-uE-6cQ">
                                 <rect key="frame" x="61" y="595" width="253" height="52"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.30654840179999998" green="1" blue="0.2175406956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="4vo-9h-REY"/>
+                                    <constraint firstAttribute="width" constant="253" id="HDN-UV-3qb"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
                                 <state key="normal" title="Begin Workout">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -682,19 +687,49 @@
                                     </segue>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UWb-dC-S1B">
-                                <rect key="frame" x="16" y="89" width="343" height="498"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="UWb-dC-S1B">
+                                <rect key="frame" x="16" y="74" width="343" height="503"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="503" id="lnO-dH-6Nw"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlainCell" id="OAb-sB-fhN">
+                                        <rect key="frame" x="0.0" y="55.5" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OAb-sB-fhN" id="IxI-fV-D38">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="HRG-jE-GSX" id="79V-Rd-xMh"/>
+                                    <outlet property="delegate" destination="HRG-jE-GSX" id="ajL-EN-G9O"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Yx8-dB-rV5" firstAttribute="trailing" secondItem="UWb-dC-S1B" secondAttribute="trailing" constant="16" id="5Pj-YW-Ha7"/>
+                            <constraint firstItem="lrn-o4-YkO" firstAttribute="top" secondItem="Yx8-dB-rV5" secondAttribute="top" id="Odv-Fs-Ucc"/>
+                            <constraint firstItem="UWb-dC-S1B" firstAttribute="leading" secondItem="Yx8-dB-rV5" secondAttribute="leading" constant="16" id="RP1-WQ-vfh"/>
+                            <constraint firstItem="Yx8-dB-rV5" firstAttribute="bottom" secondItem="Bia-uE-6cQ" secondAttribute="bottom" constant="20" id="XLv-BE-CRJ"/>
+                            <constraint firstItem="xjN-PC-1Np" firstAttribute="top" secondItem="Yx8-dB-rV5" secondAttribute="top" id="bkZ-FN-KxX"/>
+                            <constraint firstItem="lrn-o4-YkO" firstAttribute="leading" secondItem="xjN-PC-1Np" secondAttribute="trailing" priority="999" constant="6" id="dX8-j0-Htj"/>
+                            <constraint firstItem="UWb-dC-S1B" firstAttribute="top" secondItem="lrn-o4-YkO" secondAttribute="bottom" constant="16" id="jGO-NE-Wt2"/>
+                            <constraint firstItem="xjN-PC-1Np" firstAttribute="leading" secondItem="Yx8-dB-rV5" secondAttribute="leading" constant="16" id="oSQ-OI-aXQ"/>
+                            <constraint firstItem="Yx8-dB-rV5" firstAttribute="trailing" secondItem="lrn-o4-YkO" secondAttribute="trailing" constant="16" id="pcd-1x-igO"/>
+                            <constraint firstItem="Bia-uE-6cQ" firstAttribute="leading" secondItem="Yx8-dB-rV5" secondAttribute="leading" constant="61" id="x2B-pL-sLa"/>
+                            <constraint firstItem="Yx8-dB-rV5" firstAttribute="trailing" secondItem="Bia-uE-6cQ" secondAttribute="trailing" constant="61" id="xrw-05-xRU"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Yx8-dB-rV5"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hai-OY-rsM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="834" y="-1390"/>
+            <point key="canvasLocation" x="832.79999999999995" y="-1390.2548725637182"/>
         </scene>
         <!--Work Exercise-->
         <scene sceneID="4aF-3Y-xRg">
@@ -894,6 +929,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QqA-j3-CR8"/>
+        <segue reference="04j-kh-duF"/>
     </inferredMetricsTieBreakers>
 </document>
