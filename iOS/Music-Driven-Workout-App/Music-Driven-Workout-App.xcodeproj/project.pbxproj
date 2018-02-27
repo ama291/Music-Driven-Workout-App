@@ -232,10 +232,10 @@
 				114626282040E99A00B2ACEB /* LoginViewController.swift */,
 				11AF5E28202D42D2004EB40B /* AppDelegate.swift */,
 				11AF5E31202D42D2004EB40B /* LaunchScreen.storyboard */,
-				D8C701952044E3B3006FA4CE /* profile */,
 				D8C7018D2044E19B006FA4CE /* workout */,
 				D8C7018C2044E10D006FA4CE /* fitness-calibration */,
 				D8C7018E2044E1A9006FA4CE /* goals-themes */,
+				D8C701952044E3B3006FA4CE /* profile */,
 				D8C701982044E74D006FA4CE /* samples */,
 			);
 			path = features;
