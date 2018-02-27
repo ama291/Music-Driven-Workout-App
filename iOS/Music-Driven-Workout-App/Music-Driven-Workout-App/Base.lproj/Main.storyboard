@@ -1332,6 +1332,9 @@
                         <color key="backgroundColor" red="0.83347629297677295" green="0.47019825973877227" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="3to-3O-5FB"/>
                     </view>
+                    <connections>
+                        <outlet property="exPicker" destination="0nJ-fr-t4c" id="SLQ-gd-Pg1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jSS-Xq-4tI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

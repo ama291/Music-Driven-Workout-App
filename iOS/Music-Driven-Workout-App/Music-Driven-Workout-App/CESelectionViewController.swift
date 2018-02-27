@@ -8,43 +8,37 @@
 
 import UIKit
 
-class CESelectionViewController: UIViewController {
+class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    @IBOutlet weak var exPicker: UIPickerView!
+    
     var category: String = ""
     var muscleGroup: String = ""
     var equipment: String = ""
     
-    struct jsonResponse: Codable {
-        var Result: String
-        var Status: String
-    }
+    var exList: [String] = [String]()
     
-    func parseJsonRespone(response: String) {
-        
+    func parseJsonRespone(data: Data) -> [Dictionary<String, Any>]? {
         var res: Dictionary<String, String>
-        
-        if let data = response.data(using: String.Encoding.utf8) {
-            do {
-                res = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String, String>
-                let myDict = res
-                print("name: ", myDict["Status"]!)
-                if let result = myDict["Result"] {
-                    var reply: Dictionary<String, Any>
-                    
-                    if let resultData = result.data(using: String.Encoding.utf8) {
-                        do {
-                            reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! Dictionary<String, Any>
-                            let myReplyDict = reply
-                            print("reply: ", myReplyDict)
-                        }
-                    }
-                    print("hi")
-                }
+        do {
+            res = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String, String>
+            let myDict = res
+            if let result = myDict["Result"] {
+                var reply: [Dictionary<String, Any>]
                 
-            } catch let error as Error {
-                print(error)
+                if let resultData = result.data(using: String.Encoding.utf8) {
+                    do {
+                        reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! [Dictionary<String, Any>]
+                        let myReplyDict = reply
+                        return myReplyDict
+                    }
+                }
             }
+            
+        } catch let error {
+            print(error)
         }
+        return nil
     }
     
   
@@ -79,33 +73,59 @@ class CESelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print("New view:", category, muscleGroup, equipment)
         
-        let str = "{\"Status\":\"OK\", \"Result\": \"{}\"}"
+        let str = "{\"Status\":\"OK\", \"Result\": \"[{},{}]\"}"
 
-        parseJsonRespone(response: str)
+        if let data = str.data(using: String.Encoding.utf8) {
+            parseJsonRespone(data: data)
+        }
+//
+        let qstr = "category=" + category + "&muscle=" + muscleGroup + "&equipment=" + equipment + "&key=SoftCon2018"
 
-//
-//
-//        let qstr = "category=" + category + "&muscle=" + muscleGroup + "&equipment=" + equipment + "&key=SoftCon2018"
-//
-//        self.submitPostLocal(route: "/api/fitness/getexsbytype/", qstring: qstr) { (data, response, error) -> Void in
-//            if let error = error {
-//                fatalError(error.localizedDescription)
-//            }
-//            guard let json = try? JSONDecoder().decode(jsonResponse.self, from: data!) else { return }
-//            print(json.Result)
-//
-////            let jsonData = json.Result.data(using: .utf8)
-////            let decoder = JSONDecoder()
-////            let arr = try! decoder.decode([String].self, from: jsonData!)
-////            print(arr)
-//            }.resume()
+        self.submitPostLocal(route: "/api/fitness/getexsbytype/", qstring: qstr) { (data, response, error) -> Void in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+            let reply = self.parseJsonRespone(data: data!)
+            
+//            names = reply.map { $0["name"] }
+            print(reply![0]["name"]!)
+            for rep in reply! {
+                self.exList.append(rep["name"]! as! String)
+            }
+            DispatchQueue.main.async {
+                self.exPicker.delegate = self
+                self.exPicker.dataSource = self
+            }
+
+            
+//            let jsonData = json.Result.data(using: .utf8)
+//            let decoder = JSONDecoder()
+//            let arr = try! decoder.decode([String].self, from: jsonData!)
+//            print(arr)
+            }.resume()
 
 
         // Do any additional setup after loading the view.
     }
 
+
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return exList.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return exList[row]
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
