@@ -24,7 +24,7 @@
         <!--CE Filter-->
         <scene sceneID="6Lg-8j-x8Q">
             <objects>
-                <viewController title="CE Filter" id="aUf-da-02j" customClass="CEFilterViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="calibrateExerciseID" title="CE Filter" id="aUf-da-02j" customClass="CEFilterViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FYz-Mr-z2L">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -164,7 +164,7 @@
         <!--FT Selection-->
         <scene sceneID="iva-kL-QxH">
             <objects>
-                <viewController title="FT Selection" id="VXz-Uo-jkF" customClass="FTSelectionViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="fitnessSelectionID" title="FT Selection" id="VXz-Uo-jkF" customClass="FTSelectionViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x1J-ly-jer">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

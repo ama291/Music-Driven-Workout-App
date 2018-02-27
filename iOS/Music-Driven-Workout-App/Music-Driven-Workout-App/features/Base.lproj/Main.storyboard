@@ -175,6 +175,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goToWorkout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HHq-Hu-LYg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b90-px-Prx">
                                 <rect key="frame" x="43" y="223" width="289" height="52"/>
@@ -188,6 +191,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goToSavedWorkouts:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DKe-fW-QXn"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsK-4H-8bL">
                                 <rect key="frame" x="84" y="301" width="206" height="52"/>
@@ -201,6 +207,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goToFitnessTest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2h9-SZ-4a2"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXy-sv-hng">
                                 <rect key="frame" x="200" y="452" width="153" height="52"/>
@@ -217,6 +226,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goToThemes:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A0G-PB-btw"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgT-8r-ecB">
                                 <rect key="frame" x="96" y="536" width="182" height="52"/>
@@ -230,6 +242,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goToProfile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CBX-XV-5AI"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEE-R6-Yeg">
                                 <rect key="frame" x="22" y="452" width="153" height="52"/>
@@ -246,6 +261,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goToGoals:" destination="BYZ-38-t0r" eventType="touchUpInside" id="n2E-U5-Ir9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHE-RM-yih">
                                 <rect key="frame" x="50" y="377" width="274" height="52"/>
@@ -259,6 +277,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goToCalibrateExercise:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pRK-Bx-VfX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

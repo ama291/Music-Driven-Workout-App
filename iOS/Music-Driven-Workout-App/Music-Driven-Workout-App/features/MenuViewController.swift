@@ -42,6 +42,37 @@ class MenuViewController: UIViewController {
         }
     }
     
+    /* Button->Storyboard Navigation */
+    @IBAction func goToWorkout(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "workout", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "workoutSelectionID") as UIViewController
+        present(vc, animated: true, completion: nil)
+    }
+    @IBAction func goToSavedWorkouts(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "workout", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "savedWorkoutsID") as UIViewController
+        present(vc, animated: true, completion: nil)
+    }
+    @IBAction func goToFitnessTest(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "fitness-calibration", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "fitnessSelectionID") as UIViewController
+        present(vc, animated: true, completion: nil)
+    }
+    @IBAction func goToCalibrateExercise(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "fitness-calibration", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "calibrateExerciseID") as UIViewController
+        present(vc, animated: true, completion: nil)
+    }
+    @IBAction func goToGoals(_ sender: UIButton) {
+    }
+    @IBAction func goToThemes(_ sender: UIButton) {
+    }
+    @IBAction func goToProfile(_ sender: UIButton) {
+    }
+    
+    /* END Button->Storyboard Navigation */
+    
+    
     @IBOutlet weak var titletext: UILabel!
     
     struct usernameResult: Codable {
