@@ -1,5 +1,5 @@
 //
-//  CECompleteViewController.swift
+//  WorkExerciseViewController.swift
 //  Music-Driven-Workout-App
 //
 //  Created by Christopher Choy on 2/25/18.
@@ -8,8 +8,10 @@
 
 import UIKit
 
-class CECompleteViewController: UIViewController {
-
+class WorkExerciseViewController: UIViewController {
+    
+    var userid: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -1,15 +1,17 @@
 //
-//  ProfileEditViewController.swift
+//  FTExerciseViewController.swift
 //  Music-Driven-Workout-App
 //
-//  Created by Christopher Choy on 2/26/18.
+//  Created by Christopher Choy on 2/25/18.
 //  Copyright © 2018 UChicago SoftCon. All rights reserved.
 //
 
 import UIKit
 
-class ProfileEditViewController: UIViewController {
-
+class FTExerciseViewController: UIViewController {
+    
+    var userid: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

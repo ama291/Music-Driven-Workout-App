@@ -43,16 +43,17 @@ class WorkSelectionViewController: UIViewController {
     }
     */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is MenuViewController {
-            let vc = segue.destination as? MenuViewController
-            //data to send
-            vc?.userid = userid!
-        }
         if segue.destination is WorkSummaryViewController {
             let vc = segue.destination as? WorkSummaryViewController
             //data to send
             vc?.userid = userid!
         }
+    }
+    @IBAction func goToHome(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        vc.userid = userid!
+        present(vc, animated: true, completion: nil)
     }
     
     @IBOutlet weak var categoryswitch: UISwitch!

@@ -1,5 +1,5 @@
 //
-//  CEFilterViewController.swift
+//  FTExDescViewController.swift
 //  Music-Driven-Workout-App
 //
 //  Created by Christopher Choy on 2/25/18.
@@ -8,8 +8,10 @@
 
 import UIKit
 
-class CEFilterViewController: UIViewController {
-
+class FTExDescViewController: UIViewController {
+    
+    var userid: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

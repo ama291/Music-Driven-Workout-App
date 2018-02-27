@@ -1,5 +1,5 @@
 //
-//  ThemesMenuViewController.swift
+//  WorkCompleteViewController.swift
 //  Music-Driven-Workout-App
 //
 //  Created by Christopher Choy on 2/25/18.
@@ -8,8 +8,10 @@
 
 import UIKit
 
-class ThemesMenuViewController: UIViewController {
-
+class WorkCompleteViewController: UIViewController {
+    
+    var userid: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

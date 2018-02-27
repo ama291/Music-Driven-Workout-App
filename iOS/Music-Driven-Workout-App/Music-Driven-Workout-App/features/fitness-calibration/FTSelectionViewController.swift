@@ -1,5 +1,5 @@
 //
-//  FTSummaryViewController.swift
+//  FTSelectionViewController.swift
 //  Music-Driven-Workout-App
 //
 //  Created by Christopher Choy on 2/25/18.
@@ -8,8 +8,10 @@
 
 import UIKit
 
-class FTSummaryViewController: UIViewController {
-
+class FTSelectionViewController: UIViewController {
+    
+    var userid: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,5 +33,11 @@ class FTSummaryViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    @IBAction func goToHome(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        vc.userid = userid!
+        present(vc, animated: true, completion: nil)
+    }
+    
 }

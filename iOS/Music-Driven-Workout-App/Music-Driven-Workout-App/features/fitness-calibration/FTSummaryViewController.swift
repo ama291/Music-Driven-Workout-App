@@ -1,5 +1,5 @@
 //
-//  GoalsAddViewController.swift
+//  FTSummaryViewController.swift
 //  Music-Driven-Workout-App
 //
 //  Created by Christopher Choy on 2/25/18.
@@ -8,8 +8,10 @@
 
 import UIKit
 
-class GoalsAddViewController: UIViewController {
-
+class FTSummaryViewController: UIViewController {
+    
+    var userid: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
