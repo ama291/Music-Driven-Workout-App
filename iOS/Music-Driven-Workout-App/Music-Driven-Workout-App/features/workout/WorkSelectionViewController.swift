@@ -47,6 +47,13 @@ class WorkSelectionViewController: UIViewController {
             let vc = segue.destination as? WorkSummaryViewController
             //data to send
             vc?.userid = userid!
+            vc?.themes = themes
+            vc?.categories = categories
+            vc?.musclegroup = musclegroup
+            vc?.equipment = equipment
+            vc?.duration = duration
+            vc?.difficulty = difficulty
+
         }
     }
     @IBAction func goToHome(_ sender: UIButton) {
@@ -107,6 +114,22 @@ class WorkSelectionViewController: UIViewController {
     @IBOutlet weak var glutelabel: UILabel!
     @IBOutlet weak var hamlabel: UILabel!
     
+    //equipment switches and labels
+    @IBOutlet weak var bodyswitch: UISwitch!
+    @IBOutlet weak var machineswitch: UISwitch!
+    @IBOutlet weak var dumbswitch: UISwitch!
+    @IBOutlet weak var kettleswitch: UISwitch!
+    @IBOutlet weak var barswitch: UISwitch!
+    @IBOutlet weak var cableswitch: UISwitch!
+    @IBOutlet weak var bandswitch: UISwitch!
+    @IBOutlet weak var medswitch: UISwitch!
+    @IBOutlet weak var ezswitch: UISwitch!
+    @IBOutlet weak var eballswitch: UISwitch!
+    @IBOutlet weak var foamswitch: UISwitch!
+    @IBOutlet weak var otherswitch: UISwitch!
+    @IBOutlet weak var noneswitch: UISwitch!
+    
+    
     @objc func hideCategories() {
         strengthswitch.isHidden = true
         stretchingswitch.isHidden = true
@@ -126,8 +149,7 @@ class WorkSelectionViewController: UIViewController {
     
     //TODO: need to deactivate category or muscle group on switch
     @IBAction func switchToggled(_ sender: Any) {
-        let status = categoryswitch.isOn
-        if (status) {
+        if (categoryswitch.isOn) {
             strengthswitch.isHidden = true
             stretchingswitch.isHidden = true
             weightliftingswitch.isHidden = true
@@ -222,50 +244,151 @@ class WorkSelectionViewController: UIViewController {
         }
     }
     
-    //equipment switches
-    @IBOutlet weak var bodyonly: UISwitch!
-    @IBOutlet weak var machine: UISwitch!
-    @IBOutlet weak var Dumbbell: UISwitch!
-    @IBOutlet weak var Kettlebells: UISwitch!
-    @IBOutlet weak var barbell: UISwitch!
-    @IBOutlet weak var cable: UISwitch!
-    @IBOutlet weak var bands: UISwitch!
-    @IBOutlet weak var medicineball: UISwitch!
-    @IBOutlet weak var ezcurl: UISwitch!
-    @IBOutlet weak var exerciseball: UISwitch!
-    @IBOutlet weak var foamroll: UISwitch!
-    @IBOutlet weak var other: UISwitch!
-    @IBOutlet weak var none: UISwitch!
-    
     @IBOutlet weak var dur: UITextField!
+    @IBOutlet weak var difficultyswitch: UISwitch!
     
-    //TODO: check input, themes
+    //TODO: themes
     @IBOutlet weak var getworkout: UIButton!
     @IBAction func getWorkoutAction(_ sender: Any) {
-        if (strengthswitch.isOn) {
-            categories += "Strength,"
+        if (categoryswitch.isOn) {
+            if (neckswitch.isOn) {
+                musclegroup += "Neck,"
+            }
+            if (trapsswitch.isOn) {
+                musclegroup += "Traps,"
+            }
+            if (shouldersswitch.isOn) {
+                musclegroup += "Shoulders,"
+            }
+            if (chestswitch.isOn) {
+                musclegroup += "Chest,"
+            }
+            if (bicepsswitch.isOn) {
+                musclegroup += "Biceps,"
+            }
+            if (forearmsswitch.isOn) {
+                musclegroup += "Forearms,"
+            }
+            if (abdominalsswitch.isOn) {
+                musclegroup += "Abdominals,"
+            }
+            if (quadricepsswitch.isOn) {
+                musclegroup += "Quadriceps,"
+            }
+            if (calvesswitch.isOn) {
+                musclegroup += "Calves,"
+            }
+            if (tricepsswitch.isOn) {
+                musclegroup += "Triceps,"
+            }
+            if (latsswitch.isOn) {
+                musclegroup += "Lats,"
+            }
+            if (middlebackswitch.isOn) {
+                musclegroup += "Middle Back,"
+            }
+            if (lowerbackswitch.isOn) {
+                musclegroup += "Lower Back,"
+            }
+            if (glutesswitch.isOn) {
+                musclegroup += "Glutes,"
+            }
+            if (hamstringsswitch.isOn) {
+                musclegroup += "Hamstrings,"
+            }
         }
-        if (stretchingswitch.isOn) {
-            categories += "Stretching,"
+            
+        else {
+            if (strengthswitch.isOn) {
+                categories += "Strength,"
+            }
+            if (stretchingswitch.isOn) {
+                categories += "Stretching,"
+            }
+            if (weightliftingswitch.isOn) {
+                categories += "Olympic Weightlifting,"
+            }
+            if (strongmanswitch.isOn) {
+                categories += "Strongman,"
+            }
+            if (plyometricsswitch.isOn) {
+                categories += "Plyometrics,"
+            }
+            if (cardioswitch.isOn) {
+                categories += "Cardio,"
+            }
+            if (powerliftingswitch.isOn) {
+                categories += "Powerlifting,"
+            }
+
         }
-        if (weightliftingswitch.isOn) {
-            categories += "Olympic Weightlifting,"
-        }
-        if (strongmanswitch.isOn) {
-            categories += "Strongman,"
-        }
-        if (plyometricsswitch.isOn) {
-            categories += "Plyometrics,"
-        }
-        if (cardioswitch.isOn) {
-            categories += "Cardio,"
-        }
-        if (powerliftingswitch.isOn) {
-            categories += "Powerlifting,"
-        }
+        
         if (categories.last == ",") {
             categories.removeLast()
         }
-        print(categories)
+        if (musclegroup.last == ",") {
+            musclegroup.removeLast()
+        }
+        print("Categories: " + categories)
+        print("Muscle Groups: " + musclegroup)
+        
+        if (bodyswitch.isOn) {
+            equipment += "Body Only,"
+        }
+        if (machineswitch.isOn) {
+            equipment += "Machine,"
+        }
+        if (dumbswitch.isOn) {
+            equipment += "Dumbbell,"
+        }
+        if (kettleswitch.isOn) {
+            equipment += "Kettlebells,"
+        }
+        if (barswitch.isOn) {
+            equipment += "Barbell,"
+        }
+        if (cableswitch.isOn) {
+            equipment += "Cable,"
+        }
+        if (bandswitch.isOn) {
+            equipment += "Bands,"
+        }
+        if (medswitch.isOn) {
+            equipment += "Medicine Ball,"
+        }
+        if (ezswitch.isOn) {
+            equipment += "E-Z Curl Bar,"
+        }
+        if (eballswitch.isOn) {
+            equipment += "Exercise Ball,"
+        }
+        if (foamswitch.isOn) {
+            equipment += "Foam roll,"
+        }
+        if (otherswitch.isOn) {
+            equipment += "Other,"
+        }
+        if (noneswitch.isOn) {
+            equipment += "None,"
+        }
+        if (equipment.last == ",") {
+            equipment.removeLast()
+        }
+        
+        print("Equipment: " + equipment)
+        
+        if (difficultyswitch.isOn) {
+            difficulty = "Intermediate"
+        }
+        else {
+            difficulty = "Beginner"
+        }
+        
+        print("Difficulty: " + difficulty)
+        
+        duration = dur.text!
+        print("Duration: " + duration)
+        
+        self.performSegue(withIdentifier: "summarySegue", sender: self)
     }
 }

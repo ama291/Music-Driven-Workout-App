@@ -522,9 +522,6 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="getWorkoutAction:" destination="fwQ-Kr-Rrb" eventType="touchUpInside" id="EW2-KF-EU6"/>
-                                                    <segue destination="HRG-jE-GSX" kind="show" animates="NO" id="iJI-G1-P79">
-                                                        <nil key="action"/>
-                                                    </segue>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Theme" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQz-4Q-d8m">
@@ -572,16 +569,14 @@
                     <navigationItem key="navigationItem" id="6lO-VG-3yp"/>
                     <size key="freeformSize" width="375" height="1800"/>
                     <connections>
-                        <outlet property="Dumbbell" destination="Mba-0f-POf" id="OAu-ny-lDT"/>
-                        <outlet property="Kettlebells" destination="aez-3X-Er3" id="1Md-Yz-wgi"/>
                         <outlet property="abdominalsswitch" destination="Kjo-LO-JUm" id="4nu-kO-MqH"/>
                         <outlet property="ablabel" destination="sVa-hF-lKm" id="fmp-bL-fpg"/>
-                        <outlet property="bands" destination="BDA-E2-Mkv" id="mGz-nw-78E"/>
-                        <outlet property="barbell" destination="aVr-ie-XNH" id="ZWJ-hY-CCD"/>
+                        <outlet property="bandswitch" destination="BDA-E2-Mkv" id="JSw-bV-0vK"/>
+                        <outlet property="barswitch" destination="aVr-ie-XNH" id="hYd-Ey-JMl"/>
                         <outlet property="biceplabel" destination="YXv-cb-SI5" id="eIk-Sd-OYs"/>
                         <outlet property="bicepsswitch" destination="FBV-2I-EWB" id="MoP-l5-kwa"/>
-                        <outlet property="bodyonly" destination="v6o-8k-vzh" id="y20-J4-1zR"/>
-                        <outlet property="cable" destination="b3t-bm-by2" id="wp7-Ke-I2A"/>
+                        <outlet property="bodyswitch" destination="v6o-8k-vzh" id="ZMd-FU-ZsX"/>
+                        <outlet property="cableswitch" destination="b3t-bm-by2" id="43c-dX-VIW"/>
                         <outlet property="calveslabel" destination="R2u-DI-Cbm" id="HAs-3x-IaR"/>
                         <outlet property="calvesswitch" destination="M87-7W-6iu" id="yaA-kf-aKT"/>
                         <outlet property="cardiolabel" destination="mnr-bw-6yx" id="XKl-nc-WCW"/>
@@ -589,10 +584,12 @@
                         <outlet property="categoryswitch" destination="EfP-U4-Pga" id="l0M-tn-U6d"/>
                         <outlet property="chestlabel" destination="PbN-pb-2lz" id="EiB-Gy-v5L"/>
                         <outlet property="chestswitch" destination="CZK-fA-zly" id="p5X-YY-LTh"/>
+                        <outlet property="difficultyswitch" destination="cvp-Uj-0jb" id="08U-fS-P1j"/>
+                        <outlet property="dumbswitch" destination="Mba-0f-POf" id="psb-6i-npf"/>
                         <outlet property="dur" destination="wet-R1-bCJ" id="dEA-Ly-cAQ"/>
-                        <outlet property="exerciseball" destination="eBV-Kj-Kgc" id="Zia-Sx-tqB"/>
-                        <outlet property="ezcurl" destination="vfd-Ef-TeS" id="zE6-Vc-YPR"/>
-                        <outlet property="foamroll" destination="qaw-Pf-B42" id="lc9-S8-0RC"/>
+                        <outlet property="eballswitch" destination="eBV-Kj-Kgc" id="VvJ-yd-RNP"/>
+                        <outlet property="ezswitch" destination="vfd-Ef-TeS" id="Ssi-g5-Tl4"/>
+                        <outlet property="foamswitch" destination="qaw-Pf-B42" id="YqK-kZ-Y2t"/>
                         <outlet property="forearmlabel" destination="5HE-jy-zwe" id="7hX-86-7BI"/>
                         <outlet property="forearmsswitch" destination="hGe-yI-Nss" id="pXe-TO-nBb"/>
                         <outlet property="getworkout" destination="vm2-Sh-IIE" id="ncO-Xg-PSc"/>
@@ -600,18 +597,19 @@
                         <outlet property="glutesswitch" destination="PQw-F9-q3o" id="UXV-UK-YXR"/>
                         <outlet property="hamlabel" destination="i53-VQ-7d5" id="p0s-Dp-c1M"/>
                         <outlet property="hamstringsswitch" destination="x1g-4P-iPl" id="ew6-vt-vXi"/>
+                        <outlet property="kettleswitch" destination="aez-3X-Er3" id="b4i-IR-dR0"/>
                         <outlet property="latlabel" destination="bfs-K9-tBe" id="jX9-so-Oh8"/>
                         <outlet property="latsswitch" destination="hoN-RV-eKP" id="mMh-vh-ThX"/>
                         <outlet property="lowerbackswitch" destination="tsY-KM-Tmy" id="ggg-nh-jTj"/>
                         <outlet property="lowlabel" destination="RgM-B2-MV3" id="84j-xP-7pw"/>
-                        <outlet property="machine" destination="EGC-Xe-iox" id="3j2-Eh-5RZ"/>
-                        <outlet property="medicineball" destination="jSR-Av-iww" id="Dhw-Lr-Eln"/>
+                        <outlet property="machineswitch" destination="EGC-Xe-iox" id="5oJ-eT-VOr"/>
+                        <outlet property="medswitch" destination="jSR-Av-iww" id="IKP-Hi-LoO"/>
                         <outlet property="middlebackswitch" destination="FFa-4U-8Rs" id="O6J-cn-jKX"/>
                         <outlet property="midlabel" destination="k8y-xH-Kbp" id="H8f-MT-eRx"/>
                         <outlet property="necklabel" destination="16y-Me-Juh" id="Yfc-FI-Se6"/>
                         <outlet property="neckswitch" destination="J4s-Ae-cTW" id="538-tE-xka"/>
-                        <outlet property="none" destination="o7B-P5-Hfz" id="ppj-52-sVm"/>
-                        <outlet property="other" destination="08l-76-QeJ" id="gNo-OT-PaO"/>
+                        <outlet property="noneswitch" destination="o7B-P5-Hfz" id="crF-vK-BhU"/>
+                        <outlet property="otherswitch" destination="08l-76-QeJ" id="XBB-v3-qkM"/>
                         <outlet property="plylabel" destination="405-RA-3VB" id="eS8-02-RIb"/>
                         <outlet property="plyometricsswitch" destination="DMo-xY-y5p" id="vYp-br-wQF"/>
                         <outlet property="powerlabel" destination="PxO-30-AfB" id="gXO-ue-Dms"/>
@@ -632,6 +630,7 @@
                         <outlet property="trilabel" destination="K2l-td-BZE" id="BJO-y9-v1q"/>
                         <outlet property="weightlabel" destination="a1F-xI-JJb" id="ZXx-JV-fzN"/>
                         <outlet property="weightliftingswitch" destination="Ty2-e6-h75" id="kL2-Ku-2LY"/>
+                        <segue destination="HRG-jE-GSX" kind="show" identifier="summarySegue" id="QqA-j3-CR8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G0m-qk-BlQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -895,6 +894,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="04j-kh-duF"/>
+        <segue reference="QqA-j3-CR8"/>
     </inferredMetricsTieBreakers>
 </document>

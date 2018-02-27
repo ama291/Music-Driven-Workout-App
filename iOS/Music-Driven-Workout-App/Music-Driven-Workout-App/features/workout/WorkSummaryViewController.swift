@@ -40,5 +40,13 @@ class WorkSummaryViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is WorkSelectionViewController {
+            let vc = segue.destination as? WorkSelectionViewController
+            //data to send
+            vc?.userid = userid!
+        }
+    }
 
 }
