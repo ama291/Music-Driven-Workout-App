@@ -1,15 +1,17 @@
 //
-//  ThemesMenuViewController.swift
+//  ProfileViewController.swift
 //  Music-Driven-Workout-App
 //
-//  Created by Christopher Choy on 2/25/18.
+//  Created by Christopher Choy on 2/26/18.
 //  Copyright © 2018 UChicago SoftCon. All rights reserved.
 //
 
 import UIKit
 
-class ThemesMenuViewController: UIViewController {
-
+class ProfileViewController: UIViewController {
+    
+    var userid: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,5 +33,11 @@ class ThemesMenuViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    @IBAction func goToHome(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        vc.userid = userid!
+        present(vc, animated: true, completion: nil)
+    }
+    
 }

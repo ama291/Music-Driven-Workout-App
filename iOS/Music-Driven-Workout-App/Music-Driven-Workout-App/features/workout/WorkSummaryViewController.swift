@@ -1,15 +1,24 @@
 //
-//  ProfileViewController.swift
+//  WorkSummaryViewController.swift
 //  Music-Driven-Workout-App
 //
-//  Created by Christopher Choy on 2/26/18.
+//  Created by Christopher Choy on 2/25/18.
 //  Copyright © 2018 UChicago SoftCon. All rights reserved.
 //
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class WorkSummaryViewController: UIViewController {
 
+    var userid: String!
+    var themes: String!
+    var categories: String!
+    var musclegroup: String!
+    var equipment: String!
+    var duration: String!
+    var difficulty: String!
+    var token: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

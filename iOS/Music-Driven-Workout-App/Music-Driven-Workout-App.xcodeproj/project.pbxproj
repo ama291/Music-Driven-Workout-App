@@ -22,6 +22,7 @@
 		4CE2AAAC203F7AA000A55F29 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2AAA9203F7AA000A55F29 /* SpotifyAuthentication.framework */; };
 		D812999D2042B3CD00ED6D57 /* GoalsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */; };
 		D812999F2042B3E200ED6D57 /* ThemesMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812999E2042B3E200ED6D57 /* ThemesMenuViewController.swift */; };
+		D813DF0B2045BD3E00532701 /* global.swift in Sources */ = {isa = PBXBuildFile; fileRef = D813DF0A2045BD3E00532701 /* global.swift */; };
 		D87D00EE203CEDB000A97449 /* AmaticSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D87D00EB203CEDB000A97449 /* AmaticSC-Regular.ttf */; };
 		D87D00F2203CEEA500A97449 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D87D00F1203CEEA500A97449 /* background.jpg */; };
 		D87D00F4203CEF2200A97449 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11AF5E34202D42D2004EB40B /* Info.plist */; };
@@ -43,6 +44,10 @@
 		D8C5A975204382C7006D2A0A /* CESelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5A974204382C7006D2A0A /* CESelectionViewController.swift */; };
 		D8C5A9772043838B006D2A0A /* CEFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5A9762043838B006D2A0A /* CEFilterViewController.swift */; };
 		D8C5A979204384FF006D2A0A /* CECompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C5A978204384FF006D2A0A /* CECompleteViewController.swift */; };
+		D8C701902044E1DF006FA4CE /* goals-themes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8C7018F2044E1DF006FA4CE /* goals-themes.storyboard */; };
+		D8C701922044E1EB006FA4CE /* workout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8C701912044E1EB006FA4CE /* workout.storyboard */; };
+		D8C701942044E1F5006FA4CE /* fitness-calibration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8C701932044E1F5006FA4CE /* fitness-calibration.storyboard */; };
+		D8C701972044E3D7006FA4CE /* profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8C701962044E3D7006FA4CE /* profile.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +90,7 @@
 		4CE2AAA9203F7AA000A55F29 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
 		D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsMenuViewController.swift; sourceTree = "<group>"; };
 		D812999E2042B3E200ED6D57 /* ThemesMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesMenuViewController.swift; sourceTree = "<group>"; };
+		D813DF0A2045BD3E00532701 /* global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = global.swift; sourceTree = "<group>"; };
 		D87D00EB203CEDB000A97449 /* AmaticSC-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Regular.ttf"; sourceTree = "<group>"; };
 		D87D00F1203CEEA500A97449 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 		D87D00F3203CEEF900A97449 /* AmaticSC-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AmaticSC-Bold.ttf"; sourceTree = "<group>"; };
@@ -106,6 +112,10 @@
 		D8C5A974204382C7006D2A0A /* CESelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CESelectionViewController.swift; sourceTree = "<group>"; };
 		D8C5A9762043838B006D2A0A /* CEFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CEFilterViewController.swift; sourceTree = "<group>"; };
 		D8C5A978204384FF006D2A0A /* CECompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CECompleteViewController.swift; sourceTree = "<group>"; };
+		D8C7018F2044E1DF006FA4CE /* goals-themes.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "goals-themes.storyboard"; sourceTree = "<group>"; };
+		D8C701912044E1EB006FA4CE /* workout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = workout.storyboard; sourceTree = "<group>"; };
+		D8C701932044E1F5006FA4CE /* fitness-calibration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "fitness-calibration.storyboard"; sourceTree = "<group>"; };
+		D8C701962044E3D7006FA4CE /* profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = profile.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,42 +169,16 @@
 		11AF5E27202D42D2004EB40B /* Music-Driven-Workout-App */ = {
 			isa = PBXGroup;
 			children = (
+				D8C7018B2044E0FD006FA4CE /* features */,
 				4CE2AAA8203F7AA000A55F29 /* SpotifyAudioPlayback.framework */,
 				4CE2AAA9203F7AA000A55F29 /* SpotifyAuthentication.framework */,
 				4CE2AAA7203F7A9F00A55F29 /* SpotifyMetadata.framework */,
 				4C860B93203DF86D00176A96 /* Frameworks */,
 				D87D00DE203CE09600A97449 /* img */,
 				D87D00D9203CD22D00A97449 /* fonts */,
-				11AF5E28202D42D2004EB40B /* AppDelegate.swift */,
-				11AF5E2A202D42D2004EB40B /* ViewController.swift */,
-				11AF5E2C202D42D2004EB40B /* Main.storyboard */,
-				11AF5E2F202D42D2004EB40B /* Assets.xcassets */,
-				11AF5E31202D42D2004EB40B /* LaunchScreen.storyboard */,
 				11AF5E34202D42D2004EB40B /* Info.plist */,
-				11F9ABEA2033E593007F217C /* AccelerometerTest.swift */,
 				4CE2AAA6203F787C00A55F29 /* SpotifySDKDemo-Bridging-Header.h */,
-				114626262040E93F00B2ACEB /* MenuViewController.swift */,
-				114626282040E99A00B2ACEB /* LoginViewController.swift */,
-				D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */,
-				D812999E2042B3E200ED6D57 /* ThemesMenuViewController.swift */,
-				D8880C5A2043606200415877 /* SavedWorkoutsViewController.swift */,
-				D8880C62204366E200415877 /* FTExDescViewController.swift */,
-				D8880C642043676500415877 /* FTExerciseViewController.swift */,
-				D8880C6620436BB900415877 /* FTCheckpointViewController.swift */,
-				D8880C6820436C5200415877 /* FTSelectionViewController.swift */,
-				D8880C6A20436D4500415877 /* FTCompleteViewController.swift */,
-				D8880C6C20436D8200415877 /* FTSummaryViewController.swift */,
-				D8880C6E20436E6400415877 /* WorkSelectionViewController.swift */,
-				D8880C7020436E7200415877 /* WorkSummaryViewController.swift */,
-				D8880C7220436E8300415877 /* WorkExerciseViewController.swift */,
-				D8880C7420436E8F00415877 /* WorkCompleteViewController.swift */,
-				D8C5A974204382C7006D2A0A /* CESelectionViewController.swift */,
-				D8C5A9762043838B006D2A0A /* CEFilterViewController.swift */,
-				D8C5A978204384FF006D2A0A /* CECompleteViewController.swift */,
-				D885DF512043AD250043B087 /* ThemesAddViewController.swift */,
-				D885DF532043AD300043B087 /* GoalsAddViewController.swift */,
-				D88B1F782043F2940053FF78 /* ProfileViewController.swift */,
-				D88B1F7A2043F5D70053FF78 /* ProfileEditViewController.swift */,
+				11AF5E2F202D42D2004EB40B /* Assets.xcassets */,
 			);
 			path = "Music-Driven-Workout-App";
 			sourceTree = "<group>";
@@ -240,6 +224,85 @@
 				D87D00F1203CEEA500A97449 /* background.jpg */,
 			);
 			path = img;
+			sourceTree = "<group>";
+		};
+		D8C7018B2044E0FD006FA4CE /* features */ = {
+			isa = PBXGroup;
+			children = (
+				11AF5E2C202D42D2004EB40B /* Main.storyboard */,
+				114626262040E93F00B2ACEB /* MenuViewController.swift */,
+				114626282040E99A00B2ACEB /* LoginViewController.swift */,
+				11AF5E28202D42D2004EB40B /* AppDelegate.swift */,
+				11AF5E31202D42D2004EB40B /* LaunchScreen.storyboard */,
+				D8C7018D2044E19B006FA4CE /* workout */,
+				D8C7018C2044E10D006FA4CE /* fitness-calibration */,
+				D8C7018E2044E1A9006FA4CE /* goals-themes */,
+				D8C701952044E3B3006FA4CE /* profile */,
+				D8C701982044E74D006FA4CE /* samples */,
+			);
+			path = features;
+			sourceTree = "<group>";
+		};
+		D8C7018C2044E10D006FA4CE /* fitness-calibration */ = {
+			isa = PBXGroup;
+			children = (
+				D8C701932044E1F5006FA4CE /* fitness-calibration.storyboard */,
+				D8C5A9762043838B006D2A0A /* CEFilterViewController.swift */,
+				D8C5A974204382C7006D2A0A /* CESelectionViewController.swift */,
+				D8C5A978204384FF006D2A0A /* CECompleteViewController.swift */,
+				D8880C6820436C5200415877 /* FTSelectionViewController.swift */,
+				D8880C6C20436D8200415877 /* FTSummaryViewController.swift */,
+				D8880C62204366E200415877 /* FTExDescViewController.swift */,
+				D8880C642043676500415877 /* FTExerciseViewController.swift */,
+				D8880C6620436BB900415877 /* FTCheckpointViewController.swift */,
+				D8880C6A20436D4500415877 /* FTCompleteViewController.swift */,
+			);
+			path = "fitness-calibration";
+			sourceTree = "<group>";
+		};
+		D8C7018D2044E19B006FA4CE /* workout */ = {
+			isa = PBXGroup;
+			children = (
+				D8C701912044E1EB006FA4CE /* workout.storyboard */,
+				D8880C6E20436E6400415877 /* WorkSelectionViewController.swift */,
+				D8880C7020436E7200415877 /* WorkSummaryViewController.swift */,
+				D8880C7220436E8300415877 /* WorkExerciseViewController.swift */,
+				D8880C7420436E8F00415877 /* WorkCompleteViewController.swift */,
+				D8880C5A2043606200415877 /* SavedWorkoutsViewController.swift */,
+			);
+			path = workout;
+			sourceTree = "<group>";
+		};
+		D8C7018E2044E1A9006FA4CE /* goals-themes */ = {
+			isa = PBXGroup;
+			children = (
+				D8C7018F2044E1DF006FA4CE /* goals-themes.storyboard */,
+				D812999E2042B3E200ED6D57 /* ThemesMenuViewController.swift */,
+				D885DF512043AD250043B087 /* ThemesAddViewController.swift */,
+				D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */,
+				D885DF532043AD300043B087 /* GoalsAddViewController.swift */,
+			);
+			path = "goals-themes";
+			sourceTree = "<group>";
+		};
+		D8C701952044E3B3006FA4CE /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				D8C701962044E3D7006FA4CE /* profile.storyboard */,
+				D88B1F782043F2940053FF78 /* ProfileViewController.swift */,
+				D88B1F7A2043F5D70053FF78 /* ProfileEditViewController.swift */,
+			);
+			path = profile;
+			sourceTree = "<group>";
+		};
+		D8C701982044E74D006FA4CE /* samples */ = {
+			isa = PBXGroup;
+			children = (
+				D813DF0A2045BD3E00532701 /* global.swift */,
+				11F9ABEA2033E593007F217C /* AccelerometerTest.swift */,
+				11AF5E2A202D42D2004EB40B /* ViewController.swift */,
+			);
+			path = samples;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,8 +415,12 @@
 			files = (
 				D87D00EE203CEDB000A97449 /* AmaticSC-Regular.ttf in Resources */,
 				11AF5E33202D42D2004EB40B /* LaunchScreen.storyboard in Resources */,
+				D8C701972044E3D7006FA4CE /* profile.storyboard in Resources */,
 				D87D00F4203CEF2200A97449 /* Info.plist in Resources */,
 				D87D00F2203CEEA500A97449 /* background.jpg in Resources */,
+				D8C701922044E1EB006FA4CE /* workout.storyboard in Resources */,
+				D8C701902044E1DF006FA4CE /* goals-themes.storyboard in Resources */,
+				D8C701942044E1F5006FA4CE /* fitness-calibration.storyboard in Resources */,
 				11AF5E30202D42D2004EB40B /* Assets.xcassets in Resources */,
 				11AF5E2E202D42D2004EB40B /* Main.storyboard in Resources */,
 			);
@@ -398,6 +465,7 @@
 				D8C5A9772043838B006D2A0A /* CEFilterViewController.swift in Sources */,
 				D8880C652043676500415877 /* FTExerciseViewController.swift in Sources */,
 				D8880C7120436E7200415877 /* WorkSummaryViewController.swift in Sources */,
+				D813DF0B2045BD3E00532701 /* global.swift in Sources */,
 				11F9ABEB2033E593007F217C /* AccelerometerTest.swift in Sources */,
 				D8C5A979204384FF006D2A0A /* CECompleteViewController.swift in Sources */,
 				114626292040E99A00B2ACEB /* LoginViewController.swift in Sources */,
