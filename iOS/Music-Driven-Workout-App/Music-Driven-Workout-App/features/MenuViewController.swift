@@ -61,7 +61,7 @@ class MenuViewController: UIViewController {
     }
     @IBAction func goToGoals(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "goalsID") as! GoalsMenuViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "goalsTable") as! GoalsMenuViewController
         vc.userid = userid!
         present(vc, animated: true, completion: nil)
     }

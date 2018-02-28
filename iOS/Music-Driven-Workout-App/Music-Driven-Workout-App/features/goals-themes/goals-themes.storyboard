@@ -18,9 +18,43 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Goals Menu View Controller-->
+        <scene sceneID="ZBB-Le-Gt7">
+            <objects>
+                <tableViewController storyboardIdentifier="goalsTable" id="MdZ-QM-Fcn" customClass="GoalsMenuViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xwH-mv-3wS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AFP-KN-08X">
+                            <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="ixb-rN-hBG">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ixb-rN-hBG" id="azC-Zd-Uok">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MdZ-QM-Fcn" id="GMi-OG-Rsz"/>
+                            <outlet property="delegate" destination="MdZ-QM-Fcn" id="ppK-Tl-Jh7"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qwa-K3-Elq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2314" y="921"/>
+        </scene>
         <!--Goals Menu-->
         <scene sceneID="jkd-RG-vQn">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DWp-C9-IEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="goalsID" title="Goals Menu" id="3d6-DF-ivo" customClass="GoalsMenuViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="05g-5R-YYg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -46,6 +80,16 @@
                                 <rect key="frame" x="16" y="121" width="343" height="450"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="4AU-YX-9T7">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4AU-YX-9T7" id="gH9-Je-0Dw">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Thb-F5-MtN">
                                 <rect key="frame" x="61" y="595" width="253" height="52"/>
@@ -61,6 +105,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="testPopulateGoals:" destination="3d6-DF-ivo" eventType="touchUpInside" id="cVz-vh-dr9"/>
                                     <segue destination="RNK-oy-od9" kind="show" animates="NO" id="bem-On-I5B">
                                         <nil key="action"/>
                                     </segue>
@@ -72,7 +117,6 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DWp-C9-IEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1372" y="928.78560719640188"/>
         </scene>
@@ -359,9 +403,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bem-On-I5B"/>
-        <segue reference="KsW-2D-yHF"/>
         <segue reference="c6j-01-N9k"/>
-        <segue reference="YdA-GG-8UL"/>
+        <segue reference="SbE-dF-jLe"/>
     </inferredMetricsTieBreakers>
 </document>
