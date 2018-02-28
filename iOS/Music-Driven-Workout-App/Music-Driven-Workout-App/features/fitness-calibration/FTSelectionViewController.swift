@@ -13,12 +13,12 @@ class FTSelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var numLabel: UILabel!
     
     var category: String = ""
-    var numEx: Int = 3
+    var numEx: Int = 1
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is FTSummaryViewController
+        if segue.destination is FTChooseTracked
         {
-            let vc = segue.destination as? FTSummaryViewController
+            let vc = segue.destination as? FTChooseTracked
             //data to send
             vc?.category = category
             vc?.numEx = numEx

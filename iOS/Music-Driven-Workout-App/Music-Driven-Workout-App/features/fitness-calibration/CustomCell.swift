@@ -10,6 +10,8 @@ import UIKit
 
 class CustomCell: UITableViewCell {
     
+    @IBOutlet weak var titleLabel: UILabel?
+    
     var item: ViewModelItem? {
         didSet {
             titleLabel?.text = item?.title
@@ -22,7 +24,6 @@ class CustomCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    @IBOutlet weak var titleLabel: UILabel?
     
     static var nib:UINib {
         return UINib(nibName: identifier, bundle: nil)

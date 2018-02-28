@@ -232,7 +232,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfq-gg-pnl">
-                                <rect key="frame" x="323" y="0.0" width="52" height="38"/>
+                                <rect key="frame" x="323" y="9" width="52" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Back"/>
@@ -293,7 +293,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4n-CL-bcV">
-                                <rect key="frame" x="323" y="0.0" width="52" height="38"/>
+                                <rect key="frame" x="323" y="11" width="52" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Back"/>
@@ -318,15 +318,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose tracked exercises" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uiK-Fl-kuk">
-                                <rect key="frame" x="35" y="38" width="197" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m3X-3d-At0">
-                                <rect key="frame" x="323" y="0.0" width="52" height="38"/>
+                                <rect key="frame" x="323" y="11" width="52" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Back"/>
@@ -359,18 +352,26 @@
                                     <segue destination="FJ8-Vh-dgK" kind="show" id="XGu-r8-LIQ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose tracked exercises" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uiK-Fl-kuk">
+                                <rect key="frame" x="8" y="48" width="356" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="sJV-fJ-D4P"/>
                     </view>
                     <connections>
+                        <outlet property="instructions" destination="uiK-Fl-kuk" id="FmU-r7-RnT"/>
                         <outlet property="nextButton" destination="Oe9-3K-8gR" id="gDf-ig-QZw"/>
                         <outlet property="tableView" destination="YNv-Gl-gDm" id="k5t-JI-Q05"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ka0-09-kRh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1296.5" y="1652.5"/>
+            <point key="canvasLocation" x="1295.2" y="1652.0239880059971"/>
         </scene>
         <!--FT Checkpoint-->
         <scene sceneID="LUR-i3-FeJ">
@@ -687,9 +688,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XGu-r8-LIQ"/>
+        <segue reference="M2O-gH-2eY"/>
         <segue reference="nRJ-Nt-mDX"/>
         <segue reference="2Kn-eQ-nrA"/>
-        <segue reference="gW0-DC-Gtg"/>
+        <segue reference="EN8-IK-vOx"/>
     </inferredMetricsTieBreakers>
 </document>

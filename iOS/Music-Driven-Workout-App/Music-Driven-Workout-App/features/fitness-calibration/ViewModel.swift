@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let dataArray = [Model(title: "Swift"), Model(title: "Objective C"), Model(title: "Java"), Model(title: "Kotlin"), Model(title: "Java Script"), Model(title: "Python"), Model(title: "Ruby"), Model(title: "PHP"), Model(title: "Perl"), Model(title: "C#"), Model(title: "C++"), Model(title: "Pascal"), Model(title: "Visual Basic")]
+var dataArray = [Model(title: "Swift"), Model(title: "Objective C"), Model(title: "Java"), Model(title: "Kotlin"), Model(title: "Java Script"), Model(title: "Python"), Model(title: "Ruby"), Model(title: "PHP"), Model(title: "Perl"), Model(title: "C#"), Model(title: "C++"), Model(title: "Pascal"), Model(title: "Visual Basic")]
 
 class ViewModelItem {
     private var item: Model
@@ -27,6 +27,10 @@ class ViewModelItem {
 
 class ViewModel: NSObject {
     var items = [ViewModelItem]()
+    
+    func setItems(items: [ViewModelItem]) {
+        self.items = items
+    }
     
     var didToggleSelection: ((_ hasSelection: Bool) -> ())? {
         didSet {
