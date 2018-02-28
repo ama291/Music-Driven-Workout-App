@@ -212,6 +212,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="createTest:" destination="VXz-Uo-jkF" eventType="touchUpInside" id="AzN-lv-fAQ"/>
                                     <segue destination="FJ8-Vh-dgK" kind="show" id="4FE-Jc-DuD">
                                         <nil key="action"/>
                                     </segue>
@@ -230,6 +231,9 @@
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ijp-Pv-Ges">
                                 <rect key="frame" x="14" y="319" width="347" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="numChanged:" destination="VXz-Uo-jkF" eventType="valueChanged" id="3Dy-gy-liZ"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Exercises: X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Amc-Y7-Fi8">
                                 <rect key="frame" x="16" y="271" width="253" height="40"/>
@@ -242,6 +246,10 @@
                         <color key="backgroundColor" red="1" green="0.64652936579999998" blue="0.25394061299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="NnB-wR-BXd"/>
                     </view>
+                    <connections>
+                        <outlet property="catPicker" destination="k6l-wR-nFW" id="SFT-x8-i08"/>
+                        <outlet property="numLabel" destination="Amc-Y7-Fi8" id="K8U-sk-aem"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ojD-cD-Qey" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -11,9 +11,12 @@ import UIKit
 class FTSummaryViewController: UIViewController {
     
     var userid: String!
+    var category: String = ""
+    var numEx: Int = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(category, numEx)
 
         // Do any additional setup after loading the view.
     }
