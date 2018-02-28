@@ -26,7 +26,6 @@
 		D813DF0B2045BD3E00532701 /* global.swift in Sources */ = {isa = PBXBuildFile; fileRef = D813DF0A2045BD3E00532701 /* global.swift */; };
 		D87D00EE203CEDB000A97449 /* AmaticSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D87D00EB203CEDB000A97449 /* AmaticSC-Regular.ttf */; };
 		D87D00F2203CEEA500A97449 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D87D00F1203CEEA500A97449 /* background.jpg */; };
-		D87D00F4203CEF2200A97449 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11AF5E34202D42D2004EB40B /* Info.plist */; };
 		D885DF522043AD250043B087 /* ThemesAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D885DF512043AD250043B087 /* ThemesAddViewController.swift */; };
 		D885DF542043AD300043B087 /* GoalsAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D885DF532043AD300043B087 /* GoalsAddViewController.swift */; };
 		D8880C5B2043606200415877 /* SavedWorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880C5A2043606200415877 /* SavedWorkoutsViewController.swift */; };
@@ -419,7 +418,6 @@
 				D87D00EE203CEDB000A97449 /* AmaticSC-Regular.ttf in Resources */,
 				11AF5E33202D42D2004EB40B /* LaunchScreen.storyboard in Resources */,
 				D8C701972044E3D7006FA4CE /* profile.storyboard in Resources */,
-				D87D00F4203CEF2200A97449 /* Info.plist in Resources */,
 				D87D00F2203CEEA500A97449 /* background.jpg in Resources */,
 				D8C701922044E1EB006FA4CE /* workout.storyboard in Resources */,
 				D8C701902044E1DF006FA4CE /* goals-themes.storyboard in Resources */,

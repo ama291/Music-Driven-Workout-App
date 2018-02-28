@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WorkSelectionViewController: UIViewController {
+class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var userid: String!
     var themes = ""
@@ -24,6 +24,9 @@ class WorkSelectionViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         hideCategories()
+        
+        self.durationPicker.delegate = self
+        self.durationPicker.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -234,7 +237,30 @@ class WorkSelectionViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var dur: UITextField!
+    /* Duraton Picker Stuff */
+    @IBOutlet weak var durationPicker: UIPickerView!
+    let durationOptions = ["10","15","20","25","30","35","40","45","50","55","60"]
+    
+    // number of columns of data
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    // number of rows in data
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return durationOptions.count
+    }
+    // data to return for row and column
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return durationOptions[row]
+    }
+    // Catpure the picker view selection
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // This method is triggered whenever the user makes a change to the picker selection.
+        // The parameter named row and component represents what was selected.
+        duration = durationOptions[row]
+    }
+
+    
     @IBOutlet weak var difficultyswitch: UISwitch!
     
     //TODO: themes
@@ -367,17 +393,17 @@ class WorkSelectionViewController: UIViewController {
         
         print("Equipment: " + equipment)
         
+        
+        print("Duration: " + duration)
+        
         if (difficultyswitch.isOn) {
             difficulty = "Intermediate"
         }
         else {
             difficulty = "Beginner"
         }
-        
         print("Difficulty: " + difficulty)
         
-        duration = dur.text!
-        print("Duration: " + duration)
         
         self.performSegue(withIdentifier: "summarySegue", sender: self)
     }

@@ -357,13 +357,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wet-R1-bCJ">
-                                                <rect key="frame" x="86" y="1304" width="203" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Body Only" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJY-0b-why">
                                                 <rect key="frame" x="63" y="728" width="295" height="32"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -535,6 +528,10 @@
                                                 <rect key="frame" x="0.0" y="1541" width="375" height="54"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             </pickerView>
+                                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b8v-Yb-fol">
+                                                <rect key="frame" x="0.0" y="1298" width="375" height="73"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            </pickerView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -586,7 +583,7 @@
                         <outlet property="chestswitch" destination="CZK-fA-zly" id="p5X-YY-LTh"/>
                         <outlet property="difficultyswitch" destination="cvp-Uj-0jb" id="08U-fS-P1j"/>
                         <outlet property="dumbswitch" destination="Mba-0f-POf" id="psb-6i-npf"/>
-                        <outlet property="dur" destination="wet-R1-bCJ" id="dEA-Ly-cAQ"/>
+                        <outlet property="durationPicker" destination="b8v-Yb-fol" id="KoG-Pu-yeh"/>
                         <outlet property="eballswitch" destination="eBV-Kj-Kgc" id="VvJ-yd-RNP"/>
                         <outlet property="ezswitch" destination="vfd-Ef-TeS" id="Ssi-g5-Tl4"/>
                         <outlet property="foamswitch" destination="qaw-Pf-B42" id="YqK-kZ-Y2t"/>
@@ -937,6 +934,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="04j-kh-duF"/>
+        <segue reference="QqA-j3-CR8"/>
     </inferredMetricsTieBreakers>
 </document>
