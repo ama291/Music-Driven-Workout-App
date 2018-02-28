@@ -68,13 +68,8 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     @objc func requestWorkout() {
-        let apiRoute = "http://138.197.49.155:8000/api/workouts/getworkout/"
-        guard let myUrl = URL(string: apiRoute) else {
-            print("Failed to construct URL")
-            return
-        }
+        let myUrl = URL(string: "http://138.197.49.155:8000/api/workouts/getworkout/")!
         
-        let request = URLRequest(url: myUrl)
         var query = "userid=" + userid + "&key=SoftCon2018"
         query += "&themes" + themes
         query += "&categories" + categories
@@ -85,8 +80,12 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         query += "&token" + token
         print(query)
         
-        let session  = URLSession.shared
-        session.dataTask(with: request)
+        var request = URLRequest(url: myUrl)
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        request.httpBody = query.data(using: .utf8)
+        
+        
     }
     
     /* The Table View */
