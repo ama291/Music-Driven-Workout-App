@@ -45,7 +45,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     /* Make a call to getWorkout() */
-    struct usernameResult: Codable {
+    struct queryResult: Codable {
         var Result: String
         var Status: String
     }
@@ -97,6 +97,12 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(String(describing: response))")
             }
+            
+            guard let json = try? JSONDecoder().decode(queryResult.self, from: data) else {
+                print("Failed to decode data as json")
+                return
+            }
+            print(json)
             
             let responseString = String(data: data, encoding: .utf8)
             print("responseString = \(String(describing: responseString))")

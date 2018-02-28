@@ -44,9 +44,13 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var goButton: UIButton!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        /* Empty Login Box Check */
+        if (userBox.text?.isEmpty)! {
+            print("ERR: No userid given.")
+            return
+        }
         if segue.destination is MenuViewController {
             let vc = segue.destination as? MenuViewController
-                //data to send
                 vc?.userid = userBox.text!
         }
     }

@@ -13,7 +13,7 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var musclePicker: UIPickerView!
     @IBOutlet weak var equipPicker: UIPickerView!
 
-    
+    var userid: String!
     var category: String = ""
     var muscleGroup: String = ""
     var equipment: String = ""
