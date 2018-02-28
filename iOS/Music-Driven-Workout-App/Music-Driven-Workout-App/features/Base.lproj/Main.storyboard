@@ -88,6 +88,10 @@
                                 <state key="normal" title="Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginButtonPressed:" destination="A61-lo-4Uw" eventType="touchUpInside" id="8m6-YI-Yxh"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="Dgp-FV-1Ww"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -121,6 +125,7 @@
                     </view>
                     <connections>
                         <outlet property="goButton" destination="kkl-EB-MZj" id="egK-pZ-Pki"/>
+                        <outlet property="loginButton" destination="QUP-vF-7jh" id="hhU-S2-CCm"/>
                         <outlet property="passBox" destination="v2F-VA-TjJ" id="qfy-l4-uB6"/>
                         <outlet property="userBox" destination="hKK-FB-oCQ" id="xYQ-lW-lCx"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" animates="NO" id="9h8-Cm-IcJ"/>
@@ -327,4 +332,7 @@
     <resources>
         <image name="background.jpg" width="914" height="523"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="9h8-Cm-IcJ"/>
+    </inferredMetricsTieBreakers>
 </document>
