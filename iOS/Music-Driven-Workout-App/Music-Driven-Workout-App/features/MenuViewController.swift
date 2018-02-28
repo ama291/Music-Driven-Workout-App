@@ -56,7 +56,7 @@ class MenuViewController: UIViewController {
     @IBAction func goToCalibrateExercise(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "fitness-calibration", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "calibrateExerciseID") as! CEFilterViewController
-        vc.userid = userid!
+//        vc.userid = userid!
         present(vc, animated: true, completion: nil)
     }
     @IBAction func goToGoals(_ sender: UIButton) {
