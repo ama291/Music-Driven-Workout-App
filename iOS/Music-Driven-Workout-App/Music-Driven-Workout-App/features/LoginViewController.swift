@@ -52,7 +52,16 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             self.player!.delegate = self
             try! player?.start(withClientId: auth.clientID)
             self.player!.login(withAccessToken: authSession.accessToken)
+            print("access token: ")
+            print(authSession.accessToken)
+            print("username: ")
+            print(authSession.canonicalUsername)
         }
+    }
+    
+    func spotifyLogout(authSession:SPTSession) {
+        self.spotifyLogout(authSession: <#T##SPTSession#>)
+        print("logged out")
     }
     
     @objc func updateAfterFirstLogin () {
@@ -76,13 +85,15 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
         // after a user authenticates a session, the SPTAudioStreamingController is then initialized and this method called
         print("logged in")
         self.player?.playSpotifyURI("spotify:track:58s6EuEYJdlb0kO7awm3Vp", startingWith: 0, startingWithPosition: 0, callback: { (error) in
-            if (error != nil) {
+            if (error == nil) {
                 print("playing!")
             }
-            
+            if(error != nil) {
+                print("errors while playing")
+            }
         })
-        
     }
+    
     
     
     @IBAction func loginButtonPressed(_ sender: Any) {
@@ -129,4 +140,8 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     @IBAction func goButtonClick(_ sender: Any) {
         self.performSegue(withIdentifier: "loginSegue", sender: self)
     }
+    
+//    @IBAction func spotifyLogout(_ sender: UIButton) {
+//        self.spotifyLogout(authSession: <#T##SPTSession#>)
+//    }
 }
