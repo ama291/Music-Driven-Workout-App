@@ -80,7 +80,6 @@ class MenuViewController: UIViewController {
     
     /* END Button->Storyboard Navigation */
     
-    
     @IBOutlet weak var titletext: UILabel!
     
     struct usernameResult: Codable {
