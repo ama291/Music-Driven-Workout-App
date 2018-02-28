@@ -30,13 +30,14 @@ class FTChooseTracked: UIViewController {
 
         instructions.text = "Choose at most \(numEx) tracked exercises"
 
-        let qstr = "userid=\(userID)&key=SoftCon2018"
+        let qstr = "userid=\(userID)&categories=\(category)&key=SoftCon2018"
         let request = APIRequest()
         
         request.submitPostLocal(route: "/api/fitness/tracked/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }
+            print("data, error, response: \(data, response, error)")
 //            self.reply = request.parseJsonRespone(data: data!)!
             self.reply = [["name": "Push ups", "id": 1], ["name": "chin ups", "id": 2]]
             //            names = reply.map { $0["name"] }
