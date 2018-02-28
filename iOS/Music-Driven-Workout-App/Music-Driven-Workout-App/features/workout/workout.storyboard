@@ -720,9 +720,7 @@
                             <constraint firstItem="lrn-o4-YkO" firstAttribute="leading" secondItem="xjN-PC-1Np" secondAttribute="trailing" priority="999" constant="6" id="dX8-j0-Htj"/>
                             <constraint firstItem="UWb-dC-S1B" firstAttribute="top" secondItem="lrn-o4-YkO" secondAttribute="bottom" constant="16" id="jGO-NE-Wt2"/>
                             <constraint firstItem="xjN-PC-1Np" firstAttribute="leading" secondItem="Yx8-dB-rV5" secondAttribute="leading" constant="16" id="oSQ-OI-aXQ"/>
-                            <constraint firstItem="Yx8-dB-rV5" firstAttribute="trailing" secondItem="lrn-o4-YkO" secondAttribute="trailing" constant="16" id="pcd-1x-igO"/>
                             <constraint firstItem="Bia-uE-6cQ" firstAttribute="leading" secondItem="Yx8-dB-rV5" secondAttribute="leading" constant="61" id="x2B-pL-sLa"/>
-                            <constraint firstItem="Yx8-dB-rV5" firstAttribute="trailing" secondItem="Bia-uE-6cQ" secondAttribute="trailing" constant="61" id="xrw-05-xRU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Yx8-dB-rV5"/>
                     </view>

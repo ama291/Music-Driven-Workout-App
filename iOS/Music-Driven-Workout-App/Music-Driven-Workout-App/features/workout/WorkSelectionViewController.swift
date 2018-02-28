@@ -44,7 +44,7 @@ class WorkSelectionViewController: UIViewController {
             vc?.equipment = equipment
             vc?.duration = duration
             vc?.difficulty = difficulty
-
+            vc?.token = token
         }
     }
     @IBAction func goToHome(_ sender: UIButton) {

@@ -50,42 +50,58 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         var Status: String
     }
     
-    @objc func getWorkout() {
-        guard let url = URL(string: "http://138.197.49.155:8000/api/workouts/getworkout") else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        let postString = "userid=" + userid + "&key=SoftCon2018"
-        request.httpBody = postString.data(using: String.Encoding.utf8)
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            if let data = data {
-                guard let json = try? JSONDecoder().decode(usernameResult.self, from: data) else { return }
-                print(json)
-                DispatchQueue.main.async {
-                }
-            }
-            }.resume()
-    }
+//    @objc func getWorkout() {
+//        guard let url = URL(string: "http://138.197.49.155:8000/api/workouts/getworkout") else { return }
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "POST"
+//        let postString = "userid=" + userid + "&key=SoftCon2018"
+//        request.httpBody = postString.data(using: String.Encoding.utf8)
+//        let session = URLSession.shared
+//        session.dataTask(with: request) { (data, response, error) in
+//            if let data = data {
+//                guard let json = try? JSONDecoder().decode(usernameResult.self, from: data) else { return }
+//                print(json)
+//                DispatchQueue.main.async {
+//                }
+//            }
+//            }.resume()
+//    }
     
     @objc func requestWorkout() {
-        let myUrl = URL(string: "http://138.197.49.155:8000/api/workouts/getworkout/")!
+        let apiRoute = URL(string: "http://138.197.49.155:8000/api/workouts/getworkout/")!
         
         var query = "userid=" + userid + "&key=SoftCon2018"
-        query += "&themes" + themes
-        query += "&categories" + categories
-        query += "&musclegroups" + musclegroup
-        query += "&equipment" + equipment
-        query += "&duration" + duration
-        query += "&difficulty" + difficulty
-        query += "&token" + token
-        print(query)
+        query += "&themes=" + themes
+        query += "&categories=" + categories
+        query += "&musclegroups=" + musclegroup
+        query += "&equipment=" + equipment
+        query += "&duration=" + duration
+        query += "&difficulty=" + difficulty
+        query += "&token=" + token
+        print("QUERY:" + query)
         
-        var request = URLRequest(url: myUrl)
+        var request = URLRequest(url: apiRoute)
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
         request.httpBody = query.data(using: .utf8)
         
+        print(request)
         
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {  // check for fundamental networking error
+                print("error:\(String(describing: error))")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {  // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(String(describing: response))")
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(String(describing: responseString))")
+        }
+        task.resume()  // v important. do not forget.
     }
     
     /* The Table View */
