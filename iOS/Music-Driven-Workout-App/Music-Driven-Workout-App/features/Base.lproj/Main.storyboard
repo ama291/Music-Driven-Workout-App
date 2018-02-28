@@ -90,7 +90,6 @@
                                 </state>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="A61-lo-4Uw" eventType="touchUpInside" id="8m6-YI-Yxh"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="Dgp-FV-1Ww"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -287,6 +286,14 @@
                                     <action selector="goToCalibrateExercise:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pRK-Bx-VfX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vhz-6w-fYl">
+                                <rect key="frame" x="156" y="617" width="63" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -326,13 +333,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-514" y="-681"/>
+            <point key="canvasLocation" x="-514.39999999999998" y="-681.40929535232385"/>
         </scene>
     </scenes>
     <resources>
         <image name="background.jpg" width="914" height="523"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="9h8-Cm-IcJ"/>
-    </inferredMetricsTieBreakers>
 </document>
