@@ -44,11 +44,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var goButton: UIButton!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        /* Empty Login Box Ch eck */
-        if (userBox.text?.isEmpty)! {
-            print("ERR: No userid given.")
-            return
-        }
         if segue.destination is MenuViewController {
             let vc = segue.destination as? MenuViewController
                 vc?.userid = userBox.text!
@@ -56,6 +51,15 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func goButtonClick(_ sender: Any) {
+        if (userBox.text?.isEmpty)! {
+            print("ERR: No userid given.")
+            let alert = UIAlertController(title: "Error", message: "No userid given.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         self.performSegue(withIdentifier: "loginSegue", sender: self)
     }
 }
