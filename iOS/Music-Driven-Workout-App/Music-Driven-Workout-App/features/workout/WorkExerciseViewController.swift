@@ -52,6 +52,10 @@ class WorkExerciseViewController: UIViewController {
     @IBOutlet weak var pausebutton: UIButton!
     @IBOutlet weak var skipbutton: UIButton!
     @IBOutlet weak var eximage: UIImageView!
+    var timer = Timer()
+    var timecountdown = 0.0
+    var paused = false
+    var i = 0
     
     @objc func startWorkouts() {
         namelabel.adjustsFontSizeToFitWidth = true
@@ -63,23 +67,63 @@ class WorkExerciseViewController: UIViewController {
         exercisedurations = [30, 30]
         exerciseimages = ["https://www.bodybuilding.com/exercises/exerciseImages/sequences/25/Male/m/25_2.jpg","https://www.bodybuilding.com/exercises/exerciseImages/sequences/26/Male/m/26_1.jpg"]
         
-        var i = 0
-        /*for _ in exercisenames {
-            doexercise(index: i)
-            i += 1
-        }*/
         doexercise(index: 0)
     }
     
     @objc func doexercise(index: Int) {
+        let dur = exercisedurations[index]
         namelabel.text = exercisenames[index]
         descriptionlabel.text = exercisedescriptions[index]
-        timelabel.text = "Time Remaining: " + String(exercisedurations[index]) + "s"
+        timelabel.text = "Time Remaining: " + String(dur) + "s"
         let url = URL(string: exerciseimages[index])
         let data = try? Data(contentsOf: url!)
         eximage.image = UIImage(data: data!)
         eximage.contentMode = UIViewContentMode.scaleAspectFit
         
+        timecountdown = Double(dur)
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+        
+    }
+    
+    @objc func updateTimer() {
+        if (!paused) {
+            timecountdown -= 0.1
+            timecountdown = ceil(timecountdown*10)/10
+            timelabel.text = "Time Remaining: " + timecountdown.description + "s"
+            heartratelabel.text = "Heartrate: " + String(heartrate)
+            if (timecountdown <= 0) {
+                completeExercise()
+            }
+        }
+    }
+    
+    @objc func completeExercise() {
+        timer.invalidate()
+        timelabel.text = "Time Remaining: 0s"
+        if (i < exercisenames.count-1) {
+            i += 1
+            doexercise(index: i)
+        }
+        else {
+            self.performSegue(withIdentifier: "completeSegue", sender: self)
+        }
+    }
+    
+    //TODO: add listener for this to UI
+    @IBAction func pauseclick(_ sender: Any) {
+        if (!paused) {
+            paused = true
+            pausebutton.setTitle("PLAY", for: .normal)
+        }
+        else {
+            paused = false
+            pausebutton.setTitle("PAUSE", for: .normal)
+        }
+    }
+    
+    //TODO: add listener for this to UI, segue manually
+    @IBAction func skipclick(_ sender: Any) {
+        completeExercise()
     }
     
 }
