@@ -11,6 +11,7 @@ import UIKit
 class WorkExerciseViewController: UIViewController {
     
     var userid: String!
+    var workoutjson: String!
     
     //variables to be taken from workout summary
     var exercisenames: [String]!
@@ -23,7 +24,7 @@ class WorkExerciseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        startWorkouts()
+        startWorkout()
 
     }
 
@@ -57,7 +58,7 @@ class WorkExerciseViewController: UIViewController {
     var paused = false
     var i = 0
     
-    @objc func startWorkouts() {
+    @objc func startWorkout() {
         namelabel.adjustsFontSizeToFitWidth = true
         descriptionlabel.lineBreakMode = .byWordWrapping
         descriptionlabel.numberOfLines = 0
@@ -67,7 +68,31 @@ class WorkExerciseViewController: UIViewController {
         exercisedurations = [30, 30]
         exerciseimages = ["https://www.bodybuilding.com/exercises/exerciseImages/sequences/25/Male/m/25_2.jpg","https://www.bodybuilding.com/exercises/exerciseImages/sequences/26/Male/m/26_1.jpg"]
         
+        //TODO: startworkout API call
+        //startworkoutapi()
+        
         doexercise(index: 0)
+    }
+    
+    struct jsonRequest: Codable {
+        var Result: String
+        var Status: String
+    }
+    
+    @objc func startworkoutapi() {
+        guard let url = URL(string: "http://138.197.49.155:8000/api/startworkout/") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let postString = "userid=" + userid + "&workout=" + workoutjson +  "&key=SoftCon2018"
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if let data = data {
+                guard let json = try? JSONDecoder().decode(jsonRequest.self, from: data) else { return }
+                print(json)
+            }
+            
+        }.resume()
     }
     
     @objc func doexercise(index: Int) {
