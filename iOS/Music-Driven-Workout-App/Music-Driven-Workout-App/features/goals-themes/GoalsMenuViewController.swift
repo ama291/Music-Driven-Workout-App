@@ -61,10 +61,8 @@ class GoalsMenuViewController: UITableViewController {
 //            let jsonRes = json["Result"]!
             if let array = json as? [String : Any] {
                 self.tableArray = array
-                print("65")
                 print(self.tableArray)
             }
-            print("68")
             print(self.tableArray)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -90,7 +88,7 @@ class GoalsMenuViewController: UITableViewController {
 extension GoalsMenuViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
-        cell.textLabel?.text = self.tableArray["Result"]! as! String
+        cell.textLabel?.text = (self.tableArray["Result"]! as! String)
         
         return cell
     }
