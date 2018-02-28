@@ -51,7 +51,7 @@ class WorkSelectionViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
         vc.userid = userid!
-        present(vc, animated: true, completion: nil)
+        present(vc, animated: false, completion: nil)
     }
     
     /* Category switches & labels */
