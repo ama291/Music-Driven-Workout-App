@@ -305,6 +305,9 @@
                         <color key="backgroundColor" red="1" green="0.64652936579999998" blue="0.25394061299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="7vw-lR-pcK"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="Cvg-xW-VTs" id="oWj-fu-3eP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yb7-Jq-GlL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -688,9 +691,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="M2O-gH-2eY"/>
         <segue reference="nRJ-Nt-mDX"/>
         <segue reference="2Kn-eQ-nrA"/>
-        <segue reference="EN8-IK-vOx"/>
+        <segue reference="gW0-DC-Gtg"/>
     </inferredMetricsTieBreakers>
 </document>

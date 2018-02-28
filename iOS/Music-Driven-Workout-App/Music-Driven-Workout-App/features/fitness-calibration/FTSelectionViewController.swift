@@ -34,7 +34,7 @@ class FTSelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
         
         self.catPicker.delegate = self
         self.catPicker.dataSource = self
-        catList = ["Any", "Strength", "Stretching", "Olympic Weightlifting", "Strongman", "Plyometrics", "Cardio", "Powerlifting"]
+        catList = ["Strength", "Stretching", "Olympic Weightlifting", "Strongman", "Plyometrics", "Cardio", "Powerlifting"]
         
         // Do any additional setup after loading the view.
     }

@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-var dataArray = [Model(title: "Swift"), Model(title: "Objective C"), Model(title: "Java"), Model(title: "Kotlin"), Model(title: "Java Script"), Model(title: "Python"), Model(title: "Ruby"), Model(title: "PHP"), Model(title: "Perl"), Model(title: "C#"), Model(title: "C++"), Model(title: "Pascal"), Model(title: "Visual Basic")]
 
 class ViewModelItem {
     private var item: Model
@@ -18,6 +17,10 @@ class ViewModelItem {
     
     var title: String {
         return item.title
+    }
+    
+    var data: [String:Any] {
+        return item.data
     }
     
     init(item: Model) {
@@ -44,7 +47,7 @@ class ViewModel: NSObject {
     
     override init() {
         super.init()
-        items = dataArray.map { ViewModelItem(item: $0) }
+        items = []
     }
 }
 
