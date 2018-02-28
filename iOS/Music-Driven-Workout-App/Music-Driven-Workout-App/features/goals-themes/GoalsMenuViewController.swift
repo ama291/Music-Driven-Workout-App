@@ -78,10 +78,10 @@ class GoalsMenuViewController: UITableViewController {
         present(vc, animated: true, completion: nil)
     }
     
-    @IBAction func testPopulateGoals(_ sender: UIButton) {
-        print("testing populate goals")
-        populateGoals()
-    }
+//    @IBAction func testPopulateGoals(_ sender: UIButton) {
+//        print("testing populate goals")
+//        populateGoals()
+//    }
     
 }
 
@@ -89,7 +89,6 @@ extension GoalsMenuViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
         cell.textLabel?.text = (self.tableArray["Result"]! as! String)
-        
         return cell
     }
     

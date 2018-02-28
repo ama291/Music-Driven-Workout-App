@@ -33,5 +33,19 @@ class GoalsAddViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+//    @IBAction func goToHome(_ sender: UIButton) {
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+//        vc.userid = userid!
+//        present(vc, animated: true, completion: nil)
+//    }
+    
+//        @IBAction func goBack(_ sender: UIButton) {
+//            let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "goalsID") as! GoalsMenuViewController
+//            vc.userid = "1"
+//            present(vc, animated: true, completion: nil)
+//        }
+
 
 }

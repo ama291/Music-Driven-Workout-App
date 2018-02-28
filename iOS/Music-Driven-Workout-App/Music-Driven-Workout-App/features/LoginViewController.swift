@@ -59,10 +59,10 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
         }
     }
     
-    func spotifyLogout(authSession:SPTSession) {
-        self.spotifyLogout(authSession: <#T##SPTSession#>)
-        print("logged out")
-    }
+//    func spotifyLogout(authSession:SPTSession) {
+//        self.spotifyLogout(authSession: <#T##SPTSession#>)
+//        print("logged out")
+//    }
     
     @objc func updateAfterFirstLogin () {
         
