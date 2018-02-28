@@ -50,6 +50,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="getExercises:" destination="aUf-da-02j" eventType="touchUpInside" id="qB8-95-fuo"/>
                                     <segue destination="fD1-8d-U4y" kind="show" animates="NO" id="3mn-gp-Eld">
                                         <nil key="action"/>
                                     </segue>
@@ -101,6 +102,11 @@
                         <color key="backgroundColor" red="0.83347629300000003" green="0.47019825970000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="bjx-wN-ZNx"/>
                     </view>
+                    <connections>
+                        <outlet property="catPicker" destination="oKS-l9-F4w" id="Ufg-8n-7VP"/>
+                        <outlet property="equipPicker" destination="uqt-O0-0sv" id="QL5-4c-R2S"/>
+                        <outlet property="musclePicker" destination="UR2-Rv-pmQ" id="hG2-N6-5eO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dSu-mO-9om" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -150,6 +156,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="beginExercise:" destination="fD1-8d-U4y" eventType="touchUpInside" id="Kkk-rk-7rU"/>
                                     <segue destination="WBg-pb-dfj" kind="show" animates="NO" id="3vg-x6-fHO">
                                         <nil key="action"/>
                                     </segue>
@@ -159,6 +166,9 @@
                         <color key="backgroundColor" red="0.83347629300000003" green="0.47019825970000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="Iyy-hR-Lob"/>
                     </view>
+                    <connections>
+                        <outlet property="exPicker" destination="jiO-ed-e5o" id="avY-dh-CaF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Hz-Ye-1cE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -611,8 +621,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3mn-gp-Eld"/>
+        <segue reference="nRJ-Nt-mDX"/>
         <segue reference="4FE-Jc-DuD"/>
-        <segue reference="gwd-07-yI0"/>
+        <segue reference="3vg-x6-fHO"/>
     </inferredMetricsTieBreakers>
 </document>
