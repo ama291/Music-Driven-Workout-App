@@ -44,7 +44,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var goButton: UIButton!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        /* Empty Login Box Check */
+        /* Empty Login Box Ch eck */
         if (userBox.text?.isEmpty)! {
             print("ERR: No userid given.")
             return
