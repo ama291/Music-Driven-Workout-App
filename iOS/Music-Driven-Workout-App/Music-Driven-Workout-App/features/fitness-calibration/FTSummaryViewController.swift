@@ -18,7 +18,35 @@ class FTSummaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(category, numEx)
-
+        let requests = APIRequest()
+        
+        var trackedStr = ""
+        for t in tracked {
+            trackedStr += String(t) + ","
+        }
+        let last = trackedStr.count - 1
+        trackedStr = trackedStr[0..last]
+        
+        let qstr = "category=" + category + "&numexercises=" + String(numEx) + "&tracked=" + "&key=SoftCon2018"
+        
+        request.submitPostLocal(route: "/api/fitness/getexsbytype/", qstring: qstr) { (data, response, error) -> Void in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+            self.reply = request.parseJsonRespone(data: data!)!
+            
+            //            names = reply.map { $0["name"] }
+            print(self.reply[0]["name"]!)
+            for rep in self.reply {
+                self.exList.append(rep["name"]! as! String)
+            }
+            DispatchQueue.main.async {
+                self.exPicker.delegate = self
+                self.exPicker.dataSource = self
+            }
+            
+            }.resume()
+        
         // Do any additional setup after loading the view.
     }
 
