@@ -39,11 +39,8 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //json response struct - need to change this to what you expect the result to be
-        struct Post: Codable {
-            let key: String
-        }
+
         self.catPicker.delegate = self
         self.catPicker.dataSource = self
         catList = ["Any", "Strength", "Stretching", "Olympic Weightlifting", "Strongman", "Plyometrics", "Cardio", "Powerlifting"]

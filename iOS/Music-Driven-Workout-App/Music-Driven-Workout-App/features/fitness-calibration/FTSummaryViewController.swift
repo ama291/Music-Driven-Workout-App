@@ -13,6 +13,7 @@ class FTSummaryViewController: UIViewController {
     var userid: String!
     var category: String = ""
     var numEx: Int = 3
+    var tracked: [Int] = [12, 144]
     
     override func viewDidLoad() {
         super.viewDidLoad()

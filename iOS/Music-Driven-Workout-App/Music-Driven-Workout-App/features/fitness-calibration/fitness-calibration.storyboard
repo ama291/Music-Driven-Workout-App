@@ -235,7 +235,7 @@
                                     <action selector="numChanged:" destination="VXz-Uo-jkF" eventType="valueChanged" id="3Dy-gy-liZ"/>
                                 </connections>
                             </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Exercises: X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Amc-Y7-Fi8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Exercises: 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Amc-Y7-Fi8">
                                 <rect key="frame" x="16" y="271" width="253" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -629,8 +629,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="zcv-zO-PYe"/>
         <segue reference="nRJ-Nt-mDX"/>
-        <segue reference="4FE-Jc-DuD"/>
-        <segue reference="3vg-x6-fHO"/>
+        <segue reference="2Kn-eQ-nrA"/>
     </inferredMetricsTieBreakers>
 </document>
