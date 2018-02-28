@@ -33,5 +33,16 @@ class WorkExerciseViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    //ui elements
+    @IBOutlet weak var quitbutton: UIButton!
+    @IBOutlet weak var namelabel: UILabel!
+    @IBOutlet weak var descriptionlabel: UILabel!
+    @IBOutlet weak var heartratelabel: UILabel!
+    @IBOutlet weak var timelabel: UILabel!
+    @IBOutlet weak var pausebutton: UIButton!
+    @IBOutlet weak var skipbutton: UIButton!
+    @IBOutlet weak var eximage: UIImageView!
+    
+    
 }

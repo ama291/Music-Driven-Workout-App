@@ -105,6 +105,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         switch section {
         case 0:
             // Exercise Section
+            
             return exercises.count
         default:
             return 0
