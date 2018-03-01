@@ -33,6 +33,31 @@ class APIRequest: NSObject {
         return nil
     }
     
+    func parseWorkoutJson(data: Data) -> Dictionary<String, Any>? {
+        var res: Dictionary<String, String>
+        print("parseWorkoutJson Start")
+        do {
+            res = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String, String>
+            let myDict = res
+            if let result = myDict["Result"] {
+                var reply: Dictionary<String, Any>
+                if let resultData = result.data(using: String.Encoding.utf8) {
+                    do {
+                        // BREAKS HERE V V V
+                        reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! Dictionary<String, Any>
+                        let myReplyDict = reply
+                        print("parseWorkoutJson End")
+                        return myReplyDict
+                    }
+                }
+            }
+        } catch let error {
+            print("ERROR while parsing workout json")
+            print(error)
+        }
+        return nil
+    }
+    
     
     func submitPostLocal(route: String, qstring: String, completion: @escaping (Data?, URLResponse?,Error?) -> Void) -> URLSessionDataTask {
         var urlComponents = URLComponents()

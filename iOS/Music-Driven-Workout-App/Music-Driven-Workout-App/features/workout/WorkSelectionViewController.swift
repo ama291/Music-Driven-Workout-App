@@ -393,7 +393,9 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         
         print("Equipment: " + equipment)
         
-        
+        if duration.isEmpty {
+            duration = "10"
+        }
         print("Duration: " + duration)
         
         if (difficultyswitch.isOn) {

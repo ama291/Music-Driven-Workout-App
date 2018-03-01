@@ -23,7 +23,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        requestWorkout()
+        getWorkout()
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,103 +44,74 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    /* Make a call to getWorkout() */
-    struct queryResult: Codable {
-        var Result: String
-        var Status: String
-    }
+    /* Mark: Make a call to getWorkout() */
+    var reply: [String:Any] = [String:Any]()
+    var exerciseInfo: [String:Any] = [String:Any]()
+    var exList: [String] = [String]()
     
-//    @objc func getWorkout() {
-//        guard let url = URL(string: "http://138.197.49.155:8000/api/workouts/getworkout") else { return }
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//        let postString = "userid=" + userid + "&key=SoftCon2018"
-//        request.httpBody = postString.data(using: String.Encoding.utf8)
-//        let session = URLSession.shared
-//        session.dataTask(with: request) { (data, response, error) in
-//            if let data = data {
-//                guard let json = try? JSONDecoder().decode(usernameResult.self, from: data) else { return }
-//                print(json)
-//                DispatchQueue.main.async {
-//                }
-//            }
-//            }.resume()
-//    }
-    
-    @objc func requestWorkout() {
-        let apiRoute = URL(string: "http://138.197.49.155:8000/api/workouts/getworkout/")!
-        
+    @objc func getWorkout() {
+        let request = APIRequest()
+        let route = "/api/workouts/getworkout/"
         var query = "userid=" + userid + "&key=SoftCon2018"
-        query += "&themes=" + themes
-        query += "&categories=" + categories
-        query += "&musclegroups=" + musclegroup
+        if musclegroup.isEmpty {
+            query += "&categories=" + categories
+        } else {
+            query += "&musclegroups=" + musclegroup
+        }
         query += "&equipment=" + equipment
         query += "&duration=" + duration
         query += "&difficulty=" + difficulty
         query += "&token=" + token
-        print("QUERY:" + query)
-        
-        var request = URLRequest(url: apiRoute)
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
-        request.httpBody = query.data(using: .utf8)
-        
-        print(request)
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {  // check for fundamental networking error
-                print("error:\(String(describing: error))")
-                return
+        print("\nQUERY:" + query + "\n")
+
+        request.submitPostLocal(route: route, qstring: query) { (data, response, error) -> Void in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+            self.reply = request.parseWorkoutJson(data: data!)!   // ERR: data = nil so it can't be unwrapped
+            
+            print(self.reply)
+            
+            for rep in self.reply {
+                //self.exList.append(rep["name"]! as! String)
+                print(self.exList)
+            }
+            DispatchQueue.main.async {
             }
             
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {  // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(String(describing: response))")
-            }
-            
-            guard let json = try? JSONDecoder().decode(queryResult.self, from: data) else {
-                print("Failed to decode data as json")
-                return
-            }
-            print(json)
-            
-            let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(String(describing: responseString))")
-        }
-        task.resume()  // v important. do not forget.
+        }.resume()
     }
     
-    /* The Table View */
+    /* Mark: tableView */
     let sections = ["Exercises"]
-    let exercises = ["Test Input 1", "Test Input 2"]
+    //let exList = ["Test Input 1", "Test Input 2"]
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section]
     }
-    
+    // Number of sections in tableView
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
-    
+    // Number of rows in each section of tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             // Exercise Section
-            
-            return exercises.count
+            return exList.count
         default:
             return 0
         }
     }
-    
+    // Data to fill the tableView with
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Create an object of the dynamic cell "PlainCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath)
+        
         // Depending on the section, fill the textLabel with the relevant text
         switch indexPath.section {
         case 0:
-            // Exercise Section
-            cell.textLabel?.text = exercises[indexPath.row]
+            cell.textLabel?.text = exList[indexPath.row]
             break
         default:
             break
