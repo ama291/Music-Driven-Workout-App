@@ -133,6 +133,10 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     @IBOutlet weak var passBox: UITextField!
     @IBOutlet weak var goButton: UIButton!
     
+    @IBOutlet weak var height: UITextField!
+    @IBOutlet weak var weight: UITextField!
+    @IBOutlet weak var year: UITextField!
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is MenuViewController {
             let vc = segue.destination as? MenuViewController
