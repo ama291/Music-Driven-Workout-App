@@ -12,13 +12,37 @@ class FTSummaryViewController: UIViewController {
     
     var userid: String!
     var category: String = ""
-    var numEx: Int = 3
-    var tracked: [Int] = [12, 144]
+    var numEx: Int = 1
+    var tracked: [Int] = []
+    
+    var reply: [[String:Any]] = [[String:Any]]()
+    var exList: [String] = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print(category, numEx)
-
+        let request = APIRequest()
+        
+        var trackedStr = ""
+        for t in tracked {
+            trackedStr += String(t) + ","
+        }
+        trackedStr.removeLast()
+        
+        let qstr = "category=" + category + "&numexercises=" + String(numEx) + "&tracked=" + trackedStr + "&key=SoftCon2018"
+        
+        request.submitPostLocal(route: "/api/fitness/getexsbytype/", qstring: qstr) { (data, response, error) -> Void in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+            self.reply = request.parseJsonRespone(data: data!)!
+            
+            //            names = reply.map { $0["name"] }
+            for rep in self.reply {
+                self.exList.append(rep["name"]! as! String)
+            }
+            }.resume()
+        
         // Do any additional setup after loading the view.
     }
 
