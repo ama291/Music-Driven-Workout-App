@@ -664,6 +664,7 @@
 					"$(PROJECT_DIR)/Music-Driven-Workout-App",
 				);
 				INFOPLIST_FILE = "Music-Driven-Workout-App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -686,6 +687,7 @@
 					"$(PROJECT_DIR)/Music-Driven-Workout-App",
 				);
 				INFOPLIST_FILE = "Music-Driven-Workout-App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "UC.Music-Driven-Workout-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";

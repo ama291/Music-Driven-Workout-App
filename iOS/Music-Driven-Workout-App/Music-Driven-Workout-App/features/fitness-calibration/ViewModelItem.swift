@@ -6,22 +6,23 @@
 //  Copyright © 2018 UChicago SoftCon. All rights reserved.
 //
 
-import UIKit
+//import UIKit
+//
+//
+//struct Model {
+//    var title: String
+//}
+//
+//class ViewModelItem: NSObject {
+//    private var item: Model
+//    
+//    var isSelected = false
+//    var title: String {
+//        return item.title
+//    }
+//    
+//    init(item: Model) {
+//        self.item = item
+//    }
+//}
 
-
-struct Model {
-    var title: String
-}
-
-class ViewModelItem: NSObject {
-    private var item: Model
-    
-    var isSelected = false
-    var title: String {
-        return item.title
-    }
-    
-    init(item: Model) {
-        self.item = item
-    }
-}

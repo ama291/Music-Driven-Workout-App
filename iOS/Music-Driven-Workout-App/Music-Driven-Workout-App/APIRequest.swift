@@ -1,70 +1,88 @@
-//
-//  APIRequest.swift
-//  Music-Driven-Workout-App
-//
-//  Created by Lucy Newman on 2/27/18.
-//  Copyright © 2018 UChicago SoftCon. All rights reserved.
-//
-
 import UIKit
-import Foundation
 
 class APIRequest: NSObject {
     
-    func parseJsonRespone(data: Data) -> [Dictionary<String, Any>]? {
+    func parseJsonInitial(data: Data) -> String? {
         var res: Dictionary<String, String>
         do {
             res = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String, String>
             let myDict = res
             if let result = myDict["Result"] {
-                var reply: [Dictionary<String, Any>]
-                
-                if let resultData = result.data(using: String.Encoding.utf8) {
-                    do {
-                        reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! [Dictionary<String, Any>]
-                        let myReplyDict = reply
-                        return myReplyDict
-                    }
-                }
+                return result
             }
             
         } catch let error {
             print(error)
         }
         return nil
+        
     }
     
-    func parseWorkoutJson(data: Data) -> Dictionary<String, Any>? {
-        print("parseWorkoutJson Start")
+    func parseJsonGeneric(data: String, key: String) -> String? {
+        var res: Dictionary<String, String>
+        let resultData = data.data(using: String.Encoding.utf8)
         do {
-            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+            res = try JSONSerialization.jsonObject(with: resultData!, options: []) as! Dictionary<String, String>
+            let myDict = res
+            if let result = myDict[key] {
+                return result
+            }
             
-            if let dictionary = json as? [String:Any] {
-                /* Access individual value in dictionary */
-                if let status = dictionary["Status"] as? String {
-                    print(status)
-                }
-                
-                /* Access nestedDictionaries in a Dictionary */
-                if let result = dictionary["Result"] as? [String: Any] {
-                    print("Returning...")
-                    return result
+        } catch let error {
+            print(error)
+        }
+        return nil
+        
+    }
+    
+    
+    func parseJsonRespone(data: Data) -> [Dictionary<String, Any>]? {
+        if let result = parseJsonInitial(data: data) {
+            var reply: [Dictionary<String, Any>]
+            
+            if let resultData = result.data(using: String.Encoding.utf8) {
+                do {
+                    reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! [Dictionary<String, Any>]
+                    let myReplyDict = reply
+                    return myReplyDict
+                } catch let error {
+                    print(error)
                 }
             }
         }
-//        catch let error {
-//            print("ERROR while parsing workout json")
-//            print(error)
-//        }
         return nil
     }
     
-    func convertToDictionary(text: String) -> [String: Any]? {
-        if let data = text.data(using: .utf8) {
-            do {
-                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-            } catch {
-                print(error.localizedDescription)
+    func parseJsonResponseFromString(str: String) -> [Dictionary<String, Any>]? {
+        let data = str.data(using: .utf8)
+        if let result = parseJsonInitial(data: data!) {
+            var reply: [Dictionary<String, Any>]
+            
+            if let resultData = result.data(using: String.Encoding.utf8) {
+                do {
+                    reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! [Dictionary<String, Any>]
+                    let myReplyDict = reply
+                    return myReplyDict
+                } catch let error {
+                    print(error)
+                }
+            }
+        }
+        return nil
+    }
+    
+    func parseJsonResponeSingleDict(data: Data) -> String? {
+        if let result = parseJsonInitial(data: data) {
+            var reply: [String:Any]
+            
+            if let resultData = result.data(using: String.Encoding.utf8) {
+                do {
+                    reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! [String:Any]
+                    let myReplyDict = reply
+                    return myReplyDict["Result"] as? String
+                } catch let error {
+                    print(error)
+                }
             }
         }
         return nil
@@ -80,13 +98,13 @@ class APIRequest: NSObject {
         guard let url = urlComponents.url else {
             fatalError("Could not create URL")
         }
-        print("url ", url, "\n")
+        print(url)
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let postString = qstring
         request.httpBody = postString.data(using: String.Encoding.utf8)
-        print("jsonData: ", String(data: request.httpBody!, encoding: .utf8) ?? "no body data", "\n")
+        print("jsonData: ", String(data: request.httpBody!, encoding: .utf8) ?? "no body data")
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
@@ -97,5 +115,5 @@ class APIRequest: NSObject {
         }
         return task
     }
-
+    
 }

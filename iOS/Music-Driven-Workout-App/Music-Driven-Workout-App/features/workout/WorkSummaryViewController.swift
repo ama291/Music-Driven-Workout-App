@@ -79,30 +79,38 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                 fatalError(error.localizedDescription)
             }
             print("initial data:", String(describing: data))
-            /* Parse the json object returned by submitPostLocal() */
-            let json = try? JSONSerialization.jsonObject(with: data!, options: [])
-            print("JSON:", json as Any)
-            if let dictionary = json as? [String: Any] {
-                if let status = dictionary["Status"] as? String {
-                    print("Status:", status)
-                }
-                
-                /* TODO - Turn the Result into a nested dictionary */
-                var result = dictionary["Result"] as! String
-//                result.remove(at: result.startIndex)
-//                result.removeLast()
-                print("result: ", result)
-                
-                //var resultDictionary: [String: [Any]]
-                if let resultData = result.data(using: .utf8, allowLossyConversion: false) {
-                    do {
-                        let reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! [String: AnyObject]
-                        print("reply JSON:", reply as Any)
-                    } catch let error as NSError {
-                        print("Failed to Load: \(error.localizedDescription)")
-                    }
-                }
-                
+            let request = APIRequest()
+            let resStr = request.parseJsonResponeSingleDict(data: data!)
+            print(resStr)
+            let secondStr = request.parseJsonGeneric(data: resStr!, key: "Exercises")
+            print(secondStr)
+            let resDict = request.parseJsonResponseFromString(str: secondStr!)
+            print(resDict)
+//
+//            /* Parse the json object returned by submitPostLocal() */
+//            let json = try? JSONSerialization.jsonObject(with: data!, options: [])
+//            print("JSON:", json as Any)
+//            if let dictionary = json as? [String: Any] {
+//                if let status = dictionary["Status"] as? String {
+//                    print("Status:", status)
+//                }
+//
+//                /* TODO - Turn the Result into a nested dictionary */
+//                var result = dictionary["Result"] as! String
+////                result.remove(at: result.startIndex)
+////                result.removeLast()
+//                print("result: ", result)
+//
+//                //var resultDictionary: [String: [Any]]
+//                if let resultData = result.data(using: .utf8, allowLossyConversion: false) {
+//                    do {
+//                        let reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! [String: AnyObject]
+//                        print("reply JSON:", reply as Any)
+//                    } catch let error as NSError {
+//                        print("Failed to Load: \(error.localizedDescription)")
+//                    }
+//                }
+//
 //                if let result = dictionary["Result"] as? String {
 //                    print("result", result.data(using: .utf8), result)
 //                    let resJson = try? JSONSerialization.jsonObject(with: result.data(using: String.Encoding.utf8)!, options: [])
@@ -114,7 +122,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
 //                    } else {print("resDict err")}
 //                }  else {print("result err")}
                 
-            }
+//            }
             
             }.resume()
     }
