@@ -71,12 +71,11 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qwa-K3-Elq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2316" y="919.79010494752629"/>
+            <point key="canvasLocation" x="-4583" y="920"/>
         </scene>
         <!--Goals Menu-->
         <scene sceneID="jkd-RG-vQn">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DWp-C9-IEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="goalsID" title="Goals Menu" id="3d6-DF-ivo" customClass="GoalsMenuViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="05g-5R-YYg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -144,8 +143,9 @@
                         <outlet property="tableView" destination="bUT-Pr-s0V" id="Wqa-t1-PMR"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DWp-C9-IEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1717.5999999999999" y="1684.4077961019491"/>
+            <point key="canvasLocation" x="-1887" y="1009"/>
         </scene>
         <!--Themes Menu-->
         <scene sceneID="GIa-a3-4yg">
@@ -185,6 +185,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="goToAddTheme:" destination="e4u-ql-KLH" eventType="touchUpInside" id="V9d-m5-lXf"/>
                                     <segue destination="QMn-Cu-BGw" kind="show" id="KsW-2D-yHF">
                                         <nil key="action"/>
                                     </segue>
@@ -194,12 +195,25 @@
                                 <rect key="frame" x="16" y="108" width="343" height="450"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="j9k-25-TiL">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j9k-25-TiL" id="zfJ-d7-PFy">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.28809646430000002" green="0.86467778500000003" blue="0.22629977640000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="jfY-FX-Rs3"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <connections>
+                        <outlet property="tableView" destination="U4a-PN-9nl" id="wy4-Nd-bWh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VXh-OA-fhn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -208,7 +222,7 @@
         <!--Themes Add-->
         <scene sceneID="v4M-Ze-6WN">
             <objects>
-                <viewController title="Themes Add" id="QMn-Cu-BGw" customClass="ThemesAddViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="themesAdd" title="Themes Add" id="QMn-Cu-BGw" customClass="ThemesAddViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nRB-Ym-GaQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -425,6 +439,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="h4I-gh-5QU"/>
-        <segue reference="c6j-01-N9k"/>
+        <segue reference="L5b-68-NLz"/>
     </inferredMetricsTieBreakers>
 </document>
