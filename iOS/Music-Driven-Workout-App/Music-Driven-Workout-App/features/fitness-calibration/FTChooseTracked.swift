@@ -71,13 +71,6 @@ class FTChooseTracked: UIViewController {
             
             }.resume()
         
-
-        
-        
-        viewModel.didToggleSelection = { [weak self] hasSelection in
-            self?.nextButton?.isEnabled = hasSelection
-        }
-        
     }
     
     @IBAction func next(_ sender: Any) {

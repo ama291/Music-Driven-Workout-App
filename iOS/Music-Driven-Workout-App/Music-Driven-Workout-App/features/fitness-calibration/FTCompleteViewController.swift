@@ -9,14 +9,34 @@
 import UIKit
 
 class FTCompleteViewController: UIViewController {
-    
+    var viewModel = ViewModel()
+
+    @IBOutlet weak var tableView: UITableView!
     var userid: String!
     var exerciseName: String!
     var isCalibration: Bool!
-    
+    var frequencies: [[String:Any]]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(self.frequencies, "frequencies")
+        var freq: String = ""
+        freq = String(describing: self.frequencies![0]["frequency"]! as! Float)
+        let name: String = self.frequencies![0]["name"]! as! String
+        print(freq, name)
+        print("\(name): \(freq)")
+        
+        let vmitems = self.frequencies!.map { ViewModelItem(item: Model(title: "\($0["name"]! as! String): \($0["frequency"]! as! Float) RPM" , data: $0)) }
+        print(vmitems[0].title)
+        self.viewModel.setItems(items: vmitems)
+        
+        self.tableView?.register(CustomCell.nib, forCellReuseIdentifier: CustomCell.identifier)
+        self.tableView?.dataSource = self.viewModel
+        self.tableView?.delegate = self.viewModel
+        self.tableView?.estimatedRowHeight = 100
+        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.allowsSelection = false
+        self.tableView?.separatorStyle = .none
         
         // Do any additional setup after loading the view.
     }

@@ -15,6 +15,7 @@ class FTExDescViewController: UIViewController {
     var isCalibration: Bool!
     var numExercises: Int?
     var exerciseNum: Int?
+    var frequencies: [[String:Any]]!
     
     @IBOutlet weak var exName: UILabel!
     @IBOutlet weak var fastornormal: UILabel!
@@ -25,8 +26,7 @@ class FTExDescViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("in description")
-        print(exerciseInfo)
+        print(self.frequencies)
         self.exName.text = (self.exerciseInfo["name"]! as? String)!
         if (self.isCalibration) {
             self.fastornormal.text = "Please do this exercise at workout pace for 60 seconds."
@@ -84,6 +84,7 @@ class FTExDescViewController: UIViewController {
             vc?.isCalibration = self.isCalibration
             vc?.exerciseInfo = self.exerciseInfo
             vc?.exercisesRemaining = self.exercisesRemaining
+            vc?.frequencies = self.frequencies
         }
     }
  

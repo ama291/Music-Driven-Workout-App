@@ -17,6 +17,7 @@ class FTSummaryViewController: UIViewController {
     var numEx: Int = 3
     var exChoices: [Int] = [Int]()
     var reply: [[String:Any]] = [[String:Any]]()
+    var frequencies: [[String: Any]]!
     
     var exercises: [[String:Any]] = [[String:Any]]()
     var exerciseInfo = [String: Any]()
@@ -36,6 +37,7 @@ class FTSummaryViewController: UIViewController {
             vc?.isCalibration = isCalibration
             vc?.numExercises = numEx
             vc?.exerciseNum = numEx - exercises.count
+            vc?.frequencies = frequencies
         }
     }
     
@@ -43,10 +45,15 @@ class FTSummaryViewController: UIViewController {
     
     override func viewDidLoad() {
         let request = APIRequest()
-        
+        self.frequencies = [[String:Any]]()
+        print(self.frequencies)
         super.viewDidLoad()
         print(exChoices, userid, category, numEx)
-        let trackedStr = exChoices.map { String($0) }.joined(separator: ",")
+        var trackedStr: String = ""
+        trackedStr = exChoices.map { String($0) }.joined(separator: ",")
+        if trackedStr == "" {
+            trackedStr = "144"
+        }
         let qstr = "categories=\(category)&numexercises=\(numEx)&exerciseids=\(trackedStr)&key=SoftCon2018"
         request.submitPostLocal(route: "/api/fitness/test/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {

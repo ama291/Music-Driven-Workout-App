@@ -19,6 +19,7 @@ class FTCheckpointViewController: UIViewController {
     var exercisesRemaining: [[String:Any]] = [[String:Any]]()
     var numExercises: Int?
     var isCalibration: Bool?
+    var frequencies: [[String:Any]]!
     let request = APIRequest()
 
     
@@ -35,6 +36,10 @@ class FTCheckpointViewController: UIViewController {
         
         super.viewDidLoad()
         frequency = 90.5
+        print(self.frequencies)
+        let freqDict = ["frequency":self.frequency!,"name":self.exerciseInfo["name"]]
+        self.frequencies.append(freqDict)
+        print(self.frequencies)
         rateLabel.text = "\(String(Int(frequency))) RPM"
         
         userid = 1 // fix later
@@ -51,7 +56,7 @@ class FTCheckpointViewController: UIViewController {
             else if self.reply == "false" {
                 self.isTracked = false
             }
-            let trackedText = self.isTracked ? "Track Exercise" : "Un-track Exercise"
+            let trackedText = !self.isTracked ? "Track Exercise" : "Un-track Exercise"
             let nextText = self.exercisesRemaining.count > 0 ? "Next Exercise" : "Finish"
             DispatchQueue.main.async {
                 self.trackButton.setTitle(trackedText, for: .normal)
@@ -100,6 +105,12 @@ class FTCheckpointViewController: UIViewController {
             vc?.isCalibration = self.isCalibration
             vc?.exerciseInfo = self.exerciseInfo
             vc?.exercisesRemaining = self.exercisesRemaining
+            vc?.frequencies = self.frequencies
+        }
+        if segue.destination is FTCompleteViewController
+        {
+            let vc = segue.destination as? FTCompleteViewController
+            vc?.frequencies = self.frequencies
         }
     }
     /*

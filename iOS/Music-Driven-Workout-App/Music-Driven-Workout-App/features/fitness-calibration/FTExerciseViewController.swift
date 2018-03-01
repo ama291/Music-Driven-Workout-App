@@ -23,6 +23,7 @@ class FTExerciseViewController: UIViewController {
     var exerciseNum: Int?
     var isCalibration: Bool!
     var userid: String?
+    var frequencies: [[String:Any]]!
     
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var frequencyLabel: UILabel!
@@ -81,6 +82,7 @@ class FTExerciseViewController: UIViewController {
     @objc func displayResult() {
         motionManager.stopAccelerometerUpdates()
         self.statusLabel.text = "complete"
+        print(self.frequencies)
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let decoder = JSONDecoder()
@@ -138,6 +140,7 @@ class FTExerciseViewController: UIViewController {
             //data to send
             vc?.exerciseName = self.exerciseName
             vc?.isCalibration = self.isCalibration
+            vc?.frequencies = self.frequencies
         }
         else if segue.destination is FTCheckpointViewController
         {
@@ -145,6 +148,8 @@ class FTExerciseViewController: UIViewController {
             vc?.exerciseInfo = self.exerciseInfo
             vc?.exercisesRemaining = self.exercisesRemaining
             vc?.isCalibration = self.isCalibration
+            vc?.frequencies = self.frequencies
+//            vc?.frequency = self.frequency
         }
     }
     
