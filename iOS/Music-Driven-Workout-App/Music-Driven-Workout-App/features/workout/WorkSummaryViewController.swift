@@ -100,5 +100,24 @@ class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDele
             print(authSession.canonicalUsername)
         }
     }
+    
+    func playPauseSong(player:SPTAudioStreamingController){
+//        if player.isPlaying == true {
+//            player.setIsPlaying(false, callback: nil)
+//        }else{
+//            player.setIsPlaying(true, callback: nil)
+//        }
+        player.setIsPlaying(<#T##playing: Bool##Bool#>, callback: <#T##SPTErrorableOperationCallback!##SPTErrorableOperationCallback!##(Error?) -> Void#>)
+    }
+    
+    func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePlaybackStatus isPlaying: Bool) {
+        self.player?.queueSpotifyURI("spotify:track:6JzzI3YxHCcjZ7MCQS2YS1", callback: {(error) in
+            if (error == nil) {
+                print("queued!")
+            } else {
+                print("error queueing")
+            }
+        })
+    }
 
 }
