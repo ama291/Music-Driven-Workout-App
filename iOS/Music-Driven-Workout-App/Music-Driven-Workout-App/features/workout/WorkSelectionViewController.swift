@@ -19,12 +19,12 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     var equipment = ""
     var duration = ""
     var difficulty = ""
-    var token = "b82cb70f-0f2e-4591-a892-a0b5bef45b9a" //TODO: populate this example token
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
+        token = "b82cb70f-0f2e-4591-a892-a0b5bef45b9a" //TODO: populate this example token
         hideCategories()
 
         self.durationPicker.delegate = self
@@ -52,6 +52,7 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
             vc?.token = token
         }
     }
+    
     @IBAction func goToHome(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
