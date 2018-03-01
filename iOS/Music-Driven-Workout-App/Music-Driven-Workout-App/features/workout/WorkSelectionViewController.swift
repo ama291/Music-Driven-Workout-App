@@ -9,7 +9,7 @@
 import UIKit
 
 class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    
+
     var userid: String!
     var username: String!
     var token: String!
@@ -19,19 +19,14 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     var equipment = ""
     var duration = ""
     var difficulty = ""
-<<<<<<< HEAD
-    //TODO: populate this example token
-//    var token = "b82cb70f-0f2e-4591-a892-a0b5bef45b9a"
-=======
     var token = "b82cb70f-0f2e-4591-a892-a0b5bef45b9a" //TODO: populate this example token
->>>>>>> d325418e2a7021972821bd9c51b051d927a74daf
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+
         hideCategories()
-        
+
         self.durationPicker.delegate = self
         self.durationPicker.dataSource = self
     }
@@ -40,7 +35,7 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     /* Navigation */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -48,10 +43,6 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
             let vc = segue.destination as? WorkSummaryViewController
             //data to send
             vc?.userid = userid!
-<<<<<<< HEAD
-            vc?.username = username!
-            vc?.token = token!
-=======
             vc?.themes = themes
             vc?.categories = categories
             vc?.musclegroup = musclegroup
@@ -59,25 +50,18 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
             vc?.duration = duration
             vc?.difficulty = difficulty
             vc?.token = token
->>>>>>> d325418e2a7021972821bd9c51b051d927a74daf
         }
     }
     @IBAction func goToHome(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
         vc.userid = userid!
-<<<<<<< HEAD
-        vc.username = username!
-        vc.token = token!
-        present(vc, animated: true, completion: nil)
-=======
         present(vc, animated: false, completion: nil)
->>>>>>> d325418e2a7021972821bd9c51b051d927a74daf
     }
-    
+
     /* Category switches & labels */
     @IBOutlet weak var categoryswitch: UISwitch!
-    
+
     @IBOutlet weak var strengthswitch: UISwitch!
     @IBOutlet weak var stretchingswitch: UISwitch!
     @IBOutlet weak var weightliftingswitch: UISwitch!
@@ -92,7 +76,7 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     @IBOutlet weak var plylabel: UILabel!
     @IBOutlet weak var cardiolabel: UILabel!
     @IBOutlet weak var powerlabel: UILabel!
-    
+
     //muscle group switches & labels
     @IBOutlet weak var neckswitch: UISwitch!
     @IBOutlet weak var trapsswitch: UISwitch!
@@ -124,7 +108,7 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     @IBOutlet weak var lowlabel: UILabel!
     @IBOutlet weak var glutelabel: UILabel!
     @IBOutlet weak var hamlabel: UILabel!
-    
+
     //equipment switches and labels
     @IBOutlet weak var bodyswitch: UISwitch!
     @IBOutlet weak var machineswitch: UISwitch!
@@ -139,8 +123,8 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     @IBOutlet weak var foamswitch: UISwitch!
     @IBOutlet weak var otherswitch: UISwitch!
     @IBOutlet weak var noneswitch: UISwitch!
-    
-    
+
+
     @objc func hideCategories() {
         strengthswitch.isHidden = true
         stretchingswitch.isHidden = true
@@ -157,7 +141,7 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         cardiolabel.isHidden = true
         powerlabel.isHidden = true
     }
-    
+
     //TODO: need to deactivate category or muscle group on switch
     @IBAction func switchToggled(_ sender: Any) {
         if (categoryswitch.isOn) {
@@ -251,14 +235,14 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
             plylabel.isHidden = false
             cardiolabel.isHidden = false
             powerlabel.isHidden = false
-            
+
         }
     }
-    
+
     /* Duraton Picker Stuff */
     @IBOutlet weak var durationPicker: UIPickerView!
     let durationOptions = ["10","15","20","25","30","35","40","45","50","55","60"]
-    
+
     // number of columns of data
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -278,9 +262,9 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         duration = durationOptions[row]
     }
 
-    
+
     @IBOutlet weak var difficultyswitch: UISwitch!
-    
+
     /* getWorkoutAction - sets variables to send to next screen */
     // TODO - themes
     @IBOutlet weak var getworkout: UIButton!
@@ -332,7 +316,7 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
                 musclegroup += "Hamstrings,"
             }
         }
-            
+
         else {
             if (strengthswitch.isOn) {
                 categories += "Strength,"
@@ -357,14 +341,14 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
             }
 
         }
-        
+
         if (categories.last == ",") {
             categories.removeLast()
         }
         if (musclegroup.last == ",") {
             musclegroup.removeLast()
         }
-        
+
         if (bodyswitch.isOn) {
             equipment += "Body Only,"
         }
@@ -407,19 +391,19 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         if (equipment.last == ",") {
             equipment.removeLast()
         }
-        
+
 
         if duration.isEmpty {
             duration = "10"
         }
-        
+
         if (difficultyswitch.isOn) {
             difficulty = "Intermediate"
         }
         else {
             difficulty = "Beginner"
         }
-        
+
         self.performSegue(withIdentifier: "summarySegue", sender: self)
     }
 }
