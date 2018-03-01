@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
 
     var userid: String!
     var themes: String!
@@ -18,7 +18,13 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     var duration: String!
     var difficulty: String!
     var token: String!
-    
+    var username: String!
+
+    //spotify
+    var auth = SPTAuth.defaultInstance()!
+    var session:SPTSession!
+    var player: SPTAudioStreamingController?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,7 +38,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         print("\t duration:" + duration)
         print("\t difficulty:" + difficulty)
         print("\t token:" + token + "\n")
-        
+
         getWorkout()
     }
 
@@ -40,7 +46,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     /* Mark: Navigation */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -53,12 +59,12 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             vc?.userid = userid!
         }
     }
-    
+
     /* Mark: Make a call to getWorkout() */
     var reply: [String:Any] = [String:Any]()
     var exerciseInfo: [String:Any] = [String:Any]()
     var exList: [String] = [String]()
-    
+
     @objc func getWorkout() {
         let request = APIRequest()
         let route = "/api/workouts/getworkout/"
@@ -86,13 +92,13 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                 if let status = dictionary["Status"] as? String {
                     print("Status:", status)
                 }
-                
+
                 /* TODO - Turn the Result into a nested dictionary */
                 var result = dictionary["Result"] as! String
 //                result.remove(at: result.startIndex)
 //                result.removeLast()
                 print("result: ", result)
-                
+
                 //var resultDictionary: [String: [Any]]
                 if let resultData = result.data(using: .utf8, allowLossyConversion: false) {
                     do {
@@ -102,7 +108,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                         print("Failed to Load: \(error.localizedDescription)")
                     }
                 }
-                
+
 //                if let result = dictionary["Result"] as? String {
 //                    print("result", result.data(using: .utf8), result)
 //                    let resJson = try? JSONSerialization.jsonObject(with: result.data(using: String.Encoding.utf8)!, options: [])
@@ -113,16 +119,16 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
 //                        } else {print("uid err")}
 //                    } else {print("resDict err")}
 //                }  else {print("result err")}
-                
+
             }
-            
+
             }.resume()
     }
-    
+
     /* Mark: tableView */
     let sections = ["Exercises"]
     //let exList = ["Test Input 1", "Test Input 2"]
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section]
     }
@@ -144,7 +150,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Create an object of the dynamic cell "PlainCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath)
-        
+
         // Depending on the section, fill the textLabel with the relevant text
         switch indexPath.section {
         case 0:
@@ -153,7 +159,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         default:
             break
         }
-    
+
         // Return the configured cell
         return cell
     }

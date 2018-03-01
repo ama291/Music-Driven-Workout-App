@@ -18,6 +18,61 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Goal name-->
+        <scene sceneID="ZBB-Le-Gt7">
+            <objects>
+                <tableViewController storyboardIdentifier="goalsTable" title="Goal name" id="MdZ-QM-Fcn" customClass="GoalsMenuViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xwH-mv-3wS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.99861770868301392" green="0.91886800527572632" blue="0.49332088232040405" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <button key="tableFooterView" autoresizesSubviews="NO" opaque="NO" contentMode="left" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OaT-fX-nZe">
+                            <rect key="frame" x="0.0" y="72" width="375" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="1"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                            <state key="normal" title="Back">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="goToHome:" destination="3d6-DF-ivo" eventType="touchUpInside" id="tHX-gA-81S"/>
+                                <action selector="goToHome:" destination="MdZ-QM-Fcn" eventType="touchUpInside" id="uxm-Cc-NVA"/>
+                            </connections>
+                        </button>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="top" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="ixb-rN-hBG">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ixb-rN-hBG" id="azC-Zd-Uok">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Usy-tq-vPw" userLabel="Add Goal">
+                                            <rect key="frame" x="88" y="13" width="198" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
+                                            <state key="normal" title="Add Goal">
+                                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="MdZ-QM-Fcn" id="GMi-OG-Rsz"/>
+                            <outlet property="delegate" destination="MdZ-QM-Fcn" id="ppK-Tl-Jh7"/>
+                        </connections>
+                    </tableView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qwa-K3-Elq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4583" y="920"/>
+        </scene>
         <!--Goals Menu-->
         <scene sceneID="jkd-RG-vQn">
             <objects>
@@ -26,27 +81,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Goals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaR-wD-zCq">
-                                <rect key="frame" x="16" y="20" width="144" height="61"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Goals" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaR-wD-zCq">
+                                <rect key="frame" x="0.0" y="49" width="375" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OaT-fX-nZe">
-                                <rect key="frame" x="307" y="20" width="52" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Back"/>
-                                <connections>
-                                    <action selector="goToHome:" destination="3d6-DF-ivo" eventType="touchUpInside" id="tHX-gA-81S"/>
-                                </connections>
-                            </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bUT-Pr-s0V">
-                                <rect key="frame" x="16" y="121" width="343" height="450"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Thb-F5-MtN">
                                 <rect key="frame" x="61" y="595" width="253" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -61,9 +102,36 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="RNK-oy-od9" kind="show" animates="NO" id="bem-On-I5B">
-                                        <nil key="action"/>
-                                    </segue>
+                                    <action selector="goToAddGoal:" destination="3d6-DF-ivo" eventType="touchUpInside" id="t41-Id-a7b"/>
+                                    <segue destination="RNK-oy-od9" kind="show" id="h4I-gh-5QU"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bUT-Pr-s0V">
+                                <rect key="frame" x="16" y="118" width="343" height="450"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="4AU-YX-9T7">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4AU-YX-9T7" id="gH9-Je-0Dw">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="3d6-DF-ivo" id="qg2-Wz-7IX"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Crt-HQ-T6B">
+                                <rect key="frame" x="298" y="20" width="61" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="goToHome:" destination="3d6-DF-ivo" eventType="touchUpInside" id="D7t-tn-jX6"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -71,10 +139,13 @@
                         <viewLayoutGuide key="safeArea" id="yYe-dW-KXO"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <connections>
+                        <outlet property="tableView" destination="bUT-Pr-s0V" id="Wqa-t1-PMR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DWp-C9-IEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1372" y="928.78560719640188"/>
+            <point key="canvasLocation" x="-1887" y="1009"/>
         </scene>
         <!--Themes Menu-->
         <scene sceneID="GIa-a3-4yg">
@@ -114,6 +185,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="goToAddTheme:" destination="e4u-ql-KLH" eventType="touchUpInside" id="V9d-m5-lXf"/>
                                     <segue destination="QMn-Cu-BGw" kind="show" id="KsW-2D-yHF">
                                         <nil key="action"/>
                                     </segue>
@@ -123,12 +195,25 @@
                                 <rect key="frame" x="16" y="108" width="343" height="450"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="j9k-25-TiL">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j9k-25-TiL" id="zfJ-d7-PFy">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.28809646430000002" green="0.86467778500000003" blue="0.22629977640000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="jfY-FX-Rs3"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <connections>
+                        <outlet property="tableView" destination="U4a-PN-9nl" id="wy4-Nd-bWh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VXh-OA-fhn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -137,7 +222,7 @@
         <!--Themes Add-->
         <scene sceneID="v4M-Ze-6WN">
             <objects>
-                <viewController title="Themes Add" id="QMn-Cu-BGw" customClass="ThemesAddViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="themesAdd" title="Themes Add" id="QMn-Cu-BGw" customClass="ThemesAddViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nRB-Ym-GaQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -148,9 +233,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
-                                    <segue destination="e4u-ql-KLH" kind="show" animates="NO" id="L5b-68-NLz">
-                                        <nil key="action"/>
-                                    </segue>
+                                    <action selector="goBackToThemesMenu:" destination="QMn-Cu-BGw" eventType="touchUpInside" id="HTS-Fh-e32"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Theme Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mAg-NU-ubq">
@@ -208,7 +291,7 @@
         <!--Goals Add-->
         <scene sceneID="mwV-M9-tD2">
             <objects>
-                <viewController title="Goals Add" id="RNK-oy-od9" customClass="GoalsAddViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="goalsAdd" title="Goals Add" id="RNK-oy-od9" customClass="GoalsAddViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NzV-65-3tc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -225,9 +308,8 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Back"/>
                                                 <connections>
-                                                    <segue destination="3d6-DF-ivo" kind="show" id="YdA-GG-8UL">
-                                                        <nil key="action"/>
-                                                    </segue>
+                                                    <action selector="goBackToGoalsMenu:" destination="RNK-oy-od9" eventType="touchUpInside" id="PZz-NG-9hj"/>
+                                                    <segue destination="3d6-DF-ivo" kind="show" id="nyR-yl-gWq"/>
                                                 </connections>
                                             </button>
                                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="skd-vM-V7F">
@@ -319,11 +401,6 @@
                                                         <integer key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="3d6-DF-ivo" kind="show" animates="NO" id="SbE-dF-jLe">
-                                                        <nil key="action"/>
-                                                    </segue>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.92422796399999996" blue="0.37517484239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -355,13 +432,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BzK-gO-Pwi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-367" y="1079"/>
+            <point key="canvasLocation" x="-852" y="1137"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bem-On-I5B"/>
-        <segue reference="KsW-2D-yHF"/>
         <segue reference="c6j-01-N9k"/>
-        <segue reference="YdA-GG-8UL"/>
+        <segue reference="h4I-gh-5QU"/>
     </inferredMetricsTieBreakers>
 </document>

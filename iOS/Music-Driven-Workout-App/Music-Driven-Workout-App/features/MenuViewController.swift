@@ -9,13 +9,15 @@
 import UIKit
 
 class MenuViewController: UIViewController {
-    
+
     var userid: String!
+    var username: String!
+    var token: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+
         populateUI()
     }
 
@@ -23,7 +25,7 @@ class MenuViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     /* Segue Navigation */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -33,13 +35,15 @@ class MenuViewController: UIViewController {
             vc?.userid = userid!
         }
     }
-    
+
     /* Button->Storyboard Navigation */
     @IBAction func goToWorkout(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "workout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "workoutSelectionID") as! WorkSelectionViewController
         vc.userid = userid!
-        present(vc, animated: false, completion: nil)
+        vc.username = username!
+        vc.token = token!
+        present(vc, animated: true, completion: nil)
     }
     @IBAction func goToSavedWorkouts(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "workout", bundle: nil)
@@ -77,17 +81,16 @@ class MenuViewController: UIViewController {
         vc.userid = userid!
         present(vc, animated: false, completion: nil)
     }
-    
+
     /* END Button->Storyboard Navigation */
-    
-    
+
     @IBOutlet weak var titletext: UILabel!
-    
+
     struct usernameResult: Codable {
         var Result: String
         var Status: String
     }
-    
+
     @objc func populateUI() {
         guard let url = URL(string: "http://138.197.49.155:8000/api/getusername/") else { return }
         var request = URLRequest(url: url)
@@ -103,7 +106,7 @@ class MenuViewController: UIViewController {
                     self.titletext.text = "Welcome back, " + json.Result + "!"
                 }
             }
-            
+
         }.resume()
     }
 }

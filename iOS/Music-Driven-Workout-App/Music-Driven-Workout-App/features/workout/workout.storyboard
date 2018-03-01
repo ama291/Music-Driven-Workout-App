@@ -679,6 +679,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="startMusic:" destination="HRG-jE-GSX" eventType="touchUpInside" id="Aoj-E4-Yac"/>
                                     <segue destination="dqf-WA-fiu" kind="show" id="XMo-jY-u0E">
                                         <nil key="action"/>
                                     </segue>
