@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class APIRequest: NSObject {
     
@@ -34,30 +35,40 @@ class APIRequest: NSObject {
     }
     
     func parseWorkoutJson(data: Data) -> Dictionary<String, Any>? {
-        var res: Dictionary<String, String>
         print("parseWorkoutJson Start")
         do {
-            res = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String, String>
-            let myDict = res
-            if let result = myDict["Result"] {
-                var reply: Dictionary<String, Any>
-                if let resultData = result.data(using: String.Encoding.utf8) {
-                    do {
-                        // BREAKS HERE V V V
-                        reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! Dictionary<String, Any>
-                        let myReplyDict = reply
-                        print("parseWorkoutJson End")
-                        return myReplyDict
-                    }
+            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+            
+            if let dictionary = json as? [String:Any] {
+                /* Access individual value in dictionary */
+                if let status = dictionary["Status"] as? String {
+                    print(status)
+                }
+                
+                /* Access nestedDictionaries in a Dictionary */
+                if let result = dictionary["Result"] as? [String: Any] {
+                    print("Returning...")
+                    return result
                 }
             }
-        } catch let error {
-            print("ERROR while parsing workout json")
-            print(error)
         }
+//        catch let error {
+//            print("ERROR while parsing workout json")
+//            print(error)
+//        }
         return nil
     }
     
+    func convertToDictionary(text: String) -> [String: Any]? {
+        if let data = text.data(using: .utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return nil
+    }
     
     func submitPostLocal(route: String, qstring: String, completion: @escaping (Data?, URLResponse?,Error?) -> Void) -> URLSessionDataTask {
         var urlComponents = URLComponents()
@@ -69,13 +80,13 @@ class APIRequest: NSObject {
         guard let url = urlComponents.url else {
             fatalError("Could not create URL")
         }
-        print(url)
+        print("url ", url, "\n")
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let postString = qstring
         request.httpBody = postString.data(using: String.Encoding.utf8)
-        print("jsonData: ", String(data: request.httpBody!, encoding: .utf8) ?? "no body data")
+        print("jsonData: ", String(data: request.httpBody!, encoding: .utf8) ?? "no body data", "\n")
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)

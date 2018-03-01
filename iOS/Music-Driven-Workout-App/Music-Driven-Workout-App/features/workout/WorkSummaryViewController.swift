@@ -23,6 +23,16 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        print("WorkSummaryVC")
+        print("\t userid:" + userid)
+        print("\t themes:" + themes)
+        print("\t categories:" + categories)
+        print("\t musclegroups:" + musclegroup)
+        print("\t equipment:" + equipment)
+        print("\t duration:" + duration)
+        print("\t difficulty:" + difficulty)
+        print("\t token:" + token + "\n")
+        
         getWorkout()
     }
 
@@ -62,24 +72,51 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         query += "&duration=" + duration
         query += "&difficulty=" + difficulty
         query += "&token=" + token
-        print("\nQUERY:" + query + "\n")
+        print("QUERY:" + query + "\n")
 
         request.submitPostLocal(route: route, qstring: query) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }
-            self.reply = request.parseWorkoutJson(data: data!)!   // ERR: data = nil so it can't be unwrapped
-            
-            print(self.reply)
-            
-            for rep in self.reply {
-                //self.exList.append(rep["name"]! as! String)
-                print(self.exList)
+            print("initial data:", String(describing: data))
+            /* Parse the json object returned by submitPostLocal() */
+            let json = try? JSONSerialization.jsonObject(with: data!, options: [])
+            print("JSON:", json as Any)
+            if let dictionary = json as? [String: Any] {
+                if let status = dictionary["Status"] as? String {
+                    print("Status:", status)
+                }
+                
+                /* TODO - Turn the Result into a nested dictionary */
+                var result = dictionary["Result"] as! String
+//                result.remove(at: result.startIndex)
+//                result.removeLast()
+                print("result: ", result)
+                
+                //var resultDictionary: [String: [Any]]
+                if let resultData = result.data(using: .utf8, allowLossyConversion: false) {
+                    do {
+                        let reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! [String: AnyObject]
+                        print("reply JSON:", reply as Any)
+                    } catch let error as NSError {
+                        print("Failed to Load: \(error.localizedDescription)")
+                    }
+                }
+                
+//                if let result = dictionary["Result"] as? String {
+//                    print("result", result.data(using: .utf8), result)
+//                    let resJson = try? JSONSerialization.jsonObject(with: result.data(using: String.Encoding.utf8)!, options: [])
+//                    print("RESJSON: ", resJson as Any)
+//                    if let resDict = resJson as? [String: Any] {
+//                        if let uid = resDict["uid"] as? String {
+//                            print(uid)
+//                        } else {print("uid err")}
+//                    } else {print("resDict err")}
+//                }  else {print("result err")}
+                
             }
-            DispatchQueue.main.async {
-            }
             
-        }.resume()
+            }.resume()
     }
     
     /* Mark: tableView */

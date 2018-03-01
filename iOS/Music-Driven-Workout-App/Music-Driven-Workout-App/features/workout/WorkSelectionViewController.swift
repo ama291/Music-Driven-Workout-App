@@ -263,7 +263,8 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     
     @IBOutlet weak var difficultyswitch: UISwitch!
     
-    //TODO: themes
+    /* getWorkoutAction - sets variables to send to next screen */
+    // TODO - themes
     @IBOutlet weak var getworkout: UIButton!
     @IBAction func getWorkoutAction(_ sender: Any) {
         if (categoryswitch.isOn) {
@@ -345,8 +346,6 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         if (musclegroup.last == ",") {
             musclegroup.removeLast()
         }
-        print("Categories: " + categories)
-        print("Muscle Groups: " + musclegroup)
         
         if (bodyswitch.isOn) {
             equipment += "Body Only,"
@@ -391,12 +390,10 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
             equipment.removeLast()
         }
         
-        print("Equipment: " + equipment)
-        
+
         if duration.isEmpty {
             duration = "10"
         }
-        print("Duration: " + duration)
         
         if (difficultyswitch.isOn) {
             difficulty = "Intermediate"
@@ -404,8 +401,6 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         else {
             difficulty = "Beginner"
         }
-        print("Difficulty: " + difficulty)
-        
         
         self.performSegue(withIdentifier: "summarySegue", sender: self)
     }
