@@ -14,12 +14,12 @@ class FTChooseTracked: UIViewController {
     var reply: [[String:Any]] = [[String:Any]]()
     var exList: [String] = [String]()
 
-    var viewModel = ViewModel()
+    //var viewModel = ViewModel()
 
     @IBOutlet weak var trackedTable: UITableView?
     
     override func viewDidLoad() {
-        trackedTable?.allowsMultipleSelection = true
+        /*trackedTable?.allowsMultipleSelection = true
         trackedTable?.dataSource = self.viewModel
         trackedTable?.delegate = self
         let request = APIRequest()
@@ -38,7 +38,7 @@ class FTChooseTracked: UIViewController {
             DispatchQueue.main.async {
                 
             }
-            }.resume()
+            }.resume()*/
         
     }
     
@@ -56,12 +56,12 @@ class FTChooseTracked: UIViewController {
 }
 
 extension FTChooseTracked: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.items[indexPath.row].isSelected = true
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         viewModel.items[indexPath.row].isSelected = false
-    }
+    }*/
 }
 
