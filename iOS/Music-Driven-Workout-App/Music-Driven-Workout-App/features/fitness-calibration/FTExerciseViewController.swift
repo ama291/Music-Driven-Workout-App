@@ -16,6 +16,8 @@ class FTExerciseViewController: UIViewController {
     var timer = Timer()
     var frequency = ""
     var time = 600
+    var exerciseInfo: [String:Any] = [String:Any]()
+    var exercisesRemaining: [[String:Any]] = [[String:Any]]()
     var exerciseName: String!
     var numExercises: Int?
     var exerciseNum: Int?
@@ -124,8 +126,28 @@ class FTExerciseViewController: UIViewController {
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
         vc.userid = userid!
         present(vc, animated: true, completion: nil)
+    }
         
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.destination is FTCompleteViewController
+        {
+            let vc = segue.destination as? FTCompleteViewController
+            //data to send
+            vc?.exerciseName = self.exerciseName
+            vc?.isCalibration = self.isCalibration
+        }
+        else if segue.destination is FTCheckpointViewController
+        {
+            let vc = segue.destination as? FTCheckpointViewController
+            vc?.exerciseInfo = self.exerciseInfo
+            vc?.exercisesRemaining = self.exercisesRemaining
+            vc?.isCalibration = self.isCalibration
+        }
     }
     
 }
+
 

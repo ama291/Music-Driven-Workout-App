@@ -25,6 +25,8 @@ class FTExDescViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("in description")
+        print(exerciseInfo)
         self.exName.text = (self.exerciseInfo["name"]! as? String)!
         if (self.isCalibration) {
             self.fastornormal.text = "Please do this exercise at workout pace for 60 seconds."
@@ -79,8 +81,9 @@ class FTExDescViewController: UIViewController {
             //data to send
             vc?.exerciseName = (self.exerciseInfo["name"]! as? String)!
             vc?.numExercises = self.numExercises
-            vc?.exerciseNum = self.exerciseNum
             vc?.isCalibration = self.isCalibration
+            vc?.exerciseInfo = self.exerciseInfo
+            vc?.exercisesRemaining = self.exercisesRemaining
         }
     }
  
