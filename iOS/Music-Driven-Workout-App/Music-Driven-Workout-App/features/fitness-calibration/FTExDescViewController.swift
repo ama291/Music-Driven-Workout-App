@@ -67,20 +67,22 @@ class FTExDescViewController: UIViewController {
         downloadPic.resume()
         
     }
+    
     // MARK: - Navigation
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.destination is FTExDescViewController
+        if segue.destination is FTExerciseViewController
         {
             let vc = segue.destination as? FTExerciseViewController
             //data to send
-            vc?.exerciseName = self.exName.text
+            vc?.exerciseName = (self.exerciseInfo["name"]! as? String)!
             vc?.numExercises = self.numExercises
             vc?.exerciseNum = self.exerciseNum
             vc?.isCalibration = self.isCalibration
         }
     }
+ 
 }
 

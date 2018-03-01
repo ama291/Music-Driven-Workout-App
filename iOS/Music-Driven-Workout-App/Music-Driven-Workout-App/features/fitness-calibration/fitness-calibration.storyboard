@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -571,14 +571,18 @@
                                 <state key="normal" title="QUIT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="go_to_home:" destination="5r9-iF-qe2" eventType="touchUpInside" id="L7q-1N-d3a"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="8wH-sL-gTV"/>
                     </view>
                     <connections>
-                        <outlet property="exName" destination="qJt-be-sSN" id="KbX-Fx-xde"/>
-                        <outlet property="seconds_remaining" destination="dMn-i0-yJq" id="L4G-AD-bUb"/>
+                        <outlet property="exName" destination="qJt-be-sSN" id="rfl-KJ-VNH"/>
+                        <outlet property="frequencyLabel" destination="dMn-i0-yJq" id="XsA-YV-Fnh"/>
+                        <outlet property="statusLabel" destination="hiB-Nk-c8p" id="FF9-Gr-bY5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nnr-eG-0Ik" userLabel="First Responder" sceneMemberID="firstResponder"/>
