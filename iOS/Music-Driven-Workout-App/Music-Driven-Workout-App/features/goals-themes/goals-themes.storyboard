@@ -74,7 +74,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qwa-K3-Elq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1868" y="1119"/>
+            <point key="canvasLocation" x="-1796" y="1025"/>
         </scene>
         <!--Goals Menu-->
         <scene sceneID="jkd-RG-vQn">
@@ -137,45 +137,45 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DWp-C9-IEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1934" y="2113"/>
+            <point key="canvasLocation" x="-1858" y="2232"/>
         </scene>
-        <!--Theme name-->
-        <scene sceneID="bNz-k7-edl">
+        <!--Themes Menu View Controller-->
+        <scene sceneID="q6a-gH-Kmv">
             <objects>
-                <tableViewController storyboardIdentifier="themesID" id="4aX-bU-aJE" userLabel="Theme name" customClass="ThemesMenuViewController" customModule="Music_Driven_Workout_App" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="qDd-Hg-R61">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <tableViewController storyboardIdentifier="themesID" id="1gn-eG-k9L" customClass="ThemesMenuViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="aAs-aL-2FX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Themes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yf6-lC-l2t">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="21"/>
+                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Themes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sUM-N8-jP7">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9sl-2N-bwo" userLabel="Back">
-                            <rect key="frame" x="0.0" y="93" width="375" height="44"/>
+                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ygR-A1-NAt">
+                            <rect key="frame" x="0.0" y="93" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="Back"/>
                             <connections>
-                                <action selector="goToHome:" destination="4aX-bU-aJE" eventType="touchUpInside" id="cz4-UN-mRv"/>
+                                <action selector="goToHome:" destination="1gn-eG-k9L" eventType="touchUpInside" id="SyN-wc-k7j"/>
                             </connections>
                         </button>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Ytj-dR-Jhv" userLabel="Cell">
-                                <rect key="frame" x="0.0" y="49" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Z6p-68-Tqa">
+                                <rect key="frame" x="0.0" y="49" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ytj-dR-Jhv" id="jgY-64-xGe">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z6p-68-Tqa" id="Mcb-DS-PpN">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTT-fp-h1u">
-                                            <rect key="frame" x="0.0" y="-1" width="375" height="44"/>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gvw-tj-Cug">
+                                            <rect key="frame" x="0.0" y="-1" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Add Theme"/>
                                             <connections>
-                                                <segue destination="QMn-Cu-BGw" kind="show" id="nBb-PL-JfX"/>
+                                                <segue destination="QMn-Cu-BGw" kind="show" id="mOS-Yf-F8r"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -183,19 +183,19 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="4aX-bU-aJE" id="sR4-vh-hcc"/>
-                            <outlet property="delegate" destination="4aX-bU-aJE" id="dD3-5C-ITA"/>
+                            <outlet property="dataSource" destination="1gn-eG-k9L" id="8Zb-d4-kBO"/>
+                            <outlet property="delegate" destination="1gn-eG-k9L" id="4Ea-Qb-fFX"/>
                         </connections>
                     </tableView>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="j0n-UJ-kt2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hEP-QD-62C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1654" y="198"/>
+            <point key="canvasLocation" x="-952" y="198"/>
         </scene>
         <!--Themes Menu-->
         <scene sceneID="GIa-a3-4yg">
             <objects>
-                <viewController title="Themes Menu" id="e4u-ql-KLH" sceneMemberID="viewController">
+                <viewController title="Themes Menu" id="e4u-ql-KLH" customClass="ThemesMenuViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JnI-dA-BK7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -243,7 +243,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VXh-OA-fhn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1122" y="-571"/>
+            <point key="canvasLocation" x="-1397" y="-760"/>
         </scene>
         <!--Themes Add-->
         <scene sceneID="v4M-Ze-6WN">
@@ -254,41 +254,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9l-5N-6Ng">
-                                <rect key="frame" x="307" y="20" width="52" height="38"/>
+                                <rect key="frame" x="252" y="20" width="52" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
-                                    <action selector="goToThemes:" destination="QMn-Cu-BGw" eventType="touchUpInside" id="c01-IT-p4g"/>
-                                    <segue destination="4aX-bU-aJE" kind="show" id="ENm-PI-6ka"/>
+                                    <segue destination="1gn-eG-k9L" kind="show" id="qU3-B2-PJ5"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Theme Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mAg-NU-ubq">
-                                <rect key="frame" x="43" y="81" width="289" height="30"/>
+                                <rect key="frame" x="43" y="81" width="261" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="SPOTIFY SEARCHBAR" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tKE-8z-8fo">
-                                <rect key="frame" x="43" y="143" width="289" height="30"/>
+                                <rect key="frame" x="43" y="143" width="261" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V3X-yQ-XCj">
-                                <rect key="frame" x="56" y="235" width="263" height="30"/>
+                                <rect key="frame" x="29" y="246" width="263" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Workouts: X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDt-z8-rd2">
-                                <rect key="frame" x="16" y="193" width="241" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1g-cU-aUg">
-                                <rect key="frame" x="61" y="307" width="253" height="52"/>
+                                <rect key="frame" x="34" y="309" width="253" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
@@ -301,6 +294,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Workouts: X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDt-z8-rd2">
+                                <rect key="frame" x="31" y="193" width="241" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.28809646430000002" green="0.86467778500000003" blue="0.22629977640000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="ruu-lW-9EK"/>
@@ -308,7 +307,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3y-Xc-ePL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-366" y="199"/>
+            <point key="canvasLocation" x="-367.5" y="198.59154929577466"/>
         </scene>
         <!--Goals Add-->
         <scene sceneID="mwV-M9-tD2">
@@ -457,7 +456,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="sYS-VE-czP"/>
-        <segue reference="c6j-01-N9k"/>
+        <segue reference="qU3-B2-PJ5"/>
+        <segue reference="1Tn-vv-rt8"/>
     </inferredMetricsTieBreakers>
 </document>
