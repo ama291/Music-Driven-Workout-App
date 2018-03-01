@@ -10,6 +10,11 @@ import UIKit
 import SafariServices
 import AVFoundation
 
+struct jsonRequest: Codable {
+    var Result: String
+    var Status: String
+}
+
 class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
 
     // Variables
@@ -17,6 +22,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     var session:SPTSession!
     var token:String!
     var username:String!
+    var userid:String!
     
     // Initialzed in either updateAfterFirstLogin: (if first time login) or in viewDidLoad (when there is a check for a session object in User Defaults
     var player: SPTAudioStreamingController?
@@ -66,6 +72,25 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
 //        print("logged out")
 //    }
     
+    func getuseridapi(username: String) {
+        guard let url = URL(string: "http://138.197.49.155:8000/api/workouts/getuserid/") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //userid, workoutid, key
+        let postString = "username=" + username + "&key=SoftCon2018"
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if let data = data {
+                guard let json = try? JSONDecoder().decode(jsonRequest.self, from: data) else { return }
+                self.userid = json.Result
+                print(self.userid)
+
+            }
+            
+            }.resume()
+    }
+    
     @objc func updateAfterFirstLogin () {
         
         loginButton.isHidden = true
@@ -79,6 +104,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             self.session = firstTimeSession
 //            initializaPlayer(authSession: session)
             username = session.canonicalUsername
+            getuseridapi(username: username)
             token = session.accessToken
             self.loginButton.isHidden = true
             // self.loadingLabel.isHidden = false
@@ -140,7 +166,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is MenuViewController {
             let vc = segue.destination as? MenuViewController
-                vc?.userid = userBox.text!
+                vc?.userid = self.userid
                 vc?.username = username
                 vc?.token = token
         }
