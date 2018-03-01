@@ -8,10 +8,16 @@
 
 import UIKit
 
-class GoalsMenuViewController: UITableViewController {
+class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    
+//}, UITableViewController {
 
     var userid: String!
     var tableArray = [String:Any] ()
+    
+    var passedUserId = String()
+    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +52,7 @@ class GoalsMenuViewController: UITableViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let postString = "userid=" + userid + "&key=SoftCon2018"
+        passedUserId = userid
         request.httpBody = postString.data(using: String.Encoding.utf8)
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
@@ -77,24 +84,32 @@ class GoalsMenuViewController: UITableViewController {
         vc.userid = userid!
         present(vc, animated: true, completion: nil)
     }
-    
-//    @IBAction func testPopulateGoals(_ sender: UIButton) {
-//        print("testing populate goals")
-//        populateGoals()
-//    }
-    
-}
-
-extension GoalsMenuViewController {
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+ 
+//extension GoalsMenuViewController {
+//    override func
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
         cell.textLabel?.text = (self.tableArray["Result"]! as! String)
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//    override
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.tableArray.count/2
         
+    }
+    
+//    @IBAction func addGoal(_sender: UIButton) {
+//        let myVC = storyboard?.instantiateViewController(withIdentifier: "goalsAdd") as! GoalsAddViewController
+//        myVC.userid = passedUserId
+//        navigationController?.pushViewController(myVC, animated: true)
+//    }
+    
+    @IBAction func goToAddGoal(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "goalsAdd") as! GoalsAddViewController
+        vc.userid = userid!
+        present(vc, animated: true, completion: nil)
     }
 }

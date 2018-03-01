@@ -14,7 +14,8 @@ class GoalsAddViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("userid")
+        print(userid)
         // Do any additional setup after loading the view.
     }
 
@@ -47,5 +48,17 @@ class GoalsAddViewController: UIViewController {
 //            present(vc, animated: true, completion: nil)
 //        }
 
+//    @IBAction func back(_sender: UIButton) {
+//        let myVC = storyboard?.instantiateViewController(withIdentifier: "goalsID") as! GoalsMenuViewController
+//        myVC.userid = userid!
+//        navigationController?.pushViewController(myVC, animated: true)
+//    }
+    
+    @IBAction func goBackToGoalsMenu(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "goalsID") as! GoalsMenuViewController
+        vc.userid = userid!
+        present(vc, animated: true, completion: nil)
+    }
 
 }
