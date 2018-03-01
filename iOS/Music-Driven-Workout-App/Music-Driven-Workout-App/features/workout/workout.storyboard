@@ -717,6 +717,7 @@
                             <constraint firstItem="lrn-o4-YkO" firstAttribute="leading" secondItem="xjN-PC-1Np" secondAttribute="trailing" priority="999" constant="6" id="dX8-j0-Htj"/>
                             <constraint firstItem="UWb-dC-S1B" firstAttribute="top" secondItem="lrn-o4-YkO" secondAttribute="bottom" constant="16" id="jGO-NE-Wt2"/>
                             <constraint firstItem="xjN-PC-1Np" firstAttribute="leading" secondItem="Yx8-dB-rV5" secondAttribute="leading" constant="16" id="oSQ-OI-aXQ"/>
+                            <constraint firstItem="Yx8-dB-rV5" firstAttribute="trailing" secondItem="Bia-uE-6cQ" secondAttribute="trailing" constant="61" id="pXJ-dY-PIC"/>
                             <constraint firstItem="Bia-uE-6cQ" firstAttribute="leading" secondItem="Yx8-dB-rV5" secondAttribute="leading" constant="61" id="x2B-pL-sLa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Yx8-dB-rV5"/>
@@ -749,6 +750,9 @@
                                 <state key="normal" title="QUIT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="goToHome:" destination="dqf-WA-fiu" eventType="touchUpInside" id="NtQ-Qt-jCN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T44-TO-dsu">
                                 <rect key="frame" x="16" y="588" width="97" height="59"/>
@@ -758,6 +762,9 @@
                                 <state key="normal" title="PAUSE">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="pauseclick:" destination="dqf-WA-fiu" eventType="touchUpInside" id="9BY-qH-Zoj"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUy-B7-Rj7">
                                 <rect key="frame" x="260" y="588" width="99" height="59"/>
@@ -768,6 +775,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="skipclick:" destination="dqf-WA-fiu" eventType="touchUpInside" id="HYn-jS-QX7"/>
                                     <segue destination="e91-8e-ujU" kind="show" id="hH3-WN-N88">
                                         <nil key="action"/>
                                     </segue>
@@ -908,6 +916,9 @@
                                 <state key="normal" title="YES">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveWorkout_Yes:" destination="e91-8e-ujU" eventType="touchUpInside" id="UzB-1H-Ivz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lx1-GR-spU">
                                 <rect key="frame" x="213" y="588" width="85" height="59"/>
@@ -917,6 +928,9 @@
                                 <state key="normal" title="No">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveWorkout_No:" destination="e91-8e-ujU" eventType="touchUpInside" id="lda-4j-git"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fQg-sb-dHT">
                                 <rect key="frame" x="16" y="122" width="343" height="296"/>

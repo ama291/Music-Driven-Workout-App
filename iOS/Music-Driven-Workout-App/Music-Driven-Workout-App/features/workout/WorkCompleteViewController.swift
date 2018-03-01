@@ -32,15 +32,22 @@ class WorkCompleteViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    /* MARK: - Navigation */
+    @IBAction func saveWorkout_Yes(_ sender: UIButton) {
+        // TODO - save workout
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        vc.userid = userid!
+        present(vc, animated: false, completion: nil)
     }
-    */
+    @IBAction func saveWorkout_No(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        vc.userid = userid!
+        present(vc, animated: false, completion: nil)
+    }
+    
+    
     
     struct jsonRequest: Codable {
         var Result: String
