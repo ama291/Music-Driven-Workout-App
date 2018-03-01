@@ -15,6 +15,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     // Variables
     var auth = SPTAuth.defaultInstance()!
     var session:SPTSession!
+    var userid:String!
     var token:String!
     var username:String!
     
@@ -137,14 +138,14 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     @IBOutlet weak var weight: UITextField!
     @IBOutlet weak var year: UITextField!
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is MenuViewController {
-            let vc = segue.destination as? MenuViewController
-                vc?.userid = userBox.text!
-                vc?.username = username
-                vc?.token = token
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.destination is MenuViewController {
+//            let vc = segue.destination as? MenuViewController
+//                vc?.userid = userBox.text!
+//                vc?.username = username
+//                vc?.token = token
+//        }
+//    }
     
     @IBAction func goButtonClick(_ sender: Any) {
         if (userBox.text?.isEmpty)! {
@@ -159,6 +160,13 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
         self.performSegue(withIdentifier: "loginSegue", sender: self)
     }
     
+    @IBAction func createNewUser(_ sender:UIButton) {
+        if(userid == "null") {
+            self.performSegue(withIdentifier: "createnewuser", sender: self)
+        } else {
+            self.performSegue(withIdentifier: "loginSegue", sender: self)
+        }
+    }
 //    @IBAction func spotifyLogout(_ sender: UIButton) {
 //        self.spotifyLogout(authSession: <#T##SPTSession#>)
 //    }
