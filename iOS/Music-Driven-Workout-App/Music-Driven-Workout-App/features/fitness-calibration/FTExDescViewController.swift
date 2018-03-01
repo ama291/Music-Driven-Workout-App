@@ -25,6 +25,8 @@ class FTExDescViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("in description")
+        print(exerciseInfo)
         self.exName.text = (self.exerciseInfo["name"]! as? String)!
         if (self.isCalibration) {
             self.fastornormal.text = "Please do this exercise at workout pace for 60 seconds."
@@ -72,14 +74,14 @@ class FTExDescViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.destination is FTExDescViewController
+        if segue.destination is FTExerciseViewController
         {
             let vc = segue.destination as? FTExerciseViewController
             //data to send
-            vc?.exerciseName = self.exName.text
             vc?.numExercises = self.numExercises
-            vc?.exerciseNum = self.exerciseNum
             vc?.isCalibration = self.isCalibration
+            vc?.exerciseInfo = self.exerciseInfo
+            vc?.exercisesRemaining = self.exercisesRemaining
         }
     }
 }

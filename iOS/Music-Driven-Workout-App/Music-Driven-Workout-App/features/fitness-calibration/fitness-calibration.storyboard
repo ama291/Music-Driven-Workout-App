@@ -311,7 +311,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yb7-Jq-GlL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1696.8" y="928.78560719640188"/>
+            <point key="canvasLocation" x="1734" y="958"/>
         </scene>
         <!--Choose Tracked-->
         <scene sceneID="pQb-KF-oWG">
@@ -413,6 +413,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="track:" destination="ZRy-OX-ssX" eventType="touchUpInside" id="OfL-ut-QY4"/>
+                                    <action selector="trackExercise:" destination="ZRy-OX-ssX" eventType="touchUpInside" id="7Y6-hP-SD5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxm-V4-GRa">
@@ -428,6 +429,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="next:" destination="ZRy-OX-ssX" eventType="touchUpInside" id="j12-m7-v9Y"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Results:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbZ-gh-fwX">
                                 <rect key="frame" x="29" y="195" width="122" height="59"/>
@@ -448,13 +452,16 @@
                         <viewLayoutGuide key="safeArea" id="Q2A-B7-blG"/>
                     </view>
                     <connections>
+                        <outlet property="nextExercise" destination="wxm-V4-GRa" id="Tpa-bm-D94"/>
                         <outlet property="rateLabel" destination="vT6-Py-O5F" id="gWq-pk-LGH"/>
                         <outlet property="trackButton" destination="Rsz-kQ-wKM" id="gC4-wc-JXC"/>
+                        <segue destination="WBg-pb-dfj" kind="show" identifier="nextExercise" id="yG1-XU-EPQ"/>
+                        <segue destination="bcl-X6-rOM" kind="show" identifier="finish" id="NiN-uD-3au"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gQ8-rd-Flk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3076" y="1592.6536731634185"/>
+            <point key="canvasLocation" x="3172" y="1678"/>
         </scene>
         <!--FT Ex Desc-->
         <scene sceneID="C4R-ff-2Bd">
@@ -722,7 +729,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="nRJ-Nt-mDX"/>
-        <segue reference="3vg-x6-fHO"/>
-        <segue reference="EN8-IK-vOx"/>
+        <segue reference="yG1-XU-EPQ"/>
+        <segue reference="gW0-DC-Gtg"/>
     </inferredMetricsTieBreakers>
 </document>

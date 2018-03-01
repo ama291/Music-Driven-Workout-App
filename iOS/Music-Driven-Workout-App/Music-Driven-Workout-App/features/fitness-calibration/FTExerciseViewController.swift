@@ -9,7 +9,8 @@
 import UIKit
 
 class FTExerciseViewController: UIViewController {
-    
+    var exerciseInfo: [String:Any] = [String:Any]()
+    var exercisesRemaining: [[String:Any]] = [[String:Any]]()
     var userid: String!
     var exerciseName: String!
     var numExercises: Int!
@@ -60,14 +61,20 @@ class FTExerciseViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if segue.destination is FTExDescViewController
+        if segue.destination is FTCompleteViewController
         {
             let vc = segue.destination as? FTCompleteViewController
             //data to send
             vc?.exerciseName = self.exerciseName
             vc?.isCalibration = self.isCalibration
         }
-        
+        else if segue.destination is FTCheckpointViewController
+        {
+            let vc = segue.destination as? FTCheckpointViewController
+            vc?.exerciseInfo = self.exerciseInfo
+            vc?.exercisesRemaining = self.exercisesRemaining
+            vc?.isCalibration = self.isCalibration
+        }
     }
     
 }
