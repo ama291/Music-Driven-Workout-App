@@ -11,6 +11,8 @@ import UIKit
 class WorkSelectionViewController: UIViewController {
     
     var userid: String!
+    var username: String!
+    var token: String!
     var themes = ""
     var categories = ""
     var musclegroup = ""
@@ -18,7 +20,7 @@ class WorkSelectionViewController: UIViewController {
     var duration = ""
     var difficulty = ""
     //TODO: populate this example token
-    var token = "b82cb70f-0f2e-4591-a892-a0b5bef45b9a"
+//    var token = "b82cb70f-0f2e-4591-a892-a0b5bef45b9a"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,12 +49,16 @@ class WorkSelectionViewController: UIViewController {
             let vc = segue.destination as? WorkSummaryViewController
             //data to send
             vc?.userid = userid!
+            vc?.username = username!
+            vc?.token = token!
         }
     }
     @IBAction func goToHome(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
         vc.userid = userid!
+        vc.username = username!
+        vc.token = token!
         present(vc, animated: true, completion: nil)
     }
     
