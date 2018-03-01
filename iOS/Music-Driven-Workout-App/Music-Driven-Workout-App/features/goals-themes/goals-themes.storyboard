@@ -233,9 +233,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
-                                    <segue destination="e4u-ql-KLH" kind="show" animates="NO" id="L5b-68-NLz">
-                                        <nil key="action"/>
-                                    </segue>
+                                    <action selector="goBackToThemesMenu:" destination="QMn-Cu-BGw" eventType="touchUpInside" id="HTS-Fh-e32"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Theme Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mAg-NU-ubq">
@@ -438,7 +436,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="c6j-01-N9k"/>
         <segue reference="h4I-gh-5QU"/>
-        <segue reference="L5b-68-NLz"/>
     </inferredMetricsTieBreakers>
 </document>

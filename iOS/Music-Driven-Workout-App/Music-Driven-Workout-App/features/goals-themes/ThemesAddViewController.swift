@@ -23,7 +23,12 @@ class ThemesAddViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    @IBAction func goBackToThemesMenu(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "themesID") as! ThemesMenuViewController
+        vc.userid = userid!
+        present(vc, animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 
