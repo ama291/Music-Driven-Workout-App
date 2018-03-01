@@ -112,6 +112,7 @@ def apiGetWorkout():
 		return failure("Invalid authentication")
 	try:
 		response = getWorkout(userid, themes, cats, groups, equipment, duration, difficulty, accessToken)
+		response = response[1:-1]
 		return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
