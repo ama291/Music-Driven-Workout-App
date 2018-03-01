@@ -11,9 +11,28 @@ import UIKit
 class FTCheckpointViewController: UIViewController {
     
     var userid: String!
+    var exid: Int!
+    var frequency: Float!
+    var isTracked: Bool!
+    var exercise: [String:Any] = [String:Any]()
+    
+    @IBOutlet weak var trackButton: UIButton!
+    @IBAction func track(_ sender: UIButton) {
+        print("track pressed")
+    }
+    
+    @IBOutlet weak var rateLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        frequency = 90.5
+        rateLabel.text = "\(String(Int(frequency))) RPM"
+        
+        isTracked = false
+        let trackedText = isTracked ? "Track Exercise" : "Un-track Exercise"
+        print(trackedText)
+        
+        trackButton.setTitle(trackedText, for: .normal)
 
         // Do any additional setup after loading the view.
     }

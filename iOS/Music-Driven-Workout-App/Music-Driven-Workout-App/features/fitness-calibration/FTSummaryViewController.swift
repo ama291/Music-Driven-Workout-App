@@ -43,7 +43,7 @@ class FTSummaryViewController: UIViewController {
                 self.tableView?.delegate = self.viewModel
                 self.tableView?.estimatedRowHeight = 100
                 self.tableView?.rowHeight = UITableViewAutomaticDimension
-                self.tableView?.allowsMultipleSelection = true
+                self.tableView?.allowsSelection = false
                 self.tableView?.separatorStyle = .none
             }
             
