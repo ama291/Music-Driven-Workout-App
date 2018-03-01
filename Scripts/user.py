@@ -114,6 +114,16 @@ class User(object):
         hasGenerated = new.generateWorkout() # true if no request failures
         return new if hasGenerated else None
 
+    def getWorkoutExercises(self, themes, categories, muscleGroups, equipment, duration, difficulty, accessToken):
+        print("in get workout exercises")
+        workout = Workout(self.ID, self.spotifyUsername, themes, categories, muscleGroups,
+                      equipment, duration, difficulty, accessToken)
+        print(workout)
+        hasGenerated = workout.generateWorkout()
+        print(workout.Exercises)
+        return workout.Exercises if hasGenerated else None
+
+
     def startWorkout(self, workout):
         id = workout.ID
 

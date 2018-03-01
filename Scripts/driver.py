@@ -151,6 +151,16 @@ def getWorkout(uid, themes, categories, muscleGroups, equipment, duration, diffi
     workout = user.getWorkout(themes, categories, muscleGroups, equipment, duration, difficulty, accessToken)
     return '{}' if workout is None else jsonpickle.encode(workout)
 
+def getWorkoutExercises(uid, themes, categories, muscleGroups, equipment, duration, difficulty, accessToken):
+    print(uid)
+    user = getUser(uid)
+    print(user)
+
+    if user is None:
+        return '{}'
+    exercises = user.getWorkoutExercises(themes, categories, muscleGroups, equipment, duration, difficulty, accessToken)
+    return '{}' if exercises is None else jsonpickle.encode(exercises)
+
 
 def startWorkout(uid, workout):
     """

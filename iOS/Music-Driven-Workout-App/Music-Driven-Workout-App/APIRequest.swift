@@ -18,23 +18,27 @@ class APIRequest: NSObject {
         
     }
     
-    func parseJsonGeneric(data: String, key: String) -> String? {
-        var res: Dictionary<String, String>
-        let resultData = data.data(using: String.Encoding.utf8)
+    func parseJsonStrToDictArrayWithKey(str: String, key: String) -> [[String:Any]] {
+        let dict = parseJsonResponeSingleDict(str: str)
+        let arrayStr = dict![key]
+        print(arrayStr, "arrayStr")
+        let arrayDict = arrayStr as! [[String:Any]]
+        print(arrayDict[0]["bpm"]!, "0 bpm")
+        return arrayDict
+    }
+    
+    func parseJsonStrToDictArray(str: String) -> [[String:Any]]? {
+        let data = str.data(using: .utf8)
+        var reply: [[String:Any]]
         do {
-            res = try JSONSerialization.jsonObject(with: resultData!, options: []) as! Dictionary<String, String>
-            let myDict = res
-            if let result = myDict[key] {
-                return result
-            }
-            
+            reply = try JSONSerialization.jsonObject(with: data!, options: []) as! [[String:Any]]
+            let myReplyDict = reply
+            return myReplyDict
         } catch let error {
             print(error)
         }
         return nil
-        
     }
-    
     
     func parseJsonRespone(data: Data) -> [Dictionary<String, Any>]? {
         if let result = parseJsonInitial(data: data) {
@@ -71,19 +75,15 @@ class APIRequest: NSObject {
         return nil
     }
     
-    func parseJsonResponeSingleDict(data: Data) -> String? {
-        if let result = parseJsonInitial(data: data) {
-            var reply: [String:Any]
-            
-            if let resultData = result.data(using: String.Encoding.utf8) {
-                do {
-                    reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! [String:Any]
-                    let myReplyDict = reply
-                    return myReplyDict["Result"] as? String
-                } catch let error {
-                    print(error)
-                }
-            }
+    func parseJsonResponeSingleDict(str: String) -> [String:Any]? {
+        let data = str.data(using: .utf8)
+        var reply: [String:Any]
+        do {
+            reply = try JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any]
+            let myReplyDict = reply
+            return myReplyDict
+        } catch let error {
+            print(error)
         }
         return nil
     }

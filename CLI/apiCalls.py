@@ -3,6 +3,8 @@ import json
 import jsonpickle
 from sys import argv
 from Scripts.dbfunctions import clearUser, realDB
+from Scripts.driver import onboarding, getUser
+from Scripts.theme import Theme
 
 dbURL = realDB
 
@@ -35,6 +37,20 @@ def getWorkout(uid, equipment, duration, difficulty, categories=None, muscleGrou
     data = {"userid": uid, "equipment": equipment, "duration": duration, "difficulty": difficulty, "categories": categories, "musclegroups": muscleGroups, "themes": themes, "key": key}
     workout = json.loads(jsonpickle.decode(makeRequest(route, data)))
     return workout
+
+def getWorkoutExercises(uid, themes, categories, muscleGroups, equipment, duration, difficulty, accessToken):
+    route = "/api/workouts/getworkout/"
+    data = {"userid": uid, 
+        "equipment": equipment, 
+        "duration": duration, 
+        "difficulty": difficulty, 
+        "categories": categories, 
+        "musclegroups": muscleGroups, 
+        "themes": themes, 
+        "token": accessToken,
+        "key": key}
+    exercises = json.loads(makeRequest(route, data))
+    return exercises
 
 def startWorkout(uid, workout):
     route = "/api/workouts/startworkout/"
@@ -215,29 +231,51 @@ if __name__ == '__main__':
         print(removeTheme(1, "theme2"))
         clearUser(dbURL, 1)
     elif argv[1] == "workout":
-        workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
-        print("\nGet Workouts")
-        print(workout)
-        print("\nStart Workout")
-        print(startWorkout(1, workout))
-        print("\nPause Workout")
-        print(pauseWorkout(1, 0))
-        print("\nQuit Workout")
-        print(quitWorkout(1, 0))
-        print("\nSave Workout")
-        print(saveWorkout(1, 0))
-        print("\nUnsave Workout")
-        print(unsaveWorkout(1, 0))
-        print("\nStart Saved Workout")
-        print(startSavedWorkout(1, 0))
+        username = "test-spotify-user"
 
-        ## TODO: The following things may not be working
-        # Start saved workout breaks on workouts that haven't been saved
-        # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
-        print("\nWorkouts Saved")
-        saved = workoutsSaved(0)
-        print(saved)
-        print(type(saved))
+        # test onboarding
+        uid = onboarding(username, 70, 160, 1995)
+        # test getUser
+        testUser = getUser(uid)
+        # test getWorkout
+        # get new workout, themes set
+        theme1 = Theme("The Killers", "artist", "0C0XlULifJtAgn6ZNCW2eu", 1)
+        theme2 = Theme("Otra Vez (feat. J Balvin)", "track", "7pk3EpFtmsOdj8iUhjmeCM", 2)
+        theme3 = Theme("Disciples", "track", "2gNfxysfBRfl9Lvi9T3v6R", 3)
+        themes = [theme1, theme2, theme3]
+        categories = ["Cardio", "Stretching"]
+        muscleGroups = None
+        equipment = ["Body Only"]
+        duration = 50
+        difficulty = "Intermediate"
+        accessToken = "example-access-token"
+
+        # test get workout exercsies
+        exs = getWorkoutExercises(uid, themes, categories, muscleGroups, equipment, duration, difficulty, accessToken)
+        for ex in exs:
+            print(ex)
+
+        clearUser(dbURL, username)
+        # print("\nStart Workout")
+        # print(startWorkout(1, workout))
+        # print("\nPause Workout")
+        # print(pauseWorkout(1, 0))
+        # print("\nQuit Workout")
+        # print(quitWorkout(1, 0))
+        # print("\nSave Workout")
+        # print(saveWorkout(1, 0))
+        # print("\nUnsave Workout")
+        # print(unsaveWorkout(1, 0))
+        # print("\nStart Saved Workout")
+        # print(startSavedWorkout(1, 0))
+
+        # ## TODO: The following things may not be working
+        # # Start saved workout breaks on workouts that haven't been saved
+        # # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
+        # print("\nWorkouts Saved")
+        # saved = workoutsSaved(0)
+        # print(saved)
+        # print(type(saved))
 
     elif argv[1] == "fitness":
         # print("\nWorkouts In Progress\n", workoutsInProgress(0))

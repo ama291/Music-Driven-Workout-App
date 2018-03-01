@@ -60,6 +60,12 @@ class TestDriver(unittest.TestCase):
         workout = getWorkout(uid, themes, categories, muscleGroups, equipment, duration, difficulty, accessToken)
         wid = (jsonpickle.decode(workout)).ID
 
+        # test get workout exercsies
+        exs = getWorkoutExercises(uid, themes, categories, muscleGroups, equipment, duration, difficulty, accessToken)
+        for ex in exs:
+            print(ex)
+        ## TODO
+
         # test startWorkout
         self.assertEqual(startWorkout(uid, workout), 0)
         self.assertEqual(startWorkout(uid, workout), 2) # workout already in progress

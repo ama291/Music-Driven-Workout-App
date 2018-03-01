@@ -76,16 +76,44 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
 
         request.submitPostLocal(route: route, qstring: query) { (data, response, error) -> Void in
             if let error = error {
+                print("FATAL ERROR")
                 fatalError(error.localizedDescription)
             }
-            print("initial data:", String(describing: data))
+            print("initial data:", String(describing: data!))
             let request = APIRequest()
-            let resStr = request.parseJsonResponeSingleDict(data: data!)
-            print(resStr)
-            let secondStr = request.parseJsonGeneric(data: resStr!, key: "Exercises")
-            print(secondStr)
-            let resDict = request.parseJsonResponseFromString(str: secondStr!)
-            print(resDict)
+            let jsonStr = String(data: data!, encoding: .utf8)
+            let res = request.parseJsonResponeSingleDict(str: jsonStr!)
+            print(res!, "res")
+            var resStr = res!["Result"] as! String
+            resStr.removeFirst()
+            resStr.removeLast()
+            
+            
+//            let res = request.parseJsonResponeSingleDict(str: jsonStr)
+//            print(res!, "res")
+//            let exercises = res!["Exercises"]!
+//            print(exercises, "exercises")
+            let exDicts = request.parseJsonStrToDictArrayWithKey(str: jsonStr!, key: "Exercises")
+            print(exDicts)
+            print(exDicts[0])
+            
+            print("Res str: \(resStr)")
+//            let exercise = resStr[0]["Exercises"]
+//            print(exercise, "exercises")
+            let resDict = request.parseJsonResponeSingleDict(str: resStr )
+            print(resDict, "resDict")
+//            let exercises = resDict!["Exercises"]!
+//            print(exercises, "exercises")
+//            let exDicts = request.parseJsonStrToDictArrayWithKey(str: jsonStr!, key: "Exercises")
+//            print(exDicts)
+//            print(exDicts[0])
+//            let request = APIRequest()
+//            let resStr = request.parseJsonResponeSingleDict(data: data!)
+//            print(resStr)
+//            let secondStr = request.parseJsonGeneric(data: resStr!, key: "Exercises")
+//            print(secondStr)
+//            let resDict = request.parseJsonResponseFromString(str: secondStr!)
+//            print(resDict)
 //
 //            /* Parse the json object returned by submitPostLocal() */
 //            let json = try? JSONSerialization.jsonObject(with: data!, options: [])

@@ -21,6 +21,18 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let jsonStr: String = "{\"py/object\": \"Scripts.workout.Workout\", \"Exercises\": [{\"py/object\": \"Scripts.exercise.Exercise\", \"bpm\": 120, \"category\": \"Strength\", \"duration\": 3.0, \"equipment\": \"Body Only\", \"id\": 3, \"images\": \"https://www.bodybuilding.com/exercises/exerciseImages/sequences/28/Male/m/28_1.jpg\", \"muscleGroup\": \"Neck\", \"name\": \"Isometric Neck Exercise - Sides\", \"rpm\": 12, \"tracks\": [{\"name\": \"Going Under - Leon Lour Remix\", \"uri\": \"spotify:track:6rtD5drZ38Vfw007z39iH5\"}]}, {\"py/object\": \"Scripts.exercise.Exercise\", \"bpm\": 120, \"category\": \"Strength\", \"duration\": 6.0, \"equipment\": \"Body Only\", \"id\": 4, \"images\": \"https://www.bodybuilding.com/exercises/exerciseImages/sequences/27/Male/m/27_2.jpg\", \"muscleGroup\": \"Neck\", \"name\": \"Isometric Neck Exercise - Front And Back\", \"rpm\": 12, \"tracks\": [{\"name\": \"Going Under - Leon Lour Remix\", \"uri\": \"spotify:track:6rtD5drZ38Vfw007z39iH5\"}, {\"name\": \"All Ive Ever Wanted\", \"uri\": \"spotify:track:1w5GiowT8eXagycUBqcz2g\"}]}], \"ID\": \"6bb599ab-970b-4373-aaf5-630f3ab25a6f\", \"accessToken\": \"b82cb70f-0f2e-4591-a892-a0b5bef45b9a\", \"categories\": null, \"currExercise\": 0, \"difficulty\": \"Beginner\", \"duration\": 9.0, \"equipment\": [\"Body Only\", \"Body Only\"], \"muscleGroups\": [\"Neck\", \"Traps\"], \"spotID\": \"testuser1\", \"themes\": null, \"uid\": 21}"
+        
+        
+        let request = APIRequest()
+        let res = request.parseJsonResponeSingleDict(str: jsonStr)
+        print(res!, "res")
+        let exercises = res!["Exercises"]!
+        print(exercises, "exercises")
+        let exDicts = request.parseJsonStrToDictArrayWithKey(str: jsonStr, key: "Exercises")
+        print(exDicts)
+        print(exDicts[0])
         // Do any additional setup after loading the view.
         
         hideCategories()

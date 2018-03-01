@@ -116,6 +116,43 @@ def apiGetWorkout():
 	except Exception as e:
 		return failure(str(e))
 
+@app.route('/api/workouts/getworkoutexercises/', methods=['POST'])
+def apiGetWorkoutExercises():
+	userid = request.form.get('userid')
+	if (userid != None):
+		userid = int(userid)
+	equipment = request.form.get('equipment')
+	if (equipment != None):
+		equipment = equipment.split(",")
+	else:
+		equipment = []
+	duration = request.form.get('duration')
+	if (duration != None):
+		duration = int(duration)
+	difficulty = request.form.get('difficulty')
+	accessToken = request.form.get('token')
+	cats = request.form.get('categories')
+	if (cats != None):
+		cats = cats.split(",")
+	groups = request.form.get('musclegroups')
+	if (groups != None):
+		groups = groups.split(",")
+	themes = request.form.get('themes')
+	if(themes != None):
+		themes = jsonpickle.decode(themes) # turn into List[Theme]
+	key = request.form.get('key')
+	params = [userid, duration, difficulty, accessToken, key]
+	if (None in params):
+		return failure("Invalid parameters")
+	if (key != masterKey):
+		return failure("Invalid authentication")
+	try:
+		response = getWorkoutExercises(userid, themes, cats, groups, equipment, duration, difficulty, accessToken)
+		print(json.dumps(response))
+		return standardRes(json.dumps(response))
+	except Exception as e:
+		return failure(str(e))
+
 @app.route('/api/workouts/startworkout/', methods=['POST'])
 def apiStartWorkout():
 	userid = request.form.get('userid')
