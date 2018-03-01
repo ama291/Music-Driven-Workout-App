@@ -428,11 +428,6 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="WBg-pb-dfj" kind="show" id="7kX-KR-ea2">
-                                        <nil key="action"/>
-                                    </segue>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Results:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbZ-gh-fwX">
                                 <rect key="frame" x="29" y="195" width="122" height="59"/>
@@ -497,9 +492,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="5r9-iF-qe2" kind="show" id="EJK-cM-9ig">
-                                        <nil key="action"/>
-                                    </segue>
+                                    <segue destination="ZRy-OX-ssX" kind="show" id="hUa-Mp-pb9"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ukz-Hd-ro5">
@@ -517,6 +510,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="mMl-cj-V8r"/>
                     </view>
+                    <connections>
+                        <outlet property="doEx" destination="0PT-81-bQh" id="1Qb-bD-fOQ"/>
+                        <outlet property="exDesc" destination="2hh-Nf-h4c" id="hu3-4Z-jtq"/>
+                        <outlet property="exName" destination="7PZ-jG-vxD" id="mYh-ro-5cZ"/>
+                        <outlet property="fastornormal" destination="oix-Xa-Ehg" id="cC8-1e-gs9"/>
+                        <outlet property="workoutImage" destination="ukz-Hd-ro5" id="wN1-Hn-UVW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0W5-8p-6Jo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -576,6 +576,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="8wH-sL-gTV"/>
                     </view>
+                    <connections>
+                        <outlet property="exName" destination="qJt-be-sSN" id="KbX-Fx-xde"/>
+                        <outlet property="seconds_remaining" destination="dMn-i0-yJq" id="L4G-AD-bUb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nnr-eG-0Ik" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -718,7 +722,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="nRJ-Nt-mDX"/>
-        <segue reference="7kX-KR-ea2"/>
+        <segue reference="3vg-x6-fHO"/>
+        <segue reference="hUa-Mp-pb9"/>
         <segue reference="gW0-DC-Gtg"/>
     </inferredMetricsTieBreakers>
 </document>

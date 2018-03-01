@@ -12,11 +12,32 @@ class FTSummaryViewController: UIViewController {
 
     var viewModel = ViewModel()
 
-    var userid: String!
+    var userid: Int = 1
     var category: String = ""
     var numEx: Int = 3
     var exChoices: [Int] = [Int]()
     var reply: [[String:Any]] = [[String:Any]]()
+    
+    var exercises: [[String:Any]] = [[String:Any]]()
+    var exerciseInfo = [String: Any]()
+    var isCalibration: Bool = false
+    var exNum: Int?
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.destination is FTExDescViewController
+        {
+            let vc = segue.destination as? FTExDescViewController
+            //data to send
+            vc?.userid = userid
+            vc?.exercisesRemaining = exercises
+            vc?.exerciseInfo = exerciseInfo
+            vc?.isCalibration = isCalibration
+            vc?.numExercises = numEx
+            vc?.exerciseNum = numEx - exercises.count
+        }
+    }
     
     @IBOutlet weak var tableView: UITableView?
     
@@ -32,6 +53,8 @@ class FTSummaryViewController: UIViewController {
                 fatalError(error.localizedDescription)
             }
             self.reply = request.parseJsonRespone(data: data!)!
+            self.exercises = self.reply
+            self.exerciseInfo = self.exercises.removeFirst()
             
             let vmitems = self.reply.map { ViewModelItem(item: Model(title: $0["name"] as! String, data: $0)) }
             self.viewModel.setItems(items: vmitems)
