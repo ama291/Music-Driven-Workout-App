@@ -136,7 +136,6 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is MenuViewController {
             let vc = segue.destination as? MenuViewController
-                //data to send
                 vc?.userid = userBox.text!
                 vc?.username = username
                 vc?.token = token
@@ -144,6 +143,15 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     }
     
     @IBAction func goButtonClick(_ sender: Any) {
+        if (userBox.text?.isEmpty)! {
+            print("ERR: No userid given.")
+            let alert = UIAlertController(title: "Error", message: "No userid given.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         self.performSegue(withIdentifier: "loginSegue", sender: self)
     }
     

@@ -21,10 +21,10 @@ class Global {
         }
     }
     /* For navigating and passing variables to a VC on a separate storyboard */
-    func goHome() {
+    func goToHome() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)  // Main = Main.storyboard
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController  // homeID = the StoryboardID for the target ViewController in the target storyboard
         vc.userid = userid!  // Setting target VC variables
-        vc.present(vc, animated: true, completion: nil)
+        vc.present(vc, animated: true, completion: nil)  // remove the 'vc.' here when this is actually bound to a button
     }
 }

@@ -11,10 +11,13 @@ import UIKit
 class FTExDescViewController: UIViewController {
     
     var userid: String!
+    var exerciseInfo: [String:Any]!
+    var isCalibration: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print(exerciseInfo, isCalibration)
         // Do any additional setup after loading the view.
     }
 
