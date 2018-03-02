@@ -679,7 +679,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="startMusic:" destination="HRG-jE-GSX" eventType="touchUpInside" id="Aoj-E4-Yac"/>
                                     <segue destination="dqf-WA-fiu" kind="show" id="XMo-jY-u0E">
                                         <nil key="action"/>
                                     </segue>
@@ -722,6 +721,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Yx8-dB-rV5"/>
                     </view>
+                    <connections>
+                        <outlet property="exTable" destination="UWb-dC-S1B" id="Nf8-dG-ndi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hai-OY-rsM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -776,9 +778,6 @@
                                 </state>
                                 <connections>
                                     <action selector="skipclick:" destination="dqf-WA-fiu" eventType="touchUpInside" id="HYn-jS-QX7"/>
-                                    <segue destination="e91-8e-ujU" kind="show" id="hH3-WN-N88">
-                                        <nil key="action"/>
-                                    </segue>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Exercise Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhX-ZK-Xbl">
@@ -823,6 +822,7 @@
                         <outlet property="quitbutton" destination="ZnO-89-Mdg" id="H4q-hf-jws"/>
                         <outlet property="skipbutton" destination="rUy-B7-Rj7" id="FEe-Zj-Hxt"/>
                         <outlet property="timelabel" destination="n5T-vO-10O" id="wBY-tz-NCE"/>
+                        <segue destination="e91-8e-ujU" kind="show" identifier="completeSegue" animates="NO" id="1j9-ve-Qyo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZJ-y5-XV0" userLabel="First Responder" sceneMemberID="firstResponder"/>
