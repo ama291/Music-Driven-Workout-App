@@ -67,10 +67,10 @@ class GoalsAddViewController: UIViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         //userid, name, description, goalnum, categories, musclegroups, duration, dayssperweek, notify, key
-        let postString = "userid=" + userid + "name=" + name
-        let postString2 = postString + "description=" + dsc + "goalnum=" + goalnum + "categories=" + categories
-        let postString3 = postString2 + "musclegroups=" + musclegroups + "duration=" + duration
-        let postString4 = postString3 + "daysperweek=" + daysperweek + "notify=" + notify + "&key=SoftCon2018"
+        let postString = "userid=" + userid + "&name=" + name
+        let postString2 = postString + "&description=" + dsc + "&goalnum=" + goalnum + "&categories=" + categories
+        let postString3 = postString2 + "&musclegroups=" + musclegroups + "&duration=" + duration
+        let postString4 = postString3 + "&daysperweek=" + daysperweek + "&notify=" + notify + "&key=SoftCon2018"
         request.httpBody = postString4.data(using: String.Encoding.utf8)
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in

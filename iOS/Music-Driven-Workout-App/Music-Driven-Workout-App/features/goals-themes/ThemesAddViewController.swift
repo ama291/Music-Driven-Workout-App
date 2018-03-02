@@ -52,8 +52,8 @@ class ThemesAddViewController: UIViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         //userid, themename, spotifyId, theme, numworkouts, key
-        let postString = "userid=" + userid + "themename=" + themename
-        let postString2 = postString + "spotifyId=" + spotifyId + "theme=" + theme + "numworkouts=" + numworkouts + "&key=SoftCon2018"
+        let postString = "userid=" + userid + "&themename=" + themename
+        let postString2 = postString + "&spotifyId=" + spotifyId + "&theme=" + theme + "&numworkouts=" + numworkouts + "&key=SoftCon2018"
         request.httpBody = postString2.data(using: String.Encoding.utf8)
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
@@ -70,8 +70,7 @@ class ThemesAddViewController: UIViewController {
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "themesID") as! ThemesMenuViewController
         vc.userid = userid!
-        //addThemeAPI()
+        addThemeAPI()
         present(vc, animated: true, completion: nil)
     }
-    
 }

@@ -114,7 +114,7 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         //userid, name, key
-        let postString = "userid=" + userid + "name=" + name + "&key=SoftCon2018"
+        let postString = "userid=" + userid + "&name=" + name + "&key=SoftCon2018"
         request.httpBody = postString.data(using: String.Encoding.utf8)
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
