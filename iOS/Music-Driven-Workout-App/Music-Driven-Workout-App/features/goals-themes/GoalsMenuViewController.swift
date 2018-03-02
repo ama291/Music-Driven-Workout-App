@@ -115,67 +115,67 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "goalsAdd") as! GoalsAddViewController
         vc.userid = userid!
-        vc.player = self.player!
-        vc.audiostreaming = self.audiostreaming!
+//        vc.player = self.player!
+//        vc.audiostreaming = self.audiostreaming!
         present(vc, animated: true, completion: nil)
     }
     
-    @objc func updateAfterFirstLogin () {
-        
-        //        loginButton.isHidden = true
-        let userDefaults = UserDefaults.standard
-        
-        if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
-            
-            let sessionDataObj = sessionObj as! Data
-            let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
-            
-            self.session = firstTimeSession
-            initializaPlayer(authSession: session)
-            username = session.canonicalUsername
-            token = session.accessToken
-            //            self.loginButton.isHidden = true
-            // self.loadingLabel.isHidden = false
-        }
-    }
+//    @objc func updateAfterFirstLogin () {
+//
+//        //        loginButton.isHidden = true
+//        let userDefaults = UserDefaults.standard
+//
+//        if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
+//
+//            let sessionDataObj = sessionObj as! Data
+//            let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
+//
+//            self.session = firstTimeSession
+//            initializaPlayer(authSession: session)
+//            username = session.canonicalUsername
+//            token = session.accessToken
+//            //            self.loginButton.isHidden = true
+//            // self.loadingLabel.isHidden = false
+//        }
+//    }
     
-    func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
-        // after a user authenticates a session, the SPTAudioStreamingController is then initialized and this method called
-        print("logged in")
-        self.player?.playSpotifyURI("spotify:track:58s6EuEYJdlb0kO7awm3Vp", startingWith: 0, startingWithPosition: 0, callback: { (error) in
-            if (error == nil) {
-                print("playing!")
-            }
-            if(error != nil) {
-                print("errors while playing")
-            }
-        })
-    }
+//    func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
+//        // after a user authenticates a session, the SPTAudioStreamingController is then initialized and this method called
+//        print("logged in")
+//        self.player?.playSpotifyURI("spotify:track:58s6EuEYJdlb0kO7awm3Vp", startingWith: 0, startingWithPosition: 0, callback: { (error) in
+//            if (error == nil) {
+//                print("playing!")
+//            }
+//            if(error != nil) {
+//                print("errors while playing")
+//            }
+//        })
+//    }
     
-    @IBAction func startMusic(_ sender: UIButton) {
-        print("workoutsummary")
-        print("username")
-        print(username)
-        print("access token")
-        print(token)
-        updateAfterFirstLogin()
-    }
-    
-    func initializaPlayer(authSession:SPTSession){
-        if self.player == nil {
-            self.player = SPTAudioStreamingController.sharedInstance()
-            print(self.player)
-            print("^^^ self.player")
-            self.player!.playbackDelegate = self
-            self.player!.delegate = self
-            try! player?.start(withClientId: auth.clientID)
-            self.player!.login(withAccessToken: authSession.accessToken)
-            print("access token: ")
-            print(authSession.accessToken)
-            print("username: ")
-            print(authSession.canonicalUsername)
-        }
-    }
+//    @IBAction func startMusic(_ sender: UIButton) {
+//        print("workoutsummary")
+//        print("username")
+//        print(username)
+//        print("access token")
+//        print(token)
+//        updateAfterFirstLogin()
+//    }
+//
+//    func initializaPlayer(authSession:SPTSession){
+//        if self.player == nil {
+//            self.player = SPTAudioStreamingController.sharedInstance()
+//            print(self.player)
+//            print("^^^ self.player")
+//            self.player!.playbackDelegate = self
+//            self.player!.delegate = self
+//            try! player?.start(withClientId: auth.clientID)
+//            self.player!.login(withAccessToken: authSession.accessToken)
+//            print("access token: ")
+//            print(authSession.accessToken)
+//            print("username: ")
+//            print(authSession.canonicalUsername)
+//        }
+//    }
     
 //    func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePlaybackStatus isPlaying: Bool) {
 //        print("188")
@@ -189,52 +189,52 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
 //        })
 //    }
     
-    func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
-        print("193")
-        print(self.player)
-        self.player?.queueSpotifyURI("spotify:track:6JzzI3YxHCcjZ7MCQS2YS1", callback: {(error) in
-            if (error == nil) {
-                print("queued!")
-                self.player?.playSpotifyURI("spotify:track:6JzzI3YxHCcjZ7MCQS2YS1", startingWith: 0, startingWithPosition: 0, callback: { (error) in
-                    if (error == nil) {
-                        print("playing!")
-                    }
-                    if(error != nil) {
-                        print("errors while playing")
-                    }
-                })
-            } else {
-                print("error queueing")
-            }
-        })
-    }
+//    func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
+//        print("193")
+//        print(self.player)
+//        self.player?.queueSpotifyURI("spotify:track:6JzzI3YxHCcjZ7MCQS2YS1", callback: {(error) in
+//            if (error == nil) {
+//                print("queued!")
+//                self.player?.playSpotifyURI("spotify:track:6JzzI3YxHCcjZ7MCQS2YS1", startingWith: 0, startingWithPosition: 0, callback: { (error) in
+//                    if (error == nil) {
+//                        print("playing!")
+//                    }
+//                    if(error != nil) {
+//                        print("errors while playing")
+//                    }
+//                })
+//            } else {
+//                print("error queueing")
+//            }
+//        })
+//    }
+//
+//    @IBAction func pauseSong(){
+//        print("trying to pause")
+//        self.player?.setIsPlaying(false, callback: nil)
+//    }
     
-    @IBAction func pauseSong(){
-        print("trying to pause")
-        self.player?.setIsPlaying(false, callback: nil)
-    }
+//    @IBAction func skip() {
+//        do {
+//            try
+//            print(userid)
+//            initializaPlayer(authSession:session)
+//            self.player?.playSpotifyURI("spotify:track:3n3Ppam7vgaVa1iaRUc9Lp", startingWith: 0, startingWithPosition: 0, callback: { (error) in
+//                if (error == nil) {
+//                    print("playing!")
+//                }
+//                if(error != nil) {
+//                    print("errors while playing")
+//                }
+//            })
+//        } catch is Error {
+//            print("ERROR W SKIP")
+//        }
+////        self.player = nil
+//    }
     
-    @IBAction func skip() {
-        do {
-            try
-            print(userid)
-            initializaPlayer(authSession:session)
-            self.player?.playSpotifyURI("spotify:track:3n3Ppam7vgaVa1iaRUc9Lp", startingWith: 0, startingWithPosition: 0, callback: { (error) in
-                if (error == nil) {
-                    print("playing!")
-                }
-                if(error != nil) {
-                    print("errors while playing")
-                }
-            })
-        } catch is Error {
-            print("ERROR W SKIP")
-        }
-//        self.player = nil
-    }
-    
-    @IBAction func playSong(){
-        print("trying to play")
-        self.player?.setIsPlaying(true, callback: nil)
-    }
+//    @IBAction func playSong(){
+//        print("trying to play")
+//        self.player?.setIsPlaying(true, callback: nil)
+//    }
 }
