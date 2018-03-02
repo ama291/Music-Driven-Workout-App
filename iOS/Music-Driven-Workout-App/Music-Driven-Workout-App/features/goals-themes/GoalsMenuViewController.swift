@@ -191,9 +191,18 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
         print("193")
+        print(self.player)
         self.player?.queueSpotifyURI("spotify:track:6JzzI3YxHCcjZ7MCQS2YS1", callback: {(error) in
             if (error == nil) {
                 print("queued!")
+                self.player?.playSpotifyURI("spotify:track:6JzzI3YxHCcjZ7MCQS2YS1", startingWith: 0, startingWithPosition: 0, callback: { (error) in
+                    if (error == nil) {
+                        print("playing!")
+                    }
+                    if(error != nil) {
+                        print("errors while playing")
+                    }
+                })
             } else {
                 print("error queueing")
             }
@@ -201,20 +210,12 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @IBAction func pauseSong(){
-        //        if(self.player?.isPlaying == true) {
         print("trying to pause")
-        print(self.player)
         self.player?.setIsPlaying(false, callback: nil)
-        //        }
-        //        else {
-        //            self.player?.setIsPlaying(true,callback: nil)
-        //        }
     }
     
     @IBAction func playSong(){
-        //        if(self.player?.isPlaying == true) {
         print("trying to play")
-        print(self.player)
         self.player?.setIsPlaying(true, callback: nil)
     }
 }
