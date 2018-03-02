@@ -125,7 +125,12 @@ class FTExerciseViewController: UIViewController {
                             let jsonResponse = self.parser.parseJsonResponeSinglet(data: data)
                             self.frequency = String(describing: (jsonResponse!["rate"] as? Float)!)
                             self.freq = (jsonResponse!["rate"] as? Float)!
-                            self.performSegue(withIdentifier: "finished_ex", sender: nil)
+                            if self.isCalibration {
+                                self.performSegue(withIdentifier: "skipCE", sender: nil)
+                            }
+                            else {
+                                self.performSegue(withIdentifier: "skipFT", sender: nil)
+                            }
                             return
                         }
                         catch {

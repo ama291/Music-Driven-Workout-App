@@ -68,8 +68,8 @@ class APIRequest: NSObject {
     func submitPostLocal(route: String, qstring: String, completion: @escaping (Data?, URLResponse?,Error?) -> Void) -> URLSessionDataTask {
         var urlComponents = URLComponents()
         urlComponents.scheme = "http"
-        urlComponents.host = "127.0.0.1"
-        urlComponents.port = 5000
+        urlComponents.host = "138.197.49.155"
+        urlComponents.port = 8000
         urlComponents.path = route
         urlComponents.query = qstring
         guard let url = urlComponents.url else {
