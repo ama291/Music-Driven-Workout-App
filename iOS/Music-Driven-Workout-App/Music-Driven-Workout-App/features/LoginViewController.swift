@@ -74,6 +74,38 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
 //        print("logged out")
 //    }
     
+//    @objc func startPlayback () {
+//
+//        let userDefaults = UserDefaults.standard
+//
+//        if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
+//
+//            let sessionDataObj = sessionObj as! Data
+//            let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
+//
+//            self.session = firstTimeSession
+//            initializePlayer(authSession: session)
+//        }
+//    }
+    
+    func initializePlayer(authSession:SPTSession){
+        if self.player == nil {
+//            GlobalVariables.sharedManager.player = SPTAudioStreamingController.sharedInstance()
+//            GlobalVariables.sharedManager.player!.playbackDelegate = self
+//            GlobalVariables.sharedManager.player!.delegate = self
+//            try! GlobalVariables.sharedManager.player?.start(withClientId: auth.clientID)
+//            GlobalVariables.sharedManager.player!.login(withAccessToken: authSession.accessToken)
+            self.player = SPTAudioStreamingController.sharedInstance()
+            self.player!.playbackDelegate = self
+            self.player!.delegate = self
+            try! player?.start(withClientId: auth.clientID)
+            self.player!.login(withAccessToken: authSession.accessToken)
+            
+        }
+    }
+    
+    
+    
     func getuseridapi(username: String) {
         guard let url = URL(string: "http://138.197.49.155:8000/api/workouts/getuserid/") else { return }
         var request = URLRequest(url: url)
@@ -95,7 +127,6 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     
     @objc func updateAfterFirstLogin () {
         
-//        loginButton.isHidden = true
         let userDefaults = UserDefaults.standard
         
         if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
@@ -104,14 +135,24 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
             
             self.session = firstTimeSession
-//            initializaPlayer(authSession: session)
-            username = session.canonicalUsername
-            getuseridapi(username: username)
-            token = session.accessToken
-//            self.loginButton.isHidden = true
-            // self.loadingLabel.isHidden = false
+            initializePlayer(authSession: session)
         }
     }
+    
+    //    @objc func startPlayback () {
+    //
+    //        let userDefaults = UserDefaults.standard
+    //
+    //        if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
+    //
+    //            let sessionDataObj = sessionObj as! Data
+    //            let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
+    //
+    //            self.session = firstTimeSession
+    //            initializePlayer(authSession: session)
+    //        }
+    //    }
+    
     
 //    func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
 //        // after a user authenticates a session, the SPTAudioStreamingController is then initialized and this method called
@@ -190,6 +231,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
             vc.userid = userid!
+            vc.player = player!
             present(vc, animated: false, completion: nil)
         } else {
 //            self.performSegue(withIdentifier: "loginSegue", sender: self)

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -822,7 +822,6 @@
                         <outlet property="quitbutton" destination="ZnO-89-Mdg" id="H4q-hf-jws"/>
                         <outlet property="skipbutton" destination="rUy-B7-Rj7" id="FEe-Zj-Hxt"/>
                         <outlet property="timelabel" destination="n5T-vO-10O" id="wBY-tz-NCE"/>
-                        <segue destination="e91-8e-ujU" kind="show" identifier="completeSegue" animates="NO" id="1j9-ve-Qyo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZJ-y5-XV0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -944,7 +943,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FZX-bw-un5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2561" y="-1390"/>
+            <point key="canvasLocation" x="1798" y="-572"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
