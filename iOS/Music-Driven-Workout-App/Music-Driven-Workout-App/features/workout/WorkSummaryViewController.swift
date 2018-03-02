@@ -8,7 +8,13 @@
 
 import UIKit
 
-class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
+/* struct for holding JSON Response from API */
+struct jsonRequest: Codable {
+    var Result: String
+    var Status: String
+}
+
+class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
 
     var userid: String!
     var themes: String!
@@ -60,11 +66,7 @@ class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDele
         }
     }
 
-    /* Mark: Make a call to getWorkout() */
-    var reply: [String:Any] = [String:Any]()
-    var exerciseInfo: [String:Any] = [String:Any]()
-    var exList: [String] = [String]()
-
+    /* Mark: Make a call to getWorkout() API and Parse Result */
     @objc func getWorkout() {
         let request = APIRequest()
         let route = "/api/workouts/getworkout/"
@@ -78,57 +80,39 @@ class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDele
         query += "&duration=" + duration
         query += "&difficulty=" + difficulty
         query += "&token=" + token
-        print("QUERY:" + query + "\n")
 
         request.submitPostLocal(route: route, qstring: query) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }
-            print("initial data:", String(describing: data))
-            /* Parse the json object returned by submitPostLocal() */
-            let json = try? JSONSerialization.jsonObject(with: data!, options: [])
-            print("JSON:", json as Any)
-            if let dictionary = json as? [String: Any] {
-                if let status = dictionary["Status"] as? String {
-                    print("Status:", status)
-                }
-
-                /* TODO - Turn the Result into a nested dictionary */
-                var result = dictionary["Result"] as! String
-//                result.remove(at: result.startIndex)
-//                result.removeLast()
-                print("result: ", result)
-
-                //var resultDictionary: [String: [Any]]
-                if let resultData = result.data(using: .utf8, allowLossyConversion: false) {
-                    do {
-                        let reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! [String: AnyObject]
-                        print("reply JSON:", reply as Any)
-                    } catch let error as NSError {
-                        print("Failed to Load: \(error.localizedDescription)")
+            /* Parse the returned json */
+            guard let json = try? JSONDecoder().decode(jsonRequest.self, from: data!) else { return }
+            let resultData = json.Result.data(using: .utf8)
+            let resultJson = try? JSONSerialization.jsonObject(with: resultData!, options: [])
+            
+            if let dictionary = resultJson as? [String: Any] {
+                if let exercises = dictionary["Exercises"] as? [Any] {
+                    for ex in exercises {
+                        if let exDict = ex as? [String: Any] {
+                            print(exDict["name"] as! String)  // debugging
+                            // Add Exercise names to TableView
+                            var content = exDict["name"] as! String
+                            content += "\t Category: " + (exDict["category"] as! String)
+                            content += "\t Muscle Group: " + (exDict["muscleGroup"] as! String)
+                            print(content)
+                            self.tableContent.append(content)
+                        }
                     }
                 }
-
-//                if let result = dictionary["Result"] as? String {
-//                    print("result", result.data(using: .utf8), result)
-//                    let resJson = try? JSONSerialization.jsonObject(with: result.data(using: String.Encoding.utf8)!, options: [])
-//                    print("RESJSON: ", resJson as Any)
-//                    if let resDict = resJson as? [String: Any] {
-//                        if let uid = resDict["uid"] as? String {
-//                            print(uid)
-//                        } else {print("uid err")}
-//                    } else {print("resDict err")}
-//                }  else {print("result err")}
-
             }
-
-            }.resume()
+        }.resume()
     }
 
     /* Mark: tableView */
     let sections = ["Exercises"]
-    //let exList = ["Test Input 1", "Test Input 2"]
-
+    var tableContent: [String] = [String]()  //populated by getWorkout()
+    
+    // Section Headers
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section]
     }
@@ -140,8 +124,7 @@ class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDele
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            // Exercise Section
-            return exList.count
+            return tableContent.count
         default:
             return 0
         }
@@ -154,7 +137,7 @@ class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDele
         // Depending on the section, fill the textLabel with the relevant text
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = exList[indexPath.row]
+            cell.textLabel?.text = tableContent[indexPath.row]
             break
         default:
             break
@@ -163,5 +146,33 @@ class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDele
         // Return the configured cell
         return cell
     }
+    
 
 }
+
+/* Old Code that went inside  request.submitPostLocal(){}.resume */
+//var reply: [String:Any] = [String:Any]()
+//var exerciseInfo: [String:Any] = [String:Any]()
+//            /* Parse the json object returned by submitPostLocal() */
+//            let json = try? JSONSerialization.jsonObject(with: data!, options: [])
+//            print("JSON:", json as Any, "\n\n")
+//            if let dictionary = json as? [String: Any] {
+//                /* Parse Status */
+//                if let status = dictionary["Status"] as? String {
+//                    print("Status:", status)
+//                }
+//
+//                /* Parse Result */
+//                let result = dictionary["Result"] as! String
+//                print("result: ", result)
+//
+//                if let resultData = result.data(using: .utf8, allowLossyConversion: false) {
+//                    do {
+//                        let reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! [String: AnyObject]
+//                        print("reply JSON:", reply as Any)
+//                    } catch let error as NSError {
+//                        print("Failed to Load: \(error.localizedDescription)")
+//                    }
+//                }
+//
+//            }
