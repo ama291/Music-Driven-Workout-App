@@ -13,7 +13,7 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
     var userid: String!
     var username: String!
     var token: String!
-    var player: SPTAudioStreamingController?
+    //var player: SPTAudioStreamingController?
 //    var session:
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
         let storyboard = UIStoryboard(name: "workout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "workoutSelectionID") as! WorkSelectionViewController
         vc.userid = userid!
-        vc.player = player!
+        //vc.player = player!
 //        vc.username = username!
 //        vc.token = token!
         present(vc, animated: true, completion: nil)

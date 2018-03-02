@@ -30,8 +30,8 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         startWorkout()
-        self.player = GlobalVariables.sharedManager.player
-        startPlayback()
+        //self.player = GlobalVariables.sharedManager.player
+        initSpotify()
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,30 +74,30 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         
     }
     
-//    @objc func startPlayback () {
-//
-//        let userDefaults = UserDefaults.standard
-//
-//        if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
-//
-//            let sessionDataObj = sessionObj as! Data
-//            let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
-//
-//            self.session = firstTimeSession
-//            initializePlayer(authSession: session)
-//        }
-//    }
-//
-//    func initializePlayer(authSession:SPTSession){
-//        if self.player == nil {
-//            self.player = SPTAudioStreamingController.sharedInstance()
-//            self.player!.playbackDelegate = self
-//            self.player!.delegate = self
-//            try! player?.start(withClientId: auth.clientID)
-//            self.player!.login(withAccessToken: authSession.accessToken)
-//
-//        }
-//    }
+    @objc func initSpotify () {
+
+        let userDefaults = UserDefaults.standard
+
+        if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
+
+            let sessionDataObj = sessionObj as! Data
+            let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
+
+            self.session = firstTimeSession
+            initializePlayer(authSession: session)
+        }
+    }
+
+    func initializePlayer(authSession:SPTSession){
+        if self.player == nil {
+            self.player = SPTAudioStreamingController.sharedInstance()
+            self.player!.playbackDelegate = self
+            self.player!.delegate = self
+            try! player?.start(withClientId: auth.clientID)
+            self.player!.login(withAccessToken: authSession.accessToken)
+
+        }
+    }
     
     func startPlayback() {
         // TODO - change to first exercise uri
@@ -153,7 +153,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     
     @objc func doexercise(index: Int) {
         if(index == 0) {
-            //startPlayback()
+            startPlayback()
         }
         
         let dur = exercisedurations[index]
