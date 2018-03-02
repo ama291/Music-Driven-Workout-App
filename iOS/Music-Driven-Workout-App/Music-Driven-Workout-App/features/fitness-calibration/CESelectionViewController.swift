@@ -41,7 +41,7 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
         print("New view:", category, muscleGroup, equipment)
         let qstr = "category=" + category + "&muscle=" + muscleGroup + "&equipment=" + equipment + "&key=SoftCon2018"
         
-        request.submitPostLocal(route: "/api/fitness/getexsbytype/", qstring: qstr) { (data, response, error) -> Void in
+        request.submitPostServer(route: "/api/fitness/getexsbytype/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }

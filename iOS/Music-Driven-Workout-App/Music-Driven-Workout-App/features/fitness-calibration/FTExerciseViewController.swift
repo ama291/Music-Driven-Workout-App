@@ -104,7 +104,7 @@ class FTExerciseViewController: UIViewController {
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
                 
-                let userString = "userid=" + "50"//String(describing: self.userid)
+                let userString = "userid=" + self.userid
                 let exString = "&exid=" + String((self.exerciseInfo["id"]! as? Int)!)
                 let timestampString = "&timestamp=" + self.dateToString(givenDate: Date())
                 let rawdataString = "&rawdata=" + json
@@ -188,7 +188,7 @@ class FTExerciseViewController: UIViewController {
             vc?.isCalibration = self.isCalibration
             vc?.frequencies = self.frequencies
             vc?.userid = self.userid
-//            vc?.frequency = self.frequency
+            vc?.frequency = self.freq
         }
         else if segue.destination is CECompleteViewController {
             let vc = segue.destination as? CECompleteViewController

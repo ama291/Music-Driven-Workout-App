@@ -36,18 +36,16 @@ class FTCheckpointViewController: UIViewController {
         
         super.viewDidLoad()
         print("user: \(userid)")
-
-        frequency = 90.5
         print(self.frequencies)
         let freqDict = ["frequency":self.frequency!,"name":self.exerciseInfo["name"]]
         self.frequencies.append(freqDict)
         print(self.frequencies)
         rateLabel.text = "\(String(Int(frequency))) RPM"
         
-        userid = "1"// fix later
         exid = self.exerciseInfo["id"] as! Int
-        let qstr = "userid=\(String(describing: userid!))&exid=\(exid!)&key=SoftCon2018"
-        request.submitPostLocal(route: "/api/fitness/istracked/", qstring: qstr) { (data, response, error) -> Void in
+        let qstr = "userid=\(userid!)&exid=\(exid!)&key=SoftCon2018"
+        print(qstr)
+        request.submitPostServer(route: "/api/fitness/istracked/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }
@@ -78,8 +76,11 @@ class FTCheckpointViewController: UIViewController {
     
     @IBAction func trackExercise(_ sender: UIButton) {
         
-        let qstr = "userid=\(userid!))&exid=\(exid!)&key=SoftCon2018"
-        self.request.submitPostLocal(route: "/api/fitness/toggletracked/", qstring: qstr, completion: request.comp).resume()
+        let qstr = "userid=\(userid!)&exid=\(exid!)&key=SoftCon2018"
+        self.request.submitPostServer(route: "/api/fitness/toggletracked/", qstring: qstr, completion: request.comp).resume()
+        self.isTracked = !(isTracked)
+        let trackedText = !self.isTracked ? "Track Exercise" : "Un-track Exercise"
+        self.trackButton.setTitle(trackedText, for: .normal)
     }
     
     

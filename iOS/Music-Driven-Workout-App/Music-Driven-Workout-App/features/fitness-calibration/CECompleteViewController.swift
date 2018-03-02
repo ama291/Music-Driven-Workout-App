@@ -28,7 +28,7 @@ class CECompleteViewController: UIViewController {
     @IBAction func savePace(_ sender: Any) {
         let time = self.dateToString(givenDate: Date())
         let qstr = "userid=\(userid!)&exid=\(exerciseInfo["id"]!)&rate=\(Int(freq!))&timestamp=\(time)&key=SoftCon2018"
-        self.request.submitPostLocal(route: "/api/fitness/addexact/", qstring: qstr){(data, response, error) in
+        self.request.submitPostServer(route: "/api/fitness/addexact/", qstring: qstr){(data, response, error) in
             if let error = error {
                 fatalError(error.localizedDescription)
             } else {

@@ -46,17 +46,20 @@ class FTChooseTracked: UIViewController {
         if numEx != 1 {
             instructions.text? += "s"
         }
-
         let qstr = "userid=\(userid!)&categories=\(category)&key=SoftCon2018"
         let request = APIRequest()
       
-        request.submitPostLocal(route: "/api/fitness/tracked/", qstring: qstr) { (data, response, error) -> Void in
+        request.submitPostServer(route: "/api/fitness/tracked/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }
             self.reply = request.parseJsonRespone(data: data!)!
+            print("PRINT REPLY")
+            print(self.reply)
             let vmitems = self.reply.map { ViewModelItem(item: Model(title: $0["name"] as! String, data: $0)) }
             self.viewModel.setItems(items: vmitems)
+            print("GET ITEMS HERE")
+            print(self.viewModel.items)
             
             
             DispatchQueue.main.async {

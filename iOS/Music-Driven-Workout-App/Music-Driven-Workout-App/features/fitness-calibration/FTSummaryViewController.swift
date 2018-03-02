@@ -57,7 +57,7 @@ class FTSummaryViewController: UIViewController {
             trackedStr = "144"
         }
         let qstr = "categories=\(category)&numexercises=\(numEx)&exerciseids=\(trackedStr)&key=SoftCon2018"
-        request.submitPostLocal(route: "/api/fitness/test/", qstring: qstr) { (data, response, error) -> Void in
+        request.submitPostServer(route: "/api/fitness/test/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }
