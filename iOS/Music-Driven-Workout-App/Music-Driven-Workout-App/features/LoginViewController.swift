@@ -200,7 +200,5 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             present(vc, animated: false, completion: nil)
         }
     }
-//    @IBAction func spotifyLogout(_ sender: UIButton) {
-//        self.spotifyLogout(authSession: <#T##SPTSession#>)
-//    }
+   
 }

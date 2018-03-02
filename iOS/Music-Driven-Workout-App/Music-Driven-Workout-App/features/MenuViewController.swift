@@ -8,12 +8,12 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
 
     var userid: String!
     var username: String!
     var token: String!
-
+//    var session:
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -123,6 +123,13 @@ class MenuViewController: UIViewController {
 //            let vc = storyboard.instantiateViewController(withIdentifier: "newUserID") as! LoginViewController
 //            //            vc.userid = userid!
 //            present(vc, animated: false, completion: nil)
+//        }
+//    }
+    
+//    @IBAction func logout(_ sender: UIButton) {
+//        let userDefaults = UserDefaults.standard
+//        if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
+//            sessionObj.logout()
 //        }
 //    }
 }

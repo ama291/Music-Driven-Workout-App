@@ -264,14 +264,6 @@
                                     <action selector="goToCalibrateExercise:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pRK-Bx-VfX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vhz-6w-fYl">
-                                <rect key="frame" x="156" y="617" width="63" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Logout">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -403,6 +395,6 @@
         <image name="background.jpg" width="914" height="523"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XKJ-aP-8Aq"/>
+        <segue reference="Mru-OU-zQv"/>
     </inferredMetricsTieBreakers>
 </document>
