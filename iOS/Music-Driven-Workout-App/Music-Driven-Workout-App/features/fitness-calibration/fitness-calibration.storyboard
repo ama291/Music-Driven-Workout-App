@@ -62,7 +62,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
-                                    <action selector="goToHome:" destination="aUf-da-02j" eventType="touchUpInside" id="wPs-0V-11R"/>
+                                    <action selector="goToHome:" destination="aUf-da-02j" eventType="touchUpInside" id="9ah-jz-LjT"/>
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oKS-l9-F4w">
@@ -133,6 +133,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
+                                    <action selector="goToHome:" destination="O6d-Sk-Ec5" eventType="touchUpInside" id="Pi4-qL-OIN"/>
                                     <segue destination="aUf-da-02j" kind="show" animates="NO" id="nRJ-Nt-mDX">
                                         <nil key="action"/>
                                     </segue>
@@ -157,9 +158,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="beginExercise:" destination="fD1-8d-U4y" eventType="touchUpInside" id="Kkk-rk-7rU"/>
-                                    <segue destination="WBg-pb-dfj" kind="show" animates="NO" id="3vg-x6-fHO">
-                                        <nil key="action"/>
-                                    </segue>
                                 </connections>
                             </button>
                         </subviews>
@@ -168,9 +166,11 @@
                     </view>
                     <connections>
                         <outlet property="exPicker" destination="jiO-ed-e5o" id="avY-dh-CaF"/>
+                        <segue destination="WBg-pb-dfj" kind="show" identifier="toExercise" id="QzH-hN-UGp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Hz-Ye-1cE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="O6d-Sk-Ec5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1696.8" y="98.50074962518741"/>
         </scene>

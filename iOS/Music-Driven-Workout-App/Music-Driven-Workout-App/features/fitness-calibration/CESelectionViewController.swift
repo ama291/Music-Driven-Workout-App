@@ -80,7 +80,12 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     @IBAction func beginExercise(_ sender: Any) {
-        exerciseInfo = reply[exPicker.selectedRow(inComponent: 0)]
+        if(!reply.isEmpty) {
+            exerciseInfo = reply[exPicker.selectedRow(inComponent: 0)]
+            self.performSegue(withIdentifier: "toExercise", sender: self)
+        } else {
+            return
+        }
         print(exerciseInfo)
     }
     

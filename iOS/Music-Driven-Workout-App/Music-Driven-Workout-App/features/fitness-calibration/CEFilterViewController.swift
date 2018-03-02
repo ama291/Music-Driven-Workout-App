@@ -119,6 +119,13 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
      }
      */
     
+    @IBAction func goToHome(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        vc.userid = userid!
+        present(vc, animated: true, completion: nil)
+    }
+    
 }
 
 

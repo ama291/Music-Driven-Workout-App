@@ -36,11 +36,13 @@ class CECompleteViewController: UIViewController {
                 print(res)
                 if res! == "True" {
                     DispatchQueue.main.async {
+                        print("Pace saved!")
                         self.paceSaved.text = "Pace saved!"
                     }
                 }
             }
             }.resume()
+        self.goToHome("")
     }
     @IBAction func tryAgain(_ sender: UIButton) {
         self.performSegue(withIdentifier: "tryAgain", sender: sender)
@@ -64,6 +66,9 @@ class CECompleteViewController: UIViewController {
         super.viewDidLoad()
         
         print("user: \(userid)")
+        print(self.exName)
+        print(self.freq)
+        print("")
 
         self.exerciseName.text = self.exName
         self.results.text = "\(self.freq!) RPM"
@@ -87,7 +92,7 @@ class CECompleteViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    @IBAction func goToHome(_ sender: UIButton) {
+    @IBAction func goToHome(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
         vc.userid = userid!

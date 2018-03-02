@@ -80,7 +80,6 @@ class FTCheckpointViewController: UIViewController {
         
         let qstr = "userid=\(userid!))&exid=\(exid!)&key=SoftCon2018"
         self.request.submitPostLocal(route: "/api/fitness/toggletracked/", qstring: qstr, completion: request.comp).resume()
-        self.request.submitPostLocal(route: "/api/fitness/toggletracked/", qstring: qstr, completion: request.comp).resume()
     }
     
     
