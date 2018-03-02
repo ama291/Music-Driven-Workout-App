@@ -19,6 +19,8 @@ class FTCompleteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("user: \(userid)")
+
         print(self.frequencies, "frequencies")
         var freq: String = ""
         freq = String(describing: self.frequencies![0]["frequency"]! as! Float)

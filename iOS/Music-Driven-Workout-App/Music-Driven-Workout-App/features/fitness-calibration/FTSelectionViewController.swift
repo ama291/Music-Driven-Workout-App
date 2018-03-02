@@ -14,6 +14,7 @@ class FTSelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     var category: String = ""
     var numEx: Int = 1
+    var userid: String!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is FTChooseTracked
@@ -22,16 +23,17 @@ class FTSelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
             //data to send
             vc?.category = category
             vc?.numEx = numEx
+            vc?.userid = userid
         }
     }
     
-    var userid: String!
     var catList: [String] = [String]()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        userid = "1"
+        print("user: \(userid)")
         self.catPicker.delegate = self
         self.catPicker.dataSource = self
         catList = ["Strength", "Stretching", "Olympic Weightlifting", "Strongman", "Plyometrics", "Cardio", "Powerlifting"]

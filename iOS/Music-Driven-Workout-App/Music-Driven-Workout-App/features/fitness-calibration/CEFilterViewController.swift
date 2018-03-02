@@ -17,6 +17,7 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var category: String = ""
     var muscleGroup: String = ""
     var equipment: String = ""
+    var userid: String! = "1"
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is CESelectionViewController
@@ -26,6 +27,7 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             vc?.category = category
             vc?.muscleGroup = muscleGroup
             vc?.equipment = equipment
+            vc?.userid = userid
         }
     }
     
@@ -39,6 +41,7 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("user: \(userid)")
         
         //json response struct - need to change this to what you expect the result to be
         struct Post: Codable {

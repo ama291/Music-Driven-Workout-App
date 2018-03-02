@@ -12,7 +12,7 @@ class FTSummaryViewController: UIViewController {
 
     var viewModel = ViewModel()
 
-    var userid: Int = 1
+    var userid: String!
     var category: String = ""
     var numEx: Int = 3
     var exChoices: [Int] = [Int]()
@@ -44,10 +44,12 @@ class FTSummaryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView?
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        print("user: \(userid)")
+
         let request = APIRequest()
         self.frequencies = [[String:Any]]()
         print(self.frequencies)
-        super.viewDidLoad()
         print(exChoices, userid, category, numEx)
         var trackedStr: String = ""
         trackedStr = exChoices.map { String($0) }.joined(separator: ",")

@@ -14,6 +14,7 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
     var category: String = ""
     var muscleGroup: String = ""
     var equipment: String = ""
+    var userid: String!
     
     var reply: [[String:Any]] = [[String:Any]]()
     var exerciseInfo: [String:Any] = [String:Any]()
@@ -26,6 +27,7 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
             //data to send
             vc?.exerciseInfo = exerciseInfo
             vc?.isCalibration = isCalibration
+            vc?.userid = userid
         }
     }
     
@@ -33,6 +35,8 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("user: \(userid)")
+
         let request = APIRequest()
         
         print("New view:", category, muscleGroup, equipment)

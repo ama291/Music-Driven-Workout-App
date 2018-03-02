@@ -10,7 +10,7 @@ import UIKit
 
 class FTCheckpointViewController: UIViewController {
     
-    var userid: Int?
+    var userid: String!
     var exid: Int!
     var frequency: Float!
     var isTracked: Bool!
@@ -35,6 +35,8 @@ class FTCheckpointViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        print("user: \(userid)")
+
         frequency = 90.5
         print(self.frequencies)
         let freqDict = ["frequency":self.frequency!,"name":self.exerciseInfo["name"]]
@@ -42,7 +44,7 @@ class FTCheckpointViewController: UIViewController {
         print(self.frequencies)
         rateLabel.text = "\(String(Int(frequency))) RPM"
         
-        userid = 1 // fix later
+        userid = "1"// fix later
         exid = self.exerciseInfo["id"] as! Int
         let qstr = "userid=\(String(describing: userid!))&exid=\(exid!)&key=SoftCon2018"
         request.submitPostLocal(route: "/api/fitness/istracked/", qstring: qstr) { (data, response, error) -> Void in
@@ -76,7 +78,7 @@ class FTCheckpointViewController: UIViewController {
     
     @IBAction func trackExercise(_ sender: UIButton) {
         
-        let qstr = "userid=\(String(describing: userid!))&exid=\(exid!)&key=SoftCon2018"
+        let qstr = "userid=\(userid!))&exid=\(exid!)&key=SoftCon2018"
         self.request.submitPostLocal(route: "/api/fitness/toggletracked/", qstring: qstr, completion: request.comp).resume()
         self.request.submitPostLocal(route: "/api/fitness/toggletracked/", qstring: qstr, completion: request.comp).resume()
     }
@@ -104,11 +106,13 @@ class FTCheckpointViewController: UIViewController {
             vc?.exerciseInfo = self.exerciseInfo
             vc?.exercisesRemaining = self.exercisesRemaining
             vc?.frequencies = self.frequencies
+            vc?.userid = self.userid
         }
         if segue.destination is FTCompleteViewController
         {
             let vc = segue.destination as? FTCompleteViewController
             vc?.frequencies = self.frequencies
+            vc?.userid = self.userid
         }
     }
     /*

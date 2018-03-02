@@ -9,7 +9,7 @@ import UIKit
 
 class FTExDescViewController: UIViewController {
     
-    var userid: Int?
+    var userid: String!
     var exercisesRemaining = [[String:Any]]()
     var exerciseInfo = [String: Any]()
     var isCalibration: Bool!
@@ -26,6 +26,8 @@ class FTExDescViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("user: \(userid)")
+
         print(self.frequencies)
         self.exName.text = (self.exerciseInfo["name"]! as? String)!
         if (self.isCalibration) {
@@ -85,6 +87,7 @@ class FTExDescViewController: UIViewController {
             vc?.exerciseInfo = self.exerciseInfo
             vc?.exercisesRemaining = self.exercisesRemaining
             vc?.frequencies = self.frequencies
+            vc?.userid = userid
         }
     }
  

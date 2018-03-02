@@ -15,7 +15,7 @@ class FTChooseTracked: UIViewController {
     var viewModel = ViewModel()
     let items = ["Hello there", "my people"]
     
-    var userid: Int = 1
+    var userid: String!
     var category: String = ""
     var numEx: Int = 1
     var reply: [[String:Any]] = [[String:Any]]()
@@ -40,13 +40,14 @@ class FTChooseTracked: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("user: \(userid)")
 
         instructions.text = "Choose up to \(numEx) tracked exercise"
         if numEx != 1 {
             instructions.text? += "s"
         }
 
-        let qstr = "userid=\(String(userid))&categories=\(category)&key=SoftCon2018"
+        let qstr = "userid=\(userid!)&categories=\(category)&key=SoftCon2018"
         let request = APIRequest()
         
         request.submitPostLocal(route: "/api/fitness/tracked/", qstring: qstr) { (data, response, error) -> Void in

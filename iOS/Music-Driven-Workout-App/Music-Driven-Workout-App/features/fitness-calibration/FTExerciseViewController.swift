@@ -15,7 +15,7 @@ class FTExerciseViewController: UIViewController {
     var motionData: [[String : Double]] = []
     var timer = Timer()
     var frequency = ""
-    var freq: Float! = 0.0
+    var freq = Float(0.0)
     var time = 600
     var exerciseInfo: [String:Any] = [String:Any]()
     var exercisesRemaining: [[String:Any]] = [[String:Any]]()
@@ -23,8 +23,9 @@ class FTExerciseViewController: UIViewController {
     var numExercises: Int?
     var exerciseNum: Int?
     var isCalibration: Bool!
-    var userid: String?
+    var userid: String!
     var frequencies: [[String:Any]]!
+    let parser = APIRequest()
     
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var frequencyLabel: UILabel!
@@ -32,6 +33,8 @@ class FTExerciseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("user: \(userid)")
+
         self.exName.text = self.exerciseName
         self.getMotionData()
         // Do any additional setup after loading the view.
@@ -56,7 +59,7 @@ class FTExerciseViewController: UIViewController {
     func getMotionData() {
         self.statusLabel.text = "Do the exercise."
         // saving acceleration every 0.1 seconds
-        timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(AccelerometerViewController.displayResult), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(AccelerometerViewController.displayResult), userInfo: nil, repeats: false)
         
         var dispTime = -0.1;
         motionManager.accelerometerUpdateInterval = 0.1
@@ -80,6 +83,12 @@ class FTExerciseViewController: UIViewController {
         var Status: String
     }
     
+    struct subRequest: Codable {
+        var level: Int
+        var rate: Float
+        var leveledUp: Bool
+    }
+    
     @objc func displayResult() {
         motionManager.stopAccelerometerUpdates()
         self.statusLabel.text = "complete"
@@ -91,23 +100,37 @@ class FTExerciseViewController: UIViewController {
             let data = try? JSONSerialization.data(withJSONObject: self.motionData, options: .prettyPrinted)
             let json = String(data: data!, encoding: .utf8)
             if let json = json { // converting to a string
-                let url = URL(string: "http://138.197.49.155:8000/api/fitness/accel/")!
+                let url = URL(string: "http://138.197.49.155:8000/api/fitness/processmotion/")!
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
-                let postString = "data=" + json + "&key=SoftCon2018"
+                
+                let userString = "userid=" + "50"//String(describing: self.userid)
+                let exString = "&exid=" + String((self.exerciseInfo["id"]! as? Int)!)
+                let timestampString = "&timestamp=" + self.dateToString(givenDate: Date())
+                let rawdataString = "&rawdata=" + json
+                let exactString = "&exact=" + (self.isCalibration.description)
+                let postString = userString + exString + timestampString + rawdataString + exactString + "&key=SoftCon2018"
+                
                 request.httpBody = postString.data(using: String.Encoding.utf8)
                 let config = URLSessionConfiguration.default
                 let session = URLSession(configuration: config)
                 let task = session.dataTask(with: request) { (responseData, response, responseError) in
                     guard responseError == nil else {
+                        print("Response Error:")
+                        print(responseError!)
                         return
                     }
                     if let data = responseData {
                         do {
-                            let jsonResponse = try decoder.decode(jsonRequest.self, from: data)
-                            self.frequency = String(describing: jsonResponse.Result)
+                            let jsonResponse = self.parser.parseJsonResponeSinglet(data: data)
+                            self.frequency = String(describing: (jsonResponse!["rate"] as? Float)!)
+                            self.freq = (jsonResponse!["rate"] as? Float)!
+                            self.performSegue(withIdentifier: "finished_ex", sender: nil)
+                            return
                         }
                         catch {
+                            print("Parsing Error:")
+                            print(error)
                             return
                         }
                     } else {
@@ -150,6 +173,7 @@ class FTExerciseViewController: UIViewController {
             vc?.exerciseName = self.exerciseName
             vc?.isCalibration = self.isCalibration
             vc?.frequencies = self.frequencies
+            vc?.userid = self.userid
         }
         else if segue.destination is FTCheckpointViewController
         {
@@ -158,6 +182,7 @@ class FTExerciseViewController: UIViewController {
             vc?.exercisesRemaining = self.exercisesRemaining
             vc?.isCalibration = self.isCalibration
             vc?.frequencies = self.frequencies
+            vc?.userid = self.userid
 //            vc?.frequency = self.frequency
         }
         else if segue.destination is CECompleteViewController {
@@ -165,7 +190,15 @@ class FTExerciseViewController: UIViewController {
             vc?.exName = self.exerciseName
             vc?.exerciseInfo = self.exerciseInfo
             vc?.freq = self.freq
+            vc?.userid = self.userid
         }
+    }
+    
+    func dateToString(givenDate: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let res = formatter.string(from: Date())
+        return res
     }
     
 }

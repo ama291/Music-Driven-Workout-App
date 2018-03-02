@@ -47,6 +47,23 @@ class APIRequest: NSObject {
         return nil
     }
     
+    func parseJsonResponeSinglet(data: Data) -> Dictionary<String, Any>? {
+        if let result = parseJsonInitial(data: data) {
+            var reply: Dictionary<String, Any>
+            
+            if let resultData = result.data(using: String.Encoding.utf8) {
+                do {
+                    reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! Dictionary<String, Any>
+                    let myReplyDict = reply
+                    return myReplyDict
+                } catch let error {
+                    print(error)
+                }
+            }
+        }
+        return nil
+    }
+
     
     func submitPostLocal(route: String, qstring: String, completion: @escaping (Data?, URLResponse?,Error?) -> Void) -> URLSessionDataTask {
         var urlComponents = URLComponents()

@@ -13,7 +13,7 @@ class CECompleteViewController: UIViewController {
     var exName: String!
     var exerciseInfo: [String:Any] = [:]
     var freq: Float!
-    var userid: String! = "1"
+    var userid: String!
     
     func dateToString(givenDate: Date) -> String {
         let formatter = DateFormatter()
@@ -27,7 +27,7 @@ class CECompleteViewController: UIViewController {
     @IBOutlet weak var paceSaved: UILabel!
     @IBAction func savePace(_ sender: Any) {
         let time = self.dateToString(givenDate: Date())
-        let qstr = "userid=\(String(describing: userid!))&exid=\(exerciseInfo["id"]!)&rate=\(Int(freq!))&timestamp=\(time)&key=SoftCon2018"
+        let qstr = "userid=\(userid!)&exid=\(exerciseInfo["id"]!)&rate=\(Int(freq!))&timestamp=\(time)&key=SoftCon2018"
         self.request.submitPostLocal(route: "/api/fitness/addexact/", qstring: qstr){(data, response, error) in
             if let error = error {
                 fatalError(error.localizedDescription)
@@ -53,6 +53,7 @@ class CECompleteViewController: UIViewController {
             //data to send
             vc?.exerciseInfo = exerciseInfo
             vc?.isCalibration = true
+            vc?.userid = userid
         }
     }
     
@@ -62,6 +63,8 @@ class CECompleteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("user: \(userid)")
+
         self.exerciseName.text = self.exName
         self.results.text = "\(self.freq!) RPM"
         self.paceSaved.text = ""
