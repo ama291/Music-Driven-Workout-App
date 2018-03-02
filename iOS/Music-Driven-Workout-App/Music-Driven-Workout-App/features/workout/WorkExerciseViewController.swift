@@ -18,6 +18,8 @@ class WorkExerciseViewController: UIViewController {
     var exercisedescriptions: [String]!
     var exercisedurations: [Int]!
     var exerciseimages: [String]!
+    var exercisetracknames: [[String]]!
+    var exercisetrackuris: [[String]]!
     
     var heartrate = 0
     

@@ -31,7 +31,9 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     var exDesc: [String] = []
     var exDur: [Int] = []
     var exImgs: [String] = []
-
+    var exTrackNames: [[String]] = [[]]
+    var exTrackUris: [[String]] = [[]]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,6 +62,8 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             vc?.exercisedescriptions = exDesc
             vc?.exercisedurations = exDur
             vc?.exerciseimages = exImgs
+            vc?.exercisetracknames = exTrackNames
+            vc?.exercisetrackuris = exTrackUris
         }
     }
     
@@ -90,6 +94,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             
             if let dictionary = resultjson as? [String: Any] {
                 if let exercises = dictionary["Exercises"] as? [Any] {
+                    var exIndex = 0
                     for ex in exercises {
                         if let exDict = ex as? [String: Any] {
                             // Populate tableContent
@@ -101,7 +106,22 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                             self.exDesc.append("exDescription")
                             self.exDur.append((exDict["duration"] as! Int) * 60) // convert to secs
                             self.exImgs.append(exDict["images"] as! String)
+                            
+                            if let trackDict = exDict["tracks"] as? [Dictionary<String, String>] {
+                                for track in trackDict {
+                                    print("Track:", track)
+                                    print("TName:", track["name"] as Any)
+                                    print("TUri:", track["uri"] as Any)
+                                    self.exTrackNames[exIndex].append(track["name"]!)
+                                    self.exTrackUris[exIndex].append(track["uri"]!)
+                                }
+                            }
+                            print(self.exTrackNames)
+                            print(self.exTrackUris)
                         }
+                        exIndex += 1
+                        self.exTrackNames.append([])
+                        self.exTrackUris.append([])
                     }
                 }
             }
@@ -115,6 +135,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         }.resume()
     }
 
+    
     /* Mark: tableView */
     @IBOutlet weak var exTable: UITableView!
     let sections = ["Exercises"]
