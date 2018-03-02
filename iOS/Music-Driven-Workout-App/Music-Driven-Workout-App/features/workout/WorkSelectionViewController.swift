@@ -19,6 +19,7 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     var equipment = ""
     var duration = ""
     var difficulty = ""
+    //var player: SPTAudioStreamingController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,7 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
             vc?.duration = duration
             vc?.difficulty = difficulty
             vc?.token = token
+            //vc?.player = player!
         }
     }
     

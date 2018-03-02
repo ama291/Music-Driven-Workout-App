@@ -19,11 +19,11 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     var difficulty: String!
     var token: String!
     var username: String!
+    //var player: SPTAudioStreamingController?
 
     //spotify
     var auth = SPTAuth.defaultInstance()!
     var session:SPTSession!
-    var player: SPTAudioStreamingController?
     
     //variables to send to WorkExerciseVC
     var workoutjson: String!
@@ -64,6 +64,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             vc?.exerciseimages = exImgs
             vc?.exercisetracknames = exTrackNames
             vc?.exercisetrackuris = exTrackUris
+            //vc?.player = player!
         }
     }
     

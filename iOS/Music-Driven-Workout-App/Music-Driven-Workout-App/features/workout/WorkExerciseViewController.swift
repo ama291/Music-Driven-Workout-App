@@ -8,8 +8,9 @@
 
 import UIKit
 
-class WorkExerciseViewController: UIViewController {
+class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
     
+    var auth = SPTAuth.defaultInstance()!
     var userid: String!
     var workoutjson: String!
     
@@ -20,14 +21,19 @@ class WorkExerciseViewController: UIViewController {
     var exerciseimages: [String]!
     var exercisetracknames: [[String]]!
     var exercisetrackuris: [[String]]!
+    var session:SPTSession!
+    var player: SPTAudioStreamingController?
+    var queued = false
     
     var heartrate = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        heartratelabel.adjustsFontSizeToFitWidth = true
+        initSpotify()
         startWorkout()
-
+        //self.player = GlobalVariables.sharedManager.player
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,6 +63,7 @@ class WorkExerciseViewController: UIViewController {
     var timecountdown = 0.0
     var paused = false
     var i = 0
+    var ind = 0
     
     @objc func startWorkout() {
         namelabel.adjustsFontSizeToFitWidth = true
@@ -67,6 +74,73 @@ class WorkExerciseViewController: UIViewController {
         //startworkoutapi()
         
         doexercise(index: 0)
+        
+    }
+    
+    @objc func initSpotify () {
+
+        let userDefaults = UserDefaults.standard
+
+        if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
+
+            let sessionDataObj = sessionObj as! Data
+            let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
+
+            self.session = firstTimeSession
+            initializePlayer(authSession: session)
+        }
+    }
+
+    func initializePlayer(authSession:SPTSession){
+        if self.player == nil {
+            self.player = SPTAudioStreamingController.sharedInstance()
+            self.player!.playbackDelegate = self
+            self.player!.delegate = self
+            try! player?.start(withClientId: auth.clientID)
+            self.player!.login(withAccessToken: authSession.accessToken)
+
+        }
+    }
+    
+    func startPlayback() {
+        // TODO - change to first exercise uri
+        print("attempting playback")
+        heartratelabel.text =  "Song: " + exercisetracknames[0][0]
+        self.player?.playSpotifyURI(self.exercisetrackuris[0][0], startingWith: 0, startingWithPosition: 0, callback: { (error) in
+            if (error == nil) {
+                print("playing!")
+            }
+            if(error != nil) {
+                print("error playing")
+            }
+        })
+    }
+    
+    func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
+        startPlayback()
+    }
+    
+    func audioStreamingDidPopQueue(_ audioStreaming: SPTAudioStreamingController!) {
+        ind += 1
+        heartratelabel.text =  "Song: " + exercisetracknames[0][ind]
+    }
+    
+    func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePlaybackStatus isPlaying: Bool) {
+        // TODO - change to queue all songs
+        if(!queued) {
+            if(exercisetrackuris[0].count > 1) {
+                for index in 1...exercisetrackuris[0].count-1 {
+                    self.player?.queueSpotifyURI(exercisetrackuris[0][index], callback: {(error) in
+                        if (error == nil) {
+                            print("queued!")
+                        } else {
+                            print("error queueing")
+                        }
+                    })
+                    }
+                self.queued = true
+            }
+        }
     }
     
     struct jsonRequest: Codable {
@@ -91,6 +165,10 @@ class WorkExerciseViewController: UIViewController {
     }
     
     @objc func doexercise(index: Int) {
+        if(index == 0) {
+            //startPlayback()
+        }
+        
         let dur = exercisedurations[index]
         namelabel.text = exercisenames[index]
         descriptionlabel.text = exercisedescriptions[index]
@@ -106,14 +184,12 @@ class WorkExerciseViewController: UIViewController {
     }
     
     @objc func updateTimer() {
-        if (!paused) {
-            timecountdown -= 0.1
-            timecountdown = ceil(timecountdown*10)/10
-            timelabel.text = "Time Remaining: " + timecountdown.description + "s"
-            heartratelabel.text = "Heartrate: " + String(heartrate)
-            if (timecountdown <= 0) {
-                completeExercise()
-            }
+        timecountdown -= 0.1
+        timecountdown = ceil(timecountdown*10)/10
+        timelabel.text = "Time Remaining: " + timecountdown.description + "s"
+        //heartratelabel.text = "Heartrate: " + String(heartrate)
+        if (timecountdown <= 0) {
+            completeExercise()
         }
     }
     
@@ -125,7 +201,12 @@ class WorkExerciseViewController: UIViewController {
             doexercise(index: i)
         }
         else {
-            self.performSegue(withIdentifier: "completeSegue", sender: self)
+            //self.performSegue(withIdentifier: "completeSegue", sender: self)
+            /*let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+            vc.userid = userid!
+            present(vc, animated: false, completion: nil)*/
+            exit(0)
         }
     }
     
@@ -133,10 +214,19 @@ class WorkExerciseViewController: UIViewController {
         if (!paused) {
             paused = true
             pausebutton.setTitle("PLAY", for: .normal)
+            timer.invalidate()
+            self.player?.setIsPlaying(false, callback: nil)
+//            do {
+//                try self.player?.stop()
+//            } catch {
+//                print("error occurred")
+//            }
         }
         else {
             paused = false
             pausebutton.setTitle("PAUSE", for: .normal)
+            self.player?.setIsPlaying(true, callback: nil)
+            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
         }
     }
     
@@ -144,4 +234,7 @@ class WorkExerciseViewController: UIViewController {
         completeExercise()
     }
     
+    @IBAction func quitclick(_ sender: Any) {
+        exit(0)
+    }
 }
