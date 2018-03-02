@@ -12,6 +12,8 @@ class ThemesMenuViewController: UIViewController, UITableViewDelegate, UITableVi
     var userid: String!
     var tableArray = [String:Any] ()
     
+    var themename: String!
+    
     var passedUserId = String()
     
     @IBOutlet weak var tableView: UITableView!
@@ -72,6 +74,30 @@ class ThemesMenuViewController: UIViewController, UITableViewDelegate, UITableVi
             }.resume()
     }
     
+    func removeThemeAPI() {
+        guard let url = URL(string: "http://138.197.49.155:8000/api/themes/removetheme/") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //userid, themename, key
+        let postString = "userid=" + userid + "themename=" + themename + "&key=SoftCon2018"
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if let data = data {
+                guard let json = try? JSONDecoder().decode(jsonRequest.self, from: data) else { return }
+                self.userid = json.Result
+                print(self.userid)
+            }
+        }.resume()
+    }
+    
+    @IBAction func removeTheme(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "themesID") as! ThemesMenuViewController
+        vc.userid = userid!
+        //removeThemeAPI()
+        present(vc, animated: false, completion: nil)
+    }
     
     @IBAction func goToHome(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
