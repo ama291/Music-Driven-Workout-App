@@ -59,7 +59,7 @@ class FTExerciseViewController: UIViewController {
     func getMotionData() {
         self.statusLabel.text = "Do the exercise."
         // saving acceleration every 0.1 seconds
-        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(AccelerometerViewController.displayResult), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(AccelerometerViewController.displayResult), userInfo: nil, repeats: false)
         
         var dispTime = -0.1;
         motionManager.accelerometerUpdateInterval = 0.1
