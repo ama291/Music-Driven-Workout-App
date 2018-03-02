@@ -15,6 +15,7 @@ class FTExerciseViewController: UIViewController {
     var motionData: [[String : Double]] = []
     var timer = Timer()
     var frequency = ""
+    var freq: Float! = 0.0
     var time = 600
     var exerciseInfo: [String:Any] = [String:Any]()
     var exercisesRemaining: [[String:Any]] = [[String:Any]]()
@@ -117,6 +118,14 @@ class FTExerciseViewController: UIViewController {
             }
         }
     }
+    @IBAction func skip(_ sender: Any) {
+        if self.isCalibration {
+            self.performSegue(withIdentifier: "skipCE", sender: sender)
+        }
+        else {
+            self.performSegue(withIdentifier: "skipFT", sender: sender)
+        }
+    }
     
     @objc func updateLabel() {
         //need to fix this to callback
@@ -150,6 +159,12 @@ class FTExerciseViewController: UIViewController {
             vc?.isCalibration = self.isCalibration
             vc?.frequencies = self.frequencies
 //            vc?.frequency = self.frequency
+        }
+        else if segue.destination is CECompleteViewController {
+            let vc = segue.destination as? CECompleteViewController
+            vc?.exName = self.exerciseName
+            vc?.exerciseInfo = self.exerciseInfo
+            vc?.freq = self.freq
         }
     }
     

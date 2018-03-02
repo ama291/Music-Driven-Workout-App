@@ -10,6 +10,10 @@ import UIKit
 
 class APIRequest: NSObject {
     
+    func comp(data: Data?, response: URLResponse?, error: Error?) -> Void {
+        return
+    }
+    
     func parseJsonInitial(data: Data) -> String? {
         var res: Dictionary<String, String>
         do {
@@ -47,8 +51,8 @@ class APIRequest: NSObject {
     func submitPostLocal(route: String, qstring: String, completion: @escaping (Data?, URLResponse?,Error?) -> Void) -> URLSessionDataTask {
         var urlComponents = URLComponents()
         urlComponents.scheme = "http"
-        urlComponents.host = "138.197.49.155"
-        urlComponents.port = 8000
+        urlComponents.host = "127.0.0.1"
+        urlComponents.port = 5000
         urlComponents.path = route
         urlComponents.query = qstring
         guard let url = urlComponents.url else {

@@ -72,15 +72,13 @@ class FTCheckpointViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func comp(data: Data?, response: URLResponse?, error: Error?) -> Void {
-        return
-    }
+
     
     @IBAction func trackExercise(_ sender: UIButton) {
         
         let qstr = "userid=\(String(describing: userid!))&exid=\(exid!)&key=SoftCon2018"
-        self.request.submitPostLocal(route: "/api/fitness/toggletracked/", qstring: qstr, completion: comp).resume()
-        self.request.submitPostLocal(route: "/api/fitness/toggletracked/", qstring: qstr, completion: comp).resume()
+        self.request.submitPostLocal(route: "/api/fitness/toggletracked/", qstring: qstr, completion: request.comp).resume()
+        self.request.submitPostLocal(route: "/api/fitness/toggletracked/", qstring: qstr, completion: request.comp).resume()
     }
     
     

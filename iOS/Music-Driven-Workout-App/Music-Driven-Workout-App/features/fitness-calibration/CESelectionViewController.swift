@@ -17,7 +17,7 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     var reply: [[String:Any]] = [[String:Any]]()
     var exerciseInfo: [String:Any] = [String:Any]()
-    var isCalibration: Bool = false
+    var isCalibration: Bool = true
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is FTExDescViewController
@@ -30,10 +30,7 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     var exList: [String] = [String]()
-    
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let request = APIRequest()

@@ -567,7 +567,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ZRy-OX-ssX" kind="show" id="PAG-3L-f2U"/>
+                                    <action selector="skip:" destination="5r9-iF-qe2" eventType="touchUpInside" id="4xo-ly-UyA"/>
+                                    <action selector="skip:" destination="Ub2-A8-8kg" eventType="touchUpInside" id="P1j-l8-xmZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tNE-RA-8f2">
@@ -590,9 +591,12 @@
                         <outlet property="exName" destination="qJt-be-sSN" id="rfl-KJ-VNH"/>
                         <outlet property="frequencyLabel" destination="dMn-i0-yJq" id="XsA-YV-Fnh"/>
                         <outlet property="statusLabel" destination="hiB-Nk-c8p" id="FF9-Gr-bY5"/>
+                        <segue destination="ZRy-OX-ssX" kind="show" identifier="skipFT" id="jS2-yn-PZh"/>
+                        <segue destination="LqD-yX-sGw" kind="show" identifier="skipCE" id="VQG-4T-egN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nnr-eG-0Ik" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Ub2-A8-8kg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3504.8000000000002" y="928.78560719640188"/>
         </scene>
@@ -642,9 +646,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="WBg-pb-dfj" kind="show" animates="NO" id="gwd-07-yI0">
-                                        <nil key="action"/>
-                                    </segue>
+                                    <action selector="tryAgain:" destination="LqD-yX-sGw" eventType="touchUpInside" id="5i8-0I-eSx"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ8-QI-UvM">
@@ -660,6 +662,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="savePace:" destination="LqD-yX-sGw" eventType="touchUpInside" id="KiP-tE-AcL"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9j9-3C-JO1">
                                 <rect key="frame" x="62" y="195" width="250" height="222"/>
@@ -675,10 +680,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWl-dd-D1d">
+                                <rect key="frame" x="80" y="393" width="214" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.4152316278" green="0.99517798199999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="jNB-Cl-BPg"/>
                     </view>
+                    <connections>
+                        <outlet property="exerciseName" destination="R8b-hc-fgu" id="Kq8-7T-s95"/>
+                        <outlet property="paceSaved" destination="rWl-dd-D1d" id="mTp-2W-tw4"/>
+                        <outlet property="results" destination="9j9-3C-JO1" id="26e-2b-IMa"/>
+                        <segue destination="WBg-pb-dfj" kind="show" identifier="tryAgain" id="dHe-eK-X13"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PEi-4f-7yA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -736,7 +754,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="nRJ-Nt-mDX"/>
-        <segue reference="yG1-XU-EPQ"/>
+        <segue reference="dHe-eK-X13"/>
         <segue reference="gW0-DC-Gtg"/>
     </inferredMetricsTieBreakers>
 </document>
