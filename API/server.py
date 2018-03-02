@@ -112,8 +112,7 @@ def apiGetWorkout():
 		return failure("Invalid authentication")
 	try:
 		response = getWorkout(userid, themes, cats, groups, equipment, duration, difficulty, accessToken)
-		response = response[1:-1]
-		return standardRes(json.dumps(response))
+		return standardRes(json.dumps(response)[1:-1])
 	except Exception as e:
 		return failure(str(e))
 
@@ -241,7 +240,7 @@ def apiWorkoutsSaved():
 		return failure("Invalid authentication")
 	try:
 		response = workoutsSaved(userid)
-		return standardRes(json.dumps(response))
+		return standardRes(json.dumps(response)[1:-1])
 	except Exception as e:
 		return failure(str(e))
 
@@ -260,7 +259,7 @@ def apiWorkoutsInProgress():
 		return failure("Invalid authentication")
 	try:
 		response = workoutsInProgress(userid)
-		return standardRes(json.dumps(response))
+		return standardRes(json.dumps(response)[1:-1])
 	except Exception as e:
 		return failure(str(e))
 
