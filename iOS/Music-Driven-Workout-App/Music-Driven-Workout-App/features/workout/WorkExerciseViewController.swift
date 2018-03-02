@@ -10,6 +10,7 @@ import UIKit
 
 class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
     
+    var auth = SPTAuth.defaultInstance()!
     var userid: String!
     var workoutjson: String!
     
@@ -29,9 +30,10 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        heartratelabel.adjustsFontSizeToFitWidth = true
+        initSpotify()
         startWorkout()
         //self.player = GlobalVariables.sharedManager.player
-        initSpotify()
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,6 +63,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     var timecountdown = 0.0
     var paused = false
     var i = 0
+    var ind = 0
     
     @objc func startWorkout() {
         namelabel.adjustsFontSizeToFitWidth = true
@@ -102,6 +105,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     func startPlayback() {
         // TODO - change to first exercise uri
         print("attempting playback")
+        heartratelabel.text =  "Song: " + exercisetracknames[0][0]
         self.player?.playSpotifyURI(self.exercisetrackuris[0][0], startingWith: 0, startingWithPosition: 0, callback: { (error) in
             if (error == nil) {
                 print("playing!")
@@ -110,6 +114,15 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
                 print("error playing")
             }
         })
+    }
+    
+    func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
+        startPlayback()
+    }
+    
+    func audioStreamingDidPopQueue(_ audioStreaming: SPTAudioStreamingController!) {
+        ind += 1
+        heartratelabel.text =  "Song: " + exercisetracknames[0][ind]
     }
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePlaybackStatus isPlaying: Bool) {
@@ -153,7 +166,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     
     @objc func doexercise(index: Int) {
         if(index == 0) {
-            startPlayback()
+            //startPlayback()
         }
         
         let dur = exercisedurations[index]
@@ -174,7 +187,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         timecountdown -= 0.1
         timecountdown = ceil(timecountdown*10)/10
         timelabel.text = "Time Remaining: " + timecountdown.description + "s"
-        heartratelabel.text = "Heartrate: " + String(heartrate)
+        //heartratelabel.text = "Heartrate: " + String(heartrate)
         if (timecountdown <= 0) {
             completeExercise()
         }
@@ -189,10 +202,11 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         }
         else {
             //self.performSegue(withIdentifier: "completeSegue", sender: self)
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            /*let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
             vc.userid = userid!
-            present(vc, animated: false, completion: nil)
+            present(vc, animated: false, completion: nil)*/
+            exit(0)
         }
     }
     
@@ -220,4 +234,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         completeExercise()
     }
     
+    @IBAction func quitclick(_ sender: Any) {
+        exit(0)
+    }
 }
