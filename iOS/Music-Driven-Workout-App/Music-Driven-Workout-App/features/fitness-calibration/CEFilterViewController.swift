@@ -17,6 +17,7 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var category: String = ""
     var muscleGroup: String = ""
     var equipment: String = ""
+    var userid: String! = "1"
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is CESelectionViewController
@@ -26,6 +27,7 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             vc?.category = category
             vc?.muscleGroup = muscleGroup
             vc?.equipment = equipment
+            vc?.userid = userid
         }
     }
     
@@ -112,6 +114,13 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
      // Pass the selected object to the new view controller.
      }
      */
+    
+    @IBAction func goToHome(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        vc.userid = userid!
+        present(vc, animated: true, completion: nil)
+    }
     
 }
 

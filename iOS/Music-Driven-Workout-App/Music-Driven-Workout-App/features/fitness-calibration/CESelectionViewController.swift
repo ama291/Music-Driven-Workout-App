@@ -14,10 +14,11 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
     var category: String = ""
     var muscleGroup: String = ""
     var equipment: String = ""
+    var userid: String!
     
     var reply: [[String:Any]] = [[String:Any]]()
     var exerciseInfo: [String:Any] = [String:Any]()
-    var isCalibration: Bool = false
+    var isCalibration: Bool = true
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is FTExDescViewController
@@ -26,25 +27,20 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
             //data to send
             vc?.exerciseInfo = exerciseInfo
             vc?.isCalibration = isCalibration
+            vc?.userid = userid
         }
     }
     
     var exList: [String] = [String]()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("user: \(userid)")
+
+        let request = APIRequest()
         
         let request = APIRequest()
         
         print("New view:", category, muscleGroup, equipment)
-        
-        let str = "{\"Status\":\"OK\", \"Result\": \"[{},{}]\"}"
-        
-        if let data = str.data(using: String.Encoding.utf8) {
-            request.parseJsonRespone(data: data)
-        }
-        //
         let qstr = "category=" + category + "&muscle=" + muscleGroup + "&equipment=" + equipment + "&key=SoftCon2018"
         
         request.submitPostLocal(route: "/api/fitness/getexsbytype/", qstring: qstr) { (data, response, error) -> Void in
@@ -84,7 +80,12 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     @IBAction func beginExercise(_ sender: Any) {
-        exerciseInfo = reply[exPicker.selectedRow(inComponent: 0)]
+        if(!reply.isEmpty) {
+            exerciseInfo = reply[exPicker.selectedRow(inComponent: 0)]
+            self.performSegue(withIdentifier: "toExercise", sender: self)
+        } else {
+            return
+        }
         print(exerciseInfo)
     }
     

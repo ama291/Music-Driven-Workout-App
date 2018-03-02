@@ -2,21 +2,26 @@
 //  APIRequest.swift
 //  Music-Driven-Workout-App
 //
-//  Created by Lucy Newman on 2/27/18.
+//  Created by Lucy Newman on 2/28/18.
 //  Copyright © 2018 UChicago SoftCon. All rights reserved.
 //
 
 import UIKit
-import Foundation
 
 class APIRequest: NSObject {
     
-    func parseJsonRespone(data: Data) -> [Dictionary<String, Any>]? {
+    func comp(data: Data?, response: URLResponse?, error: Error?) -> Void {
+        return
+    }
+    
+    func parseJsonInitial(data: Data) -> String? {
         var res: Dictionary<String, String>
         do {
             res = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String, String>
             let myDict = res
             if let result = myDict["Result"] {
+                return result
+/*
                 var reply: [Dictionary<String, Any>]
                 
                 if let resultData = result.data(using: String.Encoding.utf8) {
@@ -26,13 +31,50 @@ class APIRequest: NSObject {
                         return myReplyDict
                     }
                 }
-            }
+  
+            } */
             
         } catch let error {
             print(error)
         }
         return nil
     }
+    
+    func parseJsonRespone(data: Data) -> [Dictionary<String, Any>]? {
+        if let result = parseJsonInitial(data: data) {
+            var reply: [Dictionary<String, Any>]
+            
+            if let resultData = result.data(using: String.Encoding.utf8) {
+                do {
+                    reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! [Dictionary<String, Any>]
+                    let myReplyDict = reply
+                    return myReplyDict
+                } catch let error {
+                    print(error)
+                }
+            }
+        }
+        return nil
+    }
+    
+    func parseJsonResponeSinglet(data: Data) -> Dictionary<String, Any>? {
+        if let result = parseJsonInitial(data: data) {
+            var reply: Dictionary<String, Any>
+            
+            if let resultData = result.data(using: String.Encoding.utf8) {
+                do {
+                    reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! Dictionary<String, Any>
+                    let myReplyDict = reply
+                    return myReplyDict
+                } catch let error {
+                    print(error)
+                }
+            }
+        }
+        return nil
+    }
+
+   
     
     
     func submitPostLocal(route: String, qstring: String, completion: @escaping (Data?, URLResponse?,Error?) -> Void) -> URLSessionDataTask {
@@ -79,7 +121,6 @@ class APIRequest: NSObject {
         request.httpMethod = "POST"
         let postString = qstring
         request.httpBody = postString.data(using: String.Encoding.utf8)
-        
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         let task = session.dataTask(with: request) {(data, response, responseError) in

@@ -9,38 +9,76 @@
 import UIKit
 
 class FTSummaryViewController: UIViewController {
-    
+
+    var viewModel = ViewModel()
+
     var userid: String!
     var category: String = ""
-    var numEx: Int = 1
-    var tracked: [Int] = []
-    
+    var numEx: Int = 3
+    var exChoices: [Int] = [Int]()
     var reply: [[String:Any]] = [[String:Any]]()
-    var exList: [String] = [String]()
+    var frequencies: [[String: Any]]!
+    
+    var exercises: [[String:Any]] = [[String:Any]]()
+    var exerciseInfo = [String: Any]()
+    var isCalibration: Bool = false
+    var exNum: Int?
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.destination is FTExDescViewController
+        {
+            let vc = segue.destination as? FTExDescViewController
+            //data to send
+            vc?.userid = userid
+            vc?.exercisesRemaining = exercises
+            vc?.exerciseInfo = exerciseInfo
+            vc?.isCalibration = isCalibration
+            vc?.numExercises = numEx
+            vc?.exerciseNum = numEx - exercises.count
+            vc?.frequencies = frequencies
+        }
+    }
+    
+    @IBOutlet weak var tableView: UITableView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(category, numEx)
+        print("user: \(userid)")
+
         let request = APIRequest()
-        
-        var trackedStr = ""
-        for t in tracked {
-            trackedStr += String(t) + ","
+        self.frequencies = [[String:Any]]()
+        print(self.frequencies)
+        print(exChoices, userid, category, numEx)
+        var trackedStr: String = ""
+        trackedStr = exChoices.map { String($0) }.joined(separator: ",")
+        if trackedStr == "" {
+            trackedStr = "144"
         }
-        trackedStr.removeLast()
-        
-        let qstr = "category=" + category + "&numexercises=" + String(numEx) + "&tracked=" + trackedStr + "&key=SoftCon2018"
-        
-        request.submitPostLocal(route: "/api/fitness/getexsbytype/", qstring: qstr) { (data, response, error) -> Void in
+        let qstr = "categories=\(category)&numexercises=\(numEx)&exerciseids=\(trackedStr)&key=SoftCon2018"
+        request.submitPostLocal(route: "/api/fitness/test/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }
             self.reply = request.parseJsonRespone(data: data!)!
+            self.exercises = self.reply
+            self.exerciseInfo = self.exercises.removeFirst()
             
-            //            names = reply.map { $0["name"] }
-            for rep in self.reply {
-                self.exList.append(rep["name"]! as! String)
+            let vmitems = self.reply.map { ViewModelItem(item: Model(title: $0["name"] as! String, data: $0)) }
+            self.viewModel.setItems(items: vmitems)
+            
+            
+            DispatchQueue.main.async {
+                self.tableView?.register(CustomCell.nib, forCellReuseIdentifier: CustomCell.identifier)
+                self.tableView?.dataSource = self.viewModel
+                self.tableView?.delegate = self.viewModel
+                self.tableView?.estimatedRowHeight = 100
+                self.tableView?.rowHeight = UITableViewAutomaticDimension
+                self.tableView?.allowsSelection = false
+                self.tableView?.separatorStyle = .none
             }
+         
             }.resume()
         
         // Do any additional setup after loading the view.

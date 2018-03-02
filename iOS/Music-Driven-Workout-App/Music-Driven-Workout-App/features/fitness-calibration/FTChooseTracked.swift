@@ -8,60 +8,78 @@
 
 import UIKit
 
+private let reuseIdentifier = "Cell"
+
 class FTChooseTracked: UIViewController {
+
+    var viewModel = ViewModel()
+    let items = ["Hello there", "my people"]
     
     var userid: String!
+    var category: String = ""
+    var numEx: Int = 1
     var reply: [[String:Any]] = [[String:Any]]()
     var exList: [String] = [String]()
-
-    //var viewModel = ViewModel()
-
-    @IBOutlet weak var trackedTable: UITableView?
+    var exChoices: [Int] = [Int]()
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is FTSummaryViewController
+        {
+            let vc = segue.destination as? FTSummaryViewController
+            //data to send
+            vc?.category = category
+            vc?.userid = userid
+            vc?.numEx = numEx
+            vc?.exChoices = exChoices
+        }
+    }
+    
+    @IBOutlet weak var instructions: UILabel!
+    @IBOutlet weak var tableView: UITableView?
+    @IBOutlet weak var nextButton: UIButton?
     
     override func viewDidLoad() {
-        /*trackedTable?.allowsMultipleSelection = true
-        trackedTable?.dataSource = self.viewModel
-        trackedTable?.delegate = self
+        super.viewDidLoad()
+        print("user: \(userid)")
+
+        instructions.text = "Choose up to \(numEx) tracked exercise"
+        if numEx != 1 {
+            instructions.text? += "s"
+        }
+
+        let qstr = "userid=\(userid!)&categories=\(category)&key=SoftCon2018"
         let request = APIRequest()
-        let qstr = "userid=" + userid + "&key=SoftCon2018"
+      
         request.submitPostLocal(route: "/api/fitness/tracked/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }
             self.reply = request.parseJsonRespone(data: data!)!
+            let vmitems = self.reply.map { ViewModelItem(item: Model(title: $0["name"] as! String, data: $0)) }
+            self.viewModel.setItems(items: vmitems)
             
-            //            names = reply.map { $0["name"] }
-            for rep in self.reply {
-                self.exList.append(rep["name"]! as! String)
-            }
             
             DispatchQueue.main.async {
-                
+                self.tableView?.register(CustomCell.nib, forCellReuseIdentifier: CustomCell.identifier)
+                self.tableView?.dataSource = self.viewModel
+                self.tableView?.delegate = self.viewModel
+                self.tableView?.estimatedRowHeight = 100
+                self.tableView?.rowHeight = UITableViewAutomaticDimension
+                self.tableView?.allowsMultipleSelection = true
+                self.tableView?.separatorStyle = .none
             }
-            }.resume()*/
+            
+            }.resume()
         
     }
     
     @IBAction func next(_ sender: Any) {
+        exChoices = viewModel.selectedItems.map{ $0.data["id"] as! Int}
+        tableView?.reloadData()
     }
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
-    */
 
 }
-
-extension FTChooseTracked: UITableViewDelegate {
-    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.items[indexPath.row].isSelected = true
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        viewModel.items[indexPath.row].isSelected = false
-    }*/
-}
-
