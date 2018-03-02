@@ -20,9 +20,9 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     // Variables
     var auth = SPTAuth.defaultInstance()!
     var session:SPTSession!
+    var userid:String!
     var token:String!
     var username:String!
-    var userid:String!
     
     // Initialzed in either updateAfterFirstLogin: (if first time login) or in viewDidLoad (when there is a check for a session object in User Defaults
     var player: SPTAudioStreamingController?
@@ -36,6 +36,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
         // Do any additional setup after loading the view.
         setup()
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.updateAfterFirstLogin), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -93,7 +94,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     
     @objc func updateAfterFirstLogin () {
         
-        loginButton.isHidden = true
+//        loginButton.isHidden = true
         let userDefaults = UserDefaults.standard
         
         if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
@@ -106,7 +107,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             username = session.canonicalUsername
             getuseridapi(username: username)
             token = session.accessToken
-            self.loginButton.isHidden = true
+//            self.loginButton.isHidden = true
             // self.loadingLabel.isHidden = false
         }
     }
@@ -162,29 +163,45 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     @IBOutlet weak var height: UITextField!
     @IBOutlet weak var weight: UITextField!
     @IBOutlet weak var year: UITextField!
+
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.destination is MenuViewController {
+//            let vc = segue.destination as? MenuViewController
+//                vc?.userid = userBox.text!
+//                vc?.username = username
+//                vc?.token = token
+//        }
+//    }
+
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is MenuViewController {
-            let vc = segue.destination as? MenuViewController
-                vc?.userid = self.userid
-                vc?.username = username
-                vc?.token = token
+//    @IBAction func goButtonClick(_ sender: Any) {
+//        if (userBox.text?.isEmpty)! {
+//            print("ERR: No userid given.")
+//            let alert = UIAlertController(title: "Error", message: "No userid given.", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+//                NSLog("The \"OK\" alert occured.")
+//            }))
+//            self.present(alert, animated: true, completion: nil)
+//            return
+//        }
+//        self.performSegue(withIdentifier: "loginSegue", sender: self)
+//    }
+    
+    @IBAction func createNewUser(_ sender:UIButton) {
+        if(userid != "null") {
+//            self.performSegue(withIdentifier: "createnewuser", sender: self)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+            vc.userid = userid!
+            present(vc, animated: false, completion: nil)
+        } else {
+//            self.performSegue(withIdentifier: "loginSegue", sender: self)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "newUserID") as! LoginViewController
+//            vc.userid = userid!
+            present(vc, animated: false, completion: nil)
         }
     }
-    
-    @IBAction func goButtonClick(_ sender: Any) {
-        if (userBox.text?.isEmpty)! {
-            print("ERR: No userid given.")
-            let alert = UIAlertController(title: "Error", message: "No userid given.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-                NSLog("The \"OK\" alert occured.")
-            }))
-            self.present(alert, animated: true, completion: nil)
-            return
-        }
-        self.performSegue(withIdentifier: "loginSegue", sender: self)
-    }
-    
 //    @IBAction func spotifyLogout(_ sender: UIButton) {
 //        self.spotifyLogout(authSession: <#T##SPTSession#>)
 //    }
