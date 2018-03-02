@@ -19,6 +19,13 @@ class OnboardingViewController: UIViewController{
     
     @IBAction func completeOnboarding(_ sender: Any) {
         onboardingapi(username: self.username)
+        print("USER ID ")
+        print(self.userid)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        vc.userid = userid!
+        vc.username = username!
+        present(vc, animated: false, completion: nil)
     }
     
     func onboardingapi(username: String) {
