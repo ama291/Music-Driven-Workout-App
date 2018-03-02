@@ -20,6 +20,7 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     var passedUserId = String()
     var auth = SPTAuth.defaultInstance()!
     var session:SPTSession!
+    var audiostreaming: SPTAudioStreamingController?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -114,6 +115,8 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "goalsAdd") as! GoalsAddViewController
         vc.userid = userid!
+        vc.player = self.player!
+        vc.audiostreaming = self.audiostreaming!
         present(vc, animated: true, completion: nil)
     }
     
@@ -161,6 +164,8 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     func initializaPlayer(authSession:SPTSession){
         if self.player == nil {
             self.player = SPTAudioStreamingController.sharedInstance()
+            print(self.player)
+            print("^^^ self.player")
             self.player!.playbackDelegate = self
             self.player!.delegate = self
             try! player?.start(withClientId: auth.clientID)
@@ -172,16 +177,20 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-//    func playPauseSong(player:SPTAudioStreamingController){
-//        //        if player.isPlaying == true {
-//        //            player.setIsPlaying(false, callback: nil)
-//        //        }else{
-//        //            player.setIsPlaying(true, callback: nil)
-//        //        }
-//        player.setIsPlaying(<#T##playing: Bool##Bool#>, callback: <#T##SPTErrorableOperationCallback!##SPTErrorableOperationCallback!##(Error?) -> Void#>)
+//    func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePlaybackStatus isPlaying: Bool) {
+//        print("188")
+//        self.player?.queueSpotifyURI("spotify:track:6JzzI3YxHCcjZ7MCQS2YS1", callback: {(error) in
+//            if (error == nil) {
+//                print("queued!")
+//                self.audiostreaming = audioStreaming
+//            } else {
+//                print("error queueing")
+//            }
+//        })
 //    }
     
-    func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePlaybackStatus isPlaying: Bool) {
+    func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
+        print("193")
         self.player?.queueSpotifyURI("spotify:track:6JzzI3YxHCcjZ7MCQS2YS1", callback: {(error) in
             if (error == nil) {
                 print("queued!")
@@ -189,5 +198,23 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
                 print("error queueing")
             }
         })
+    }
+    
+    @IBAction func pauseSong(){
+        //        if(self.player?.isPlaying == true) {
+        print("trying to pause")
+        print(self.player)
+        self.player?.setIsPlaying(false, callback: nil)
+        //        }
+        //        else {
+        //            self.player?.setIsPlaying(true,callback: nil)
+        //        }
+    }
+    
+    @IBAction func playSong(){
+        //        if(self.player?.isPlaying == true) {
+        print("trying to play")
+        print(self.player)
+        self.player?.setIsPlaying(true, callback: nil)
     }
 }

@@ -11,7 +11,8 @@ import UIKit
 class GoalsAddViewController: UIViewController {
     
     var userid: String!
-    
+    var audiostreaming: SPTAudioStreamingController!
+    var player: SPTAudioStreamingController!
     override func viewDidLoad() {
         super.viewDidLoad()
         print("userid")
@@ -60,5 +61,7 @@ class GoalsAddViewController: UIViewController {
         vc.userid = userid!
         present(vc, animated: true, completion: nil)
     }
+    
+   
 
 }

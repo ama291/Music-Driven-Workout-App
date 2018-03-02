@@ -52,6 +52,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
         auth.clientID        = "8f81031574b54170a24a3a1afab27578"
         auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope]
         loginUrl = auth.spotifyWebAuthenticationURL()
+        print(userid)
     }
     
 //    func initializaPlayer(authSession:SPTSession){
@@ -155,14 +156,10 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     //  Created by Alex A on 2/8/18.
     //  Copyright © 2018 UChicago SoftCon. All rights reserved.
     //
-    
-    @IBOutlet weak var userBox: UITextField!
-    @IBOutlet weak var passBox: UITextField!
-    @IBOutlet weak var goButton: UIButton!
-    
-    @IBOutlet weak var height: UITextField!
-    @IBOutlet weak var weight: UITextField!
-    @IBOutlet weak var year: UITextField!
+//
+//    @IBOutlet weak var userBox: UITextField!
+//    @IBOutlet weak var passBox: UITextField!
+//    @IBOutlet weak var goButton: UIButton!
 
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.destination is MenuViewController {
