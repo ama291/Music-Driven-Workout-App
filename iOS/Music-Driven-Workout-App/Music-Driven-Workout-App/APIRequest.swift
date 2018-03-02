@@ -21,7 +21,7 @@ class APIRequest: NSObject {
             let myDict = res
             if let result = myDict["Result"] {
                 return result
-/*
+                /*
                 var reply: [Dictionary<String, Any>]
                 
                 if let resultData = result.data(using: String.Encoding.utf8) {
@@ -30,11 +30,11 @@ class APIRequest: NSObject {
                         let myReplyDict = reply
                         return myReplyDict
                     }
-                }
+                } */
   
-            } */
+            }
             
-        } catch let error {
+        } catch let error{
             print(error)
         }
         return nil

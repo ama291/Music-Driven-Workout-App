@@ -13,11 +13,10 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var musclePicker: UIPickerView!
     @IBOutlet weak var equipPicker: UIPickerView!
 
-    var userid: String!
     var category: String = ""
     var muscleGroup: String = ""
     var equipment: String = ""
-    var userid: String! = "1"
+    var userid: String!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is CESelectionViewController

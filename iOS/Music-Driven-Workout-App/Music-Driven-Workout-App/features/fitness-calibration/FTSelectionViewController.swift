@@ -32,7 +32,6 @@ class FTSelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        userid = "1"
         print("user: \(userid)")
         self.catPicker.delegate = self
         self.catPicker.dataSource = self

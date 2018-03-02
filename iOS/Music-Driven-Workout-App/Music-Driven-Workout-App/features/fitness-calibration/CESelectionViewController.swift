@@ -38,8 +38,6 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
 
         let request = APIRequest()
         
-        let request = APIRequest()
-        
         print("New view:", category, muscleGroup, equipment)
         let qstr = "category=" + category + "&muscle=" + muscleGroup + "&equipment=" + equipment + "&key=SoftCon2018"
         
