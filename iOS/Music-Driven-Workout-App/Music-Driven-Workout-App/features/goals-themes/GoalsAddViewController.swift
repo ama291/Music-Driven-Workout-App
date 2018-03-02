@@ -61,7 +61,4 @@ class GoalsAddViewController: UIViewController {
         vc.userid = userid!
         present(vc, animated: true, completion: nil)
     }
-    
-   
-
 }

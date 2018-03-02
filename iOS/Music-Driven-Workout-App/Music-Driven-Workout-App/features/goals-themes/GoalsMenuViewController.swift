@@ -214,6 +214,25 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
         self.player?.setIsPlaying(false, callback: nil)
     }
     
+    @IBAction func skip() {
+        do {
+            try
+            print(userid)
+            initializaPlayer(authSession:session)
+            self.player?.playSpotifyURI("spotify:track:3n3Ppam7vgaVa1iaRUc9Lp", startingWith: 0, startingWithPosition: 0, callback: { (error) in
+                if (error == nil) {
+                    print("playing!")
+                }
+                if(error != nil) {
+                    print("errors while playing")
+                }
+            })
+        } catch is Error {
+            print("ERROR W SKIP")
+        }
+//        self.player = nil
+    }
+    
     @IBAction func playSong(){
         print("trying to play")
         self.player?.setIsPlaying(true, callback: nil)
