@@ -26,12 +26,16 @@
 		AAC249932047195A007709BC /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC249912047195A007709BC /* CustomCell.swift */; };
 		AAC249942047195A007709BC /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAC249922047195A007709BC /* CustomCell.xib */; };
 		AAC24996204724EE007709BC /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC24995204724EE007709BC /* APIRequest.swift */; };
+		AA530DC62046759700D60B55 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA530DC52046759700D60B55 /* APIRequest.swift */; };
+		AA5EEF682046F2C2004BBAF5 /* FTChooseTracked.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5EEF672046F2C2004BBAF5 /* FTChooseTracked.swift */; };
+		AA5EEF6A2046FDEB004BBAF5 /* TrackedExTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5EEF692046FDEB004BBAF5 /* TrackedExTableViewCell.swift */; };
+		AA5EEF6C2046FE8E004BBAF5 /* ViewModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5EEF6B2046FE8E004BBAF5 /* ViewModelItem.swift */; };
+		AA5EEF6E2046FF24004BBAF5 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5EEF6D2046FF24004BBAF5 /* ViewModel.swift */; };
 		D812999D2042B3CD00ED6D57 /* GoalsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */; };
 		D812999F2042B3E200ED6D57 /* ThemesMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812999E2042B3E200ED6D57 /* ThemesMenuViewController.swift */; };
 		D813DF0B2045BD3E00532701 /* global.swift in Sources */ = {isa = PBXBuildFile; fileRef = D813DF0A2045BD3E00532701 /* global.swift */; };
 		D87D00EE203CEDB000A97449 /* AmaticSC-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D87D00EB203CEDB000A97449 /* AmaticSC-Regular.ttf */; };
 		D87D00F2203CEEA500A97449 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D87D00F1203CEEA500A97449 /* background.jpg */; };
-		D87D00F4203CEF2200A97449 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11AF5E34202D42D2004EB40B /* Info.plist */; };
 		D885DF522043AD250043B087 /* ThemesAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D885DF512043AD250043B087 /* ThemesAddViewController.swift */; };
 		D885DF542043AD300043B087 /* GoalsAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D885DF532043AD300043B087 /* GoalsAddViewController.swift */; };
 		D8880C5B2043606200415877 /* SavedWorkoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8880C5A2043606200415877 /* SavedWorkoutsViewController.swift */; };
@@ -100,6 +104,11 @@
 		AAC249912047195A007709BC /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		AAC249922047195A007709BC /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		AAC24995204724EE007709BC /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		AA530DC52046759700D60B55 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		AA5EEF672046F2C2004BBAF5 /* FTChooseTracked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTChooseTracked.swift; sourceTree = "<group>"; };
+		AA5EEF692046FDEB004BBAF5 /* TrackedExTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedExTableViewCell.swift; sourceTree = "<group>"; };
+		AA5EEF6B2046FE8E004BBAF5 /* ViewModelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelItem.swift; sourceTree = "<group>"; };
+		AA5EEF6D2046FF24004BBAF5 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsMenuViewController.swift; sourceTree = "<group>"; };
 		D812999E2042B3E200ED6D57 /* ThemesMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesMenuViewController.swift; sourceTree = "<group>"; };
 		D813DF0A2045BD3E00532701 /* global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = global.swift; sourceTree = "<group>"; };
@@ -192,6 +201,7 @@
 				11AF5E34202D42D2004EB40B /* Info.plist */,
 				4CE2AAA6203F787C00A55F29 /* SpotifySDKDemo-Bridging-Header.h */,
 				11AF5E2F202D42D2004EB40B /* Assets.xcassets */,
+				AA530DC52046759700D60B55 /* APIRequest.swift */,
 			);
 			path = "Music-Driven-Workout-App";
 			sourceTree = "<group>";
@@ -243,8 +253,8 @@
 			isa = PBXGroup;
 			children = (
 				11AF5E2C202D42D2004EB40B /* Main.storyboard */,
-				114626262040E93F00B2ACEB /* MenuViewController.swift */,
 				114626282040E99A00B2ACEB /* LoginViewController.swift */,
+				114626262040E93F00B2ACEB /* MenuViewController.swift */,
 				11AF5E28202D42D2004EB40B /* AppDelegate.swift */,
 				11AF5E31202D42D2004EB40B /* LaunchScreen.storyboard */,
 				D8C7018D2044E19B006FA4CE /* workout */,
@@ -274,6 +284,10 @@
 				AAC2498F20471927007709BC /* Model.swift */,
 				AAC249912047195A007709BC /* CustomCell.swift */,
 				AAC249922047195A007709BC /* CustomCell.xib */,
+				AA5EEF672046F2C2004BBAF5 /* FTChooseTracked.swift */,
+				AA5EEF692046FDEB004BBAF5 /* TrackedExTableViewCell.swift */,
+				AA5EEF6B2046FE8E004BBAF5 /* ViewModelItem.swift */,
+				AA5EEF6D2046FF24004BBAF5 /* ViewModel.swift */,
 			);
 			path = "fitness-calibration";
 			sourceTree = "<group>";
@@ -435,7 +449,6 @@
 				AAC249942047195A007709BC /* CustomCell.xib in Resources */,
 				11AF5E33202D42D2004EB40B /* LaunchScreen.storyboard in Resources */,
 				D8C701972044E3D7006FA4CE /* profile.storyboard in Resources */,
-				D87D00F4203CEF2200A97449 /* Info.plist in Resources */,
 				D87D00F2203CEEA500A97449 /* background.jpg in Resources */,
 				D8C701922044E1EB006FA4CE /* workout.storyboard in Resources */,
 				D8C701902044E1DF006FA4CE /* goals-themes.storyboard in Resources */,
@@ -467,6 +480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8C5A975204382C7006D2A0A /* CESelectionViewController.swift in Sources */,
+				AA5EEF6C2046FE8E004BBAF5 /* ViewModelItem.swift in Sources */,
 				D8880C5B2043606200415877 /* SavedWorkoutsViewController.swift in Sources */,
 				114626272040E93F00B2ACEB /* MenuViewController.swift in Sources */,
 				D8880C6720436BB900415877 /* FTCheckpointViewController.swift in Sources */,
@@ -476,8 +490,10 @@
 				D88B1F792043F2940053FF78 /* ProfileViewController.swift in Sources */,
 				D812999F2042B3E200ED6D57 /* ThemesMenuViewController.swift in Sources */,
 				D8880C6B20436D4500415877 /* FTCompleteViewController.swift in Sources */,
+				AA5EEF682046F2C2004BBAF5 /* FTChooseTracked.swift in Sources */,
 				D8880C7520436E8F00415877 /* WorkCompleteViewController.swift in Sources */,
 				D8880C6920436C5200415877 /* FTSelectionViewController.swift in Sources */,
+				AA5EEF6A2046FDEB004BBAF5 /* TrackedExTableViewCell.swift in Sources */,
 				D8880C6D20436D8200415877 /* FTSummaryViewController.swift in Sources */,
 				D885DF522043AD250043B087 /* ThemesAddViewController.swift in Sources */,
 				D8880C6F20436E6400415877 /* WorkSelectionViewController.swift in Sources */,
@@ -486,6 +502,7 @@
 				D8880C652043676500415877 /* FTExerciseViewController.swift in Sources */,
 				D8880C7120436E7200415877 /* WorkSummaryViewController.swift in Sources */,
 				D813DF0B2045BD3E00532701 /* global.swift in Sources */,
+				AA5EEF6E2046FF24004BBAF5 /* ViewModel.swift in Sources */,
 				11F9ABEB2033E593007F217C /* AccelerometerTest.swift in Sources */,
 				D8C5A979204384FF006D2A0A /* CECompleteViewController.swift in Sources */,
 				AAC249932047195A007709BC /* CustomCell.swift in Sources */,
@@ -496,6 +513,7 @@
 				AAC2499020471927007709BC /* Model.swift in Sources */,
 				11AF5E29202D42D2004EB40B /* AppDelegate.swift in Sources */,
 				D8880C63204366E200415877 /* FTExDescViewController.swift in Sources */,
+				AA530DC62046759700D60B55 /* APIRequest.swift in Sources */,
 				D812999D2042B3CD00ED6D57 /* GoalsMenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

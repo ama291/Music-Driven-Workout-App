@@ -11,11 +11,19 @@ import UIKit
 class WorkCompleteViewController: UIViewController {
     
     var userid: String!
+    var workoutjson: String!
+    var workoutid: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        
+        //TODO: quitWorkout api call
+        //quitworkoutapi()
+        
+        //TODO: display workout same way as workout summary
+        
+        //TODO: button onclick save workout api call
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,14 +32,59 @@ class WorkCompleteViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    /* MARK: - Navigation */
+    @IBAction func saveWorkout_Yes(_ sender: UIButton) {
+        // TODO - save workout
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        vc.userid = userid!
+        present(vc, animated: false, completion: nil)
     }
-    */
-
+    @IBAction func saveWorkout_No(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        vc.userid = userid!
+        present(vc, animated: false, completion: nil)
+    }
+    
+    
+    
+    struct jsonRequest: Codable {
+        var Result: String
+        var Status: String
+    }
+    
+    @objc func quitworkoutapi() {
+        guard let url = URL(string: "http://138.197.49.155:8000/api/quitworkout/") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //userid, workoutid, key
+        let postString = "userid=" + userid + "&workoutid=" + workoutid +  "&key=SoftCon2018"
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if let data = data {
+                guard let json = try? JSONDecoder().decode(jsonRequest.self, from: data) else { return }
+                print(json)
+            }
+            
+        }.resume()
+    }
+    
+    @objc func saveworkoutapi() {
+        guard let url = URL(string: "http://138.197.49.155:8000/api/saveworkout/") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //userid, workoutid, key
+        let postString = "userid=" + userid + "&workoutid=" + workoutid +  "&key=SoftCon2018"
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if let data = data {
+                guard let json = try? JSONDecoder().decode(jsonRequest.self, from: data) else { return }
+                print(json)
+            }
+            
+        }.resume()
+    }
 }

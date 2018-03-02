@@ -32,15 +32,15 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     var exList: [String] = [String]()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         print("user: \(userid)")
 
         let request = APIRequest()
         
-        print("New view:", category, muscleGroup, equipment)
+        let request = APIRequest()
         
+        print("New view:", category, muscleGroup, equipment)
         let qstr = "category=" + category + "&muscle=" + muscleGroup + "&equipment=" + equipment + "&key=SoftCon2018"
         
         request.submitPostLocal(route: "/api/fitness/getexsbytype/", qstring: qstr) { (data, response, error) -> Void in
@@ -59,7 +59,7 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
                 self.exPicker.dataSource = self
             }
             
-            }.resume()
+        }.resume()
         
         
         // Do any additional setup after loading the view.

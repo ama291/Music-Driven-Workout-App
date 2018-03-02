@@ -78,7 +78,7 @@ class FTSummaryViewController: UIViewController {
                 self.tableView?.allowsSelection = false
                 self.tableView?.separatorStyle = .none
             }
-            
+         
             }.resume()
         
         // Do any additional setup after loading the view.

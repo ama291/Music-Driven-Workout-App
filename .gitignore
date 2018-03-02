@@ -12,3 +12,6 @@ __pycache__
 env/
 *.db
 click
+
+# Xcode Stuff #
+iOS/Music-Driven-Workout-App/Music-Driven-Workout-App.xcodeproj/project.xcworkspace/xcuserdata/*
