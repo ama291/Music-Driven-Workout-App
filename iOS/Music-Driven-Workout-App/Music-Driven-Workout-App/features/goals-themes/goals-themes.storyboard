@@ -402,6 +402,12 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lG-5r-j3q">
+                                                <rect key="frame" x="7" y="917" width="120" height="60"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.37853592629999999" green="0.73301404709999995" blue="0.2026962638" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="play/pause"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.92422796399999996" blue="0.37517484239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -432,7 +438,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BzK-gO-Pwi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-852" y="1137"/>
+            <point key="canvasLocation" x="-852" y="1136.1319340329835"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
