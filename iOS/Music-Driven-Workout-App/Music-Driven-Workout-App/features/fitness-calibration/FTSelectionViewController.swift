@@ -13,28 +13,29 @@ class FTSelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
     @IBOutlet weak var numLabel: UILabel!
     
     var category: String = ""
-    var numEx: Int = 3
+    var numEx: Int = 1
+    var userid: String!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is FTSummaryViewController
+        if segue.destination is FTChooseTracked
         {
-            let vc = segue.destination as? FTSummaryViewController
+            let vc = segue.destination as? FTChooseTracked
             //data to send
             vc?.category = category
             vc?.numEx = numEx
+            vc?.userid = userid
         }
     }
     
-    var userid: String!
     var catList: [String] = [String]()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("user: \(userid)")
         self.catPicker.delegate = self
         self.catPicker.dataSource = self
-        catList = ["Any", "Strength", "Stretching", "Olympic Weightlifting", "Strongman", "Plyometrics", "Cardio", "Powerlifting"]
+        catList = ["Strength", "Stretching", "Olympic Weightlifting", "Strongman", "Plyometrics", "Cardio", "Powerlifting"]
         
         // Do any additional setup after loading the view.
     }

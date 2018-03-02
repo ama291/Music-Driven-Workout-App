@@ -62,7 +62,7 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
     @IBAction func goToCalibrateExercise(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "fitness-calibration", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "calibrateExerciseID") as! CEFilterViewController
-        vc.userid = userid!
+        vc.userid = self.userid!
         present(vc, animated: false, completion: nil)
     }
     @IBAction func goToGoals(_ sender: UIButton) {

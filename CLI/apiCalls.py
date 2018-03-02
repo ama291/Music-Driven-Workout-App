@@ -218,26 +218,26 @@ if __name__ == '__main__':
         workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
         print("\nGet Workouts")
         print(workout)
-        print("\nStart Workout")
-        print(startWorkout(1, workout))
-        print("\nPause Workout")
-        print(pauseWorkout(1, 0))
-        print("\nQuit Workout")
-        print(quitWorkout(1, 0))
-        print("\nSave Workout")
-        print(saveWorkout(1, 0))
-        print("\nUnsave Workout")
-        print(unsaveWorkout(1, 0))
-        print("\nStart Saved Workout")
-        print(startSavedWorkout(1, 0))
+        # print("\nStart Workout")
+        # print(startWorkout(1, workout))
+        # print("\nPause Workout")
+        # print(pauseWorkout(1, 0))
+        # print("\nQuit Workout")
+        # print(quitWorkout(1, 0))
+        # print("\nSave Workout")
+        # print(saveWorkout(1, 0))
+        # print("\nUnsave Workout")
+        # print(unsaveWorkout(1, 0))
+        # print("\nStart Saved Workout")
+        # print(startSavedWorkout(1, 0))
 
-        ## TODO: The following things may not be working
-        # Start saved workout breaks on workouts that haven't been saved
-        # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
-        print("\nWorkouts Saved")
-        saved = workoutsSaved(0)
-        print(saved)
-        print(type(saved))
+        # ## TODO: The following things may not be working
+        # # Start saved workout breaks on workouts that haven't been saved
+        # # print("\nGet Workouts\n", getWorkout(0, ["Body Only"], 50, "Beginner"))
+        # print("\nWorkouts Saved")
+        # saved = workoutsSaved(0)
+        # print(saved)
+        # print(type(saved))
 
     elif argv[1] == "fitness":
         # print("\nWorkouts In Progress\n", workoutsInProgress(0))
@@ -253,9 +253,9 @@ if __name__ == '__main__':
         print(isTracked(1,12))
         print("\nIs Tracked")
         print(isTracked(1,123))
-        cats = ["Strength", "Cardio"]
+        cats = ["Strength"]
         print("\nget ftiness test")
-        print(getFitnessTest(cats, 4, [12, 144]))
+        print(getFitnessTest(cats, 3, [12]))
         print("\nToggle tracked")
         print(toggleTracked(1,12))
         print(toggleTracked(1,12))
