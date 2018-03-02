@@ -18,6 +18,8 @@ class WorkExerciseViewController: UIViewController {
     var exercisedescriptions: [String]!
     var exercisedurations: [Int]!
     var exerciseimages: [String]!
+    var exercisetracknames: [[String]]!
+    var exercisetrackuris: [[String]]!
     
     var heartrate = 0
     
@@ -60,11 +62,6 @@ class WorkExerciseViewController: UIViewController {
         namelabel.adjustsFontSizeToFitWidth = true
         descriptionlabel.lineBreakMode = .byWordWrapping
         descriptionlabel.numberOfLines = 0
-        //test values
-        exercisenames = ["Lying Face Down Plate Neck Resistance", "Lying Face Up Plate Neck Resistance"]
-        exercisedescriptions = ["Lorem ipsum dolor sit amet, consectetur adipiscing elit.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit."]
-        exercisedurations = [30, 30]
-        exerciseimages = ["https://www.bodybuilding.com/exercises/exerciseImages/sequences/25/Male/m/25_2.jpg","https://www.bodybuilding.com/exercises/exerciseImages/sequences/26/Male/m/26_1.jpg"]
         
         //TODO: startworkout API call
         //startworkoutapi()
@@ -132,7 +129,6 @@ class WorkExerciseViewController: UIViewController {
         }
     }
     
-    //TODO: add listener for this to UI
     @IBAction func pauseclick(_ sender: Any) {
         if (!paused) {
             paused = true
@@ -144,7 +140,6 @@ class WorkExerciseViewController: UIViewController {
         }
     }
     
-    //TODO: add listener for this to UI, segue manually
     @IBAction func skipclick(_ sender: Any) {
         completeExercise()
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
+class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
 
     var userid: String!
     var themes: String!
@@ -24,21 +24,21 @@ class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDele
     var auth = SPTAuth.defaultInstance()!
     var session:SPTSession!
     var player: SPTAudioStreamingController?
-
+    
+    //variables to send to WorkExerciseVC
+    var workoutjson: String!
+    var exNames: [String] = []
+    var exDesc: [String] = []
+    var exDur: [Int] = []
+    var exImgs: [String] = []
+    var exTrackNames: [[String]] = [[]]
+    var exTrackUris: [[String]] = [[]]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-        print("WorkSummaryVC")
-        print("\t userid:" + userid)
-        print("\t themes:" + themes)
-        print("\t categories:" + categories)
-        print("\t musclegroups:" + musclegroup)
-        print("\t equipment:" + equipment)
-        print("\t duration:" + duration)
-        print("\t difficulty:" + difficulty)
-        print("\t token:" + token + "\n")
-
+        
         getWorkout()
     }
 
@@ -57,14 +57,18 @@ class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDele
         else if segue.destination is WorkExerciseViewController {
             let vc = segue.destination as? WorkExerciseViewController
             vc?.userid = userid!
+            vc?.workoutjson = workoutjson
+            vc?.exercisenames = exNames
+            vc?.exercisedescriptions = exDesc
+            vc?.exercisedurations = exDur
+            vc?.exerciseimages = exImgs
+            vc?.exercisetracknames = exTrackNames
+            vc?.exercisetrackuris = exTrackUris
         }
     }
-
-    /* Mark: Make a call to getWorkout() */
-    var reply: [String:Any] = [String:Any]()
-    var exerciseInfo: [String:Any] = [String:Any]()
-    var exList: [String] = [String]()
-
+    
+    
+    /* Mark: Make a call to getWorkout() API and Parse Result */
     @objc func getWorkout() {
         let request = APIRequest()
         let route = "/api/workouts/getworkout/"
@@ -78,57 +82,66 @@ class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDele
         query += "&duration=" + duration
         query += "&difficulty=" + difficulty
         query += "&token=" + token
-        print("QUERY:" + query + "\n")
-
-        request.submitPostLocal(route: route, qstring: query) { (data, response, error) -> Void in
+        
+        request.submitPostServer(route: route, qstring: query) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }
-            print("initial data:", String(describing: data))
-            /* Parse the json object returned by submitPostLocal() */
-            let json = try? JSONSerialization.jsonObject(with: data!, options: [])
-            print("JSON:", json as Any)
-            if let dictionary = json as? [String: Any] {
-                if let status = dictionary["Status"] as? String {
-                    print("Status:", status)
-                }
-
-                /* TODO - Turn the Result into a nested dictionary */
-                var result = dictionary["Result"] as! String
-//                result.remove(at: result.startIndex)
-//                result.removeLast()
-                print("result: ", result)
-
-                //var resultDictionary: [String: [Any]]
-                if let resultData = result.data(using: .utf8, allowLossyConversion: false) {
-                    do {
-                        let reply = try JSONSerialization.jsonObject(with: resultData, options: []) as! [String: AnyObject]
-                        print("reply JSON:", reply as Any)
-                    } catch let error as NSError {
-                        print("Failed to Load: \(error.localizedDescription)")
+            
+            let resultjson = try? JSONSerialization.jsonObject(with: data!, options: [])
+            self.workoutjson = String(describing: data)
+            print("resultJson: ", resultjson as Any, "\n")
+            
+            if let dictionary = resultjson as? [String: Any] {
+                if let exercises = dictionary["Exercises"] as? [Any] {
+                    var exIndex = 0
+                    for ex in exercises {
+                        if let exDict = ex as? [String: Any] {
+                            // Populate tableContent
+                            let content = exDict["name"] as! String
+                            self.tableContent.append(content)
+                            
+                            // Populate data to send to next scene
+                            self.exNames.append(exDict["name"] as! String)
+                            self.exDesc.append("exDescription")
+                            self.exDur.append((exDict["duration"] as! Int) * 60) // convert to secs
+                            self.exImgs.append(exDict["images"] as! String)
+                            
+                            if let trackDict = exDict["tracks"] as? [Dictionary<String, String>] {
+                                for track in trackDict {
+                                    print("Track:", track)
+                                    print("TName:", track["name"] as Any)
+                                    print("TUri:", track["uri"] as Any)
+                                    self.exTrackNames[exIndex].append(track["name"]!)
+                                    self.exTrackUris[exIndex].append(track["uri"]!)
+                                }
+                            }
+                            print(self.exTrackNames)
+                            print(self.exTrackUris)
+                        }
+                        exIndex += 1
+                        self.exTrackNames.append([])
+                        self.exTrackUris.append([])
                     }
                 }
-
-//                if let result = dictionary["Result"] as? String {
-//                    print("result", result.data(using: .utf8), result)
-//                    let resJson = try? JSONSerialization.jsonObject(with: result.data(using: String.Encoding.utf8)!, options: [])
-//                    print("RESJSON: ", resJson as Any)
-//                    if let resDict = resJson as? [String: Any] {
-//                        if let uid = resDict["uid"] as? String {
-//                            print(uid)
-//                        } else {print("uid err")}
-//                    } else {print("resDict err")}
-//                }  else {print("result err")}
-
             }
-
-            }.resume()
+            
+            DispatchQueue.main.async {
+                self.exTable.delegate = self
+                self.exTable.dataSource = self
+                self.exTable?.reloadData()
+            }
+            
+        }.resume()
     }
 
+    
     /* Mark: tableView */
+    @IBOutlet weak var exTable: UITableView!
     let sections = ["Exercises"]
-    //let exList = ["Test Input 1", "Test Input 2"]
-
+    var tableContent: [String] = []  //populated by getWorkout()
+    
+    // Section Headers
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections[section]
     }
@@ -140,8 +153,7 @@ class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDele
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            // Exercise Section
-            return exList.count
+            return tableContent.count
         default:
             return 0
         }
@@ -154,7 +166,7 @@ class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDele
         // Depending on the section, fill the textLabel with the relevant text
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = exList[indexPath.row]
+            cell.textLabel?.text = tableContent[indexPath.row]
             break
         default:
             break
@@ -163,5 +175,5 @@ class WorkSummaryViewController: UIViewController, SPTAudioStreamingPlaybackDele
         // Return the configured cell
         return cell
     }
-
+    
 }

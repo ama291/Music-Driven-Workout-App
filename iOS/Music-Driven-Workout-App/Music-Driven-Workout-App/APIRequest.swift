@@ -34,41 +34,6 @@ class APIRequest: NSObject {
         return nil
     }
     
-    func parseWorkoutJson(data: Data) -> Dictionary<String, Any>? {
-        print("parseWorkoutJson Start")
-        do {
-            let json = try? JSONSerialization.jsonObject(with: data, options: [])
-            
-            if let dictionary = json as? [String:Any] {
-                /* Access individual value in dictionary */
-                if let status = dictionary["Status"] as? String {
-                    print(status)
-                }
-                
-                /* Access nestedDictionaries in a Dictionary */
-                if let result = dictionary["Result"] as? [String: Any] {
-                    print("Returning...")
-                    return result
-                }
-            }
-        }
-//        catch let error {
-//            print("ERROR while parsing workout json")
-//            print(error)
-//        }
-        return nil
-    }
-    
-    func convertToDictionary(text: String) -> [String: Any]? {
-        if let data = text.data(using: .utf8) {
-            do {
-                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        return nil
-    }
     
     func submitPostLocal(route: String, qstring: String, completion: @escaping (Data?, URLResponse?,Error?) -> Void) -> URLSessionDataTask {
         var urlComponents = URLComponents()
@@ -98,4 +63,31 @@ class APIRequest: NSObject {
         return task
     }
 
+    func submitPostServer(route: String, qstring: String, completion: @escaping (Data?, URLResponse?,Error?) -> Void) -> URLSessionDataTask {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "http"
+        urlComponents.host = "138.197.49.155"
+        urlComponents.port = 8000
+        urlComponents.path = route
+        urlComponents.query = qstring
+        guard let url = urlComponents.url else {
+            fatalError("Could not create URL")
+        }
+        print("url: ", url, "\n")
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let postString = qstring
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: request) {(data, response, responseError) in
+            if let data = data {
+                completion(data, response, responseError)
+            }
+        }
+        return task
+    }
+    
 }
