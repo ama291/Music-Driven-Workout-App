@@ -14,7 +14,7 @@ class ThemesMenuViewController: UIViewController {
     var themes: [[String:Any]]!
     var selectedTheme: [String:Any]!
     
-    var viewModel = ThemeViewModel()
+    var viewModel = ViewModel()
     var request = APIRequest()
     
     @IBOutlet weak var viewButton: UIButton!
@@ -27,13 +27,13 @@ class ThemesMenuViewController: UIViewController {
         super.viewDidLoad()
         self.themes = [["theme":"theme", "name": "theme name", "spotifyId": "Spotify id", "numworkouts": "4"], ["theme":"theme 2", "name": "theme name 2", "spotifyId": "Spotify id 2", "numworkouts": "6"]]
         
-        let vmitems = self.themes!.map { ThemeViewModelItem(item: ThemeModel(title: "\($0["name"]! as! String)" , data: $0)) }
+        let vmitems = self.themes!.map { ViewModelItem(item: Model(title: "\($0["name"]! as! String)" , data: $0)) }
 
         print(vmitems[0].title)
         
         self.viewModel.setItems(items: vmitems)
 
-        self.tableView?.register(ThemeCustomCell.nib, forCellReuseIdentifier: ThemeCustomCell.identifier)
+        self.tableView?.register(CustomCell.nib, forCellReuseIdentifier: CustomCell.identifier)
         self.tableView?.dataSource = self.viewModel
         self.tableView?.delegate = self.viewModel
         self.tableView?.estimatedRowHeight = 100

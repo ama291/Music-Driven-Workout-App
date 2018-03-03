@@ -20,11 +20,12 @@
 		4CE2AAAA203F7AA000A55F29 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2AAA7203F7A9F00A55F29 /* SpotifyMetadata.framework */; };
 		4CE2AAAB203F7AA000A55F29 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2AAA8203F7AA000A55F29 /* SpotifyAudioPlayback.framework */; };
 		4CE2AAAC203F7AA000A55F29 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2AAA9203F7AA000A55F29 /* SpotifyAuthentication.framework */; };
+		AA6654A4204B488200E2F3FC /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6654A3204B488200E2F3FC /* ViewModel.swift */; };
+		AA6654A6204B48A200E2F3FC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6654A5204B48A200E2F3FC /* Model.swift */; };
+		AA6654A9204B48D800E2F3FC /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6654A7204B48D800E2F3FC /* CustomCell.swift */; };
+		AA6654AA204B48D800E2F3FC /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA6654A8204B48D800E2F3FC /* CustomCell.xib */; };
+		AA6654AC204B49E800E2F3FC /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6654AB204B49E800E2F3FC /* ThemeViewController.swift */; };
 		AAC2498C20471741007709BC /* FTChooseTracked.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2498B20471741007709BC /* FTChooseTracked.swift */; };
-		AAC2498E20471912007709BC /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2498D20471912007709BC /* ViewModel.swift */; };
-		AAC2499020471927007709BC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC2498F20471927007709BC /* Model.swift */; };
-		AAC249932047195A007709BC /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC249912047195A007709BC /* CustomCell.swift */; };
-		AAC249942047195A007709BC /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAC249922047195A007709BC /* CustomCell.xib */; };
 		AAC24996204724EE007709BC /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC24995204724EE007709BC /* APIRequest.swift */; };
 		D812999D2042B3CD00ED6D57 /* GoalsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */; };
 		D812999F2042B3E200ED6D57 /* ThemesMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812999E2042B3E200ED6D57 /* ThemesMenuViewController.swift */; };
@@ -94,11 +95,12 @@
 		4CE2AAA7203F7A9F00A55F29 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
 		4CE2AAA8203F7AA000A55F29 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
 		4CE2AAA9203F7AA000A55F29 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
+		AA6654A3204B488200E2F3FC /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		AA6654A5204B48A200E2F3FC /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		AA6654A7204B48D800E2F3FC /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		AA6654A8204B48D800E2F3FC /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
+		AA6654AB204B49E800E2F3FC /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		AAC2498B20471741007709BC /* FTChooseTracked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTChooseTracked.swift; sourceTree = "<group>"; };
-		AAC2498D20471912007709BC /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		AAC2498F20471927007709BC /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		AAC249912047195A007709BC /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
-		AAC249922047195A007709BC /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		AAC24995204724EE007709BC /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsMenuViewController.swift; sourceTree = "<group>"; };
 		D812999E2042B3E200ED6D57 /* ThemesMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesMenuViewController.swift; sourceTree = "<group>"; };
@@ -252,6 +254,10 @@
 				D8C7018E2044E1A9006FA4CE /* goals-themes */,
 				D8C701952044E3B3006FA4CE /* profile */,
 				D8C701982044E74D006FA4CE /* samples */,
+				AA6654A3204B488200E2F3FC /* ViewModel.swift */,
+				AA6654A5204B48A200E2F3FC /* Model.swift */,
+				AA6654A7204B48D800E2F3FC /* CustomCell.swift */,
+				AA6654A8204B48D800E2F3FC /* CustomCell.xib */,
 			);
 			path = features;
 			sourceTree = "<group>";
@@ -270,10 +276,6 @@
 				D8880C6620436BB900415877 /* FTCheckpointViewController.swift */,
 				D8880C6A20436D4500415877 /* FTCompleteViewController.swift */,
 				AAC2498B20471741007709BC /* FTChooseTracked.swift */,
-				AAC2498D20471912007709BC /* ViewModel.swift */,
-				AAC2498F20471927007709BC /* Model.swift */,
-				AAC249912047195A007709BC /* CustomCell.swift */,
-				AAC249922047195A007709BC /* CustomCell.xib */,
 			);
 			path = "fitness-calibration";
 			sourceTree = "<group>";
@@ -299,6 +301,7 @@
 				D885DF512043AD250043B087 /* ThemesAddViewController.swift */,
 				D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */,
 				D885DF532043AD300043B087 /* GoalsAddViewController.swift */,
+				AA6654AB204B49E800E2F3FC /* ThemeViewController.swift */,
 			);
 			path = "goals-themes";
 			sourceTree = "<group>";
@@ -432,11 +435,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D87D00EE203CEDB000A97449 /* AmaticSC-Regular.ttf in Resources */,
-				AAC249942047195A007709BC /* CustomCell.xib in Resources */,
 				11AF5E33202D42D2004EB40B /* LaunchScreen.storyboard in Resources */,
 				D8C701972044E3D7006FA4CE /* profile.storyboard in Resources */,
 				D87D00F4203CEF2200A97449 /* Info.plist in Resources */,
 				D87D00F2203CEEA500A97449 /* background.jpg in Resources */,
+				AA6654AA204B48D800E2F3FC /* CustomCell.xib in Resources */,
 				D8C701922044E1EB006FA4CE /* workout.storyboard in Resources */,
 				D8C701902044E1DF006FA4CE /* goals-themes.storyboard in Resources */,
 				D8C701942044E1F5006FA4CE /* fitness-calibration.storyboard in Resources */,
@@ -468,11 +471,12 @@
 			files = (
 				D8C5A975204382C7006D2A0A /* CESelectionViewController.swift in Sources */,
 				D8880C5B2043606200415877 /* SavedWorkoutsViewController.swift in Sources */,
+				AA6654A9204B48D800E2F3FC /* CustomCell.swift in Sources */,
 				114626272040E93F00B2ACEB /* MenuViewController.swift in Sources */,
 				D8880C6720436BB900415877 /* FTCheckpointViewController.swift in Sources */,
 				D885DF542043AD300043B087 /* GoalsAddViewController.swift in Sources */,
+				AA6654AC204B49E800E2F3FC /* ThemeViewController.swift in Sources */,
 				11AF5E2B202D42D2004EB40B /* ViewController.swift in Sources */,
-				AAC2498E20471912007709BC /* ViewModel.swift in Sources */,
 				D88B1F792043F2940053FF78 /* ProfileViewController.swift in Sources */,
 				D812999F2042B3E200ED6D57 /* ThemesMenuViewController.swift in Sources */,
 				D8880C6B20436D4500415877 /* FTCompleteViewController.swift in Sources */,
@@ -488,13 +492,13 @@
 				D813DF0B2045BD3E00532701 /* global.swift in Sources */,
 				11F9ABEB2033E593007F217C /* AccelerometerTest.swift in Sources */,
 				D8C5A979204384FF006D2A0A /* CECompleteViewController.swift in Sources */,
-				AAC249932047195A007709BC /* CustomCell.swift in Sources */,
+				AA6654A4204B488200E2F3FC /* ViewModel.swift in Sources */,
 				114626292040E99A00B2ACEB /* LoginViewController.swift in Sources */,
 				AAC2498C20471741007709BC /* FTChooseTracked.swift in Sources */,
 				D88B1F7B2043F5D70053FF78 /* ProfileEditViewController.swift in Sources */,
 				AAC24996204724EE007709BC /* APIRequest.swift in Sources */,
-				AAC2499020471927007709BC /* Model.swift in Sources */,
 				11AF5E29202D42D2004EB40B /* AppDelegate.swift in Sources */,
+				AA6654A6204B48A200E2F3FC /* Model.swift in Sources */,
 				D8880C63204366E200415877 /* FTExDescViewController.swift in Sources */,
 				D812999D2042B3CD00ED6D57 /* GoalsMenuViewController.swift in Sources */,
 			);
