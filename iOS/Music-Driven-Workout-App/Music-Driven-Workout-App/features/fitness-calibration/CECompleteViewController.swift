@@ -13,7 +13,6 @@ class CECompleteViewController: UIViewController {
     var exName: String!
     var exerciseInfo: [String:Any] = [:]
     var freq: Float!
-    var userid: String!
     
     func dateToString(givenDate: Date) -> String {
         let formatter = DateFormatter()
@@ -27,13 +26,13 @@ class CECompleteViewController: UIViewController {
     @IBOutlet weak var paceSaved: UILabel!
     @IBAction func savePace(_ sender: Any) {
         let time = self.dateToString(givenDate: Date())
-        let qstr = "userid=\(userid!)&exid=\(exerciseInfo["id"]!)&rate=\(Int(freq!))&timestamp=\(time)&key=SoftCon2018"
+        let qstr = "userid=\(global.userid!)&exid=\(exerciseInfo["id"]!)&rate=\(Int(freq!))&timestamp=\(time)&key=SoftCon2018"
         self.request.submitPostServer(route: "/api/fitness/addexact/", qstring: qstr){(data, response, error) in
             if let error = error {
                 fatalError(error.localizedDescription)
             } else {
                 let res = self.request.parseJsonInitial(data: data!)
-                print(res)
+                print(res as Any)
                 if res! == "True" {
                     DispatchQueue.main.async {
                         print("Pace saved!")
@@ -48,24 +47,11 @@ class CECompleteViewController: UIViewController {
         self.performSegue(withIdentifier: "tryAgain", sender: sender)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is FTExDescViewController
-        {
-            let vc = segue.destination as? FTExDescViewController
-            //data to send
-            vc?.exerciseInfo = exerciseInfo
-            vc?.isCalibration = true
-            vc?.userid = userid
-        }
-    }
-    
-    
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("user: \(userid)")
+        print("user: \(global.userid)")
         print(self.exName)
         print(self.freq)
         print("")
@@ -83,20 +69,20 @@ class CECompleteViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    /* Navigation */
     @IBAction func goToHome(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
-        vc.userid = userid!
         present(vc, animated: true, completion: nil)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is FTExDescViewController
+        {
+            let vc = segue.destination as? FTExDescViewController
+            //data to send
+            vc?.exerciseInfo = exerciseInfo
+            vc?.isCalibration = true
+        }
     }
     
 }
