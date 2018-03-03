@@ -115,6 +115,9 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                                     print("TUri:", track["uri"] as Any)
                                     self.exTrackNames[exIndex].append(track["name"]!)
                                     self.exTrackUris[exIndex].append(track["uri"]!)
+                                    
+                                    // Populate Song List
+                                    self.songList.append(track["name"]!)
                                 }
                             }
                             print(self.exTrackNames)
@@ -139,8 +142,9 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     
     /* Mark: tableView */
     @IBOutlet weak var exTable: UITableView!
-    let sections = ["Exercises"]
+    let sections = ["Exercises", "Songs"]
     var tableContent: [String] = []  //populated by getWorkout()
+    var songList: [String] = []  //populated by getWorkout()
     
     // Section Headers
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -155,6 +159,8 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         switch section {
         case 0:
             return tableContent.count
+        case 1:
+            return songList.count
         default:
             return 0
         }
@@ -168,6 +174,9 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         switch indexPath.section {
         case 0:
             cell.textLabel?.text = tableContent[indexPath.row]
+            break
+        case 1:
+            cell.textLabel?.text = songList[indexPath.row]
             break
         default:
             break

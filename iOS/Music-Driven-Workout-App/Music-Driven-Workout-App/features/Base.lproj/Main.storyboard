@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,10 +42,12 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUP-vF-7jh">
-                                <rect key="frame" x="123" y="546" width="129" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUP-vF-7jh">
+                                <rect key="frame" x="123" y="544" width="129" height="49"/>
                                 <color key="backgroundColor" red="0.35015490508252639" green="0.87944823503494263" blue="0.34544791516809054" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="9Xd-zA-2TE"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="37"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,9 +57,8 @@
                                     <segue destination="IVo-7s-udP" kind="show" id="EQQ-BG-hEh"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="A Music Driven Workout App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qj-Uz-Iud">
-                                <rect key="frame" x="0.0" y="70" width="375" height="63"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Music Driven Workout App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qj-Uz-Iud">
+                                <rect key="frame" x="0.0" y="70" width="375" height="48"/>
                                 <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="38"/>
                                 <color key="textColor" red="1" green="0.95857317973319134" blue="0.86531994368254705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -64,13 +66,19 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="xKz-ky-fNL" firstAttribute="trailing" secondItem="QUP-vF-7jh" secondAttribute="trailing" constant="123" id="13C-nE-XCr"/>
                             <constraint firstItem="XQD-Fy-lw2" firstAttribute="leading" secondItem="xKz-ky-fNL" secondAttribute="leading" id="AAm-07-7U2"/>
+                            <constraint firstItem="5Qj-Uz-Iud" firstAttribute="trailing" secondItem="xKz-ky-fNL" secondAttribute="trailing" id="FGU-A2-VMh"/>
                             <constraint firstItem="XQD-Fy-lw2" firstAttribute="trailing" secondItem="xKz-ky-fNL" secondAttribute="trailing" id="Kbv-h4-ftG"/>
                             <constraint firstItem="d3Y-9l-VwU" firstAttribute="leading" secondItem="xKz-ky-fNL" secondAttribute="leading" constant="190" id="SZu-jp-afc"/>
                             <constraint firstItem="xKz-ky-fNL" firstAttribute="trailing" secondItem="d3Y-9l-VwU" secondAttribute="trailing" constant="16" id="ZbW-9Q-ryh"/>
+                            <constraint firstItem="QUP-vF-7jh" firstAttribute="leading" secondItem="xKz-ky-fNL" secondAttribute="leading" constant="123" id="cPG-CB-rEm"/>
                             <constraint firstItem="XQD-Fy-lw2" firstAttribute="top" secondItem="Y7T-Ac-Zia" secondAttribute="top" id="cbt-RV-ONP"/>
+                            <constraint firstItem="d3Y-9l-VwU" firstAttribute="top" secondItem="QUP-vF-7jh" secondAttribute="bottom" constant="38" id="dwW-df-Obv"/>
                             <constraint firstItem="xKz-ky-fNL" firstAttribute="bottom" secondItem="d3Y-9l-VwU" secondAttribute="bottom" constant="20" id="iVC-fg-J2a"/>
                             <constraint firstItem="XQD-Fy-lw2" firstAttribute="bottom" secondItem="xKz-ky-fNL" secondAttribute="bottom" id="kJe-iH-UsE"/>
+                            <constraint firstItem="5Qj-Uz-Iud" firstAttribute="top" secondItem="xKz-ky-fNL" secondAttribute="top" constant="50" id="qQg-Hh-Pcg"/>
+                            <constraint firstItem="5Qj-Uz-Iud" firstAttribute="leading" secondItem="xKz-ky-fNL" secondAttribute="leading" id="sbG-bt-Jg2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xKz-ky-fNL"/>
                     </view>
@@ -98,6 +106,7 @@
                                 <color key="backgroundColor" red="0.9380349731262787" green="0.95992551813471505" blue="0.86176168705156797" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="118" id="1Ge-tH-Eem"/>
+                                    <constraint firstAttribute="width" secondItem="Qj8-Vd-d6V" secondAttribute="height" multiplier="61:59" id="2jy-CO-ZIf"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="118" id="o7v-Hs-WG3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="37"/>
