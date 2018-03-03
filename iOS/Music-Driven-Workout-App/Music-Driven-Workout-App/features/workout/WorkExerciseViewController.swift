@@ -208,7 +208,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         eximage.contentMode = UIViewContentMode.scaleAspectFit
         
         timecountdown = Double(dur)
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
         
     }
     
