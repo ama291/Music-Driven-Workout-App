@@ -195,7 +195,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             //            self.performSegue(withIdentifier: "loginSegue", sender: self)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "newUserID") as! OnboardingViewController
-            //            vc.userid = userid!
+            vc.userid = userid!
             vc.username = username!
             present(vc, animated: false, completion: nil)
         }

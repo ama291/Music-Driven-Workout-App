@@ -32,11 +32,11 @@ class OnboardingViewController: UIViewController{
         guard let url = URL(string: "http://138.197.49.155:8000/api/workouts/onboarding/") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        var userparam = "username=" + self.username
-        var heightparam = "&height=" + height.text!
-        var weightparam = "&weight=" + weight.text!
-        var yearparam = "&year=" + year.text!
-        var keyparam = "&key=SoftCon2018"
+        let userparam = "username=" + self.username
+        let heightparam = "&height=" + height.text!
+        let weightparam = "&weight=" + weight.text!
+        let yearparam = "&year=" + year.text!
+        let keyparam = "&key=SoftCon2018"
         let postString = userparam + heightparam + weightparam + yearparam + keyparam
         //let postString = "username=" + self.username + "&height=" + height + "&weight=" + weight + "&year=" + year + "&key=SoftCon2018"
         request.httpBody = postString.data(using: String.Encoding.utf8)
