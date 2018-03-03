@@ -213,7 +213,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     }
     
     @objc func updateTimer() {
-        timecountdown -= 0.1
+        timecountdown -= 1
         timecountdown = ceil(timecountdown*10)/10
         timelabel.text = "Time Remaining: " + timecountdown.description + "s"
         //heartratelabel.text = "Heartrate: " + String(heartrate)
