@@ -15,14 +15,12 @@ struct jsonRequest: Codable {
     var Status: String
 }
 
+var global = Global()
+
 class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
     
     // Variables
     var auth = SPTAuth.defaultInstance()!
-    var session:SPTSession!
-    var userid:String!
-    var token:String!
-    var username:String!
     
     // Initialzed in either updateAfterFirstLogin: (if first time login) or in viewDidLoad (when there is a check for a session object in User Defaults
     var player: SPTAudioStreamingController?
@@ -52,7 +50,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
         auth.clientID        = "8f81031574b54170a24a3a1afab27578"
         auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope]
         loginUrl = auth.spotifyWebAuthenticationURL()
-        print(userid)
+        print(global.userid)
     }
     
     //    func initializaPlayer(authSession:SPTSession){
@@ -85,9 +83,8 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
         session.dataTask(with: request) { (data, response, error) in
             if let data = data {
                 guard let json = try? JSONDecoder().decode(jsonRequest.self, from: data) else { return }
-                self.userid = json.Result
-                print(self.userid)
-                
+                global.userid = json.Result
+                print(global.userid)
             }
             
             }.resume()
@@ -103,12 +100,12 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             let sessionDataObj = sessionObj as! Data
             let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
             
-            self.session = firstTimeSession
-            //            initializaPlayer(authSession: session)
-            username = session.canonicalUsername
-            getuseridapi(username: username)
-            token = session.accessToken
-            //            self.loginButton.isHidden = true
+            global.session = firstTimeSession
+            // initializaPlayer(authSession: session)
+            global.username = session.canonicalUsername
+            getuseridapi(username: global.username)
+            global.token = global.session.accessToken
+            // self.loginButton.isHidden = true
             // self.loadingLabel.isHidden = false
         }
     }
@@ -129,9 +126,6 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     
     
     @IBAction func loginButtonPressed(_ sender: Any) {
-        
-        //     UIApplication.shared.open(loginUrl!, options: nil, completionHandler: nil)
-        
         if UIApplication.shared.openURL(loginUrl!) {
             
             if auth.canHandle(auth.redirectURL) {
@@ -140,63 +134,15 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
         }
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    //
-    //  ViewController.swift
-    //  Music-Driven-Workout-App
-    //
-    //  Created by Alex A on 2/8/18.
-    //  Copyright © 2018 UChicago SoftCon. All rights reserved.
-    //
-    //
-    //    @IBOutlet weak var userBox: UITextField!
-    //    @IBOutlet weak var passBox: UITextField!
-    //    @IBOutlet weak var goButton: UIButton!
-    
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if segue.destination is MenuViewController {
-    //            let vc = segue.destination as? MenuViewController
-    //                vc?.userid = userBox.text!
-    //                vc?.username = username
-    //                vc?.token = token
-    //        }
-    //    }
-    
-    
-    //    @IBAction func goButtonClick(_ sender: Any) {
-    //        if (userBox.text?.isEmpty)! {
-    //            print("ERR: No userid given.")
-    //            let alert = UIAlertController(title: "Error", message: "No userid given.", preferredStyle: .alert)
-    //            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
-    //                NSLog("The \"OK\" alert occured.")
-    //            }))
-    //            self.present(alert, animated: true, completion: nil)
-    //            return
-    //        }
-    //        self.performSegue(withIdentifier: "loginSegue", sender: self)
-    //    }
     
     @IBAction func createNewUser(_ sender:UIButton) {
-        if(userid != "null") {
-            //            self.performSegue(withIdentifier: "createnewuser", sender: self)
+        if(global.userid != "null") {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
-            vc.userid = userid!
             present(vc, animated: false, completion: nil)
         } else {
-            //            self.performSegue(withIdentifier: "loginSegue", sender: self)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "newUserID") as! OnboardingViewController
-            vc.userid = userid!
-            vc.username = username!
             present(vc, animated: false, completion: nil)
         }
     }

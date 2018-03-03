@@ -14,7 +14,6 @@ class FTSelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     var category: String = ""
     var numEx: Int = 1
-    var userid: String!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is FTChooseTracked
@@ -23,7 +22,6 @@ class FTSelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
             //data to send
             vc?.category = category
             vc?.numEx = numEx
-            vc?.userid = userid
         }
     }
     
@@ -32,7 +30,7 @@ class FTSelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("user: \(userid)")
+        print("user: \(global.userid)")
         self.catPicker.delegate = self
         self.catPicker.dataSource = self
         catList = ["Strength", "Stretching", "Olympic Weightlifting", "Strongman", "Plyometrics", "Cardio", "Powerlifting"]
@@ -83,10 +81,7 @@ class FTSelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
      }
      */
     @IBAction func goToHome(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
-        vc.userid = userid!
-        present(vc, animated: true, completion: nil)
+        global.goToHome()
     }
     
 }

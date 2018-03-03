@@ -12,14 +12,13 @@ class FTCompleteViewController: UIViewController {
     var viewModel = ViewModel()
 
     @IBOutlet weak var tableView: UITableView!
-    var userid: String!
     var exerciseName: String!
     var isCalibration: Bool!
     var frequencies: [[String:Any]]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("user: \(userid)")
+        print("user: \(global.userid)")
 
         print(self.frequencies, "frequencies")
         var freq: String = ""
@@ -49,20 +48,9 @@ class FTCompleteViewController: UIViewController {
     }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    /* Navigation */
     @IBAction func goToHome(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
-        vc.userid = userid!
-        present(vc, animated: true, completion: nil)
+        global.goToHome()
     }
     
 }

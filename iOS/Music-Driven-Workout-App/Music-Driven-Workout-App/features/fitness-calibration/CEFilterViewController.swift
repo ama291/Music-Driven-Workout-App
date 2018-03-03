@@ -16,21 +16,6 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var category: String = ""
     var muscleGroup: String = ""
     var equipment: String = ""
-    var userid: String!
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is CESelectionViewController
-        {
-            let vc = segue.destination as? CESelectionViewController
-            //data to send
-            vc?.category = category
-            vc?.muscleGroup = muscleGroup
-            vc?.equipment = equipment
-            vc?.userid = userid
-        }
-    }
-    
-    
     
     var catList: [String] = [String]()
     var muscleList: [String] = [String]()
@@ -105,20 +90,20 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     
-    /*
-     // MARK: - Navigation
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    /* Navigation */
     
     @IBAction func goToHome(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
-        vc.userid = userid!
-        present(vc, animated: true, completion: nil)
+        global.goToHome()
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is CESelectionViewController
+        {
+            let vc = segue.destination as? CESelectionViewController
+            //data to send
+            vc?.category = category
+            vc?.muscleGroup = muscleGroup
+            vc?.equipment = equipment
+        }
     }
     
 }
