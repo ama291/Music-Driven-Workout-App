@@ -12,8 +12,54 @@ class ThemesAddViewController: UIViewController {
     
     var userid: String!
     
+    let request = APIRequest()
+    var themeName: String!
+    var theme: String!
+    var numWorkouts: Int! = 3
+    
+    @IBOutlet weak var numWorkoutsLabel: UILabel!
+    @IBAction func numWorkoutsSlider(_ sender: Any) {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.numWorkoutsLabel.text = "Number of Workouts: \(numWorkouts)"
+        
+//
+//        self.frequencies = [[String:Any]]()
+//        print(self.frequencies)
+//        print(exChoices, userid, category, numEx)
+//        var trackedStr: String = ""
+//        trackedStr = exChoices.map { String($0) }.joined(separator: ",")
+//        if trackedStr == "" {
+//            trackedStr = "144"
+//        }
+//        let qstr = "categories=\(category)&numexercises=\(numEx)&exerciseids=\(trackedStr)&key=SoftCon2018"
+//        self.request.submitPostServer(route: "/api/fitness/test/", qstring: qstr) { (data, response, error) -> Void in
+//            if let error = error {
+//                fatalError(error.localizedDescription)
+//            }
+//            self.reply = self.request.parseJsonRespone(data: data!)!
+//            self.exercises = self.reply
+//            self.exerciseInfo = self.exercises.removeFirst()
+//
+//            let vmitems = self.reply.map { ViewModelItem(item: Model(title: $0["name"] as! String, data: $0)) }
+//            self.viewModel.setItems(items: vmitems)
+//
+//
+//            DispatchQueue.main.async {
+//                self.tableView?.register(CustomCell.nib, forCellReuseIdentifier: CustomCell.identifier)
+//                self.tableView?.dataSource = self.viewModel
+//                self.tableView?.delegate = self.viewModel
+//                self.tableView?.estimatedRowHeight = 100
+//                self.tableView?.rowHeight = UITableViewAutomaticDimension
+//                self.tableView?.allowsSelection = false
+//                self.tableView?.separatorStyle = .none
+//            }
+//
+//            }.resume()
+        
 
         // Do any additional setup after loading the view.
     }
