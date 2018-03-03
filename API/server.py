@@ -602,6 +602,8 @@ def apiAddTheme():
 		numWorkouts = int(numWorkouts)
 	key = request.form.get('key')
 	params = [userid, name, theme, spotifyId, numWorkouts, key]
+	print("printing parameters")
+	print(params)
 	if (None in params):
 		return failure("Invalid parameters")
 	if (key != masterKey):

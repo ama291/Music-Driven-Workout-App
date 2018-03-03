@@ -178,9 +178,10 @@ def removeGoal(uid, name):
 def addTheme(uid, themeName, theme, numWorkouts):
     route = "/api/themes/addtheme/"
     data = {"userid": uid,
-        "themename": themeName,
+        "name": themeName,
         "theme": theme,
         "numworkouts": numWorkouts,
+        "spotifyId": "example-id",
         "key": key}
     return jsonpickle.decode(makeRequest(route, data))
 
@@ -195,25 +196,25 @@ if __name__ == '__main__':
     if len(argv) != 2:
         pass
     elif argv[1] == "goals":
-        print("\nAdd goal")
-        print(addGoal(1, "goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True))
-        print(addGoal(1, "goal2", "", 1, ['cardio'], ['abs'], 5, 5, True))
-        print(addGoal(1, "goal3", "", 1, ['cardio'], ['abs'], 5, 5, True))
-        print(addGoal(1, "goal5", "", 1, ['cardio'], ['abs'], 5, 5, False))
+        # print("\nAdd goal")
+        # print(addGoal(21, "goal1", "goal1 description", 1, ['cardio'], ['abs'], 5, 5, True))
+        # print(addGoal(21, "goal2", "", 1, ['cardio'], ['abs'], 5, 5, True))
+        # print(addGoal(21, "goal3", "", 1, ['cardio'], ['abs'], 5, 5, True))
+        # print(addGoal(21, "goal5", "", 1, ['cardio'], ['abs'], 5, 5, False))
 
-        print("\nRemove goal")
-        print(removeGoal(1, "goal1"))
-        print(removeGoal(1, "goal2"))
-        print(removeGoal(1, "goal2"))
+        # print("\nRemove goal")
+        # print(removeGoal(21, "goal1"))
+        # print(removeGoal(21, "goal2"))
+        # print(removeGoal(21, "goal2"))
 
         print("\nAdd Theme")
-        print(addTheme(1, "theme1", "Artist", 3))
-        print(addTheme(1, "theme3", "Song", 3))
+        print(addTheme(21, "theme1", "Artist", 3))
+        # print(addTheme(21, "theme3", "Song", 3))
 
-        print("\nRemove Theme")
-        print(removeTheme(1, "theme1"))
-        print(removeTheme(1, "theme2"))
-        clearUser(dbURL, 1)
+        # print("\nRemove Theme")
+        # print(removeTheme(21, "theme1"))
+        # print(removeTheme(21, "theme2"))
+        clearUser(dbURL, 21)
     elif argv[1] == "workout":
         workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
         print("\nGet Workouts")

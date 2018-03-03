@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -191,6 +191,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="saveTheme:" destination="QMn-Cu-BGw" eventType="touchUpInside" id="WqK-wJ-rDg"/>
                                     <segue destination="e4u-ql-KLH" kind="show" animates="NO" id="c6j-01-N9k">
                                         <nil key="action"/>
                                     </segue>
@@ -200,6 +201,11 @@
                         <color key="backgroundColor" red="0.28809646430000002" green="0.86467778500000003" blue="0.22629977640000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="ruu-lW-9EK"/>
                     </view>
+                    <connections>
+                        <outlet property="numWorkoutsLabel" destination="CDt-z8-rd2" id="CL5-4Q-sjO"/>
+                        <outlet property="spotifySearchbar" destination="tKE-8z-8fo" id="aZf-cR-fid"/>
+                        <outlet property="themeNameTextField" destination="mAg-NU-ubq" id="fcz-XP-kyP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3y-Xc-ePL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -359,8 +365,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bem-On-I5B"/>
-        <segue reference="KsW-2D-yHF"/>
         <segue reference="c6j-01-N9k"/>
         <segue reference="YdA-GG-8UL"/>
     </inferredMetricsTieBreakers>
