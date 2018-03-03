@@ -151,7 +151,9 @@ class FTExerciseViewController: UIViewController {
     
     /* Navigation */
     @IBAction func go_to_home(_ sender: Any) {
-        global.goToHome()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        present(vc, animated: true, completion: nil)
     }
         
     // In a storyboard-based application, you will often want to do a little preparation before navigation

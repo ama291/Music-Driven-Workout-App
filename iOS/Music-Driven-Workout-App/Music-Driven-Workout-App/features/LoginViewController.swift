@@ -102,7 +102,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             
             global.session = firstTimeSession
             // initializaPlayer(authSession: session)
-            global.username = session.canonicalUsername
+            global.username = global.session.canonicalUsername
             getuseridapi(username: global.username)
             global.token = global.session.accessToken
             // self.loginButton.isHidden = true

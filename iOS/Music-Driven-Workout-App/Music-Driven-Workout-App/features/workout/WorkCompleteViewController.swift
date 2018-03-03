@@ -34,10 +34,14 @@ class WorkCompleteViewController: UIViewController {
     /* MARK: - Navigation */
     @IBAction func saveWorkout_Yes(_ sender: UIButton) {
         // TODO - save workout
-        global.goToHome()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        present(vc, animated: true, completion: nil)
     }
     @IBAction func saveWorkout_No(_ sender: UIButton) {
-        global.goToHome()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        present(vc, animated: true, completion: nil)
     }
     
     

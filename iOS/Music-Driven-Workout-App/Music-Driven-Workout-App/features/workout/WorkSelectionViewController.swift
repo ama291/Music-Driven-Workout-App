@@ -51,7 +51,9 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     }
     
     @IBAction func goToHome(_ sender: UIButton) {
-        global.goToHome()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        present(vc, animated: true, completion: nil)
     }
 
     /* Category switches & labels */

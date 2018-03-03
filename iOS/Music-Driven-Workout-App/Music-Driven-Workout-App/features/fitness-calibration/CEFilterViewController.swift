@@ -93,7 +93,9 @@ class CEFilterViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     /* Navigation */
     
     @IBAction func goToHome(_ sender: Any) {
-        global.goToHome()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        present(vc, animated: true, completion: nil)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is CESelectionViewController

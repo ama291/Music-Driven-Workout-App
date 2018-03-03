@@ -10,16 +10,10 @@ import UIKit
 
 class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
     
-//}, UITableViewController {
-
-    var userid: String!
     var tableArray = [String:Any] ()
-    var username: String!
-    var token: String!
     var player: SPTAudioStreamingController?
     var passedUserId = String()
     var auth = SPTAuth.defaultInstance()!
-    var session:SPTSession!
     var audiostreaming: SPTAudioStreamingController?
     
     @IBOutlet weak var tableView: UITableView!
@@ -36,16 +30,6 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     struct goalsResult: Codable {
         var Result: String
@@ -56,8 +40,8 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
         guard let url = URL(string: "http://138.197.49.155:8000/api/workouts/goalssaved/") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let postString = "userid=" + userid + "&key=SoftCon2018"
-        passedUserId = userid
+        let postString = "userid=" + global.userid + "&key=SoftCon2018"
+        passedUserId = global.userid
         request.httpBody = postString.data(using: String.Encoding.utf8)
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
@@ -82,11 +66,10 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
             }.resume()
     }
 
-    
+    /* Navigation */
     @IBAction func goToHome(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
-        vc.userid = userid!
         present(vc, animated: true, completion: nil)
     }
  
@@ -114,7 +97,6 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func goToAddGoal(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "goalsAdd") as! GoalsAddViewController
-        vc.userid = userid!
 //        vc.player = self.player!
 //        vc.audiostreaming = self.audiostreaming!
         present(vc, animated: true, completion: nil)

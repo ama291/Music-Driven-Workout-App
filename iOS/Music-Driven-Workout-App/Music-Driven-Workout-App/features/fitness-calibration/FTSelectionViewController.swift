@@ -81,7 +81,9 @@ class FTSelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
      }
      */
     @IBAction func goToHome(_ sender: UIButton) {
-        global.goToHome()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        present(vc, animated: true, completion: nil)
     }
     
 }

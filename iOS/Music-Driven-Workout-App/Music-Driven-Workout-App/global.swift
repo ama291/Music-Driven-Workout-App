@@ -17,14 +17,23 @@ class Global {
     var userid: String!                     // set in LoginVC
     var username: String!                   // set in LoginVC
     var auth = SPTAuth.defaultInstance()!
-    var session:SPTSession!
-    var token:String!                       // set in LoginVC
+    var session: SPTSession!                // set in LoginVC (?)
+    var token: String!                      // set in LoginVC & MenuViewVC
     
     /* * Global Methods * */
-    // For navigating and passing variables to a VC on a separate storyboard
-    func goToHome() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)  // Main = Main.storyboard
-        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController  // homeID = the StoryboardID for the target ViewController in the target storyboard
-        vc.present(vc, animated: true, completion: nil)  // remove the 'vc.' here when this is actually bound to a button
+    func reset() {
+        self.userid = nil
+        self.username = nil
+        self.session = nil
+        self.token = nil
+    }
+    
+    func printAll() {
+        print("Global Variables:")
+        print("\t userid: \(userid)")
+        print("\t username: \(username)")
+        print("\t auth: \(auth)")
+        print("\t session: \(session)")
+        print("\t token: \(token)")
     }
 }
