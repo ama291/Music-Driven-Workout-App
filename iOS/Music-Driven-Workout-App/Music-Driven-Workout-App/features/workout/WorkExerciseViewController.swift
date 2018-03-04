@@ -247,7 +247,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         else {
             paused = false
             pausebutton.setTitle("PAUSE", for: .normal)
-            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
             self.player?.setIsPlaying(true, callback: nil)
         }
     }
