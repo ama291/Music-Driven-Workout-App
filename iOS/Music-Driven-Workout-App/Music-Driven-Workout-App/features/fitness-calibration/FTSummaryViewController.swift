@@ -12,7 +12,6 @@ class FTSummaryViewController: UIViewController {
 
     var viewModel = ViewModel()
 
-    var userid: String!
     var category: String = ""
     var numEx: Int = 3
     var exChoices: [Int] = [Int]()
@@ -23,34 +22,17 @@ class FTSummaryViewController: UIViewController {
     var exerciseInfo = [String: Any]()
     var isCalibration: Bool = false
     var exNum: Int?
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if segue.destination is FTExDescViewController
-        {
-            let vc = segue.destination as? FTExDescViewController
-            //data to send
-            vc?.userid = userid
-            vc?.exercisesRemaining = exercises
-            vc?.exerciseInfo = exerciseInfo
-            vc?.isCalibration = isCalibration
-            vc?.numExercises = numEx
-            vc?.exerciseNum = numEx - exercises.count
-            vc?.frequencies = frequencies
-        }
-    }
     
     @IBOutlet weak var tableView: UITableView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("user: \(userid)")
+        print("user: \(global.userid)")
 
         let request = APIRequest()
         self.frequencies = [[String:Any]]()
         print(self.frequencies)
-        print(exChoices, userid, category, numEx)
+        print(exChoices, global.userid, category, numEx)
         var trackedStr: String = ""
         trackedStr = exChoices.map { String($0) }.joined(separator: ",")
         if trackedStr == "" {
@@ -90,14 +72,21 @@ class FTSummaryViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    /* Navigation */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.destination is FTExDescViewController
+        {
+            let vc = segue.destination as? FTExDescViewController
+            //data to send
+            vc?.exercisesRemaining = exercises
+            vc?.exerciseInfo = exerciseInfo
+            vc?.isCalibration = isCalibration
+            vc?.numExercises = numEx
+            vc?.exerciseNum = numEx - exercises.count
+            vc?.frequencies = frequencies
+        }
     }
-    */
 
 }

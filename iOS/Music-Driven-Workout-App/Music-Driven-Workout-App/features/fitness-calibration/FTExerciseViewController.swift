@@ -23,7 +23,6 @@ class FTExerciseViewController: UIViewController {
     var numExercises: Int?
     var exerciseNum: Int?
     var isCalibration: Bool!
-    var userid: String!
     var frequencies: [[String:Any]]!
     let parser = APIRequest()
     
@@ -33,7 +32,7 @@ class FTExerciseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("user: \(userid)")
+        print("user: \(global.userid)")
 
         self.exName.text = self.exerciseName
         self.getMotionData()
@@ -45,16 +44,6 @@ class FTExerciseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     func getMotionData() {
         self.statusLabel.text = "Do the exercise."
@@ -104,7 +93,7 @@ class FTExerciseViewController: UIViewController {
                 var request = URLRequest(url: url)
                 request.httpMethod = "POST"
                 
-                let userString = "userid=" + self.userid
+                let userString = "userid=" + global.userid
                 let exString = "&exid=" + String((self.exerciseInfo["id"]! as? Int)!)
                 let timestampString = "&timestamp=" + self.dateToString(givenDate: Date())
                 let rawdataString = "&rawdata=" + json
@@ -160,10 +149,10 @@ class FTExerciseViewController: UIViewController {
         self.frequencyLabel.text = self.frequency
     }
     
+    /* Navigation */
     @IBAction func go_to_home(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
-        vc.userid = userid!
         present(vc, animated: true, completion: nil)
     }
         
@@ -178,7 +167,6 @@ class FTExerciseViewController: UIViewController {
             vc?.exerciseName = self.exerciseName
             vc?.isCalibration = self.isCalibration
             vc?.frequencies = self.frequencies
-            vc?.userid = self.userid
         }
         else if segue.destination is FTCheckpointViewController
         {
@@ -187,7 +175,6 @@ class FTExerciseViewController: UIViewController {
             vc?.exercisesRemaining = self.exercisesRemaining
             vc?.isCalibration = self.isCalibration
             vc?.frequencies = self.frequencies
-            vc?.userid = self.userid
             vc?.frequency = self.freq
         }
         else if segue.destination is CECompleteViewController {
@@ -195,7 +182,6 @@ class FTExerciseViewController: UIViewController {
             vc?.exName = self.exerciseName
             vc?.exerciseInfo = self.exerciseInfo
             vc?.freq = self.freq
-            vc?.userid = self.userid
         }
     }
     

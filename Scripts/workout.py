@@ -198,7 +198,8 @@ class Workout(object):
                     seed_genres.append(theme.spotifyId)
         else:
             # first check if user has workout playlists
-            playlists = self.getUserWorkoutPlaylists(spotID, accessToken)
+            # playlists = self.getUserWorkoutPlaylists(spotID, accessToken)
+            playlists = []
 
             if len(playlists) > 0:
                 # pick a random playlist

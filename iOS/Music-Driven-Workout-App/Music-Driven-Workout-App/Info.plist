@@ -37,6 +37,7 @@
 	<array>
 		<string>AmaticSC-Regular.ttf</string>
 		<string>AmaticSC-Bold.ttf</string>
+		<string>GIL.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

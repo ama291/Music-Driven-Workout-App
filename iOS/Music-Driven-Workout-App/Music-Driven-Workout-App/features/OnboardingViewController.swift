@@ -14,17 +14,13 @@ class OnboardingViewController: UIViewController{
     @IBOutlet weak var weight: UITextField!
     @IBOutlet weak var year: UITextField!
     
-    var username: String!
-    var userid: String!
     
     @IBAction func completeOnboarding(_ sender: Any) {
-        onboardingapi(username: self.username)
+        onboardingapi(username: global.username)
         print("USER ID ")
-        print(self.userid)
+        print(global.userid)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
-        vc.userid = userid!
-        vc.username = username!
         present(vc, animated: false, completion: nil)
     }
     
@@ -32,11 +28,11 @@ class OnboardingViewController: UIViewController{
         guard let url = URL(string: "http://138.197.49.155:8000/api/workouts/onboarding/") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        var userparam = "username=" + self.username
-        var heightparam = "&height=" + height.text!
-        var weightparam = "&weight=" + weight.text!
-        var yearparam = "&year=" + year.text!
-        var keyparam = "&key=SoftCon2018"
+        let userparam = "username=" + global.username
+        let heightparam = "&height=" + height.text!
+        let weightparam = "&weight=" + weight.text!
+        let yearparam = "&year=" + year.text!
+        let keyparam = "&key=SoftCon2018"
         let postString = userparam + heightparam + weightparam + yearparam + keyparam
         //let postString = "username=" + self.username + "&height=" + height + "&weight=" + weight + "&year=" + year + "&key=SoftCon2018"
         request.httpBody = postString.data(using: String.Encoding.utf8)
@@ -44,7 +40,7 @@ class OnboardingViewController: UIViewController{
         session.dataTask(with: request) { (data, response, error) in
             if let data = data {
                 guard let json = try? JSONDecoder().decode(jsonRequest.self, from: data) else { return }
-                self.userid = json.Result
+                global.userid = json.Result
             }
             
             }.resume()
