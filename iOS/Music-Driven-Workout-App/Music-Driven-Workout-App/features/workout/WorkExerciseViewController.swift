@@ -34,10 +34,9 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         // Do any additional setup after loading the view.
         heartratelabel.adjustsFontSizeToFitWidth = true
         descriptionlabel.adjustsFontSizeToFitWidth = true
-        //timelabel.adjustsFontSizeToFitWidth = true
+        namelabel.adjustsFontSizeToFitWidth = true
         initSpotify()
         startWorkout()
-        //self.player = GlobalVariables.sharedManager.player
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,10 +70,8 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     var ind = 0 // song index within current exercise
     
     @objc func startWorkout() {
-        namelabel.adjustsFontSizeToFitWidth = true
         descriptionlabel.lineBreakMode = .byWordWrapping
         doexercise(index: 0)
-        
     }
     
     @objc func initSpotify () {

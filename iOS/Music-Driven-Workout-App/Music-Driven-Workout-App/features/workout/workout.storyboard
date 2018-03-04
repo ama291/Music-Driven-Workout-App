@@ -738,7 +738,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EXERCISE NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Dp-rt-SGy">
-                                <rect key="frame" x="16" y="20" width="217" height="64"/>
+                                <rect key="frame" x="16" y="20" width="242" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="4mj-sG-GA6"/>
                                 </constraints>
@@ -831,6 +831,7 @@
                             <constraint firstItem="T44-TO-dsu" firstAttribute="top" secondItem="n5T-vO-10O" secondAttribute="bottom" constant="17" id="UWO-S5-yRF"/>
                             <constraint firstItem="8Dp-rt-SGy" firstAttribute="leading" secondItem="zIB-RL-dTN" secondAttribute="leading" constant="16" id="Uov-J8-ITG"/>
                             <constraint firstItem="zIB-RL-dTN" firstAttribute="trailing" secondItem="ZnO-89-Mdg" secondAttribute="trailing" constant="16" id="VL1-dV-GFj"/>
+                            <constraint firstItem="ZnO-89-Mdg" firstAttribute="leading" secondItem="8Dp-rt-SGy" secondAttribute="trailing" constant="16" id="ZIW-zU-6BG"/>
                             <constraint firstItem="zIB-RL-dTN" firstAttribute="trailing" secondItem="SZB-Mx-dSR" secondAttribute="trailing" constant="20" id="cL9-Vq-kfT"/>
                             <constraint firstItem="rUy-B7-Rj7" firstAttribute="top" secondItem="n5T-vO-10O" secondAttribute="bottom" constant="17" id="nbS-0I-LTQ"/>
                             <constraint firstItem="T44-TO-dsu" firstAttribute="leading" secondItem="zIB-RL-dTN" secondAttribute="leading" constant="16" id="qYA-w6-QJt"/>
