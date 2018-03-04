@@ -22,7 +22,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     var exercisetracknames: [[String]]!
     var exercisetrackuris: [[String]]!
     var exerciseEquipment: [String]!
-    var exerciseBPM: [Int]!
+    var exerciseRPM: [Int]!
     var session:SPTSession!
     var player: SPTAudioStreamingController?
     var queued = false
@@ -32,6 +32,8 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         heartratelabel.adjustsFontSizeToFitWidth = true
+        descriptionlabel.adjustsFontSizeToFitWidth = true
+        //timelabel.adjustsFontSizeToFitWidth = true
         initSpotify()
         startWorkout()
         //self.player = GlobalVariables.sharedManager.player
@@ -62,7 +64,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     
     
     var timer = Timer()
-    var timecountdown = 0.0
+    var timecountdown = 0
     var paused = false
     var i = 0 // exercise index
     var ind = 0 // song index within current exercise
@@ -70,11 +72,9 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     @objc func startWorkout() {
         namelabel.adjustsFontSizeToFitWidth = true
         descriptionlabel.lineBreakMode = .byWordWrapping
-        descriptionlabel.numberOfLines = 0
-        
-        //TODO: startworkout API call
+
         //startworkoutapi()
-        
+
         doexercise(index: 0)
         
     }
@@ -104,9 +104,8 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     }
     
     func startPlayback() {
-        // TODO - change to first exercise uri
-        var descText = "Equipment: " + exerciseEquipment[self.i] + "\n"
-        descText += "BPM: " + String(exerciseBPM[self.i]) + "\n"
+        var descText = "Equipment: " + exerciseEquipment[self.i] + ", "
+        descText += "RPM: " + String(exerciseRPM[self.i])
         descriptionlabel.text = descText
         heartratelabel.text =  "Song: " + exercisetracknames[self.i][0]
         
@@ -205,21 +204,30 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         let dur = exercisedurations[index]
         namelabel.text = exercisenames[index]
         descriptionlabel.text = exercisedescriptions[index]
-        timelabel.text = "Time Remaining: " + String(dur) + "s"
+        //timelabel.text = "Time Remaining: " + String(dur) + "s"
+        timelabel.text = "Time: " + getFormattedTime(seconds: dur)
         let url = URL(string: exerciseimages[index])
         let data = try? Data(contentsOf: url!)
         eximage.image = UIImage(data: data!)
         eximage.contentMode = UIViewContentMode.scaleAspectFit
         
-        timecountdown = Double(dur)
+        timecountdown = dur
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
         
     }
     
+    func getFormattedTime(seconds: Int) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.minute, .second]
+        formatter.unitsStyle = .full
+        return formatter.string(from: TimeInterval(seconds))!
+    }
+    
     @objc func updateTimer() {
         timecountdown -= 1
-        timecountdown = ceil(timecountdown*10)/10
-        timelabel.text = "Time Remaining: " + timecountdown.description + "s"
+        //timecountdown = ceil(timecountdown*10)/10
+        //timelabel.text = "Time Remaining: " + timecountdown.description + "s"
+        timelabel.text = "Time: " + getFormattedTime(seconds: timecountdown)
         //heartratelabel.text = "Heartrate: " + String(heartrate)
         if (timecountdown <= 0) {
             completeExercise()
@@ -228,13 +236,22 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     
     @objc func completeExercise() {
         timer.invalidate()
-        timelabel.text = "Time Remaining: 0s"
+        timelabel.text = "Time: 0 minutes 0 seconds"
         if (i < exercisenames.count-1) {
             i += 1
             doexercise(index: i)
+            self.player?.skipNext({ (error) in
+                if (error == nil) {
+                    print("skipped!")
+                }
+                if(error != nil) {
+                    print("error skipping")
+                }
+            })
         }
         else {
             // self.performSegue(withIdentifier: "completeSegue", sender: self)
+            self.player?.setIsPlaying(false, callback: nil)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
             present(vc, animated: true, completion: nil)
@@ -257,21 +274,24 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     }
     
     @IBAction func skipclick(_ sender: Any) {
-        completeExercise()
-        self.player?.skipNext({ (error) in
-            if (error == nil) {
-                print("skipped!")
-            }
-            if(error != nil) {
-                print("error skipping")
-            }
-        })
+        if(!paused) {
+            completeExercise()
+//                self.player?.skipNext({ (error) in
+//                    if (error == nil) {
+//                        print("skipped!")
+//                    }
+//                    if(error != nil) {
+//                        print("error skipping")
+//                    }
+//                })
+        }
     }
     
     @IBAction func quitclick(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
         present(vc, animated: true, completion: nil)
+        self.player?.setIsPlaying(false, callback: nil)
         // exit(0)
     }
 }

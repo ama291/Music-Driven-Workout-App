@@ -33,7 +33,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     var exTrackNames: [[String]] = [[]]
     var exTrackUris: [[String]] = [[]]
     var exEquip: [String] = []
-    var exBPM: [Int] = []
+    var exRPM: [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +61,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             vc?.exercisetracknames = exTrackNames
             vc?.exercisetrackuris = exTrackUris
             vc?.exerciseEquipment = exEquip
-            vc?.exerciseBPM = exBPM
+            vc?.exerciseRPM = exRPM
             //vc?.player = player!
         }
     }
@@ -119,7 +119,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                             self.exDur.append((exDict["duration"] as! Int) * 60) // convert to secs
                             self.exImgs.append(exDict["images"] as! String)
                             self.exEquip.append(exDict["equipment"] as! String)
-                            self.exBPM.append(exDict["bpm"] as! Int)
+                            self.exRPM.append(exDict["rpm"] as! Int)
                             
                             if let trackDict = exDict["tracks"] as? [Dictionary<String, String>] {
                                 for track in trackDict {
