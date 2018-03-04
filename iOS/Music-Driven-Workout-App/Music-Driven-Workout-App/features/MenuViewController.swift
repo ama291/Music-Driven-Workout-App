@@ -75,6 +75,7 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "themesID") as! ThemesMenuViewController
         vc.userid = userid!
+        vc.token = token!
         present(vc, animated: false, completion: nil)
     }
     @IBAction func goToProfile(_ sender: UIButton) {

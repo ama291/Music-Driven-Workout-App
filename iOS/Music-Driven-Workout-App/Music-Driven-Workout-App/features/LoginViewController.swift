@@ -50,7 +50,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
         //_ = "8f81031574b54170a24a3a1afab27578" // put your client ID here
         auth.redirectURL     = URL(string: redirectURL)
         auth.clientID        = "8f81031574b54170a24a3a1afab27578"
-        auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope]
+        auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope, SPTAuthUserReadPrivateScope, SPTAuthUserLibraryReadScope, SPTAuthUserReadTopScope]
         loginUrl = auth.spotifyWebAuthenticationURL()
         print(userid)
     }
@@ -190,6 +190,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
             vc.userid = userid!
+            vc.token = token!
             present(vc, animated: false, completion: nil)
         } else {
             //            self.performSegue(withIdentifier: "loginSegue", sender: self)

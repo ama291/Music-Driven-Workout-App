@@ -11,7 +11,7 @@ class ThemesMenuViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var userid: String!
     var tableArray = [String:Any] ()
-    
+    var token: String!
     var passedUserId = String()
     
     @IBOutlet weak var tableView: UITableView!
@@ -84,6 +84,7 @@ class ThemesMenuViewController: UIViewController, UITableViewDelegate, UITableVi
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "themesAdd") as! ThemesAddViewController
         vc.userid = userid!
+        vc.token = token!
         present(vc, animated: true, completion: nil)
     }
     

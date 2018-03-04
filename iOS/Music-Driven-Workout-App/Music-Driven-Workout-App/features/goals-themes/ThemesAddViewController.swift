@@ -9,27 +9,40 @@
 import UIKit
 
 class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet weak var tableView: UITableView!
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tableArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "themescell", for: indexPath) as UITableViewCell
-        cell.textLabel?.text = "blah"
-        return cell
-    }
     
     var userid: String!
     var tableArray: [String: Dictionary<String, Any>] = [:]
     var token: String!
+    var listNames: [String] = []
+    var artistURIs: [String] = []
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (self.tableArray["artists"] != nil) {
+            let names = self.tableArray["artists"]!["items"] as? NSArray
+            return(names!.count)
+        }
+        else { return 0 }
+    }
+        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "themescell", for: indexPath) as UITableViewCell
+//        if(self.tableArray["artists"] != nil) {
+//            let names = self.tableArray["artists"]!["items"] as? NSArray
+//            if let item = names![indexPath.row] as? NSDictionary {
+//                cell.textLabel?.text = item["name"]
+//            }
+//        }
+        cell.textLabel?.text = listNames[indexPath.row]
+        return cell
+    }
     
     @IBOutlet weak var artistToSearchFor: UITextField!
     @IBAction func searchForTheme(_ sender: UIButton) {
         print("token")
         print(token)
-        let postString = "q=" + artistToSearchFor.text! + "&type=artist&limit=5"
+        let artistToSearchFor2 = artistToSearchFor.text!.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
+        let postString = "q=" + artistToSearchFor2 + "&type=artist&limit=5"
         guard let url = URL(string: "https://api.spotify.com/v1/search?" + postString) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -53,12 +66,17 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
             print("tyring")
 //            print(self.tableArray.count)
             if let names = self.tableArray["artists"]!["items"] as? NSArray {
+                print(names.count)
+                self.listNames = []
+                self.artistURIs = []
                 for item in names {
-//                    print(item)
+                    print(item)
 //                    print((item as AnyObject).count)
 //                    print(type(of:item))
-                    if let item2 = item as? NSDictionary {
+                    if let item2 = item as? [String: AnyObject] {
                         print(item2["name"])
+                        self.listNames.append(item2["name"] as! String)
+                        self.artistURIs.append(item2["uri"] as! String)
                     }
                 }
             }
