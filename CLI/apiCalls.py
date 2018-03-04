@@ -192,6 +192,18 @@ def removeTheme(uid, themeName):
         "key": key}
     return jsonpickle.decode(makeRequest(route, data))
 
+def themesSaved(uid):
+    route = "/api/workouts/themessaved/"
+    url = getURL(apiIP, route)
+    data = {"userid": uid, "key": key}
+    r = requests.post(url, data=data)
+    print("r.status_code - %s" % r.status_code)
+    assert r.status_code == requests.codes.ok
+    res = r.json()
+    return res
+
+
+
 if __name__ == '__main__':
     if len(argv) != 2:
         pass
@@ -215,6 +227,8 @@ if __name__ == '__main__':
         # print(removeTheme(21, "theme1"))
         # print(removeTheme(21, "theme2"))
         clearUser(dbURL, 21)
+        print("\nThemes Saved")
+        print(themesSaved(21))
     elif argv[1] == "workout":
         workout = getWorkout(1, ["Body Only", "Kettlebells"], 50, "Intermediate", categories=["Cardio","Stretching"])
         print("\nGet Workouts")

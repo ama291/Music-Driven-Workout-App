@@ -645,7 +645,8 @@ def apiThemesSaved():
 		return failure("Invalid authentication")
 	try:
 		response = themesSaved(userid)
-		return standardRes(json.dumps(response))
+		return Response(response, mimetype='application/json')
+		# return standardRes(json.dumps(response))
 	except Exception as e:
 		return failure(str(e))
 
