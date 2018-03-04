@@ -34,6 +34,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     var exTrackUris: [[String]] = [[]]
     var exEquip: [String] = []
     var exRPM: [Int] = []
+    var workoutid: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +63,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             vc?.exercisetrackuris = exTrackUris
             vc?.exerciseEquipment = exEquip
             vc?.exerciseRPM = exRPM
+            vc?.workoutid = workoutid
             //vc?.player = player!
         }
     }
@@ -102,9 +104,10 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             
             let resultjson = try? JSONSerialization.jsonObject(with: data!, options: [])
             self.workoutjson = String(describing: data)
-            // print("resultJson: ", resultjson as Any, "\n")
             
             if let dictionary = resultjson as? [String: Any] {
+                self.workoutid = dictionary["ID"] as! String
+                
                 if let exercises = dictionary["Exercises"] as? [Any] {
                     var exIndex = 0
                     for ex in exercises {

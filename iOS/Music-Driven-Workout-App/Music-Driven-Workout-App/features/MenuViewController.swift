@@ -59,9 +59,10 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
         present(vc, animated: false, completion: nil)
     }
     @IBAction func goToProfile(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "profile", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "profileID") as! ProfileViewController
-        present(vc, animated: false, completion: nil)
+//        let storyboard = UIStoryboard(name: "profile", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "profileID") as! ProfileViewController
+//        present(vc, animated: false, completion: nil)
+        exit(0)
     }
 
     /* END Button->Storyboard Navigation */
@@ -83,7 +84,6 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
         session.dataTask(with: request) { (data, response, error) in
             if let data = data {
                 guard let json = try? JSONDecoder().decode(usernameResult.self, from: data) else { return }
-                print(json)
                 DispatchQueue.main.async {
                     self.titletext.text = "Welcome back, " + json.Result + "!"
                 }
