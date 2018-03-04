@@ -22,7 +22,8 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     var exercisetracknames: [[String]]!
     var exercisetrackuris: [[String]]!
     var exerciseEquipment: [String]!
-    var exerciseBPM: [Int]!
+    var exerciseRPM: [Int]!
+    var workoutid: String!
     var session:SPTSession!
     var player: SPTAudioStreamingController?
     var queued = false
@@ -32,9 +33,10 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         heartratelabel.adjustsFontSizeToFitWidth = true
+        descriptionlabel.adjustsFontSizeToFitWidth = true
+        namelabel.adjustsFontSizeToFitWidth = true
         initSpotify()
         startWorkout()
-        //self.player = GlobalVariables.sharedManager.player
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,21 +64,14 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     
     
     var timer = Timer()
-    var timecountdown = 0.0
+    var timecountdown = 0
     var paused = false
     var i = 0 // exercise index
     var ind = 0 // song index within current exercise
     
     @objc func startWorkout() {
-        namelabel.adjustsFontSizeToFitWidth = true
         descriptionlabel.lineBreakMode = .byWordWrapping
-        descriptionlabel.numberOfLines = 0
-        
-        //TODO: startworkout API call
-        //startworkoutapi()
-        
         doexercise(index: 0)
-        
     }
     
     @objc func initSpotify () {
@@ -104,59 +99,24 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     }
     
     func startPlayback() {
-        // TODO - change to first exercise uri
-        var descText = "Equipment: " + exerciseEquipment[self.i] + "\n"
-        descText += "BPM: " + String(exerciseBPM[self.i]) + "\n"
+        var descText = "Equipment: " + exerciseEquipment[self.i] + ", "
+        descText += "RPM: " + String(exerciseRPM[self.i])
         descriptionlabel.text = descText
         heartratelabel.text =  "Song: " + exercisetracknames[self.i][0]
         
         self.player?.playSpotifyURI(self.exercisetrackuris[self.i][0], startingWith: 0, startingWithPosition: 0, callback: { (error) in
             if (error == nil) {
-                print("playing!")
+                //print("playing!")
             }
             if(error != nil) {
-                print("error playing")
+                //print("error playing")
             }
         })
-        //self.ind += 1
     }
     
     func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
         startPlayback()
     }
-    
-//    func audioStreamingDidPopQueue(_ audioStreaming: SPTAudioStreamingController!) {
-//        //ind += 1
-//        heartratelabel.text =  "Song: " + exercisetracknames[self.i][self.ind]
-//    }
-    
-//    func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePlaybackStatus isPlaying: Bool) {
-//        // TODO - change to queue all songs
-//        if(!queued) {
-//            if(exercisetrackuris[0].count > 1) {
-//                for index in 1...exercisetrackuris[0].count-1 {
-//                    self.player?.queueSpotifyURI(exercisetrackuris[0][index], callback: {(error) in
-//                        if (error == nil) {
-//                            print("queued!")
-//                        } else {
-//                            print("error queueing")
-//                        }
-//                    })
-//                    }
-//                self.queued = true
-//            }
-//        }
-////        if(skipping) {
-////            self.player?.skipNext({(error) in
-////                if (error == nil) {
-////                    print("skipped!")
-////                }
-////                if(error != nil) {
-////                    print("error skipping")
-////                }
-////            })
-////        }
-//    }
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStartPlayingTrack trackUri: String!) {
         heartratelabel.text =  "Song: " + exercisetracknames[self.i][self.ind]
@@ -164,12 +124,11 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         if (self.ind < exercisetrackuris[self.i].count) {
             self.player?.queueSpotifyURI(exercisetrackuris[self.i][self.ind], callback: {(error) in
                 if (error == nil) {
-                    print("queued!")
+                    //print("queued!")
                  } else {
-                    print("error queueing")
+                    //print("error queueing")
                 }
             })
-            //self.ind += 1
         }
         
     }
@@ -177,6 +136,11 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     func audioStreamingDidSkip(toNextTrack audioStreaming: SPTAudioStreamingController!) {
         self.ind = 0
         startPlayback()
+    }
+    
+    func spotifyLogout() {
+        self.player?.logout()
+        self.session = nil
     }
     
     struct jsonRequest: Codable {
@@ -188,16 +152,51 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         guard let url = URL(string: "http://138.197.49.155:8000/api/startworkout/") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let postString = "userid=" + global.userid + "&workout=" + workoutjson +  "&key=SoftCon2018"
+        let postString = "userid=" + global.userid + "&workout=" + self.workoutjson +  "&key=SoftCon2018"
         request.httpBody = postString.data(using: String.Encoding.utf8)
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
             if let data = data {
                 guard let json = try? JSONDecoder().decode(jsonRequest.self, from: data) else { return }
-                print(json)
+                //print(json)
             }
             
         }.resume()
+    }
+    
+    @objc func pauseworkoutapi() {
+        guard let url = URL(string: "http://138.197.49.155:8000/api/pauseworkout/") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let postString1 = "userid=" + global.userid + "&workoutid=" + self.workoutid
+        let postString2 = "&paused=" + self.i.description + "&key=SoftCon2018"
+        let postString = postString1 + postString2
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if let data = data {
+                guard let json = try? JSONDecoder().decode(jsonRequest.self, from: data) else { return }
+                //print(json)
+            }
+            
+            }.resume()
+    }
+    
+    
+    @objc func quitworkoutapi() {
+        guard let url = URL(string: "http://138.197.49.155:8000/api/quitworkout/") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let postString = "userid=" + global.userid + "&workoutid=" + workoutid +  "&key=SoftCon2018"
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if let data = data {
+                guard let json = try? JSONDecoder().decode(jsonRequest.self, from: data) else { return }
+                //print(json)
+            }
+            
+            }.resume()
     }
     
     @objc func doexercise(index: Int) {
@@ -205,22 +204,27 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         let dur = exercisedurations[index]
         namelabel.text = exercisenames[index]
         descriptionlabel.text = exercisedescriptions[index]
-        timelabel.text = "Time Remaining: " + String(dur) + "s"
+        timelabel.text = "Time: " + getFormattedTime(seconds: dur)
         let url = URL(string: exerciseimages[index])
         let data = try? Data(contentsOf: url!)
         eximage.image = UIImage(data: data!)
         eximage.contentMode = UIViewContentMode.scaleAspectFit
         
-        timecountdown = Double(dur)
+        timecountdown = dur
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
         
     }
     
+    func getFormattedTime(seconds: Int) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.minute, .second]
+        formatter.unitsStyle = .full
+        return formatter.string(from: TimeInterval(seconds))!
+    }
+    
     @objc func updateTimer() {
         timecountdown -= 1
-        timecountdown = ceil(timecountdown*10)/10
-        timelabel.text = "Time Remaining: " + timecountdown.description + "s"
-        //heartratelabel.text = "Heartrate: " + String(heartrate)
+        timelabel.text = "Time: " + getFormattedTime(seconds: timecountdown)
         if (timecountdown <= 0) {
             completeExercise()
         }
@@ -228,13 +232,22 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     
     @objc func completeExercise() {
         timer.invalidate()
-        timelabel.text = "Time Remaining: 0s"
+        timelabel.text = "Time: 0 minutes 0 seconds"
         if (i < exercisenames.count-1) {
             i += 1
             doexercise(index: i)
+            self.player?.skipNext({ (error) in
+                if (error == nil) {
+                    //print("skipped!")
+                }
+                if(error != nil) {
+                    //print("error skipping")
+                }
+            })
         }
         else {
-            // self.performSegue(withIdentifier: "completeSegue", sender: self)
+            self.player?.setIsPlaying(false, callback: nil)
+            spotifyLogout()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
             present(vc, animated: true, completion: nil)
@@ -257,25 +270,17 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     }
     
     @IBAction func skipclick(_ sender: Any) {
-        completeExercise()
-        self.player?.skipNext({ (error) in
-            if (error == nil) {
-                print("skipped!")
-            }
-            if(error != nil) {
-                print("error skipping")
-            }
-        })
+        if(!paused) {
+            completeExercise()
+        }
     }
     
     @IBAction func quitclick(_ sender: Any) {
+        self.player?.setIsPlaying(false, callback: nil)
+        spotifyLogout()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
         present(vc, animated: true, completion: nil)
-        // exit(0)
     }
 }
-
-
-// TODO - add text boxes on the exercise page to display the equipment required and rpm for the current exercise? Those are kind of necessary in terms of usability. And if the timer could be displayed in a minutes:seconds format that would be good, since some exercises can be pretty long, but this is not as important.
 

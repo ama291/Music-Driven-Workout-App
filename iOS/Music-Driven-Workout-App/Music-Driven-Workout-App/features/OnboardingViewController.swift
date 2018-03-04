@@ -17,8 +17,6 @@ class OnboardingViewController: UIViewController{
     
     @IBAction func completeOnboarding(_ sender: Any) {
         onboardingapi(username: global.username)
-        print("USER ID ")
-        print(global.userid)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
         present(vc, animated: false, completion: nil)

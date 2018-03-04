@@ -108,16 +108,18 @@ class TestWorkout(unittest.TestCase):
     '''
     Added Tests for music recommendation
     '''
-    # NOTE - can't do these this because don't have valid accessToken
-    # #test that duration of music is greater than equal to duration of workout
-    # for i in range(len(workout1.Exercises)):
-    #   result = workout1.getRecommendations(workout1.spotID, workout1.themes, workout1.accessToken, workout1.Exercises[i].bpm, workout1.Exercises[i].duration)
-    #   duration = 0
-    #   for j in range(len(result)):
-    #     duration += result[j]['duration']
-    #   self.assertTrue(duration >= workout1.Exercises[i].duration)
+    """NOTE - can only do this test if themes are being used,
+    because then we won't use the invalid accessToken"""
+    #test that duration of music is greater than equal to duration of workout
+    for i in range(len(workout1.Exercises)):
+      result = workout1.getRecommendations(workout1.spotID, workout1.themes, workout1.accessToken, workout1.Exercises[i].bpm, workout1.Exercises[i].duration)
+      duration = 0
+      for j in range(len(result)):
+        duration += result[j]['duration']
+      self.assertTrue(duration >= workout1.Exercises[i].duration)
 
-    # NOTE - can do this test because won't use the invalid accessToken
+    """NOTE - can only do this test if themes are being used,
+    because then we won't use the invalid accessToken"""
     # test that if selected, themes are used for getSeeds
     seeds = workout1.getSeeds(workout1.spotID, workout1.themes, workout1.accessToken)
     if workout1.themes:
@@ -142,13 +144,12 @@ class TestWorkout(unittest.TestCase):
     tracks_len = 0 if seeds['tracks'] is None else len(seeds['tracks'])
     self.assertTrue(artist_len + genres_len + tracks_len <= 5)
 
-    # NOTE - can't include this test yet
-    # #test getBPM which gets bpm from rpm
-    # for i in range(len(workout1.Exercises)):
-    #   rpm = workout1.Exercises[i].rpm
-    #   bpm = workout1.getBPM(rpm,min_beats,max_beats)
-    #   self.assertTrue(min_beats <= bpm <= max_beats )  #bpm is within required range
-    #   self.assertTrue((bpm % rpm) == 0)   #bpm is multiple of rpm
+    #test getBPM which gets bpm from rpm
+    for i in range(len(workout1.Exercises)):
+      rpm = workout1.Exercises[i].rpm
+      bpm = workout1.getBPM(rpm,min_beats,max_beats)
+      self.assertTrue(min_beats <= bpm <= max_beats )  #bpm is within required range
+      self.assertTrue((bpm % rpm) == 0)   #bpm is multiple of rpm
 
 
 if __name__ == '__main__':

@@ -33,7 +33,8 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     var exTrackNames: [[String]] = [[]]
     var exTrackUris: [[String]] = [[]]
     var exEquip: [String] = []
-    var exBPM: [Int] = []
+    var exRPM: [Int] = []
+    var workoutid: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +62,8 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             vc?.exercisetracknames = exTrackNames
             vc?.exercisetrackuris = exTrackUris
             vc?.exerciseEquipment = exEquip
-            vc?.exerciseBPM = exBPM
+            vc?.exerciseRPM = exRPM
+            vc?.workoutid = workoutid
             //vc?.player = player!
         }
     }
@@ -102,9 +104,10 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             
             let resultjson = try? JSONSerialization.jsonObject(with: data!, options: [])
             self.workoutjson = String(describing: data)
-            // print("resultJson: ", resultjson as Any, "\n")
             
             if let dictionary = resultjson as? [String: Any] {
+                self.workoutid = dictionary["ID"] as! String
+                
                 if let exercises = dictionary["Exercises"] as? [Any] {
                     var exIndex = 0
                     for ex in exercises {
@@ -119,7 +122,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                             self.exDur.append((exDict["duration"] as! Int) * 60) // convert to secs
                             self.exImgs.append(exDict["images"] as! String)
                             self.exEquip.append(exDict["equipment"] as! String)
-                            self.exBPM.append(exDict["bpm"] as! Int)
+                            self.exRPM.append(exDict["rpm"] as! Int)
                             
                             if let trackDict = exDict["tracks"] as? [Dictionary<String, String>] {
                                 for track in trackDict {

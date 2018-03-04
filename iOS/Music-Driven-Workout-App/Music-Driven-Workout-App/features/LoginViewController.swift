@@ -45,28 +45,12 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     func setup () {
         // insert redirect your url and client ID below
         let redirectURL = "Music-Driven-Workout-App://returnAfterLogin" // put your redirect URL here
-        //_ = "8f81031574b54170a24a3a1afab27578" // put your client ID here
         auth.redirectURL     = URL(string: redirectURL)
         auth.clientID        = "8f81031574b54170a24a3a1afab27578"
         auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope]
         loginUrl = auth.spotifyWebAuthenticationURL()
-        print(global.userid)
     }
-    
-    //    func initializaPlayer(authSession:SPTSession){
-    //        if self.player == nil {
-    //            self.player = SPTAudioStreamingController.sharedInstance()
-    //            self.player!.playbackDelegate = self
-    //            self.player!.delegate = self
-    //            try! player?.start(withClientId: auth.clientID)
-    //            self.player!.login(withAccessToken: authSession.accessToken)
-    //            print("access token: ")
-    //            print(authSession.accessToken)
-    //            print("username: ")
-    //            print(authSession.canonicalUsername)
-    //        }
-    //    }
-    
+
     //    func spotifyLogout(authSession:SPTSession) {
     //        self.spotifyLogout(authSession: <#T##SPTSession#>)
     //        print("logged out")
@@ -83,7 +67,6 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             if let data = data {
                 guard let json = try? JSONDecoder().decode(jsonRequest.self, from: data) else { return }
                 global.userid = json.Result
-                print(global.userid)
             }
             
             }.resume()
@@ -100,30 +83,13 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
             
             global.session = firstTimeSession
-            // initializaPlayer(authSession: session)
             global.username = global.session.canonicalUsername
             getuseridapi(username: global.username)
             global.token = global.session.accessToken
-            // self.loginButton.isHidden = true
-            // self.loadingLabel.isHidden = false
         }
     }
     
-    //    func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
-    //        // after a user authenticates a session, the SPTAudioStreamingController is then initialized and this method called
-    //        print("logged in")
-    //        self.player?.playSpotifyURI("spotify:track:58s6EuEYJdlb0kO7awm3Vp", startingWith: 0, startingWithPosition: 0, callback: { (error) in
-    //            if (error == nil) {
-    //                print("playing!")
-    //            }
-    //            if(error != nil) {
-    //                print("errors while playing")
-    //            }
-    //        })
-    //    }
-    
-    
-    
+
     @IBAction func loginButtonPressed(_ sender: Any) {
         if UIApplication.shared.openURL(loginUrl!) {
             
