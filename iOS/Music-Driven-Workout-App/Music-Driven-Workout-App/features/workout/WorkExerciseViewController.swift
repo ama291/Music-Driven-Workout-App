@@ -11,6 +11,7 @@ import UIKit
 class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
     
     var auth = SPTAuth.defaultInstance()!
+    var heartrate = 0
     
     //variables to be taken from workout summary
     var workoutjson: String!
@@ -23,8 +24,6 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     var session:SPTSession!
     var player: SPTAudioStreamingController?
     var queued = false
-    
-    var heartrate = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +75,6 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     }
     
     @objc func initSpotify () {
-
         let userDefaults = UserDefaults.standard
 
         if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
@@ -199,12 +197,11 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
             doexercise(index: i)
         }
         else {
-            //self.performSegue(withIdentifier: "completeSegue", sender: self)
-            /*let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            // self.performSegue(withIdentifier: "completeSegue", sender: self)
+            // exit(0)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
-            vc.userid = userid!
-            present(vc, animated: false, completion: nil)*/
-            exit(0)
+            present(vc, animated: true, completion: nil)
         }
     }
     
@@ -224,7 +221,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
             paused = false
             pausebutton.setTitle("PAUSE", for: .normal)
             self.player?.setIsPlaying(true, callback: nil)
-            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
         }
     }
     
