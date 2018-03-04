@@ -14,27 +14,15 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
     var category: String = ""
     var muscleGroup: String = ""
     var equipment: String = ""
-    var userid: String!
     
     var reply: [[String:Any]] = [[String:Any]]()
     var exerciseInfo: [String:Any] = [String:Any]()
     var isCalibration: Bool = true
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is FTExDescViewController
-        {
-            let vc = segue.destination as? FTExDescViewController
-            //data to send
-            vc?.exerciseInfo = exerciseInfo
-            vc?.isCalibration = isCalibration
-            vc?.userid = userid
-        }
-    }
-    
     var exList: [String] = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("user: \(userid)")
+        print("user: \(global.userid)")
 
         let request = APIRequest()
         
@@ -93,13 +81,15 @@ class CESelectionViewController: UIViewController, UIPickerViewDelegate, UIPicke
     }
     
     
-    /*
-     // MARK: - Navigation
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    /* Navigation */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is FTExDescViewController
+        {
+            let vc = segue.destination as? FTExDescViewController
+            //data to send
+            vc?.exerciseInfo = exerciseInfo
+            vc?.isCalibration = isCalibration
+        }
+    }
     
 }

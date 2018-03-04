@@ -10,7 +10,6 @@ import UIKit
 
 class FTCheckpointViewController: UIViewController {
     
-    var userid: String!
     var exid: Int!
     var frequency: Float!
     var isTracked: Bool!
@@ -35,15 +34,15 @@ class FTCheckpointViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        print("user: \(userid)")
+        print("user: \(global.userid)")
         print(self.frequencies)
         let freqDict = ["frequency":self.frequency!,"name":self.exerciseInfo["name"]]
-        self.frequencies.append(freqDict)
+        self.frequencies.append(freqDict as Any as! [String: Any])
         print(self.frequencies)
         rateLabel.text = "\(String(Int(frequency))) RPM"
         
         exid = self.exerciseInfo["id"] as! Int
-        let qstr = "userid=\(userid!)&exid=\(exid!)&key=SoftCon2018"
+        let qstr = "userid=\(global.userid!)&exid=\(exid!)&key=SoftCon2018"
         print(qstr)
         request.submitPostServer(route: "/api/fitness/istracked/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
@@ -76,7 +75,7 @@ class FTCheckpointViewController: UIViewController {
     
     @IBAction func trackExercise(_ sender: UIButton) {
         
-        let qstr = "userid=\(userid!)&exid=\(exid!)&key=SoftCon2018"
+        let qstr = "userid=\(global.userid!)&exid=\(exid!)&key=SoftCon2018"
         self.request.submitPostServer(route: "/api/fitness/toggletracked/", qstring: qstr, completion: request.comp).resume()
         self.isTracked = !(isTracked)
         let trackedText = !self.isTracked ? "Track Exercise" : "Un-track Exercise"
@@ -94,6 +93,7 @@ class FTCheckpointViewController: UIViewController {
         }
     }
     
+    /* Navigation */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
@@ -106,23 +106,12 @@ class FTCheckpointViewController: UIViewController {
             vc?.exerciseInfo = self.exerciseInfo
             vc?.exercisesRemaining = self.exercisesRemaining
             vc?.frequencies = self.frequencies
-            vc?.userid = self.userid
         }
         if segue.destination is FTCompleteViewController
         {
             let vc = segue.destination as? FTCompleteViewController
             vc?.frequencies = self.frequencies
-            vc?.userid = self.userid
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

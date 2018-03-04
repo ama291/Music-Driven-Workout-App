@@ -10,7 +10,6 @@ import UIKit
 
 class WorkCompleteViewController: UIViewController {
     
-    var userid: String!
     var workoutjson: String!
     var workoutid: String!
     
@@ -37,14 +36,12 @@ class WorkCompleteViewController: UIViewController {
         // TODO - save workout
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
-        vc.userid = userid!
-        present(vc, animated: false, completion: nil)
+        present(vc, animated: true, completion: nil)
     }
     @IBAction func saveWorkout_No(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
-        vc.userid = userid!
-        present(vc, animated: false, completion: nil)
+        present(vc, animated: true, completion: nil)
     }
     
     
@@ -59,7 +56,7 @@ class WorkCompleteViewController: UIViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         //userid, workoutid, key
-        let postString = "userid=" + userid + "&workoutid=" + workoutid +  "&key=SoftCon2018"
+        let postString = "userid=" + global.userid + "&workoutid=" + workoutid +  "&key=SoftCon2018"
         request.httpBody = postString.data(using: String.Encoding.utf8)
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
@@ -76,7 +73,7 @@ class WorkCompleteViewController: UIViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         //userid, workoutid, key
-        let postString = "userid=" + userid + "&workoutid=" + workoutid +  "&key=SoftCon2018"
+        let postString = "userid=" + global.userid + "&workoutid=" + workoutid +  "&key=SoftCon2018"
         request.httpBody = postString.data(using: String.Encoding.utf8)
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in

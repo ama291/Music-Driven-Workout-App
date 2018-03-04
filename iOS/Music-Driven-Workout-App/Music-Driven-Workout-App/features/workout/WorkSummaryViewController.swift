@@ -10,15 +10,12 @@ import UIKit
 
 class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
 
-    var userid: String!
     var themes: String!
     var categories: String!
     var musclegroup: String!
     var equipment: String!
     var duration: String!
     var difficulty: String!
-    var token: String!
-    var username: String!
     //var player: SPTAudioStreamingController?
 
     //spotify
@@ -52,11 +49,9 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is WorkSelectionViewController {
             let vc = segue.destination as? WorkSelectionViewController
-            vc?.userid = userid!
         }
         else if segue.destination is WorkExerciseViewController {
             let vc = segue.destination as? WorkExerciseViewController
-            vc?.userid = userid!
             vc?.workoutjson = workoutjson
             vc?.exercisenames = exNames
             vc?.exercisedescriptions = exDesc
@@ -73,7 +68,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     @objc func getWorkout() {
         let request = APIRequest()
         let route = "/api/workouts/getworkout/"
-        var query = "userid=" + userid + "&key=SoftCon2018"
+        var query = "userid=" + global.userid + "&key=SoftCon2018"
         if musclegroup.isEmpty {
             query += "&categories=" + categories
         } else {
@@ -82,7 +77,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         query += "&equipment=" + equipment
         query += "&duration=" + duration
         query += "&difficulty=" + difficulty
-        query += "&token=" + token
+        query += "&token=" + global.token
         
         request.submitPostServer(route: route, qstring: query) { (data, response, error) -> Void in
             if let error = error {

@@ -189,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				AAC24995204724EE007709BC /* APIRequest.swift */,
+				D813DF0A2045BD3E00532701 /* global.swift */,
 				D8C7018B2044E0FD006FA4CE /* features */,
 				4CE2AAA8203F7AA000A55F29 /* SpotifyAudioPlayback.framework */,
 				4CE2AAA9203F7AA000A55F29 /* SpotifyAuthentication.framework */,
@@ -327,7 +328,6 @@
 		D8C701982044E74D006FA4CE /* samples */ = {
 			isa = PBXGroup;
 			children = (
-				D813DF0A2045BD3E00532701 /* global.swift */,
 				11F9ABEA2033E593007F217C /* AccelerometerTest.swift */,
 				11AF5E2A202D42D2004EB40B /* ViewController.swift */,
 			);
