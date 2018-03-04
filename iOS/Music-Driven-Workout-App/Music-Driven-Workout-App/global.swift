@@ -12,13 +12,11 @@ import Foundation
 class Global {
     // !! There should only be one instantiation of this class in LoginViewController.swift !!
     
-    
     /* * Persistent Global variables * */
     var userid: String!                     // set in LoginVC
     var username: String!                   // set in LoginVC
-    var auth = SPTAuth.defaultInstance()!
-    var session: SPTSession!                // set in LoginVC (?)
     var token: String!                      // set in LoginVC & MenuViewVC
+    var session: SPTSession!                // set in LoginVC (?)
     
     /* * Global Methods * */
     func reset() {
@@ -32,7 +30,6 @@ class Global {
         print("Global Variables:")
         print("\t userid: \(userid)")
         print("\t username: \(username)")
-        print("\t auth: \(auth)")
         print("\t session: \(session)")
         print("\t token: \(token)")
     }

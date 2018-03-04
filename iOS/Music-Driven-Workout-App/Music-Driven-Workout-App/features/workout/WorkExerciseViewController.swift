@@ -11,9 +11,9 @@ import UIKit
 class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
     
     var auth = SPTAuth.defaultInstance()!
-    var workoutjson: String!
     
     //variables to be taken from workout summary
+    var workoutjson: String!
     var exercisenames: [String]!
     var exercisedescriptions: [String]!
     var exercisedurations: [Int]!
