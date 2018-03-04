@@ -141,6 +141,11 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         startPlayback()
     }
     
+    func spotifyLogout() {
+        self.player?.logout()
+        self.session = nil
+    }
+    
     struct jsonRequest: Codable {
         var Result: String
         var Status: String
@@ -245,6 +250,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         }
         else {
             self.player?.setIsPlaying(false, callback: nil)
+            spotifyLogout()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
             present(vc, animated: true, completion: nil)
@@ -274,6 +280,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     
     @IBAction func quitclick(_ sender: Any) {
         self.player?.setIsPlaying(false, callback: nil)
+        spotifyLogout()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
         present(vc, animated: true, completion: nil)
