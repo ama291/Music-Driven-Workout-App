@@ -10,6 +10,8 @@ import UIKit
 
 class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
 
+    var queryComplete = false
+    
     var themes: String!
     var categories: String!
     var musclegroup: String!
@@ -30,6 +32,8 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     var exImgs: [String] = []
     var exTrackNames: [[String]] = [[]]
     var exTrackUris: [[String]] = [[]]
+    var exEquip: [String] = []
+    var exBPM: [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +51,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
 
     /* Mark: Navigation */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is WorkSelectionViewController {
-            let vc = segue.destination as? WorkSelectionViewController
-        }
-        else if segue.destination is WorkExerciseViewController {
+        if segue.destination is WorkExerciseViewController {
             let vc = segue.destination as? WorkExerciseViewController
             vc?.workoutjson = workoutjson
             vc?.exercisenames = exNames
@@ -59,8 +60,23 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             vc?.exerciseimages = exImgs
             vc?.exercisetracknames = exTrackNames
             vc?.exercisetrackuris = exTrackUris
+            vc?.exerciseEquipment = exEquip
+            vc?.exerciseBPM = exBPM
             //vc?.player = player!
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if (queryComplete) {
+            return true
+        }
+        else {
+            let alert = UIAlertController(title: "Patience, Grasshopper.", message: "We have not finished generating your workout!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Yes, Sensei.", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return false
+        }
+        
     }
     
     
@@ -86,7 +102,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             
             let resultjson = try? JSONSerialization.jsonObject(with: data!, options: [])
             self.workoutjson = String(describing: data)
-            print("resultJson: ", resultjson as Any, "\n")
+            // print("resultJson: ", resultjson as Any, "\n")
             
             if let dictionary = resultjson as? [String: Any] {
                 if let exercises = dictionary["Exercises"] as? [Any] {
@@ -102,12 +118,11 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                             self.exDesc.append("exDescription")
                             self.exDur.append((exDict["duration"] as! Int) * 60) // convert to secs
                             self.exImgs.append(exDict["images"] as! String)
+                            self.exEquip.append(exDict["equipment"] as! String)
+                            self.exBPM.append(exDict["bpm"] as! Int)
                             
                             if let trackDict = exDict["tracks"] as? [Dictionary<String, String>] {
                                 for track in trackDict {
-                                    print("Track:", track)
-                                    print("TName:", track["name"] as Any)
-                                    print("TUri:", track["uri"] as Any)
                                     self.exTrackNames[exIndex].append(track["name"]!)
                                     self.exTrackUris[exIndex].append(track["uri"]!)
                                     
@@ -115,8 +130,6 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                                     self.songList.append(track["name"]!)
                                 }
                             }
-                            print(self.exTrackNames)
-                            print(self.exTrackUris)
                         }
                         exIndex += 1
                         self.exTrackNames.append([])
@@ -129,6 +142,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                 self.exTable.delegate = self
                 self.exTable.dataSource = self
                 self.exTable?.reloadData()
+                self.queryComplete = true
             }
             
         }.resume()

@@ -10,6 +10,7 @@ import UIKit
 
 class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    // fields to pass to WorkSummaryVC
     var themes = ""
     var categories = ""
     var musclegroup = ""

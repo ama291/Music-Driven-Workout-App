@@ -102,12 +102,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qj8-Vd-d6V">
-                                <rect key="frame" x="126" y="274" width="122" height="118"/>
+                                <rect key="frame" x="126" y="273" width="122" height="118"/>
                                 <color key="backgroundColor" red="0.9380349731262787" green="0.95992551813471505" blue="0.86176168705156797" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="118" id="1Ge-tH-Eem"/>
                                     <constraint firstAttribute="width" secondItem="Qj8-Vd-d6V" secondAttribute="height" multiplier="61:59" id="2jy-CO-ZIf"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="118" id="o7v-Hs-WG3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="37"/>
                                 <state key="normal" title="Continue">
@@ -119,7 +117,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spotify Connection Complete" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmf-yB-wtf">
-                                <rect key="frame" x="0.0" y="164" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="164" width="375" height="47"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="375" id="ZgJ-7F-2cJ"/>
@@ -131,8 +129,6 @@
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qMj-lX-cHb" firstAttribute="leading" secondItem="nJD-6t-fjM" secondAttribute="leading" id="1fj-oH-1J3"/>
-                            <constraint firstItem="Qj8-Vd-d6V" firstAttribute="top" secondItem="nJD-6t-fjM" secondAttribute="top" constant="254" id="G5M-md-bdM"/>
-                            <constraint firstItem="nJD-6t-fjM" firstAttribute="bottom" secondItem="Qj8-Vd-d6V" secondAttribute="bottom" constant="275" id="HeM-Gg-2zJ"/>
                             <constraint firstItem="Vmf-yB-wtf" firstAttribute="leading" secondItem="nJD-6t-fjM" secondAttribute="leading" id="QZa-8u-uU1"/>
                             <constraint firstItem="nJD-6t-fjM" firstAttribute="trailing" secondItem="Qj8-Vd-d6V" secondAttribute="trailing" constant="127" id="Xjg-aj-N6T"/>
                             <constraint firstItem="qMj-lX-cHb" firstAttribute="trailing" secondItem="nJD-6t-fjM" secondAttribute="trailing" id="ddt-ti-6ry"/>

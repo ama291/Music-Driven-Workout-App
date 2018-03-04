@@ -21,6 +21,8 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     var exerciseimages: [String]!
     var exercisetracknames: [[String]]!
     var exercisetrackuris: [[String]]!
+    var exerciseEquipment: [String]!
+    var exerciseBPM: [Int]!
     var session:SPTSession!
     var player: SPTAudioStreamingController?
     var queued = false
@@ -57,6 +59,8 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     @IBOutlet weak var pausebutton: UIButton!
     @IBOutlet weak var skipbutton: UIButton!
     @IBOutlet weak var eximage: UIImageView!
+    
+    
     var timer = Timer()
     var timecountdown = 0.0
     var paused = false
@@ -101,7 +105,11 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     
     func startPlayback() {
         // TODO - change to first exercise uri
-        //heartratelabel.text =  "Song: " + exercisetracknames[self.i][0]
+        var descText = "Equipment: " + exerciseEquipment[self.i] + "\n"
+        descText += "BPM: " + String(exerciseBPM[self.i]) + "\n"
+        descriptionlabel.text = descText
+        heartratelabel.text =  "Song: " + exercisetracknames[self.i][0]
+        
         self.player?.playSpotifyURI(self.exercisetrackuris[self.i][0], startingWith: 0, startingWithPosition: 0, callback: { (error) in
             if (error == nil) {
                 print("playing!")
@@ -227,7 +235,6 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         }
         else {
             // self.performSegue(withIdentifier: "completeSegue", sender: self)
-            // exit(0)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
             present(vc, animated: true, completion: nil)
@@ -251,7 +258,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     
     @IBAction func skipclick(_ sender: Any) {
         completeExercise()
-        self.player?.skipNext({(error) in
+        self.player?.skipNext({ (error) in
             if (error == nil) {
                 print("skipped!")
             }
@@ -262,6 +269,13 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     }
     
     @IBAction func quitclick(_ sender: Any) {
-        exit(0)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        present(vc, animated: true, completion: nil)
+        // exit(0)
     }
 }
+
+
+// TODO - add text boxes on the exercise page to display the equipment required and rpm for the current exercise? Those are kind of necessary in terms of usability. And if the timer could be displayed in a minutes:seconds format that would be good, since some exercises can be pretty long, but this is not as important.
+

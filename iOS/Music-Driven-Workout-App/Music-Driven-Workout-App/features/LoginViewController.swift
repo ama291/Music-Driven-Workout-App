@@ -76,7 +76,6 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
         guard let url = URL(string: "http://138.197.49.155:8000/api/workouts/getuserid/") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        //userid, workoutid, key
         let postString = "username=" + username + "&key=SoftCon2018"
         request.httpBody = postString.data(using: String.Encoding.utf8)
         let session = URLSession.shared

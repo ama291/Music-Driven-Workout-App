@@ -667,7 +667,6 @@
                                 <color key="backgroundColor" red="0.30654840179999998" green="1" blue="0.2175406956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="4vo-9h-REY"/>
-                                    <constraint firstAttribute="width" constant="253" id="HDN-UV-3qb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
                                 <state key="normal" title="Begin Workout">
@@ -679,7 +678,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="dqf-WA-fiu" kind="show" id="XMo-jY-u0E">
+                                    <segue destination="dqf-WA-fiu" kind="show" identifier="workExSegue" id="XMo-jY-u0E">
                                         <nil key="action"/>
                                     </segue>
                                 </connections>
