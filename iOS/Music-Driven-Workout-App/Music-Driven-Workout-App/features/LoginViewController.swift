@@ -25,7 +25,9 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     // Initialzed in either updateAfterFirstLogin: (if first time login) or in viewDidLoad (when there is a check for a session object in User Defaults
     var player: SPTAudioStreamingController?
     var loginUrl: URL?
-
+    var userid: String!
+    var token: String!
+    
     @IBOutlet weak var loginButton: UIButton!
 
     override func viewDidLoad() {
@@ -104,8 +106,8 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
         if(global.userid != "null") {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
-            vc.userid = userid!
-            vc.token = token!
+            vc.userid = global.userid
+            vc.token = global.token
             present(vc, animated: false, completion: nil)
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

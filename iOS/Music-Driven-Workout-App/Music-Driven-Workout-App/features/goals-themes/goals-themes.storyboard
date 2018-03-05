@@ -120,35 +120,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4AU-YX-9T7" id="gH9-Je-0Dw">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mf5-bc-bl6">
-                                                    <rect key="frame" x="0.0" y="1" width="343" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pw0-Il-3lZ">
-                                                    <rect key="frame" x="106" y="0.0" width="131" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Muscle group" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dmj-AV-Wux">
-                                                    <rect key="frame" x="209" y="0.0" width="134" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="column1" destination="Mf5-bc-bl6" id="TvR-7e-nIx"/>
-                                            <outlet property="column2" destination="pw0-Il-3lZ" id="rPn-eu-nlm"/>
-                                            <outlet property="column3" destination="Dmj-AV-Wux" id="OHr-M0-THy"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -317,7 +289,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-<<<<<<< HEAD
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Adb-jO-2Od">
                                 <rect key="frame" x="175" y="181" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -342,32 +313,17 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V3X-yQ-XCj">
+                            <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V3X-yQ-XCj">
                                 <rect key="frame" x="71" y="523" width="263" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Workouts: X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDt-z8-rd2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Number of Workouts: X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDt-z8-rd2">
                                 <rect key="frame" x="31" y="481" width="241" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1g-cU-aUg">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1g-cU-aUg">
                                 <rect key="frame" x="76" y="595" width="253" height="52"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-=======
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V3X-yQ-XCj">
-                                <rect key="frame" x="56" y="331" width="263" height="31"/>
-                            </slider>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1g-cU-aUg">
-                                <rect key="frame" x="61" y="403" width="253" height="52"/>
-                                <color key="backgroundColor" red="0.15147725840000001" green="0.75097150260000001" blue="0.19562365970000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="Aj3-Qo-Oln"/>
-                                    <constraint firstAttribute="width" constant="253" id="LnX-zw-Wzf"/>
-                                </constraints>
->>>>>>> 86dfa0c7934476390bfb7bc4b7f80bb69888be35
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
                                 <state key="normal" title="Save Theme">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -390,12 +346,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of Workouts: X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDt-z8-rd2">
-                                <rect key="frame" x="43" y="290" width="157.5" height="30.5"/>
-                                <fontDescription key="fontDescription" name="Amatic-Bold" family="Amatic" pointSize="28"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -408,12 +358,10 @@
                             <constraint firstItem="ruu-lW-9EK" firstAttribute="trailing" secondItem="V3X-yQ-XCj" secondAttribute="trailing" constant="58" id="J1e-EM-rjl"/>
                             <constraint firstItem="V3X-yQ-XCj" firstAttribute="top" secondItem="CDt-z8-rd2" secondAttribute="bottom" constant="10.5" id="OYg-vV-g8H"/>
                             <constraint firstItem="ruu-lW-9EK" firstAttribute="trailing" secondItem="Pih-a4-6ba" secondAttribute="trailing" constant="86" id="Ofq-Bf-6UO"/>
-                            <constraint firstItem="CDt-z8-rd2" firstAttribute="leading" secondItem="ruu-lW-9EK" secondAttribute="leading" constant="43" id="OrR-zm-zLV"/>
                             <constraint firstItem="tKE-8z-8fo" firstAttribute="leading" secondItem="ruu-lW-9EK" secondAttribute="leading" constant="43" id="RCX-Uz-NSu"/>
                             <constraint firstItem="m1g-cU-aUg" firstAttribute="top" secondItem="V3X-yQ-XCj" secondAttribute="bottom" constant="42" id="Xhr-gZ-cIh"/>
                             <constraint firstItem="V3X-yQ-XCj" firstAttribute="leading" secondItem="ruu-lW-9EK" secondAttribute="leading" constant="58" id="Z0p-rd-5km"/>
                             <constraint firstItem="a9l-5N-6Ng" firstAttribute="top" secondItem="ruu-lW-9EK" secondAttribute="top" id="gQA-oe-zud"/>
-                            <constraint firstItem="CDt-z8-rd2" firstAttribute="top" secondItem="tKE-8z-8fo" secondAttribute="bottom" constant="22" id="gfj-TE-18t"/>
                             <constraint firstItem="mAg-NU-ubq" firstAttribute="top" secondItem="Pih-a4-6ba" secondAttribute="bottom" constant="64" id="hHJ-ph-1gm"/>
                             <constraint firstItem="m1g-cU-aUg" firstAttribute="leading" secondItem="ruu-lW-9EK" secondAttribute="leading" constant="61" id="hxV-Zm-uTT"/>
                             <constraint firstItem="ruu-lW-9EK" firstAttribute="trailing" secondItem="m1g-cU-aUg" secondAttribute="trailing" constant="61" id="iA0-dN-YJr"/>
@@ -630,7 +578,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="c6j-01-N9k"/>
         <segue reference="h4I-gh-5QU"/>
+        <segue reference="c6j-01-N9k"/>
     </inferredMetricsTieBreakers>
 </document>

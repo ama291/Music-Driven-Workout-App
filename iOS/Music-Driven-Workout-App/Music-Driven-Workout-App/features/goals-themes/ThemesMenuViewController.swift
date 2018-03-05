@@ -12,6 +12,7 @@ class ThemesMenuViewController: UIViewController, UITableViewDelegate, UITableVi
     var tableArray = [String:Any] ()
     var token: String!
     var passedUserId = String()
+    var userid: String!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -75,11 +76,8 @@ class ThemesMenuViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func goToAddTheme(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "themesAdd") as! ThemesAddViewController
-<<<<<<< HEAD
         vc.userid = userid!
         vc.token = token!
-=======
->>>>>>> 86dfa0c7934476390bfb7bc4b7f80bb69888be35
         present(vc, animated: true, completion: nil)
     }
     

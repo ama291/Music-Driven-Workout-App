@@ -11,7 +11,9 @@ import UIKit
 class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
 
     //var player: SPTAudioStreamingController?
-
+    var userid: String!
+    var token: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -56,11 +58,8 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
     @IBAction func goToThemes(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "themesID") as! ThemesMenuViewController
-<<<<<<< HEAD
         vc.userid = userid!
         vc.token = token!
-=======
->>>>>>> 86dfa0c7934476390bfb7bc4b7f80bb69888be35
         present(vc, animated: false, completion: nil)
     }
     @IBAction func goToProfile(_ sender: UIButton) {
