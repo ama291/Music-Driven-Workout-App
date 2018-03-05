@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -164,7 +164,75 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DWp-C9-IEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1372" y="958.4707646176912"/>
+            <point key="canvasLocation" x="-1372" y="1045"/>
+        </scene>
+        <!--Theme View Controller-->
+        <scene sceneID="4pP-sl-YtE">
+            <objects>
+                <viewController id="SNj-Ov-Yve" customClass="ThemeViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rBE-dk-RSN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Theme Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ev6-la-Gek">
+                                <rect key="frame" x="25" y="27" width="204" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="32"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8l7-IP-UMT">
+                                <rect key="frame" x="40" y="147" width="313" height="323"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAH-lB-5I1">
+                                <rect key="frame" x="61" y="569" width="253" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
+                                <state key="normal" title="Delete Theme">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="deleteTheme:" destination="SNj-Ov-Yve" eventType="touchUpInside" id="0d5-TR-5Ch"/>
+                                    <action selector="goToAddTheme:" destination="e4u-ql-KLH" eventType="touchUpInside" id="teY-sF-rcy"/>
+                                    <segue destination="e4u-ql-KLH" kind="show" id="tHQ-3Y-fh8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0TW-M3-FKn">
+                                <rect key="frame" x="307" y="13" width="52" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="goToHome:" destination="e4u-ql-KLH" eventType="touchUpInside" id="gM3-b7-HAR"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of workouts: 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JhL-jn-8Pu">
+                                <rect key="frame" x="25" y="95" width="176" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Gjb-Lh-OeG"/>
+                    </view>
+                    <connections>
+                        <outlet property="numWorkoutsLabel" destination="JhL-jn-8Pu" id="ouG-hw-ooO"/>
+                        <outlet property="themeNameLabel" destination="ev6-la-Gek" id="ddf-2p-TQq"/>
+                        <segue destination="e4u-ql-KLH" kind="show" identifier="toThemesList" id="V0U-E1-iEk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rZh-H4-Bwz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2295.1999999999998" y="192.95352323838082"/>
         </scene>
         <!--Themes Menu-->
         <scene sceneID="GIa-a3-4yg">
@@ -209,7 +277,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="goToAddTheme:" destination="e4u-ql-KLH" eventType="touchUpInside" id="V9d-m5-lXf"/>
                                     <segue destination="QMn-Cu-BGw" kind="show" id="KsW-2D-yHF">
                                         <nil key="action"/>
                                     </segue>
@@ -221,16 +288,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="471" id="ZNp-kH-2iw"/>
                                 </constraints>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="j9k-25-TiL">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j9k-25-TiL" id="zfJ-d7-PFy">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -251,6 +308,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="tableView" destination="U4a-PN-9nl" id="wy4-Nd-bWh"/>
+                        <segue destination="SNj-Ov-Yve" kind="show" identifier="toTheme" id="n24-ho-lGT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VXh-OA-fhn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -272,6 +330,7 @@
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="goBackToThemesMenu:" destination="QMn-Cu-BGw" eventType="touchUpInside" id="HTS-Fh-e32"/>
+                                    <segue destination="e4u-ql-KLH" kind="show" id="HYg-ej-hKR"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Theme Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mAg-NU-ubq">
@@ -309,6 +368,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="goBackToThemesMenu:" destination="QMn-Cu-BGw" eventType="touchUpInside" id="dl9-8a-GVj"/>
+                                    <action selector="saveTheme:" destination="QMn-Cu-BGw" eventType="touchUpInside" id="j1F-DO-UmI"/>
                                     <segue destination="e4u-ql-KLH" kind="show" animates="NO" id="c6j-01-N9k">
                                         <nil key="action"/>
                                     </segue>
@@ -348,7 +408,11 @@
                     </view>
                     <connections>
                         <outlet property="artistToSearchFor" destination="mAg-NU-ubq" id="YRD-ba-lqq"/>
+                        <outlet property="numLabel" destination="CDt-z8-rd2" id="Sii-Hg-9Bg"/>
+                        <outlet property="numWorkoutsLabel" destination="CDt-z8-rd2" id="nYr-mw-9Nn"/>
+                        <outlet property="spotifySearchbar" destination="mAg-NU-ubq" id="fRI-jn-aSg"/>
                         <outlet property="tableView" destination="1EC-Ra-9yd" id="APh-zd-o19"/>
+                        <outlet property="themeNameTextField" destination="mAg-NU-ubq" id="MVe-I3-ra8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3y-Xc-ePL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -551,11 +615,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BzK-gO-Pwi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-367.19999999999999" y="1107.3463268365817"/>
+            <point key="canvasLocation" x="-367" y="1195"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="c6j-01-N9k"/>
-        <segue reference="h4I-gh-5QU"/>
+        <segue reference="nyR-yl-gWq"/>
+        <segue reference="HYg-ej-hKR"/>
     </inferredMetricsTieBreakers>
 </document>

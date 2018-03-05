@@ -10,14 +10,46 @@ import UIKit
 
 class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var tableView: UITableView!
-    
-
-    var userid: String!
+    let request = APIRequest()
+    var themeName: String! = "theme1"
+    var theme: String! = "Artist"
+    var numWorkouts: Int = 5
+    var reply: String?
+    var themeDict: [String:Any] = [:]
+    var userid: String! = "21"
     var tableArray: [String: Dictionary<String, Any>] = [:]
-    var token: String!
+    var token = global.token!
     var listNames: [String] = []
     var artistURIs: [String] = []
+
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var numWorkoutsLabel: UILabel!
+    @IBOutlet weak var themeNameTextField: UITextField!
+    @IBOutlet weak var spotifySearchbar: UITextField!
+    @IBOutlet weak var numLabel: UILabel!
+    
+    @IBAction func saveTheme(_ sender: Any) {
+        self.themeName = self.themeNameTextField.text
+        self.theme = self.spotifySearchbar.text
+        let qstr = "userid=\(userid!)&name=\(themeName!)&spotifyId=example-id&theme=\(theme!)&numworkouts=\(numWorkouts)&key=SoftCon2018"
+        self.request.submitPostLocal(route: "/api/themes/addtheme/", qstring: qstr) { (data, response, error) -> Void in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+            self.reply = self.request.parseJsonInitial(data: data!)
+            if self.reply != "0" {
+                print("Add theme request failed")
+                return
+            }
+            }.resume()
+    }
+    @IBAction func numChanged(_ sender: UISlider) {
+        self.numWorkouts = Int(sender.value)
+        numLabel.text = "Number of Workouts: " + String(numWorkouts)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (self.tableArray["artists"] != nil) {
             let names = self.tableArray["artists"]!["items"] as? NSArray
@@ -25,7 +57,7 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         else { return 0 }
     }
-        
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "themescell", for: indexPath) as UITableViewCell
 //        if(self.tableArray["artists"] != nil) {
@@ -98,10 +130,23 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.numWorkoutsLabel.text = "Number of Workouts: \(numWorkouts)"
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "themescell")
         self.tableView.dataSource = self
         self.tableView.delegate = self
         // Do any additional setup after loading the view.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.destination is ThemesMenuViewController
+        {
+            let vc = segue.destination as? ThemesMenuViewController
+            vc?.userid = userid
+            self.themeDict = ["name": self.themeName, "theme": self.theme, "numWorkouts": self.numWorkouts]
+            vc?.themes.append(self.themeDict)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,7 +159,6 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "themesID") as! ThemesMenuViewController
         vc.userid = userid!
-        vc.token = token!
         present(vc, animated: true, completion: nil)
     }
 
