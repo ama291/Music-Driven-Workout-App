@@ -108,15 +108,14 @@ class TestWorkout(unittest.TestCase):
     '''
     Added Tests for music recommendation
     '''
-    """NOTE - can only do this test if themes are being used,
-    because then we won't use the invalid accessToken"""
+    """NOTE - can't do this test, removed duration from return """
     #test that duration of music is greater than equal to duration of workout
-    for i in range(len(workout1.Exercises)):
-      result = workout1.getRecommendations(workout1.spotID, workout1.themes, workout1.accessToken, workout1.Exercises[i].bpm, workout1.Exercises[i].duration)
-      duration = 0
-      for j in range(len(result)):
-        duration += result[j]['duration']
-      self.assertTrue(duration >= workout1.Exercises[i].duration)
+    # for i in range(len(workout1.Exercises)):
+    #   result = workout1.getRecommendations(workout1.spotID, workout1.themes, workout1.accessToken, workout1.Exercises[i].bpm, workout1.Exercises[i].duration)
+    #   duration = 0
+    #   for j in range(len(result)):
+    #     duration += result[j]['duration']
+    #   self.assertTrue(duration >= workout1.Exercises[i].duration)
 
     """NOTE - can only do this test if themes are being used,
     because then we won't use the invalid accessToken"""
@@ -145,10 +144,16 @@ class TestWorkout(unittest.TestCase):
     self.assertTrue(artist_len + genres_len + tracks_len <= 5)
 
     #test getBPM which gets bpm from rpm
+    max_beats = {"Cardio": 170, "Powerlifting": 140, "Strongman": 140,
+                "Olympic Weightlifting": 140, "Strength": 140,
+                "Plyometrics": 150, "Stretching": 80}
+
     for i in range(len(workout1.Exercises)):
-      rpm = workout1.Exercises[i].rpm
-      bpm = workout1.getBPM(rpm,min_beats,max_beats)
-      self.assertTrue(min_beats <= bpm <= max_beats )  #bpm is within required range
+      ex = workout1.Exercises[i]
+      rpm = ex.rpm
+      category = ex.category
+      bpm = workout1.getBPM(rpm,category)
+      self.assertTrue(bpm <= max_beats[category])  #bpm is within required range
       self.assertTrue((bpm % rpm) == 0)   #bpm is multiple of rpm
 
 
