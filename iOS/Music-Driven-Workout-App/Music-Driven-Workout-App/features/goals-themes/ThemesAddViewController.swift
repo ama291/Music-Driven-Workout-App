@@ -12,6 +12,7 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var tableView: UITableView!
     
+<<<<<<< HEAD
     var userid: String!
     var tableArray: [String: Dictionary<String, Any>] = [:]
     var token: String!
@@ -94,6 +95,8 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
             }
             }.resume()
     }
+=======
+>>>>>>> 86dfa0c7934476390bfb7bc4b7f80bb69888be35
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "themescell")
@@ -107,20 +110,16 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
+    /* Navigation */
     @IBAction func goBackToThemesMenu(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "themesID") as! ThemesMenuViewController
+<<<<<<< HEAD
         vc.userid = userid!
         vc.token = token!
+=======
+>>>>>>> 86dfa0c7934476390bfb7bc4b7f80bb69888be35
         present(vc, animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

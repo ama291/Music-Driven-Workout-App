@@ -10,15 +10,14 @@ import UIKit
 
 class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
 
-    var userid: String!
+    var queryComplete = false
+    
     var themes: String!
     var categories: String!
     var musclegroup: String!
     var equipment: String!
     var duration: String!
     var difficulty: String!
-    var token: String!
-    var username: String!
     //var player: SPTAudioStreamingController?
 
     //spotify
@@ -33,6 +32,9 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     var exImgs: [String] = []
     var exTrackNames: [[String]] = [[]]
     var exTrackUris: [[String]] = [[]]
+    var exEquip: [String] = []
+    var exRPM: [Int] = []
+    var workoutid: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +52,8 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
 
     /* Mark: Navigation */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is WorkSelectionViewController {
-            let vc = segue.destination as? WorkSelectionViewController
-            vc?.userid = userid!
-        }
-        else if segue.destination is WorkExerciseViewController {
+        if segue.destination is WorkExerciseViewController {
             let vc = segue.destination as? WorkExerciseViewController
-            vc?.userid = userid!
             vc?.workoutjson = workoutjson
             vc?.exercisenames = exNames
             vc?.exercisedescriptions = exDesc
@@ -64,8 +61,24 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             vc?.exerciseimages = exImgs
             vc?.exercisetracknames = exTrackNames
             vc?.exercisetrackuris = exTrackUris
+            vc?.exerciseEquipment = exEquip
+            vc?.exerciseRPM = exRPM
+            vc?.workoutid = workoutid
             //vc?.player = player!
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if (queryComplete) {
+            return true
+        }
+        else {
+            let alert = UIAlertController(title: "Patience, Grasshopper.", message: "We have not finished generating your workout!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Yes, Sensei.", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return false
+        }
+        
     }
     
     
@@ -73,7 +86,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     @objc func getWorkout() {
         let request = APIRequest()
         let route = "/api/workouts/getworkout/"
-        var query = "userid=" + userid + "&key=SoftCon2018"
+        var query = "userid=" + global.userid + "&key=SoftCon2018"
         if musclegroup.isEmpty {
             query += "&categories=" + categories
         } else {
@@ -82,7 +95,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         query += "&equipment=" + equipment
         query += "&duration=" + duration
         query += "&difficulty=" + difficulty
-        query += "&token=" + token
+        query += "&token=" + global.token
         
         request.submitPostServer(route: route, qstring: query) { (data, response, error) -> Void in
             if let error = error {
@@ -91,9 +104,10 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             
             let resultjson = try? JSONSerialization.jsonObject(with: data!, options: [])
             self.workoutjson = String(describing: data)
-            print("resultJson: ", resultjson as Any, "\n")
             
             if let dictionary = resultjson as? [String: Any] {
+                self.workoutid = dictionary["ID"] as! String
+                
                 if let exercises = dictionary["Exercises"] as? [Any] {
                     var exIndex = 0
                     for ex in exercises {
@@ -107,18 +121,18 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                             self.exDesc.append("exDescription")
                             self.exDur.append((exDict["duration"] as! Int) * 60) // convert to secs
                             self.exImgs.append(exDict["images"] as! String)
+                            self.exEquip.append(exDict["equipment"] as! String)
+                            self.exRPM.append(exDict["rpm"] as! Int)
                             
                             if let trackDict = exDict["tracks"] as? [Dictionary<String, String>] {
                                 for track in trackDict {
-                                    print("Track:", track)
-                                    print("TName:", track["name"] as Any)
-                                    print("TUri:", track["uri"] as Any)
                                     self.exTrackNames[exIndex].append(track["name"]!)
                                     self.exTrackUris[exIndex].append(track["uri"]!)
+                                    
+                                    // Populate Song List
+                                    self.songList.append(track["name"]!)
                                 }
                             }
-                            print(self.exTrackNames)
-                            print(self.exTrackUris)
                         }
                         exIndex += 1
                         self.exTrackNames.append([])
@@ -131,6 +145,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                 self.exTable.delegate = self
                 self.exTable.dataSource = self
                 self.exTable?.reloadData()
+                self.queryComplete = true
             }
             
         }.resume()
@@ -139,8 +154,9 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     
     /* Mark: tableView */
     @IBOutlet weak var exTable: UITableView!
-    let sections = ["Exercises"]
+    let sections = ["Exercises", "Songs"]
     var tableContent: [String] = []  //populated by getWorkout()
+    var songList: [String] = []  //populated by getWorkout()
     
     // Section Headers
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -155,6 +171,8 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         switch section {
         case 0:
             return tableContent.count
+        case 1:
+            return songList.count
         default:
             return 0
         }
@@ -168,6 +186,9 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         switch indexPath.section {
         case 0:
             cell.textLabel?.text = tableContent[indexPath.row]
+            break
+        case 1:
+            cell.textLabel?.text = songList[indexPath.row]
             break
         default:
             break
