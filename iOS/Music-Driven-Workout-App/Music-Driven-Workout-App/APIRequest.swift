@@ -14,6 +14,20 @@ class APIRequest: NSObject {
         return
     }
     
+    func parseJsonDictList(data: Data) -> [[String:Any]]? {
+        var res: [[String:Any]]
+        do {
+            res = try JSONSerialization.jsonObject(with: data, options: []) as! [[String:Any]]
+            let myDict = res
+            return myDict
+            
+        } catch let error {
+            print(error)
+        }
+        return nil
+        
+    }
+    
     func parseJsonInitial(data: Data) -> String? {
         var res: Dictionary<String, String>
         do {
