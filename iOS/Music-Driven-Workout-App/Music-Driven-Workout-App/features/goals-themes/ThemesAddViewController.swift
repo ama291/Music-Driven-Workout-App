@@ -15,12 +15,14 @@ class ThemesAddViewController: UIViewController {
     let request = APIRequest()
     var themeName: String! = "theme1"
     var theme: String! = "Artist"
-    var numWorkouts: Int = 3
+    var numWorkouts: Int = 5
     var reply: String?
+    var themeDict: [String:Any] = [:]
     
     @IBOutlet weak var numWorkoutsLabel: UILabel!
     @IBOutlet weak var themeNameTextField: UITextField!
     @IBOutlet weak var spotifySearchbar: UITextField!
+    @IBOutlet weak var numLabel: UILabel!
     
     @IBAction func saveTheme(_ sender: Any) {
         self.themeName = self.themeNameTextField.text
@@ -39,6 +41,11 @@ class ThemesAddViewController: UIViewController {
     }
     
     
+    @IBAction func numChanged(_ sender: UISlider) {
+        self.numWorkouts = Int(sender.value)
+        numLabel.text = "Number of Workouts: " + String(numWorkouts)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +53,19 @@ class ThemesAddViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.destination is ThemesMenuViewController
+        {
+            let vc = segue.destination as? ThemesMenuViewController
+            vc?.userid = userid
+            self.themeDict = ["name": self.themeName, "theme": self.theme, "numWorkouts": self.numWorkouts]
+            vc?.themes.append(self.themeDict)
+        }
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

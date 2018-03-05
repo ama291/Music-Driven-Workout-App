@@ -125,6 +125,7 @@
                     <connections>
                         <outlet property="numWorkoutsLabel" destination="c8Z-p1-hcp" id="yEg-O8-R37"/>
                         <outlet property="themeNameLabel" destination="hcg-EF-7Hr" id="I9A-9Z-vT2"/>
+                        <segue destination="e4u-ql-KLH" kind="show" identifier="toThemesList" id="h6A-Jv-ij7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qRg-7g-1Tp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -226,9 +227,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V3X-yQ-XCj">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="V3X-yQ-XCj">
                                 <rect key="frame" x="56" y="235" width="263" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="numChanged:" destination="QMn-Cu-BGw" eventType="valueChanged" id="NHI-7O-631"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Workouts: X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDt-z8-rd2">
                                 <rect key="frame" x="16" y="193" width="241" height="45"/>
@@ -261,6 +265,7 @@
                         <viewLayoutGuide key="safeArea" id="ruu-lW-9EK"/>
                     </view>
                     <connections>
+                        <outlet property="numLabel" destination="CDt-z8-rd2" id="hUL-YG-91Z"/>
                         <outlet property="numWorkoutsLabel" destination="CDt-z8-rd2" id="CL5-4Q-sjO"/>
                         <outlet property="spotifySearchbar" destination="tKE-8z-8fo" id="aZf-cR-fid"/>
                         <outlet property="themeNameTextField" destination="mAg-NU-ubq" id="fcz-XP-kyP"/>
@@ -424,8 +429,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KsW-2D-yHF"/>
-        <segue reference="L5b-68-NLz"/>
+        <segue reference="c6j-01-N9k"/>
         <segue reference="YdA-GG-8UL"/>
     </inferredMetricsTieBreakers>
 </document>

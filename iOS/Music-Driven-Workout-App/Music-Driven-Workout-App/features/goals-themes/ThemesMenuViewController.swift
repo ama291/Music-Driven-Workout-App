@@ -10,8 +10,8 @@ import UIKit
 
 class ThemesMenuViewController: UIViewController {
 
-    var userid: String!
-    var themes: [[String:Any]]!
+    var userid: String! = "21"
+    var themes: [[String:Any]] = []
     var selectedTheme: [String:Any]!
     
     var viewModel = ViewModel()
@@ -25,21 +25,45 @@ class ThemesMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.themes = [["theme":"theme", "name": "theme name", "spotifyId": "Spotify id", "numworkouts": "4"], ["theme":"theme 2", "name": "theme name 2", "spotifyId": "Spotify id 2", "numworkouts": "6"]]
-        
-        let vmitems = self.themes!.map { ViewModelItem(item: Model(title: "\($0["name"]! as! String)" , data: $0)) }
+       
+        // Do any additional setup after loading the view.
+    }
 
-        print(vmitems[0].title)
+    
+    override func viewWillAppear(_ animated: Bool) {
+//        recuperaEmpresas()
+        userid = "21"
+        //        self.themes = [["theme":"theme", "name": "theme name", "spotifyId": "Spotify id", "numworkouts": "4"], ["theme":"theme 2", "name": "theme name 2", "spotifyId": "Spotify id 2", "numworkouts": "6"]]
         
-        self.viewModel.setItems(items: vmitems)
-
-        self.tableView?.register(CustomCell.nib, forCellReuseIdentifier: CustomCell.identifier)
-        self.tableView?.dataSource = self.viewModel
-        self.tableView?.delegate = self.viewModel
-        self.tableView?.estimatedRowHeight = 100
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
-        self.tableView?.allowsSelection = true
-        self.tableView?.separatorStyle = .none
+        let qstr = "userid=\(userid!)&key=SoftCon2018"
+        request.submitPostLocal(route: "/api/workouts/themessaved/", qstring: qstr) { (data, response, error) -> Void in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+            let dataStr = String(data: data!, encoding: .utf8)!
+            print(dataStr)
+            self.themes += self.request.parseJsonDictList(data: data!)!
+            print("THEMES")
+            print(self.themes)
+            let vmitems = self.themes.map { ViewModelItem(item: Model(title: "\($0["name"]! as! String)" , data: $0)) }
+            
+            
+            DispatchQueue.main.async {
+                self.viewModel.setItems(items: vmitems)
+                
+                self.tableView?.register(CustomCell.nib, forCellReuseIdentifier: CustomCell.identifier)
+                self.tableView?.dataSource = self.viewModel
+                self.tableView?.delegate = self.viewModel
+                self.tableView?.estimatedRowHeight = 100
+                self.tableView?.rowHeight = UITableViewAutomaticDimension
+                self.tableView?.allowsSelection = true
+                self.tableView?.separatorStyle = .none
+                
+            }
+            
+            }.resume()
+        
+        
         
         viewModel.didToggleSelection = { [weak self] hasSelection in
             let selected = self!.viewModel.selectedItems
@@ -48,10 +72,8 @@ class ThemesMenuViewController: UIViewController {
             }
             self!.selectedTheme = self!.viewModel.selectedItems.map{ $0.data}[0]
             self!.performSegue(withIdentifier: "toTheme", sender: nil)
-        }
-        // Do any additional setup after loading the view.
-    }
-
+        }    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
