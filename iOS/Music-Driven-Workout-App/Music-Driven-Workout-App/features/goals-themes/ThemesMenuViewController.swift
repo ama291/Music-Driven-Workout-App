@@ -10,8 +10,9 @@ import UIKit
 class ThemesMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     var tableArray = [String:Any] ()
-    
+    var token: String!
     var passedUserId = String()
+    var userid: String!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -75,6 +76,8 @@ class ThemesMenuViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func goToAddTheme(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "themesAdd") as! ThemesAddViewController
+        vc.userid = userid!
+        vc.token = token!
         present(vc, animated: true, completion: nil)
     }
     

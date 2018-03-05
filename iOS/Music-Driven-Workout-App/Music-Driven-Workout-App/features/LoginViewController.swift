@@ -18,36 +18,38 @@ struct jsonRequest: Codable {
 var global = Global()
 
 class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
-    
+
     // Variables
     var auth = SPTAuth.defaultInstance()!
-    
+
     // Initialzed in either updateAfterFirstLogin: (if first time login) or in viewDidLoad (when there is a check for a session object in User Defaults
     var player: SPTAudioStreamingController?
     var loginUrl: URL?
+    var userid: String!
+    var token: String!
     
     @IBOutlet weak var loginButton: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
         setup()
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.updateAfterFirstLogin), name: NSNotification.Name(rawValue: "loginSuccessfull"), object: nil)
-        
+
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     func setup () {
         // insert redirect your url and client ID below
         let redirectURL = "Music-Driven-Workout-App://returnAfterLogin" // put your redirect URL here
         auth.redirectURL     = URL(string: redirectURL)
         auth.clientID        = "8f81031574b54170a24a3a1afab27578"
-        auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope]
+        auth.requestedScopes = [SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPublicScope, SPTAuthPlaylistModifyPrivateScope, SPTAuthUserReadPrivateScope, SPTAuthUserLibraryReadScope, SPTAuthUserReadTopScope]
         loginUrl = auth.spotifyWebAuthenticationURL()
     }
 
@@ -55,7 +57,7 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
     //        self.spotifyLogout(authSession: <#T##SPTSession#>)
     //        print("logged out")
     //    }
-    
+
     func getuseridapi(username: String) {
         guard let url = URL(string: "http://138.197.49.155:8000/api/workouts/getuserid/") else { return }
         var request = URLRequest(url: url)
@@ -68,42 +70,44 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
                 guard let json = try? JSONDecoder().decode(jsonRequest.self, from: data) else { return }
                 global.userid = json.Result
             }
-            
+
             }.resume()
     }
-    
+
     @objc func updateAfterFirstLogin () {
-        
+
         //        loginButton.isHidden = true
         let userDefaults = UserDefaults.standard
-        
+
         if let sessionObj:AnyObject = userDefaults.object(forKey: "SpotifySession") as AnyObject? {
-            
+
             let sessionDataObj = sessionObj as! Data
             let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
-            
+
             global.session = firstTimeSession
             global.username = global.session.canonicalUsername
             getuseridapi(username: global.username)
             global.token = global.session.accessToken
         }
     }
-    
+
 
     @IBAction func loginButtonPressed(_ sender: Any) {
         if UIApplication.shared.openURL(loginUrl!) {
-            
+
             if auth.canHandle(auth.redirectURL) {
                 // To do - build in error handling
             }
         }
     }
-    
-    
+
+
     @IBAction func createNewUser(_ sender:UIButton) {
         if(global.userid != "null") {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+            vc.userid = global.userid
+            vc.token = global.token
             present(vc, animated: false, completion: nil)
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -111,5 +115,5 @@ class LoginViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, 
             present(vc, animated: false, completion: nil)
         }
     }
-    
+
 }
