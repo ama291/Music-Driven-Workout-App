@@ -28,7 +28,7 @@
         <!--Login-->
         <scene sceneID="5ZZ-Ya-7RK">
             <objects>
-                <viewController title="Login" id="A61-lo-4Uw" customClass="LoginViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginID" title="Login" id="A61-lo-4Uw" customClass="LoginViewController" customModule="Music_Driven_Workout_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Y7T-Ac-Zia">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,7 +58,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Music Driven Workout App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qj-Uz-Iud">
-                                <rect key="frame" x="0.0" y="70" width="375" height="48"/>
+                                <rect key="frame" x="0.0" y="70" width="375" height="44.5"/>
                                 <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="38"/>
                                 <color key="textColor" red="1" green="0.95857317973319134" blue="0.86531994368254705" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -175,7 +175,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsK-4H-8bL">
-                                <rect key="frame" x="84" y="273" width="206" height="52"/>
+                                <rect key="frame" x="84" y="268.5" width="206" height="52"/>
                                 <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
                                 <state key="normal" title="Fitness Test">
@@ -191,7 +191,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXy-sv-hng">
-                                <rect key="frame" x="200" y="424" width="153" height="52"/>
+                                <rect key="frame" x="200" y="419.5" width="153" height="52"/>
                                 <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="153" id="6ct-ex-kuj"/>
@@ -211,7 +211,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEE-R6-Yeg">
-                                <rect key="frame" x="22" y="424" width="153" height="52"/>
+                                <rect key="frame" x="22" y="419.5" width="153" height="52"/>
                                 <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="153" id="4JL-rh-W55"/>
@@ -231,7 +231,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VHE-RM-yih">
-                                <rect key="frame" x="50" y="349" width="274" height="52"/>
+                                <rect key="frame" x="50" y="344.5" width="274" height="52"/>
                                 <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
                                 <state key="normal" title="Calibrate Exercise">
@@ -247,7 +247,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Np-j2-uMA">
-                                <rect key="frame" x="61" y="203" width="253" height="52"/>
+                                <rect key="frame" x="61" y="198.5" width="253" height="52"/>
                                 <color key="backgroundColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
                                 <state key="normal" title="Workout!">
@@ -263,13 +263,13 @@
                                 </connections>
                             </button>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nvh-PX-iBr">
-                                <rect key="frame" x="16" y="53" width="343" height="80"/>
+                                <rect key="frame" x="16" y="53" width="343" height="75.5"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vXc-yb-q6T">
-                                    <rect key="frame" x="0.0" y="0.0" width="343" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="75.5"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome back, &lt;USER&gt;!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfA-mz-bph">
-                                            <rect key="frame" x="0.0" y="11" width="343" height="58"/>
+                                            <rect key="frame" x="0.0" y="11" width="343" height="53.5"/>
                                             <fontDescription key="fontDescription" name="AmaticSC-Regular" family="Amatic SC" pointSize="45"/>
                                             <nil key="highlightedColor"/>
                                             <color key="shadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -300,7 +300,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="goToProfile:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CBX-XV-5AI"/>
+                                    <action selector="goToLogout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dW9-ga-0L4"/>
                                 </connections>
                             </button>
                         </subviews>

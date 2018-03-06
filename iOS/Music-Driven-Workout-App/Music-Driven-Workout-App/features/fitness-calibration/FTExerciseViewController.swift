@@ -84,7 +84,7 @@ class FTExerciseViewController: UIViewController {
         print(self.frequencies)
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
-        let decoder = JSONDecoder()
+//        let decoder = JSONDecoder()
         do {
             let data = try? JSONSerialization.data(withJSONObject: self.motionData, options: .prettyPrinted)
             let json = String(data: data!, encoding: .utf8)
@@ -122,11 +122,11 @@ class FTExerciseViewController: UIViewController {
                             }
                             return
                         }
-                        catch {
-                            print("Parsing Error:")
-                            print(error)
-                            return
-                        }
+//                        catch {
+//                            print("Parsing Error:")
+//                            print(error)
+//                            return
+//                        }
                     } else {
                         return
                     }

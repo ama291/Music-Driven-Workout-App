@@ -29,6 +29,7 @@ class ThemesMenuViewController: UIViewController {
 //        self.tableView.delegate = self
 //        // Do any additional setup after loading the view.
 //        populateThemes()
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
