@@ -352,9 +352,12 @@
                                     <action selector="searchForTheme:" destination="QMn-Cu-BGw" eventType="touchUpInside" id="GP0-4k-SkS"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V3X-yQ-XCj">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="6" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="V3X-yQ-XCj">
                                 <rect key="frame" x="71" y="539" width="263" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="numChanged:" destination="QMn-Cu-BGw" eventType="valueChanged" id="Vq3-n5-hVq"/>
+                                </connections>
                             </slider>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1g-cU-aUg">
                                 <rect key="frame" x="76" y="595" width="253" height="52"/>
@@ -623,6 +626,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="nyR-yl-gWq"/>
-        <segue reference="V0U-E1-iEk"/>
+        <segue reference="HYg-ej-hKR"/>
     </inferredMetricsTieBreakers>
 </document>
