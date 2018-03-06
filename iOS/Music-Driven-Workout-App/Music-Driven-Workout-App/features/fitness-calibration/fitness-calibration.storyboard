@@ -731,7 +731,7 @@
                                     <segue destination="5r9-iF-qe2" kind="show" id="THB-bp-Ezo"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ukz-Hd-ro5">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ukz-Hd-ro5">
                                 <rect key="frame" x="16" y="122" width="343" height="194"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="194" id="SdZ-Nr-k3U"/>
@@ -1062,8 +1062,8 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="3mn-gp-Eld"/>
-        <segue reference="yG1-XU-EPQ"/>
-        <segue reference="EN8-IK-vOx"/>
+        <segue reference="2Kn-eQ-nrA"/>
+        <segue reference="gW0-DC-Gtg"/>
         <segue reference="XGu-r8-LIQ"/>
         <segue reference="M2O-gH-2eY"/>
     </inferredMetricsTieBreakers>
