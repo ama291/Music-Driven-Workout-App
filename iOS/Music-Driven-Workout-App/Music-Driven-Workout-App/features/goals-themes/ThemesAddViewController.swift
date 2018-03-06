@@ -13,7 +13,7 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
     let request = APIRequest()
     var themeName: String! = "theme1"
     var theme: String! = "Artist"
-    var spotifyID: String!
+    var spotifyId: String! = "example-id"
     var numWorkouts: Int = 5
     var reply: String?
     var themeDict: [String:Any] = [:]
@@ -32,9 +32,7 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var numLabel: UILabel!
     
     @IBAction func saveTheme(_ sender: Any) {
-        self.themeName = self.themeNameTextField.text
-        self.theme = self.spotifySearchbar.text
-        let qstr = "userid=\(userid!)&name=\(themeName!)&spotifyId=example-id&theme=\(theme!)&numworkouts=\(numWorkouts)&key=SoftCon2018"
+        let qstr = "userid=\(userid!)&name=\(themeName!)&spotifyId=\(spotifyId!)&theme=\(theme!)&numworkouts=\(numWorkouts)&key=SoftCon2018"
         self.request.submitPostLocal(route: "/api/themes/addtheme/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
@@ -174,8 +172,8 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
         print(indexPath.row)
         let artist = artists[indexPath.row]
         self.themeName = artist["name"]! as! String
-        self.theme = artist["id"] as! String
-        self.spotifyID = artist["id"] as! String
+        self.theme = "artist"
+        self.spotifyId = artist["id"] as! String
         print(self.theme)
         print(self.themeName)
     }
