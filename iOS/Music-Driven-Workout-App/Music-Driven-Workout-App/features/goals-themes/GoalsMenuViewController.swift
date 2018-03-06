@@ -8,9 +8,15 @@
 
 import UIKit
 
-class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
+class GoalsMenuViewController: UIViewController, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
     
-    var tableArray = [String:Any] ()
+    var userid: String! = "21"
+    var goals: [[String:Any]] = []
+    var selectedGoal: [String:Any]!
+    
+    var viewModel = ViewModel()
+    var request = APIRequest()
+    
     var player: SPTAudioStreamingController?
     var passedUserId = String()
     var auth = SPTAuth.defaultInstance()!
@@ -20,52 +26,67 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
+       
         // Do any additional setup after loading the view.
-        populateGoals()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        userid = "21"
+        
+        let qstr = "userid=\(userid!)&key=SoftCon2018"
+        request.submitPostLocal(route: "/api/workouts/goalssaved/", qstring: qstr) { (data, response, error) -> Void in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+            let dataStr = String(data: data!, encoding: .utf8)!
+            print(dataStr)
+            self.goals += self.request.parseJsonDictList(data: data!)!
+            print("GOALSSSSS - ")
+            print(self.goals)
+            let vmitems = self.goals.map { ViewModelItem(item: Model(title: "\($0["name"]! as! String)" , data: $0)) }
+            
+            DispatchQueue.main.async {
+                self.viewModel.setItems(items: vmitems)
+                
+                self.tableView?.register(CustomCell.nib, forCellReuseIdentifier: CustomCell.identifier)
+                self.tableView?.dataSource = self.viewModel
+                self.tableView?.delegate = self.viewModel
+                self.tableView?.estimatedRowHeight = 100
+                self.tableView?.rowHeight = UITableViewAutomaticDimension
+                self.tableView?.allowsSelection = true
+                self.tableView?.separatorStyle = .none
+            }
+        }.resume()
+        
+        viewModel.didToggleSelection = { [weak self] hasSelection in
+            let selected = self!.viewModel.selectedItems
+            if selected.count == 0 {
+                return
+            }
+            self!.selectedGoal = self!.viewModel.selectedItems.map{ $0.data}[0]
+            self!.performSegue(withIdentifier: "toGoal", sender: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.destination is GoalViewController
+        {
+            let vc = segue.destination as? GoalViewController
+            //data to send
+            vc?.userid = userid
+            vc?.selectedGoal = self.selectedGoal
+        }
+    }
+
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    struct goalsResult: Codable {
-        var Result: String
-        var Status: String
-    }
     
-    func populateGoals() {
-        guard let url = URL(string: "http://138.197.49.155:8000/api/workouts/goalssaved/") else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        let postString = "userid=" + global.userid + "&key=SoftCon2018"
-        passedUserId = global.userid
-        request.httpBody = postString.data(using: String.Encoding.utf8)
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            guard let content = data else {
-                print("not returning data")
-                return
-            }
-//            guard let json = try? JSONDecoder().decode(goalsResult.self, from: data!) else { return }
-            guard let json = (try? JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers)) as? [String: Any] else {
-                print("Not containing JSON")
-                return
-            }
-//            let jsonRes = json["Result"]!
-            if let array = json as? [String : Any] {
-                self.tableArray = array
-                print(self.tableArray)
-            }
-            print(self.tableArray)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            }.resume()
-    }
-
     /* Navigation */
     @IBAction func goToHome(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -73,27 +94,8 @@ class GoalsMenuViewController: UIViewController, UITableViewDelegate, UITableVie
         present(vc, animated: true, completion: nil)
     }
  
-//extension GoalsMenuViewController {
-//    override func
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
-        cell.textLabel?.text = (self.tableArray["Result"]! as! String)
-        return cell
-    }
-    
-//    override
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return self.tableArray.count/2
-        
-    }
-    
-//    @IBAction func addGoal(_sender: UIButton) {
-//        let myVC = storyboard?.instantiateViewController(withIdentifier: "goalsAdd") as! GoalsAddViewController
-//        myVC.userid = passedUserId
-//        navigationController?.pushViewController(myVC, animated: true)
-//    }
-    
+
+ 
     @IBAction func goToAddGoal(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "goalsAdd") as! GoalsAddViewController
