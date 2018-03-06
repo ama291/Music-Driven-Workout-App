@@ -250,6 +250,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
             spotifyLogout()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+            global.completedWorkout = true
             present(vc, animated: true, completion: nil)
         }
     }
@@ -280,6 +281,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         spotifyLogout()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        global.completedWorkout = true
         present(vc, animated: true, completion: nil)
     }
 }

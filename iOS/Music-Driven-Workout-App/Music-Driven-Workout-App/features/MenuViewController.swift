@@ -14,6 +14,8 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
     var userid: String!
     var token: String!
     
+    @IBOutlet weak var workout: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -21,6 +23,11 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
         populateUI()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        workout.isHidden = global.completedWorkout
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
