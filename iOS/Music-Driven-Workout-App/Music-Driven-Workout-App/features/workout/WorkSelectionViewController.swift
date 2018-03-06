@@ -22,12 +22,15 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        self.durationPicker.delegate = self
+        self.durationPicker.dataSource = self
+        self.themesPicker.delegate = self
+        self.themesPicker.dataSource = self
 
         global.token = "b82cb70f-0f2e-4591-a892-a0b5bef45b9a" //TODO: populate this example token
         hideCategories()
-
-        self.durationPicker.delegate = self
-        self.durationPicker.dataSource = self
+        populateThemesPicker()
     }
 
     override func didReceiveMemoryWarning() {
@@ -247,22 +250,67 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     }
     // number of rows in data
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return durationOptions.count
+        if pickerView == durationPicker {
+            return durationOptions.count
+        } else {
+            return themesOptions.count
+        }
     }
     // data to return for row and column
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return durationOptions[row]
+        if pickerView == durationPicker {
+            return durationOptions[row]
+        } else {
+            return themesOptions[row]
+        }
     }
     // Catpure the picker view selection
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // This method is triggered whenever the user makes a change to the picker selection.
         // The parameter named row and component represents what was selected.
-        duration = durationOptions[row]
+        if pickerView == durationPicker {
+            duration = durationOptions[row]
+        } else {
+            themes = themesOptions[row]
+        }
     }
 
+    /* Themes Stuff */
+    @IBOutlet weak var themesPicker: UIPickerView!
+    var themesOptions: [String] = []
+    
+    func populateThemesPicker() {
+        /* Make the API Call */
+        let request = APIRequest()
+        
+        let qstr = "userid=\(global.userid!)&key=SoftCon2018"
+        request.submitPostServer(route: "/api/workouts/themessaved/", qstring: qstr) { (data, response, error) -> Void in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+            let resultjson = try? JSONSerialization.jsonObject(with: data!, options: [])
+            
+            if let arr = resultjson as? [Dictionary<String,Any>] {
+                for obj in arr {
+                    self.themesOptions.append(obj["name"] as! String)
+                }
+            }
+            DispatchQueue.main.async {
+                self.themesPicker.reloadAllComponents()
+            }
+           
+        }.resume()
+        
+        
+        /* Populate themesOptions */
+        /* Reload the Picker */
+    }
 
     @IBOutlet weak var difficultyswitch: UISwitch!
 
+    
+    
+    
     /* getWorkoutAction - sets variables to send to next screen */
     // TODO - themes
     @IBOutlet weak var getworkout: UIButton!

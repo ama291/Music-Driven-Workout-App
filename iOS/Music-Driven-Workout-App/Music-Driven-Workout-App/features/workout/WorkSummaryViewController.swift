@@ -129,7 +129,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                                     self.exTrackNames[exIndex].append(track["name"]!)
                                     self.exTrackUris[exIndex].append(track["uri"]!)
                                     
-                                    // Populate Song List
+                                    // Populate songList
                                     self.songList.append(track["name"]!)
                                 }
                             }
