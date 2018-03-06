@@ -17,6 +17,7 @@
 		11AF5E3E202D42D2004EB40B /* Music_Driven_Workout_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E3D202D42D2004EB40B /* Music_Driven_Workout_AppTests.swift */; };
 		11AF5E49202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11AF5E48202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift */; };
 		11F9ABEB2033E593007F217C /* AccelerometerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F9ABEA2033E593007F217C /* AccelerometerTest.swift */; };
+		45B54977204E310600972F7C /* GoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B54976204E310600972F7C /* GoalViewController.swift */; };
 		4CE2AAAA203F7AA000A55F29 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2AAA7203F7A9F00A55F29 /* SpotifyMetadata.framework */; };
 		4CE2AAAB203F7AA000A55F29 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2AAA8203F7AA000A55F29 /* SpotifyAudioPlayback.framework */; };
 		4CE2AAAC203F7AA000A55F29 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE2AAA9203F7AA000A55F29 /* SpotifyAuthentication.framework */; };
@@ -94,6 +95,7 @@
 		11AF5E48202D42D2004EB40B /* Music_Driven_Workout_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music_Driven_Workout_AppUITests.swift; sourceTree = "<group>"; };
 		11AF5E4A202D42D2004EB40B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11F9ABEA2033E593007F217C /* AccelerometerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccelerometerTest.swift; sourceTree = "<group>"; };
+		45B54976204E310600972F7C /* GoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewController.swift; sourceTree = "<group>"; };
 		4CE2AAA6203F787C00A55F29 /* SpotifySDKDemo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SpotifySDKDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		4CE2AAA7203F7A9F00A55F29 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
 		4CE2AAA8203F7AA000A55F29 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */,
 				D885DF532043AD300043B087 /* GoalsAddViewController.swift */,
 				AAD8F86D204DF89D00C0B73F /* ThemeViewController.swift */,
+				45B54976204E310600972F7C /* GoalViewController.swift */,
 			);
 			path = "goals-themes";
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				D885DF522043AD250043B087 /* ThemesAddViewController.swift in Sources */,
 				D8880C6F20436E6400415877 /* WorkSelectionViewController.swift in Sources */,
 				D8880C7320436E8300415877 /* WorkExerciseViewController.swift in Sources */,
+				45B54977204E310600972F7C /* GoalViewController.swift in Sources */,
 				D8C5A9772043838B006D2A0A /* CEFilterViewController.swift in Sources */,
 				D8880C652043676500415877 /* FTExerciseViewController.swift in Sources */,
 				D8880C7120436E7200415877 /* WorkSummaryViewController.swift in Sources */,

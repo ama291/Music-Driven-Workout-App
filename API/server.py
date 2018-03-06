@@ -585,7 +585,7 @@ def apiGoalsSaved():
 		return failure("Invalid authentication")
 	try:
 		response = goalsSaved(userid)
-		return standardRes(json.dumps(response))
+		return Response(response,mimetype='application/json')
 	except Exception as e:
 		return failure(str(e))
 
@@ -643,7 +643,7 @@ def apiThemesSaved():
 		return failure("Invalid authentication")
 	try:
 		response = themesSaved(userid)
-		return standardRes(json.dumps(response))
+		return Response(response,mimetype='application/json')
 	except Exception as e:
 		return failure(str(e))
 
