@@ -103,11 +103,11 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.listNames = []
                 self.artistURIs = []
                 for item in names {
-                    print(item)
+//                    print(item)
 //                    print((item as AnyObject).count)
 //                    print(type(of:item))
                     if let item2 = item as? [String: AnyObject] {
-                        print(item2["name"])
+//                        print(item2["name"])
                         self.listNames.append(item2["name"] as! String)
                         self.artistURIs.append(item2["uri"] as! String)
                     }
@@ -123,6 +123,8 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
 //                }
 //            }
             DispatchQueue.main.async {
+                print("table array")
+                print(self.tableArray)
                 self.tableView.reloadData()
             }
             }.resume()
@@ -162,4 +164,14 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
         present(vc, animated: true, completion: nil)
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // update ViewModel item
+        let artists = tableArray["artists"]!["items"]! as! [[String:Any]]
+        print(artists.count)
+        print(indexPath.row)
+        print(artists[indexPath.row])
+    
+    }
+    
 }

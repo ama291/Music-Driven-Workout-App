@@ -26,6 +26,7 @@
 		AAC249932047195A007709BC /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC249912047195A007709BC /* CustomCell.swift */; };
 		AAC249942047195A007709BC /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAC249922047195A007709BC /* CustomCell.xib */; };
 		AAC24996204724EE007709BC /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC24995204724EE007709BC /* APIRequest.swift */; };
+		AAD8F86E204DF89D00C0B73F /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAD8F86D204DF89D00C0B73F /* ThemeViewController.swift */; };
 		D812999D2042B3CD00ED6D57 /* GoalsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */; };
 		D812999F2042B3E200ED6D57 /* ThemesMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812999E2042B3E200ED6D57 /* ThemesMenuViewController.swift */; };
 		D813DF0B2045BD3E00532701 /* global.swift in Sources */ = {isa = PBXBuildFile; fileRef = D813DF0A2045BD3E00532701 /* global.swift */; };
@@ -103,6 +104,7 @@
 		AAC249912047195A007709BC /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		AAC249922047195A007709BC /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		AAC24995204724EE007709BC /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		AAD8F86D204DF89D00C0B73F /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsMenuViewController.swift; sourceTree = "<group>"; };
 		D812999E2042B3E200ED6D57 /* ThemesMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesMenuViewController.swift; sourceTree = "<group>"; };
 		D813DF0A2045BD3E00532701 /* global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = global.swift; sourceTree = "<group>"; };
@@ -259,6 +261,10 @@
 				114626262040E93F00B2ACEB /* MenuViewController.swift */,
 				11AF5E28202D42D2004EB40B /* AppDelegate.swift */,
 				11AF5E31202D42D2004EB40B /* LaunchScreen.storyboard */,
+				AAC2498D20471912007709BC /* ViewModel.swift */,
+				AAC2498F20471927007709BC /* Model.swift */,
+				AAC249912047195A007709BC /* CustomCell.swift */,
+				AAC249922047195A007709BC /* CustomCell.xib */,
 				D8C7018D2044E19B006FA4CE /* workout */,
 				D8C7018C2044E10D006FA4CE /* fitness-calibration */,
 				D8C7018E2044E1A9006FA4CE /* goals-themes */,
@@ -282,10 +288,6 @@
 				D8880C6620436BB900415877 /* FTCheckpointViewController.swift */,
 				D8880C6A20436D4500415877 /* FTCompleteViewController.swift */,
 				AAC2498B20471741007709BC /* FTChooseTracked.swift */,
-				AAC2498D20471912007709BC /* ViewModel.swift */,
-				AAC2498F20471927007709BC /* Model.swift */,
-				AAC249912047195A007709BC /* CustomCell.swift */,
-				AAC249922047195A007709BC /* CustomCell.xib */,
 			);
 			path = "fitness-calibration";
 			sourceTree = "<group>";
@@ -311,6 +313,7 @@
 				D885DF512043AD250043B087 /* ThemesAddViewController.swift */,
 				D812999C2042B3CD00ED6D57 /* GoalsMenuViewController.swift */,
 				D885DF532043AD300043B087 /* GoalsAddViewController.swift */,
+				AAD8F86D204DF89D00C0B73F /* ThemeViewController.swift */,
 			);
 			path = "goals-themes";
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				D8880C6720436BB900415877 /* FTCheckpointViewController.swift in Sources */,
 				D885DF542043AD300043B087 /* GoalsAddViewController.swift in Sources */,
 				11AF5E2B202D42D2004EB40B /* ViewController.swift in Sources */,
+				AAD8F86E204DF89D00C0B73F /* ThemeViewController.swift in Sources */,
 				AAC2498E20471912007709BC /* ViewModel.swift in Sources */,
 				D88B1F792043F2940053FF78 /* ProfileViewController.swift in Sources */,
 				D812999F2042B3E200ED6D57 /* ThemesMenuViewController.swift in Sources */,

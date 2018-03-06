@@ -453,16 +453,16 @@
                                                 </connections>
                                             </button>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="skd-vM-V7F">
-                                                <rect key="frame" x="56" y="216.5" width="263" height="31"/>
+                                                <rect key="frame" x="56" y="214" width="263" height="31"/>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goal Number: X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbZ-K2-HWf">
-                                                <rect key="frame" x="16" y="178" width="214" height="35"/>
+                                                <rect key="frame" x="16" y="178" width="113.5" height="32.5"/>
                                                 <fontDescription key="fontDescription" name="Amatic-Bold" family="Amatic" pointSize="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4w-Rv-XGr">
-                                                <rect key="frame" x="16" y="267.5" width="241" height="35"/>
+                                                <rect key="frame" x="16" y="265" width="241" height="32.5"/>
                                                 <fontDescription key="fontDescription" name="Amatic-Bold" family="Amatic" pointSize="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -483,51 +483,51 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tTz-wS-9Ir">
-                                                <rect key="frame" x="16" y="306" width="343" height="162"/>
+                                                <rect key="frame" x="16" y="301" width="343" height="162"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="162" id="HaU-HO-N3n"/>
                                                 </constraints>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Muscle Groups" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVs-8t-Clk">
-                                                <rect key="frame" x="16" y="482" width="204" height="35"/>
+                                                <rect key="frame" x="16" y="477" width="103" height="32.5"/>
                                                 <fontDescription key="fontDescription" name="Amatic-Bold" family="Amatic" pointSize="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cbo-NY-mKF">
-                                                <rect key="frame" x="16" y="518.5" width="343" height="158"/>
+                                                <rect key="frame" x="16" y="511" width="343" height="158"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="158" id="gYN-AX-YEx"/>
                                                 </constraints>
                                             </tableView>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="GPM-Zx-jlf">
-                                                <rect key="frame" x="56" y="733" width="263" height="31"/>
+                                                <rect key="frame" x="56" y="723" width="263" height="31"/>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration: X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfp-7e-vwL">
-                                                <rect key="frame" x="16" y="696.5" width="149" height="35"/>
+                                                <rect key="frame" x="16" y="689" width="88" height="32.5"/>
                                                 <fontDescription key="fontDescription" name="Amatic-Bold" family="Amatic" pointSize="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="MqO-9B-eQa">
-                                                <rect key="frame" x="56" y="810.5" width="263" height="31"/>
+                                                <rect key="frame" x="56" y="798" width="263" height="31"/>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Days per Week: X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FMO-GD-iLd">
-                                                <rect key="frame" x="16" y="774" width="237" height="35"/>
+                                                <rect key="frame" x="16" y="764" width="114" height="32.5"/>
                                                 <fontDescription key="fontDescription" name="Amatic-Bold" family="Amatic" pointSize="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NRE-Jm-8fO">
-                                                <rect key="frame" x="130" y="858.5" width="49.5" height="35"/>
+                                                <rect key="frame" x="130" y="846" width="49.5" height="32.5"/>
                                                 <fontDescription key="fontDescription" name="Amatic-Bold" family="Amatic" pointSize="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Le8-8c-M1H">
-                                                <rect key="frame" x="61" y="921" width="253" height="52"/>
+                                                <rect key="frame" x="61" y="906" width="253" height="52"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="52" id="E2s-d7-sgv"/>
@@ -547,7 +547,7 @@
                                                 </connections>
                                             </button>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TcU-la-P0T">
-                                                <rect key="frame" x="194" y="858.5" width="51" height="31"/>
+                                                <rect key="frame" x="194" y="846" width="51" height="31"/>
                                             </switch>
                                         </subviews>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
