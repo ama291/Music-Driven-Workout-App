@@ -18,6 +18,7 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
     var reply: String?
     var themeDict: [String:Any] = [:]
     //var userid: String! = "21"
+    
     var tableArray: [String: Dictionary<String, Any>] = [:]
     var listNames: [String] = []
     var artistURIs: [String] = []
@@ -58,12 +59,6 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "themescell", for: indexPath) as UITableViewCell
-//        if(self.tableArray["artists"] != nil) {
-//            let names = self.tableArray["artists"]!["items"] as? NSArray
-//            if let item = names![indexPath.row] as? NSDictionary {
-//                cell.textLabel?.text = item["name"]
-//            }
-//        }
         cell.textLabel?.text = listNames[indexPath.row]
         return cell
     }
@@ -92,15 +87,15 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
             
             // Prevent crashing by checking if the query didn't return anything
             if let dict = json as? [String: Any] {
+                print("JSON:",json)
                 for (key,_) in dict {
                     if key == "error" {
                         // Empty Table
-                        self.listNames = []
-                        self.artistURIs = []
-                        self.tableView.reloadData()
-                        
+                        self.listNames.removeAll()
+                        self.artistURIs.removeAll()
+
                         // Pop-up Alert
-                        let alert = UIAlertController(title: "Sorry!", message: "We couldn't find anything matching your search query!", preferredStyle: UIAlertControllerStyle.alert)
+                        let alert = UIAlertController(title: "Sorry!", message: "Your search query is empty!", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "Aight.", style: UIAlertActionStyle.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                         return
@@ -116,8 +111,8 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
             
             if let names = self.tableArray["artists"]!["items"] as? NSArray {
                 print(names.count)
-                self.listNames = []
-                self.artistURIs = []
+                self.listNames.removeAll()
+                self.artistURIs.removeAll()
                 for item in names {
                     if let item2 = item as? [String: AnyObject] {
                         self.listNames.append(item2["name"] as! String)
