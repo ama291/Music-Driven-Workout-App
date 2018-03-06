@@ -17,9 +17,9 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
     var numWorkouts: Int = 5
     var reply: String?
     var themeDict: [String:Any] = [:]
-    var userid: String! = "21"
+    //var userid: String! = "21"
+    
     var tableArray: [String: Dictionary<String, Any>] = [:]
-    var token = global.token!
     var listNames: [String] = []
     var artistURIs: [String] = []
 
@@ -32,7 +32,7 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var numLabel: UILabel!
     
     @IBAction func saveTheme(_ sender: Any) {
-        let qstr = "userid=\(userid!)&name=\(themeName!)&spotifyId=\(spotifyId!)&theme=\(theme!)&numworkouts=\(numWorkouts)&key=SoftCon2018"
+        let qstr = "userid=\(global.userid!)&name=\(themeName!)&spotifyId=\(spotifyId!)&theme=\(theme!)&numworkouts=\(numWorkouts)&key=SoftCon2018"
         self.request.submitPostServer(route: "/api/themes/addtheme/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
@@ -59,12 +59,6 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "themescell", for: indexPath) as UITableViewCell
-//        if(self.tableArray["artists"] != nil) {
-//            let names = self.tableArray["artists"]!["items"] as? NSArray
-//            if let item = names![indexPath.row] as? NSDictionary {
-//                cell.textLabel?.text = item["name"]
-//            }
-//        }
         cell.textLabel?.text = listNames[indexPath.row]
         return cell
     }
@@ -72,13 +66,13 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var artistToSearchFor: UITextField!
     @IBAction func searchForTheme(_ sender: UIButton) {
         print("token")
-        print(token)
+        print(global.token)
         let artistToSearchFor2 = artistToSearchFor.text!.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
         let postString = "q=" + artistToSearchFor2 + "&type=artist&limit=5"
         guard let url = URL(string: "https://api.spotify.com/v1/search?" + postString) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.setValue("Authorization: Bearer " + token, forHTTPHeaderField: "Authorization")
+        request.setValue("Authorization: Bearer " + global.token, forHTTPHeaderField: "Authorization")
       
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
@@ -90,40 +84,46 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
                 print("Not containing JSON")
                 return
             }
+            
+            // Prevent crashing by checking if the query didn't return anything
+            if let dict = json as? [String: Any] {
+                print("JSON:",json)
+                for (key,_) in dict {
+                    if key == "error" {
+                        // Empty Table
+                        self.listNames.removeAll()
+                        self.artistURIs.removeAll()
+
+                        // Pop-up Alert
+                        let alert = UIAlertController(title: "Sorry!", message: "Your search query is empty!", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Aight.", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        return
+                    }
+                }
+            }
+            
             if let array = json as? [String : Dictionary<String,Any>] {
                 self.tableArray = array
             }
-//            print("spotify result")
-//            print(self.tableArray["artists"])
-            print("tyring")
-//            print(self.tableArray.count)
+            
+            
+            
             if let names = self.tableArray["artists"]!["items"] as? NSArray {
                 print(names.count)
-                self.listNames = []
-                self.artistURIs = []
+                self.listNames.removeAll()
+                self.artistURIs.removeAll()
                 for item in names {
-//                    print(item)
-//                    print((item as AnyObject).count)
-//                    print(type(of:item))
                     if let item2 = item as? [String: AnyObject] {
-//                        print(item2["name"])
                         self.listNames.append(item2["name"] as! String)
                         self.artistURIs.append(item2["uri"] as! String)
                     }
                 }
             }
-//            for (name, artist) in self.tableArray["artists"]!{
-//                if(name == "items") {
-//                    for item in (self.tableArray["artists"]!["items"]) {
-//                        print(item)
-//                    }
-//                } else {
-//                    continue
-//                }
-//            }
+
             DispatchQueue.main.async {
-                print("table array")
-                print(self.tableArray)
+                // print("table array")
+                // print(self.tableArray)
                 self.tableView.reloadData()
             }
             }.resume()
@@ -144,7 +144,6 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
         if segue.destination is ThemesMenuViewController
         {
             let vc = segue.destination as? ThemesMenuViewController
-            vc?.userid = userid
             self.themeDict = ["name": self.themeName, "theme": self.theme, "numWorkouts": self.numWorkouts]
             print(themeDict)
             vc?.themes.append(self.themeDict)
@@ -160,7 +159,6 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func goBackToThemesMenu(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "themesID") as! ThemesMenuViewController
-        vc.userid = userid!
         present(vc, animated: true, completion: nil)
     }
 

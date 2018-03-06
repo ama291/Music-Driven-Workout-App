@@ -55,7 +55,7 @@ class GoalsAddViewController: UIViewController {
                 fatalError(error.localizedDescription)
             }
             self.reply = self.request.parseJsonInitial(data: data!)
-            print (self.reply)
+            print (self.reply as Any)
             if self.reply != "0" {
                 print("Add goal request failed")
                 return

@@ -27,6 +27,7 @@ class GoalsMenuViewController: UIViewController, SPTAudioStreamingPlaybackDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {

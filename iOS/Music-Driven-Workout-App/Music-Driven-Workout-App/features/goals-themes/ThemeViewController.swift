@@ -18,7 +18,6 @@ class ThemeViewController: UIViewController {
     var selectedTheme: [String:Any]!
     var theme: String! = "theme"
     var numWorkouts: String! = "5"
-    var userid: String!
     var reply: String!
     
     override func viewDidLoad() {
@@ -35,7 +34,7 @@ class ThemeViewController: UIViewController {
     }
     
     @IBAction func deleteTheme(_ sender: Any) {
-        let qstr = "userid=\(userid!)&themename=\(theme!)&key=SoftCon2018"
+        let qstr = "userid=\(global.userid!)&themename=\(theme!)&key=SoftCon2018"
         self.request.submitPostServer(route: "/api/themes/removetheme/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
@@ -53,17 +52,6 @@ class ThemeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 

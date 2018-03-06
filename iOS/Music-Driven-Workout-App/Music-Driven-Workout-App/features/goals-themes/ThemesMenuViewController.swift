@@ -12,7 +12,7 @@ class ThemesMenuViewController: UIViewController {
     var tableArray = [String:Any] ()
     var token = global.token!
     var passedUserId = String()
-    var userid: String! = "21"
+    //var userid: String! = "21"
     var themes: [[String:Any]] = []
     var selectedTheme: [String:Any]!
 
@@ -29,14 +29,15 @@ class ThemesMenuViewController: UIViewController {
 //        self.tableView.delegate = self
 //        // Do any additional setup after loading the view.
 //        populateThemes()
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         //        recuperaEmpresas()
-        userid = "21"
+        //        userid = "21"
         //        self.themes = [["theme":"theme", "name": "theme name", "spotifyId": "Spotify id", "numworkouts": "4"], ["theme":"theme 2", "name": "theme name 2", "spotifyId": "Spotify id 2", "numworkouts": "6"]]
         
-        let qstr = "userid=\(userid!)&key=SoftCon2018"
+        let qstr = "userid=\(global.userid!)&key=SoftCon2018"
         request.submitPostServer(route: "/api/workouts/themessaved/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
@@ -124,7 +125,6 @@ class ThemesMenuViewController: UIViewController {
         {
             let vc = segue.destination as? ThemeViewController
             //data to send
-            vc?.userid = userid
             vc?.selectedTheme = self.selectedTheme
         }
     }

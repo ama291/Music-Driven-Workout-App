@@ -38,7 +38,6 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
         let storyboard = UIStoryboard(name: "workout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "workoutSelectionID") as! WorkSelectionViewController
 //        vc.player = player!
-//        vc.username = username!
 //        vc.token = token!
         present(vc, animated: true, completion: nil)
     }
@@ -65,16 +64,20 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
     @IBAction func goToThemes(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "themesID") as! ThemesMenuViewController
-        vc.userid = global.userid
-        vc.token = global.token
         present(vc, animated: false, completion: nil)
     }
     @IBAction func goToProfile(_ sender: UIButton) {
-//        let storyboard = UIStoryboard(name: "profile", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: "profileID") as! ProfileViewController
-//        present(vc, animated: false, completion: nil)
-        exit(0)
+        let storyboard = UIStoryboard(name: "profile", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "profileID") as! ProfileViewController
+        present(vc, animated: false, completion: nil)
     }
+    @IBAction func goToLogout(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "loginID") as! LoginViewController
+        global.reset()
+        present(vc, animated: false, completion: nil)
+    }
+    
 
     /* END Button->Storyboard Navigation */
 
@@ -102,22 +105,6 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
 
         }.resume()
     }
-    
-//    @IBAction func createNewUser(_ sender:UIButton) {
-//        if(userid == "null") {
-//            //            self.performSegue(withIdentifier: "createnewuser", sender: self)
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
-//            vc.userid = userid!
-//            present(vc, animated: false, completion: nil)
-//        } else {
-//            //            self.performSegue(withIdentifier: "loginSegue", sender: self)
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: "newUserID") as! LoginViewController
-//            //            vc.userid = userid!
-//            present(vc, animated: false, completion: nil)
-//        }
-//    }
     
 //    @IBAction func logout(_ sender: UIButton) {
 //        let userDefaults = UserDefaults.standard
