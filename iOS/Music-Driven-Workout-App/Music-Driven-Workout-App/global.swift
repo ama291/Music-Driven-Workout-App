@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class Global {
+class Global: UIViewController {
     // !! There should only be one instantiation of this class in LoginViewController.swift !!
     
     /* * Persistent Global variables * */
@@ -33,5 +33,17 @@ class Global {
         print("\t username: \(username)")
         print("\t session: \(session)")
         print("\t token: \(token)")
+    }
+    
+    func alert_error() {
+        let alert = UIAlertController(title: "Sorry!", message: "Something went wrong", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Dismiss Alert", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func goToHome() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "homeID") as! MenuViewController
+        present(vc, animated: true, completion: nil)
     }
 }

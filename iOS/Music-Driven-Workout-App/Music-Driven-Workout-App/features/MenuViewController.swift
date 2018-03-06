@@ -38,7 +38,6 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
         let storyboard = UIStoryboard(name: "workout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "workoutSelectionID") as! WorkSelectionViewController
 //        vc.player = player!
-//        vc.username = username!
 //        vc.token = token!
         present(vc, animated: true, completion: nil)
     }
@@ -65,8 +64,6 @@ class MenuViewController: UIViewController,  SPTAudioStreamingPlaybackDelegate, 
     @IBAction func goToThemes(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "goals-themes", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "themesID") as! ThemesMenuViewController
-        vc.userid = global.userid
-        vc.token = global.token
         present(vc, animated: false, completion: nil)
     }
     @IBAction func goToProfile(_ sender: UIButton) {

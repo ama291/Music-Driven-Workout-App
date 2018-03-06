@@ -43,7 +43,6 @@
                                 <color key="backgroundColor" red="0.30654840179999998" green="1" blue="0.2175406956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="hmH-cZ-K5i"/>
-                                    <constraint firstAttribute="width" constant="253" id="mix-BY-7Nl"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
                                 <state key="normal" title="Get Exercises">
@@ -246,7 +245,6 @@
                                 <rect key="frame" x="61" y="549" width="253" height="52"/>
                                 <color key="backgroundColor" red="0.30654840179999998" green="1" blue="0.2175406956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="253" id="6bq-SZ-6dZ"/>
                                     <constraint firstAttribute="height" constant="52" id="9LC-jV-Vfm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
@@ -353,7 +351,6 @@
                                 <rect key="frame" x="61" y="595" width="253" height="52"/>
                                 <color key="backgroundColor" red="0.30654840179999998" green="1" blue="0.2175406956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="253" id="sU9-wh-fxE"/>
                                     <constraint firstAttribute="height" constant="52" id="vUT-Aq-uHK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
@@ -447,7 +444,6 @@
                                 <color key="backgroundColor" red="0.30654840179999998" green="1" blue="0.2175406956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="5hW-dN-aiN"/>
-                                    <constraint firstAttribute="width" constant="253" id="KTj-oH-kdN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
                                 <state key="normal" title="Next">
@@ -522,7 +518,6 @@
                                 <color key="backgroundColor" red="0.30654840179999998" green="1" blue="0.2175406956" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="5xy-TN-g5s"/>
-                                    <constraint firstAttribute="width" constant="253" id="bln-Mx-1Cd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="36"/>
                                 <state key="normal" title="Next">
