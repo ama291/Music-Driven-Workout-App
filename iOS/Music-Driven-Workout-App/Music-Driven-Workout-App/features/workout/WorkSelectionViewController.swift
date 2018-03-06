@@ -44,14 +44,23 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         if segue.destination is WorkSummaryViewController {
             let vc = segue.destination as? WorkSummaryViewController
             //data to send
-            vc?.themes = themes
             vc?.categories = categories
             vc?.musclegroup = musclegroup
             vc?.equipment = equipment
             vc?.duration = duration
             vc?.difficulty = difficulty
+            vc?.themes = themes
             //vc?.player = player!
         }
+    }
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if (categories.isEmpty && musclegroup.isEmpty) {
+            let alert = UIAlertController(title: "Error", message: "You must select at least one Category or Muscle Group", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "kk.", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return false
+        }
+        return true
     }
     
     @IBAction func goToHome(_ sender: UIButton) {
@@ -272,12 +281,15 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
             duration = durationOptions[row]
         } else {
             themes = themesOptions[row]
+            if themes == "Any" {
+                themes = ""
+            }
         }
     }
 
     /* Themes Stuff */
     @IBOutlet weak var themesPicker: UIPickerView!
-    var themesOptions: [String] = []
+    var themesOptions: [String] = ["Any"]
     
     func populateThemesPicker() {
         /* Make the API Call */
@@ -292,18 +304,18 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
             
             if let arr = resultjson as? [Dictionary<String,Any>] {
                 for obj in arr {
+                    // Populate themesOptions
                     self.themesOptions.append(obj["name"] as! String)
                 }
             }
+            
+            /* Reload the Picker */
             DispatchQueue.main.async {
                 self.themesPicker.reloadAllComponents()
             }
            
         }.resume()
         
-        
-        /* Populate themesOptions */
-        /* Reload the Picker */
     }
 
     @IBOutlet weak var difficultyswitch: UISwitch!
@@ -312,9 +324,9 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     
     
     /* getWorkoutAction - sets variables to send to next screen */
-    // TODO - themes
     @IBOutlet weak var getworkout: UIButton!
     @IBAction func getWorkoutAction(_ sender: Any) {
+        /* CATEGRY or MUSCLEGROUP */
         if (categoryswitch.isOn) {
             if (neckswitch.isOn) {
                 musclegroup += "Neck,"
@@ -387,14 +399,16 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
             }
 
         }
-
+        
         if (categories.last == ",") {
             categories.removeLast()
         }
         if (musclegroup.last == ",") {
             musclegroup.removeLast()
         }
-
+        
+        /* EQUIPMENT */
+        equipment = ""
         if (bodyswitch.isOn) {
             equipment += "Body Only,"
         }
@@ -437,6 +451,9 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         if (equipment.last == ",") {
             equipment.removeLast()
         }
+        if equipment.isEmpty {
+            equipment = "None"
+        }
 
 
         if duration.isEmpty {
@@ -449,7 +466,15 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         else {
             difficulty = "Beginner"
         }
-
+        
+        /* ERROR CHECKS */
+        if (categories.isEmpty && musclegroup.isEmpty) {
+            let alert = UIAlertController(title: "Error", message: "You must select at least one Category or Muscle Group", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "kk.", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+            
         self.performSegue(withIdentifier: "summarySegue", sender: self)
     }
 }

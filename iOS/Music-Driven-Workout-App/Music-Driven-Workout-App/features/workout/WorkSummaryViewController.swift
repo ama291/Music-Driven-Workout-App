@@ -99,6 +99,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         
         request.submitPostServer(route: route, qstring: query) { (data, response, error) -> Void in
             if let error = error {
+                print("\n\nERROR HERE\n\n")
                 fatalError(error.localizedDescription)
             }
             
