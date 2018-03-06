@@ -17,6 +17,7 @@ class Global {
     var username: String!                   // set in LoginVC
     var token: String!                      // set in LoginVC & MenuViewVC
     var session: SPTSession!                // set in LoginVC (?)
+    var completedWorkout = false
     
     /* * Global Methods * */
     func reset() {
