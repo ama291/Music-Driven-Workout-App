@@ -37,7 +37,7 @@ class ThemesMenuViewController: UIViewController {
         //        self.themes = [["theme":"theme", "name": "theme name", "spotifyId": "Spotify id", "numworkouts": "4"], ["theme":"theme 2", "name": "theme name 2", "spotifyId": "Spotify id 2", "numworkouts": "6"]]
         
         let qstr = "userid=\(userid!)&key=SoftCon2018"
-        request.submitPostLocal(route: "/api/workouts/themessaved/", qstring: qstr) { (data, response, error) -> Void in
+        request.submitPostServer(route: "/api/workouts/themessaved/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }

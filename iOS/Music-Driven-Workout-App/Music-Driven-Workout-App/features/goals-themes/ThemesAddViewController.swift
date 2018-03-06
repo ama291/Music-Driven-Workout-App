@@ -33,7 +33,7 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func saveTheme(_ sender: Any) {
         let qstr = "userid=\(userid!)&name=\(themeName!)&spotifyId=\(spotifyId!)&theme=\(theme!)&numworkouts=\(numWorkouts)&key=SoftCon2018"
-        self.request.submitPostLocal(route: "/api/themes/addtheme/", qstring: qstr) { (data, response, error) -> Void in
+        self.request.submitPostServer(route: "/api/themes/addtheme/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }

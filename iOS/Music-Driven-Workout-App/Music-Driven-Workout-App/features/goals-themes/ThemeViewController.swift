@@ -36,7 +36,7 @@ class ThemeViewController: UIViewController {
     
     @IBAction func deleteTheme(_ sender: Any) {
         let qstr = "userid=\(userid!)&themename=\(theme!)&key=SoftCon2018"
-        self.request.submitPostLocal(route: "/api/themes/removetheme/", qstring: qstr) { (data, response, error) -> Void in
+        self.request.submitPostServer(route: "/api/themes/removetheme/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }

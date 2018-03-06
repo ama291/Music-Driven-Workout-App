@@ -31,7 +31,7 @@ class GoalViewController: UIViewController {
     
     @IBAction func deleteGoal(_ sender: Any) {
         let qstr = "userid=\(userid!)&name=\(goal!)&key=SoftCon2018"
-        self.request.submitPostLocal(route: "/api/goals/removegoal/", qstring: qstr) { (data, response, error) -> Void in
+        self.request.submitPostServer(route: "/api/goals/removegoal/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }

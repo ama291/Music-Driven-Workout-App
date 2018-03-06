@@ -33,7 +33,7 @@ class GoalsMenuViewController: UIViewController, SPTAudioStreamingPlaybackDelega
         userid = "21"
         
         let qstr = "userid=\(userid!)&key=SoftCon2018"
-        request.submitPostLocal(route: "/api/workouts/goalssaved/", qstring: qstr) { (data, response, error) -> Void in
+        request.submitPostServer(route: "/api/workouts/goalssaved/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }

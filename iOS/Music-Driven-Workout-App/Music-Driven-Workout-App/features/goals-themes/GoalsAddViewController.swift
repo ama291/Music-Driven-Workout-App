@@ -50,7 +50,7 @@ class GoalsAddViewController: UIViewController {
         
         //userid, name, description, goalnum, categories, musclegroups, duration, dayssperweek, notify, key
         let qstr = "userid=\(userid!)&name=\(goalName!)&description=\(goalDescription!)&goalnum=\(goalNum)&categories=Cardio&musclegroups=Abs&duration=\(duration)&daysperweek=\(daysperweek)&notify=true&key=SoftCon2018"
-        self.request.submitPostLocal(route: "/api/goals/addgoal/", qstring: qstr) { (data, response, error) -> Void in
+        self.request.submitPostServer(route: "/api/goals/addgoal/", qstring: qstr) { (data, response, error) -> Void in
             if let error = error {
                 fatalError(error.localizedDescription)
             }
@@ -67,8 +67,8 @@ class GoalsAddViewController: UIViewController {
         super.viewDidLoad()
         print("userid: ", global.userid)
         self.numGoalsLabel.text = "Number of Goals: \(goalNum)"
-        self.durationLabel.text = "Duration: \(goalNum)"
-        self.numGoalsLabel.text = "Number of Goals: \(goalNum)"
+        self.durationLabel.text = "Duration: \(duration)"
+        self.daysLabel.text = "Days per week: \(daysperweek)"
         // Do any additional setup after loading the view.
     }
 
