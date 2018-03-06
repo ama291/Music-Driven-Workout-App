@@ -12,6 +12,7 @@ class CustomCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel?
     
+    
     var item: ViewModelItem? {
         didSet {
             titleLabel?.text = item?.title
