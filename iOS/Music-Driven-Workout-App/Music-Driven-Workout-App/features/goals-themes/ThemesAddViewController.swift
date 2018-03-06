@@ -13,6 +13,7 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
     let request = APIRequest()
     var themeName: String! = "theme1"
     var theme: String! = "Artist"
+    var spotifyID: String!
     var numWorkouts: Int = 5
     var reply: String?
     var themeDict: [String:Any] = [:]
@@ -147,6 +148,7 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
             let vc = segue.destination as? ThemesMenuViewController
             vc?.userid = userid
             self.themeDict = ["name": self.themeName, "theme": self.theme, "numWorkouts": self.numWorkouts]
+            print(themeDict)
             vc?.themes.append(self.themeDict)
         }
     }
@@ -170,8 +172,12 @@ class ThemesAddViewController: UIViewController, UITableViewDelegate, UITableVie
         let artists = tableArray["artists"]!["items"]! as! [[String:Any]]
         print(artists.count)
         print(indexPath.row)
-        print(artists[indexPath.row])
-    
+        let artist = artists[indexPath.row]
+        self.themeName = artist["name"]! as! String
+        self.theme = artist["id"] as! String
+        self.spotifyID = artist["id"] as! String
+        print(self.theme)
+        print(self.themeName)
     }
     
 }
