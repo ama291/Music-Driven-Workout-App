@@ -102,7 +102,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         query += "&token=" + global.token
         query += "&themes=" + self.themeSpotifyId
         
-        request.submitPostLocal(route: route, qstring: query) { (data, response, error) -> Void in
+        request.submitPostServer(route: route, qstring: query) { (data, response, error) -> Void in
             if let error = error {
                 print("\n\nERROR HERE\n\n")
                 fatalError(error.localizedDescription)
