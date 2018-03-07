@@ -28,7 +28,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     var workoutjson: String!
     var exNames: [String] = []
     var exDesc: [String] = []
-    var exDur: [Int] = []
+    var exDur: [Double] = []
     var exImgs: [String] = []
     var exTrackNames: [[String]] = [[]]
     var exTrackUris: [[String]] = [[]]
@@ -120,7 +120,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                             // Populate data to send to next scene
                             self.exNames.append(exDict["name"] as! String)
                             self.exDesc.append("exDescription")
-                            self.exDur.append((exDict["duration"] as! Int) * 60) // convert to secs
+                            self.exDur.append((exDict["duration"] as! Double) * 60) // convert to secs
                             self.exImgs.append(exDict["images"] as! String)
                             self.exEquip.append(exDict["equipment"] as! String)
                             self.exRPM.append(exDict["rpm"] as! Int)
