@@ -17,6 +17,10 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     var equipment = ""
     var duration = ""
     var difficulty = ""
+    var theme: [String:Any]!
+    var themeIndex: Int!
+    var allThemes: [[String:Any]] = []
+    var themeSpotifyID: String!
     //var player: SPTAudioStreamingController?
 
     override func viewDidLoad() {
@@ -50,6 +54,7 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
             vc?.duration = duration
             vc?.difficulty = difficulty
             vc?.themes = themes
+            vc?.themeSpotifyId = self.themeSpotifyID!
             //vc?.player = player!
         }
     }
@@ -261,17 +266,30 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == durationPicker {
             return durationOptions.count
-        } else {
+        } else if pickerView == themesPicker {
             return themesOptions.count
         }
+        return 0
     }
     // data to return for row and column
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == durationPicker {
             return durationOptions[row]
-        } else {
+        } else if pickerView == themesPicker {
+            print("THEMES PICKER")
+            print(row)
+            print(themesOptions[row])
+            if row == 0 {
+                self.themeSpotifyID = "Any"
+            }
+            else {
+                print(self.allThemes[row-1])
+                self.themeSpotifyID = self.allThemes[row-1]["spotifyId"] as! String
+                print(self.themeSpotifyID)
+            }
             return themesOptions[row]
         }
+        return ""
     }
     // Catpure the pickerview selection
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -280,10 +298,8 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         if pickerView == durationPicker {
             duration = durationOptions[row]
         } else {
-            themes = themesOptions[row]
-            if themes == "Any" {
-                themes = ""
-            }
+            self.themeIndex = row
+            
         }
     }
 
@@ -301,11 +317,12 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
                 fatalError(error.localizedDescription)
             }
             let resultjson = try? JSONSerialization.jsonObject(with: data!, options: [])
-            
+            print(resultjson)
             if let arr = resultjson as? [Dictionary<String,Any>] {
                 for obj in arr {
                     // Populate themesOptions
                     self.themesOptions.append(obj["name"] as! String)
+                    self.allThemes.append(obj)
                 }
             }
             
@@ -317,6 +334,8 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         }.resume()
         
     }
+    
+    
 
     @IBOutlet weak var difficultyswitch: UISwitch!
 
