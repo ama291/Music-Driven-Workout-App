@@ -121,7 +121,6 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                             self.exNames.append(exDict["name"] as! String)
                             self.exDesc.append("exDescription")
                             self.exDur.append((exDict["duration"] as! Double) * 60) // convert to secs
-                            print("Duration:",self.exDur)
                             self.exImgs.append(exDict["images"] as! String)
                             self.exEquip.append(exDict["equipment"] as! String)
                             self.exRPM.append(exDict["rpm"] as! Int)

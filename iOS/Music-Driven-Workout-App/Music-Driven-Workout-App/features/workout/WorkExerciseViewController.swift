@@ -204,7 +204,6 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         
         let dur = exercisedurations[index]
         namelabel.text = exercisenames[index]
-        descriptionlabel.text = exercisedescriptions[index]
         timelabel.text = "Time: " + getFormattedTime(seconds: Int(dur))
         let url = URL(string: exerciseimages[index])
         let data = try? Data(contentsOf: url!)
