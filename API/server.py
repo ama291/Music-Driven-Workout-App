@@ -101,9 +101,10 @@ def apiGetWorkout():
 	groups = request.form.get('musclegroups')
 	if (groups != None):
 		groups = groups.split(",")
-	themes = request.form.get('themes')
+	spotifyId = request.form.get('themes')
 	if(themes != None):
-		themes = jsonpickle.decode(themes) # turn into List[Theme]
+		theme = Theme("themename", "theme", spotifyId, "numWorkouts")
+		themes = [theme] # turn into List[Theme]
 	key = request.form.get('key')
 	params = [userid, duration, difficulty, accessToken, key]
 	if (None in params):
