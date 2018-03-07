@@ -102,7 +102,7 @@ def apiGetWorkout():
 	if (groups != None):
 		groups = groups.split(",")
 	spotifyId = request.form.get('themes')
-	if(themes != None):
+	if(spotifyId != None):
 		theme = Theme("themename", "theme", spotifyId, "numWorkouts")
 		themes = [theme] # turn into List[Theme]
 	key = request.form.get('key')
