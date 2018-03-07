@@ -273,7 +273,7 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
             return themesOptions[row]
         }
     }
-    // Catpure the picker view selection
+    // Catpure the pickerview selection
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // This method is triggered whenever the user makes a change to the picker selection.
         // The parameter named row and component represents what was selected.
