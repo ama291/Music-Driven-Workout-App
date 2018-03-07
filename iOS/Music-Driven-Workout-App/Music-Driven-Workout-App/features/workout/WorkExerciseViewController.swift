@@ -17,7 +17,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     var workoutjson: String!
     var exercisenames: [String]!
     var exercisedescriptions: [String]!
-    var exercisedurations: [Int]!
+    var exercisedurations: [Double]!
     var exerciseimages: [String]!
     var exercisetracknames: [[String]]!
     var exercisetrackuris: [[String]]!
@@ -64,7 +64,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     
     
     var timer = Timer()
-    var timecountdown = 0
+    var timecountdown:Double = 0
     var paused = false
     var i = 0 // exercise index
     var ind = 0 // song index within current exercise
@@ -103,6 +103,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         descText += "RPM: " + String(exerciseRPM[self.i])
         descriptionlabel.text = descText
         heartratelabel.text =  "Song: " + exercisetracknames[self.i][0]
+        
         
         self.player?.playSpotifyURI(self.exercisetrackuris[self.i][0], startingWith: 0, startingWithPosition: 0, callback: { (error) in
             if (error == nil) {
@@ -204,7 +205,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
         let dur = exercisedurations[index]
         namelabel.text = exercisenames[index]
         descriptionlabel.text = exercisedescriptions[index]
-        timelabel.text = "Time: " + getFormattedTime(seconds: dur)
+        timelabel.text = "Time: " + getFormattedTime(seconds: Int(dur))
         let url = URL(string: exerciseimages[index])
         let data = try? Data(contentsOf: url!)
         eximage.image = UIImage(data: data!)
@@ -224,7 +225,7 @@ class WorkExerciseViewController: UIViewController, SPTAudioStreamingPlaybackDel
     
     @objc func updateTimer() {
         timecountdown -= 1
-        timelabel.text = "Time: " + getFormattedTime(seconds: timecountdown)
+        timelabel.text = "Time: " + getFormattedTime(seconds: Int(timecountdown))
         if (timecountdown <= 0) {
             completeExercise()
         }
