@@ -88,10 +88,8 @@ class APIRequest: NSObject {
         return nil
     }
 
-   
     
-    
-    func submitPostServer(route: String, qstring: String, completion: @escaping (Data?, URLResponse?,Error?) -> Void) -> URLSessionDataTask {
+    func submitPostLocal(route: String, qstring: String, completion: @escaping (Data?, URLResponse?,Error?) -> Void) -> URLSessionDataTask {
         var urlComponents = URLComponents()
         urlComponents.scheme = "http"
         urlComponents.host = "127.0.0.1"

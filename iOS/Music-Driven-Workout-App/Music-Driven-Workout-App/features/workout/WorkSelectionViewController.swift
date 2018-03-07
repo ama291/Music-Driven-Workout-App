@@ -276,16 +276,16 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         if pickerView == durationPicker {
             return durationOptions[row]
         } else if pickerView == themesPicker {
-            print("THEMES PICKER")
-            print(row)
-            print(themesOptions[row])
+            // print("THEMES PICKER")
+            // print(row)
+            // print(themesOptions[row])
             if row == 0 {
                 self.themeSpotifyID = "Any"
             }
             else {
-                print(self.allThemes[row-1])
+                // print(self.allThemes[row-1])
                 self.themeSpotifyID = self.allThemes[row-1]["spotifyId"] as! String
-                print(self.themeSpotifyID)
+                // print(self.themeSpotifyID)
             }
             return themesOptions[row]
         }
@@ -317,7 +317,7 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
                 fatalError(error.localizedDescription)
             }
             let resultjson = try? JSONSerialization.jsonObject(with: data!, options: [])
-            print(resultjson)
+
             if let arr = resultjson as? [Dictionary<String,Any>] {
                 for obj in arr {
                     // Populate themesOptions
@@ -334,14 +334,9 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
         }.resume()
         
     }
-    
-    
 
     @IBOutlet weak var difficultyswitch: UISwitch!
 
-    
-    
-    
     /* getWorkoutAction - sets variables to send to next screen */
     @IBOutlet weak var getworkout: UIButton!
     @IBAction func getWorkoutAction(_ sender: Any) {

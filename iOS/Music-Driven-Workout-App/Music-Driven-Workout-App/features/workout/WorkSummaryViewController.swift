@@ -110,7 +110,7 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             
             let resultjson = try? JSONSerialization.jsonObject(with: data!, options: [])
             self.workoutjson = String(describing: data)
-            print(String(data: data!, encoding: .utf8))
+            print(String(data: data!, encoding: .utf8) as Any)
             
             if let dictionary = resultjson as? [String: Any] {
                 self.workoutid = dictionary["ID"] as! String
@@ -128,8 +128,8 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                             self.exDesc.append("exDescription")
 
                             let orderNum: NSNumber? = exDict["duration"] as? NSNumber
-                            let orderNumberInt: Int? = (orderNum != nil) ? Int(orderNum!) : nil
-                            self.exDur.append(orderNumberInt! * 60) // convert to secs
+                            let orderNumberInt: Int? = (orderNum != nil) ? Int(truncating: orderNum!) : nil
+                            self.exDur.append(Double(orderNumberInt! * 60)) // convert to secs
 
                             self.exImgs.append(exDict["images"] as! String)
                             self.exEquip.append(exDict["equipment"] as! String)
