@@ -18,6 +18,8 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     var equipment: String!
     var duration: String!
     var difficulty: String!
+    var theme: String = "Any"
+    var themeSpotifyId: String = "Any"
     //var player: SPTAudioStreamingController?
 
     //spotify
@@ -82,6 +84,8 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     
+    
+    
     /* Mark: Make a call to getWorkout() API and Parse Result */
     @objc func getWorkout() {
         let request = APIRequest()
@@ -96,8 +100,9 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
         query += "&duration=" + duration
         query += "&difficulty=" + difficulty
         query += "&token=" + global.token
+        query += "&themes=" + self.themeSpotifyId
         
-        request.submitPostServer(route: route, qstring: query) { (data, response, error) -> Void in
+        request.submitPostLocal(route: route, qstring: query) { (data, response, error) -> Void in
             if let error = error {
                 print("\n\nERROR HERE\n\n")
                 fatalError(error.localizedDescription)
@@ -105,10 +110,11 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
             
             let resultjson = try? JSONSerialization.jsonObject(with: data!, options: [])
             self.workoutjson = String(describing: data)
+            print(String(data: data!, encoding: .utf8))
             
             if let dictionary = resultjson as? [String: Any] {
                 self.workoutid = dictionary["ID"] as! String
-                
+
                 if let exercises = dictionary["Exercises"] as? [Any] {
                     var exIndex = 0
                     for ex in exercises {
@@ -116,20 +122,22 @@ class WorkSummaryViewController: UIViewController, UITableViewDataSource, UITabl
                             // Populate tableContent
                             let content = exDict["name"] as! String
                             self.tableContent.append(content)
-                            
+
                             // Populate data to send to next scene
                             self.exNames.append(exDict["name"] as! String)
                             self.exDesc.append("exDescription")
-                            self.exDur.append((exDict["duration"] as! Int) * 60) // convert to secs
+                            let orderNum: NSNumber? = exDict["duration"] as? NSNumber
+                            let orderNumberInt: Int? = (orderNum != nil) ? Int(orderNum!) : nil
+                            self.exDur.append(orderNumberInt! * 60) // convert to secs
                             self.exImgs.append(exDict["images"] as! String)
                             self.exEquip.append(exDict["equipment"] as! String)
                             self.exRPM.append(exDict["rpm"] as! Int)
-                            
+
                             if let trackDict = exDict["tracks"] as? [Dictionary<String, String>] {
                                 for track in trackDict {
                                     self.exTrackNames[exIndex].append(track["name"]!)
                                     self.exTrackUris[exIndex].append(track["uri"]!)
-                                    
+
                                     // Populate songList
                                     self.songList.append(track["name"]!)
                                 }
