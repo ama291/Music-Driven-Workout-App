@@ -54,7 +54,7 @@ class WorkSelectionViewController: UIViewController, UIPickerViewDelegate, UIPic
             vc?.duration = duration
             vc?.difficulty = difficulty
             vc?.themes = themes
-            vc?.themeSpotifyId = self.themeSpotifyID!
+            vc?.themeSpotifyId = themeSpotifyID
             //vc?.player = player!
         }
     }
